@@ -1,0 +1,1079 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<head>
+<title>MPT.Geometry - Table of Content</title>
+<link rel="stylesheet" href="TOC.css">
+<link rel="shortcut icon" href="favicon.ico"/>
+<script type="text/javascript" src="TOC.js"></script>
+</head>
+
+<body onload="javascript: Initialize('.aspx');" onresize="javascript: ResizeTree();">
+<form id="IndexForm" runat="server">
+
+<div id="TOCDiv" class="TOCDiv">
+
+<div id="divSearchOpts" class="SearchOpts" style="height: 90px; display: none;">
+	<img class="TOCLink" onclick="javascript: ShowHideSearch(false);"
+		src="Close.png" height="24" width="24" alt="Hide Search" title="Hide Search" style="float: right;"/>
+	<span class="Title">Keyword(s) to search:</span>
+	<input id="txtSearchText" type="text" style="width: 100%;" 
+		onkeypress="javascript: return OnSearchTextKeyPress(event);" /><br />
+	<input id="chkSortByTitle" type="checkbox" /><label for="chkSortByTitle">&nbsp;Sort results by title</label>
+	<input type="button" value="Search" onclick="javascript: return PerformSearch();" style="float: right;" />
+</div>
+
+<div id="divIndexOpts" class="IndexOpts" style="height: 28px; display: none;">
+	<img class="TOCLink" onclick="javascript: ShowHideIndex(false);"
+		src="Close.png" height="24" width="24" alt="Hide Keyword Index" title="Hide Keyword Index" style="float: right;"/>
+	<span class="Title">Keyword Index</span>
+</div>
+
+<div id="divNavOpts" class="NavOpts" style="height: 28px;">
+    <img class="TOCLink" onclick="javascript: SyncTOC();" src="SyncTOC.png"
+        height="24" width="24" alt="Sync to TOC" title="Sync to TOC" />
+    <img class="TOCLink" onclick="javascript: ExpandOrCollapseAll(true);"
+        src="ExpandAll.png" height="24" width="24" alt="Expand all" title="Expand all" />
+    <img class="TOCLink" onclick="javascript: ExpandOrCollapseAll(false);"
+        src="CollapseAll.png" height="24" width="24" alt="Collapse all" title="Collapse all" />
+    <img class="TOCLink" onclick="javascript: ShowDirectLink();"
+        src="Link.png" height="24" width="24" alt="Get direct link to the displayed topic" title="Get direct link to the displayed topic" />
+    <a href="#" onclick="javascript: TopicContent.history.go(-1); return false;">
+		<img class="TOCLink" style="float: right;" 
+        src="Back.png" height="24" width="24" alt="Previous page" title="Previous page" /></a>
+</div>
+
+<div class="Tree" id="divSearchResults" style="display: none;"
+    onselectstart="javascript: return false;">
+</div>
+
+<div class="Tree" id="divIndexResults" style="display: none;"
+    onselectstart="javascript: return false;">
+</div>
+
+<div class="Tree" id="divTree" onselectstart="javascript: return false;">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/N-MPT.Geometry.htm" target="TopicContent">MPT.Geometry Namespace</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.GeometryLibrary.htm" target="TopicContent">GeometryLibrary Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.GeometryLibrary.htm" target="TopicContent">GeometryLibrary Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Fields.T-MPT.Geometry.GeometryLibrary.htm" target="TopicContent">GeometryLibrary Fields</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/F-MPT.Geometry.GeometryLibrary.ZeroTolerance.htm" target="TopicContent">ZeroTolerance Field</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-MPT.Geometry.GeometryLibrary.htm" target="TopicContent">GeometryLibrary Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.Angle.htm" target="TopicContent">Angle Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.Area.htm" target="TopicContent">Area Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.ConcaveInside.htm" target="TopicContent">ConcaveInside Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.ConcavityColinearity.htm" target="TopicContent">ConcavityColinearity Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.ConvexInside.htm" target="TopicContent">ConvexInside Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.Cross.htm" target="TopicContent">Cross Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.Dot.htm" target="TopicContent">Dot Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.IsColinearOppositeDirection.htm" target="TopicContent">IsColinearOppositeDirection Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.IsColinearSameDirection.htm" target="TopicContent">IsColinearSameDirection Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.IsConcave.htm" target="TopicContent">IsConcave Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.IsConvex.htm" target="TopicContent">IsConvex Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.IsOrthogonal.htm" target="TopicContent">IsOrthogonal Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.NormalVector.htm" target="TopicContent">NormalVector Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.GeometryLibrary.TangentVector.htm" target="TopicContent">TangentVector Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/N-MPT.Geometry.Area.htm" target="TopicContent">MPT.Geometry.Area Namespace</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.Circle.htm" target="TopicContent">Circle Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.Circle.htm" target="TopicContent">Circle Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.CircularSector.htm" target="TopicContent">CircularSector Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Area.CircularSector.htm" target="TopicContent">CircularSector Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.CircularSector.htm" target="TopicContent">CircularSector Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.CircularSegment.htm" target="TopicContent">CircularSegment Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.CircularSegment.htm" target="TopicContent">CircularSegment Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.Ellipse.htm" target="TopicContent">Ellipse Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.Ellipse.htm" target="TopicContent">Ellipse Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.Hexagon.htm" target="TopicContent">Hexagon Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.Hexagon.htm" target="TopicContent">Hexagon Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.IRegularPolygon.htm" target="TopicContent">IRegularPolygon Interface</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Area.IRegularPolygon.htm" target="TopicContent">IRegularPolygon Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.IRegularPolygon.htm" target="TopicContent">IRegularPolygon Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-MPT.Geometry.Area.IRegularPolygon.htm" target="TopicContent">IRegularPolygon Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Area.IRegularPolygon.Apothem.htm" target="TopicContent">Apothem Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Area.IRegularPolygon.Circumcirle.htm" target="TopicContent">Circumcirle Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Area.IRegularPolygon.InteriorAngle.htm" target="TopicContent">InteriorAngle Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Area.IRegularPolygon.InteriorAngleSum.htm" target="TopicContent">InteriorAngleSum Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Area.IRegularPolygon.NumberOfSides.htm" target="TopicContent">NumberOfSides Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Area.IRegularPolygon.SideLength.htm" target="TopicContent">SideLength Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.IShape.htm" target="TopicContent">IShape Interface</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Area.IShape.htm" target="TopicContent">IShape Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-MPT.Geometry.Area.IShape.htm" target="TopicContent">IShape Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.Area.htm" target="TopicContent">Area Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.Ix.htm" target="TopicContent">Ix Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.Ixo.htm" target="TopicContent">Ixo Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.IxRotation.htm" target="TopicContent">IxRotation Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Area.IShape.Ixy.htm" target="TopicContent">Ixy Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.Ixy.htm" target="TopicContent">Ixy Method (Double, Double)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.Ixy_1.htm" target="TopicContent">Ixy Method (Point)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.Ixyo.htm" target="TopicContent">Ixyo Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.IxyRotation.htm" target="TopicContent">IxyRotation Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.Iy.htm" target="TopicContent">Iy Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.Iyo.htm" target="TopicContent">Iyo Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.IyRotation.htm" target="TopicContent">IyRotation Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.Perimeter.htm" target="TopicContent">Perimeter Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.Xo.htm" target="TopicContent">Xo Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Area.IShape.Yo.htm" target="TopicContent">Yo Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.Parallelogram.htm" target="TopicContent">Parallelogram Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.Parallelogram.htm" target="TopicContent">Parallelogram Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.Polygon.htm" target="TopicContent">Polygon Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.Polygon.htm" target="TopicContent">Polygon Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.Quadrilateral.htm" target="TopicContent">Quadrilateral Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.Quadrilateral.htm" target="TopicContent">Quadrilateral Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.Rectangle.htm" target="TopicContent">Rectangle Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.Rectangle.htm" target="TopicContent">Rectangle Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.RegularPolygon.htm" target="TopicContent">RegularPolygon Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.RegularPolygon.htm" target="TopicContent">RegularPolygon Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.Square.htm" target="TopicContent">Square Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.Square.htm" target="TopicContent">Square Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.Trapezoid.htm" target="TopicContent">Trapezoid Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.Trapezoid.htm" target="TopicContent">Trapezoid Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.Triangle.htm" target="TopicContent">Triangle Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.Triangle.htm" target="TopicContent">Triangle Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Area.Wedge.htm" target="TopicContent">Wedge Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Area.Wedge.htm" target="TopicContent">Wedge Methods</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/N-MPT.Geometry.Line.htm" target="TopicContent">MPT.Geometry.Line Namespace</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Line.ArcSegment.htm" target="TopicContent">ArcSegment Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Line.ArcSegment.htm" target="TopicContent">ArcSegment Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.ArcSegment.-ctor.htm" target="TopicContent">ArcSegment Constructor </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.-ctor.htm" target="TopicContent">ArcSegment Constructor </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.-ctor_1.htm" target="TopicContent">ArcSegment Constructor (Point, Point)</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-MPT.Geometry.Line.ArcSegment.htm" target="TopicContent">ArcSegment Methods</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.ArcSegment.AreCircleLineIntersecting.htm" target="TopicContent">AreCircleLineIntersecting Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.AreCircleLineIntersecting.htm" target="TopicContent">AreCircleLineIntersecting Method (Point, Point, Double, Double)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.AreCircleLineIntersecting_1.htm" target="TopicContent">AreCircleLineIntersecting Method (Double, Double)</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.ArcSegment.AreCircleLineTangent.htm" target="TopicContent">AreCircleLineTangent Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.AreCircleLineTangent.htm" target="TopicContent">AreCircleLineTangent Method (Point, Point, Double, Double)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.AreCircleLineTangent_1.htm" target="TopicContent">AreCircleLineTangent Method (Double, Double)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.AreCirclesIntersecting.htm" target="TopicContent">AreCirclesIntersecting Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.AreCirclesTangent.htm" target="TopicContent">AreCirclesTangent Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.CentroidPolar.htm" target="TopicContent">CentroidPolar Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.CircleLineIntersect.htm" target="TopicContent">CircleLineIntersect Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.ArcSegment.CircleLineIntersectX.htm" target="TopicContent">CircleLineIntersectX Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.CircleLineIntersectX.htm" target="TopicContent">CircleLineIntersectX Method (Point, Point, Double)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.CircleLineIntersectX_1.htm" target="TopicContent">CircleLineIntersectX Method (Double, Double, Double, Double, Offset)</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.ArcSegment.CircleLineIntersectY.htm" target="TopicContent">CircleLineIntersectY Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.CircleLineIntersectY.htm" target="TopicContent">CircleLineIntersectY Method (Point, Point, Double)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.CircleLineIntersectY_1.htm" target="TopicContent">CircleLineIntersectY Method (Double, Double, Double, Double, Offset)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.CirclesIntersect.htm" target="TopicContent">CirclesIntersect Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.CirclesIntersectX.htm" target="TopicContent">CirclesIntersectX Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.CirclesIntersectY.htm" target="TopicContent">CirclesIntersectY Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.Length.htm" target="TopicContent">Length Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.LengthPolar.htm" target="TopicContent">LengthPolar Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.NormalAngle.htm" target="TopicContent">NormalAngle Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.ArcSegment.NormalVector.htm" target="TopicContent">NormalVector Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.NormalVector.htm" target="TopicContent">NormalVector Method </a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.NormalVectorPolar.htm" target="TopicContent">NormalVectorPolar Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.Overlap.htm" target="TopicContent">Overlap Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.PointByPathPosition.htm" target="TopicContent">PointByPathPosition Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.PointByPathPositionPolar.htm" target="TopicContent">PointByPathPositionPolar Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.PointDivision.htm" target="TopicContent">PointDivision Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.RadicalLineLength.htm" target="TopicContent">RadicalLineLength Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.TangentialAngle.htm" target="TopicContent">TangentialAngle Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.ArcSegment.TangentVector.htm" target="TopicContent">TangentVector Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.TangentVector.htm" target="TopicContent">TangentVector Method </a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.TangentVectorPolar.htm" target="TopicContent">TangentVectorPolar Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.X.htm" target="TopicContent">X Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.Xo.htm" target="TopicContent">Xo Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.XPolar.htm" target="TopicContent">XPolar Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.Y.htm" target="TopicContent">Y Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.Yo.htm" target="TopicContent">Yo Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ArcSegment.YPolar.htm" target="TopicContent">YPolar Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-MPT.Geometry.Line.ArcSegment.htm" target="TopicContent">ArcSegment Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ArcSegment.Angle.htm" target="TopicContent">Angle Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ArcSegment.AngleDegrees.htm" target="TopicContent">AngleDegrees Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ArcSegment.ArcLength.htm" target="TopicContent">ArcLength Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ArcSegment.Center.htm" target="TopicContent">Center Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ArcSegment.Curvature.htm" target="TopicContent">Curvature Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ArcSegment.IPolar.htm" target="TopicContent">IPolar Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ArcSegment.JPolar.htm" target="TopicContent">JPolar Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ArcSegment.Radius.htm" target="TopicContent">Radius Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Line.BezierSegment.htm" target="TopicContent">BezierSegment Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Line.BezierSegment.htm" target="TopicContent">BezierSegment Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-MPT.Geometry.Line.BezierSegment.htm" target="TopicContent">BezierSegment Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.BezierSegment.NormalVector.htm" target="TopicContent">NormalVector Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.BezierSegment.TangentVector.htm" target="TopicContent">TangentVector Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.BezierSegment.X.htm" target="TopicContent">X Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.BezierSegment.Y.htm" target="TopicContent">Y Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-MPT.Geometry.Line.BezierSegment.htm" target="TopicContent">BezierSegment Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.BezierSegment.I.htm" target="TopicContent">I Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.BezierSegment.J.htm" target="TopicContent">J Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Line.ICurve.htm" target="TopicContent">ICurve Interface</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Line.ICurve.htm" target="TopicContent">ICurve Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-MPT.Geometry.Line.ICurve.htm" target="TopicContent">ICurve Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ICurve.NormalAngle.htm" target="TopicContent">NormalAngle Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.ICurve.TangentialAngle.htm" target="TopicContent">TangentialAngle Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-MPT.Geometry.Line.ICurve.htm" target="TopicContent">ICurve Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ICurve.Angle.htm" target="TopicContent">Angle Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ICurve.AngleDegrees.htm" target="TopicContent">AngleDegrees Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ICurve.ArcLength.htm" target="TopicContent">ArcLength Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ICurve.Center.htm" target="TopicContent">Center Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ICurve.Curvature.htm" target="TopicContent">Curvature Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.ICurve.Radius.htm" target="TopicContent">Radius Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Line.IPathDivision.htm" target="TopicContent">IPathDivision Interface</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Line.IPathDivision.htm" target="TopicContent">IPathDivision Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-MPT.Geometry.Line.IPathDivision.htm" target="TopicContent">IPathDivision Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPathDivision.PointDivision.htm" target="TopicContent">PointDivision Method </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Line.IPathSegment.htm" target="TopicContent">IPathSegment Interface</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Line.IPathSegment.htm" target="TopicContent">IPathSegment Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-MPT.Geometry.Line.IPathSegment.htm" target="TopicContent">IPathSegment Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPathSegment.Length.htm" target="TopicContent">Length Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPathSegment.NormalVector.htm" target="TopicContent">NormalVector Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPathSegment.PointByPathPosition.htm" target="TopicContent">PointByPathPosition Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPathSegment.TangentVector.htm" target="TopicContent">TangentVector Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPathSegment.X.htm" target="TopicContent">X Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPathSegment.Xo.htm" target="TopicContent">Xo Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPathSegment.Y.htm" target="TopicContent">Y Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPathSegment.Yo.htm" target="TopicContent">Yo Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-MPT.Geometry.Line.IPathSegment.htm" target="TopicContent">IPathSegment Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.IPathSegment.I.htm" target="TopicContent">I Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.IPathSegment.J.htm" target="TopicContent">J Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Line.IPathSegment3D.htm" target="TopicContent">IPathSegment3D Interface</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Line.IPathSegment3D.htm" target="TopicContent">IPathSegment3D Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Line.IPathSegment3D.htm" target="TopicContent">IPathSegment3D Methods</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-MPT.Geometry.Line.IPathSegment3D.htm" target="TopicContent">IPathSegment3D Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.IPathSegment3D.I.htm" target="TopicContent">I Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.IPathSegment3D.J.htm" target="TopicContent">J Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Line.IPathSegmentCollision.htm" target="TopicContent">IPathSegmentCollision Interface</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Line.IPathSegmentCollision.htm" target="TopicContent">IPathSegmentCollision Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Line.IPolarCoordinates.htm" target="TopicContent">IPolarCoordinates Interface</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Line.IPolarCoordinates.htm" target="TopicContent">IPolarCoordinates Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-MPT.Geometry.Line.IPolarCoordinates.htm" target="TopicContent">IPolarCoordinates Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPolarCoordinates.CentroidPolar.htm" target="TopicContent">CentroidPolar Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPolarCoordinates.LengthPolar.htm" target="TopicContent">LengthPolar Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPolarCoordinates.NormalVectorPolar.htm" target="TopicContent">NormalVectorPolar Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPolarCoordinates.PointByPathPositionPolar.htm" target="TopicContent">PointByPathPositionPolar Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPolarCoordinates.TangentVectorPolar.htm" target="TopicContent">TangentVectorPolar Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPolarCoordinates.XPolar.htm" target="TopicContent">XPolar Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.IPolarCoordinates.YPolar.htm" target="TopicContent">YPolar Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-MPT.Geometry.Line.IPolarCoordinates.htm" target="TopicContent">IPolarCoordinates Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.IPolarCoordinates.IPolar.htm" target="TopicContent">IPolar Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.IPolarCoordinates.JPolar.htm" target="TopicContent">JPolar Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Line.IPolyLine.htm" target="TopicContent">IPolyLine Interface</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Methods.T-MPT.Geometry.Line.IPolyLine.htm" target="TopicContent">IPolyLine Methods</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Line.LineSegment.htm" target="TopicContent">LineSegment Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Line.LineSegment.htm" target="TopicContent">LineSegment Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.LineSegment.-ctor.htm" target="TopicContent">LineSegment Constructor </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.-ctor.htm" target="TopicContent">LineSegment Constructor </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.-ctor_1.htm" target="TopicContent">LineSegment Constructor (Point, Point)</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-MPT.Geometry.Line.LineSegment.htm" target="TopicContent">LineSegment Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.AreLinesIntersecting.htm" target="TopicContent">AreLinesIntersecting Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.LineSegment.InterceptX.htm" target="TopicContent">InterceptX Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.InterceptX.htm" target="TopicContent">InterceptX Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.InterceptX_1.htm" target="TopicContent">InterceptX Method (Double, Double, Double, Double, Double)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.InterceptX_2.htm" target="TopicContent">InterceptX Method (Point, Point, Double)</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.LineSegment.InterceptY.htm" target="TopicContent">InterceptY Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.InterceptY.htm" target="TopicContent">InterceptY Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.InterceptY_1.htm" target="TopicContent">InterceptY Method (Double, Double, Double, Double, Double)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.InterceptY_2.htm" target="TopicContent">InterceptY Method (Point, Point, Double)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.Intersect.htm" target="TopicContent">Intersect Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.LineSegment.IsIntersecting.htm" target="TopicContent">IsIntersecting Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.IsIntersecting.htm" target="TopicContent">IsIntersecting Method (Point)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.IsIntersecting_1.htm" target="TopicContent">IsIntersecting Method (LineSegment)</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.LineSegment.IsParallel.htm" target="TopicContent">IsParallel Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.IsParallel.htm" target="TopicContent">IsParallel Method (LineSegment)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.IsParallel_1.htm" target="TopicContent">IsParallel Method (Double, Double, Double)</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.LineSegment.IsPerpendicular.htm" target="TopicContent">IsPerpendicular Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.IsPerpendicular.htm" target="TopicContent">IsPerpendicular Method (LineSegment)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.IsPerpendicular_1.htm" target="TopicContent">IsPerpendicular Method (Double, Double, Double)</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.LineSegment.IsProjectionIntersecting.htm" target="TopicContent">IsProjectionIntersecting Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.IsProjectionIntersecting.htm" target="TopicContent">IsProjectionIntersecting Method (Point)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.IsProjectionIntersecting_1.htm" target="TopicContent">IsProjectionIntersecting Method (LineSegment)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.Length.htm" target="TopicContent">Length Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.LineIntersect.htm" target="TopicContent">LineIntersect Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.LineIntersectX.htm" target="TopicContent">LineIntersectX Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.LineIntersectY.htm" target="TopicContent">LineIntersectY Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.LineSegment.NormalVector.htm" target="TopicContent">NormalVector Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.NormalVector.htm" target="TopicContent">NormalVector Method </a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.PointByPathPosition.htm" target="TopicContent">PointByPathPosition Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.PointDivision.htm" target="TopicContent">PointDivision Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.LineSegment.Slope.htm" target="TopicContent">Slope Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.Slope.htm" target="TopicContent">Slope Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.Slope_1.htm" target="TopicContent">Slope Method (Double, Double, Double)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.Slope_2.htm" target="TopicContent">Slope Method (Double, Double, Double, Double, Double)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.Slope_3.htm" target="TopicContent">Slope Method (Point, Point, Double)</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.Slope_4.htm" target="TopicContent">Slope Method (Offset, Double)</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.LineSegment.TangentVector.htm" target="TopicContent">TangentVector Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.TangentVector.htm" target="TopicContent">TangentVector Method </a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.ToVector.htm" target="TopicContent">ToVector Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.X.htm" target="TopicContent">X Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.Xo.htm" target="TopicContent">Xo Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.Y.htm" target="TopicContent">Y Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.LineSegment.Yo.htm" target="TopicContent">Yo Method </a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/Properties.T-MPT.Geometry.Line.LineSegment.htm" target="TopicContent">LineSegment Properties</a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Line.PathSegment.htm" target="TopicContent">PathSegment Class</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Line.PathSegment.htm" target="TopicContent">PathSegment Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-MPT.Geometry.Line.PathSegment.htm" target="TopicContent">PathSegment Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.PathSegment.Length.htm" target="TopicContent">Length Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.PathSegment.NormalVector.htm" target="TopicContent">NormalVector Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.PathSegment.NormalVector.htm" target="TopicContent">NormalVector Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.PathSegment.NormalVector_1.htm" target="TopicContent">NormalVector Method (Double)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.PathSegment.PointByPathPosition.htm" target="TopicContent">PointByPathPosition Method </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Overload-MPT.Geometry.Line.PathSegment.TangentVector.htm" target="TopicContent">TangentVector Method </a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.PathSegment.TangentVector.htm" target="TopicContent">TangentVector Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.PathSegment.TangentVector_1.htm" target="TopicContent">TangentVector Method (Double)</a>
+</div>
+</div>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.PathSegment.X.htm" target="TopicContent">X Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.PathSegment.Xo.htm" target="TopicContent">Xo Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.PathSegment.Y.htm" target="TopicContent">Y Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Line.PathSegment.Yo.htm" target="TopicContent">Yo Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-MPT.Geometry.Line.PathSegment.htm" target="TopicContent">PathSegment Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.PathSegment.I.htm" target="TopicContent">I Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.PathSegment.J.htm" target="TopicContent">J Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Line.PathSegment.Tolerance.htm" target="TopicContent">Tolerance Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/N-MPT.Geometry.Point.htm" target="TopicContent">MPT.Geometry.Point Namespace</a>
+<div class="Hidden">
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Point.Offset.htm" target="TopicContent">Offset Structure</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Point.Offset.htm" target="TopicContent">Offset Members</a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Point.Offset.-ctor.htm" target="TopicContent">Offset Constructor </a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-MPT.Geometry.Point.Offset.htm" target="TopicContent">Offset Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Point.Offset.X.htm" target="TopicContent">X Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Point.Offset.Y.htm" target="TopicContent">Y Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-MPT.Geometry.Point.Offset.htm" target="TopicContent">Offset Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Point.Offset.I.htm" target="TopicContent">I Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Point.Offset.J.htm" target="TopicContent">J Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/T-MPT.Geometry.Point.OffSet3D.htm" target="TopicContent">OffSet3D Structure</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/AllMembers.T-MPT.Geometry.Point.OffSet3D.htm" target="TopicContent">OffSet3D Members</a>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Methods.T-MPT.Geometry.Point.OffSet3D.htm" target="TopicContent">OffSet3D Methods</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Point.OffSet3D.X.htm" target="TopicContent">X Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Point.OffSet3D.Y.htm" target="TopicContent">Y Method </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/M-MPT.Geometry.Point.OffSet3D.Z.htm" target="TopicContent">Z Method </a>
+</div>
+</div>
+</div>
+<div class="TreeNode">
+<img class="TreeNodeImg" onclick="javascript: Toggle(this);" src="Collapsed.png"/><a class="UnselectedNode" onclick="javascript: return Expand(this);" href="html/Properties.T-MPT.Geometry.Point.OffSet3D.htm" target="TopicContent">OffSet3D Properties</a>
+<div class="Hidden">
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Point.OffSet3D.I.htm" target="TopicContent">I Property </a>
+</div>
+<div class="TreeItem">
+<img src="Item.gif"/><a class="UnselectedNode" onclick="javascript: return SelectNode(this);" href="html/P-MPT.Geometry.Point.OffSet3D.J.htm" target="TopicContent">J Property </a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<div id="TOCSizer" class="TOCSizer" onmousedown="OnMouseDown(event)" onselectstart="javascript: return false;"></div>
+
+<iframe id="TopicContent" name="TopicContent" class="TopicContent" src="html/n-mpt.geometry.htm">
+This page uses an IFRAME but your browser does not support it.
+</iframe>
+
+</form>
+
+</body>
+
+</html>

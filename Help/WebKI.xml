@@ -1,0 +1,729 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<HelpKI>
+  <HelpKINode Title="Angle method" Url="html/M-MPT.Geometry.GeometryLibrary.Angle.htm" />
+  <HelpKINode Title="Angle property">
+    <HelpKINode Title="Angle Property " Url="html/P-MPT.Geometry.Line.ICurve.Angle.htm" />
+    <HelpKINode Title="Angle Property " Url="html/P-MPT.Geometry.Line.ArcSegment.Angle.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AngleDegrees property">
+    <HelpKINode Title="AngleDegrees Property " Url="html/P-MPT.Geometry.Line.ICurve.AngleDegrees.htm" />
+    <HelpKINode Title="AngleDegrees Property " Url="html/P-MPT.Geometry.Line.ArcSegment.AngleDegrees.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Apothem property" Url="html/P-MPT.Geometry.Area.IRegularPolygon.Apothem.htm" />
+  <HelpKINode Title="ArcLength property">
+    <HelpKINode Title="ArcLength Property " Url="html/P-MPT.Geometry.Line.ArcSegment.ArcLength.htm" />
+    <HelpKINode Title="ArcLength Property " Url="html/P-MPT.Geometry.Line.ICurve.ArcLength.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ArcSegment class">
+    <HelpKINode Title="ArcSegment Class" Url="html/T-MPT.Geometry.Line.ArcSegment.htm" />
+    <HelpKINode Title="ArcSegment Members" Url="html/AllMembers.T-MPT.Geometry.Line.ArcSegment.htm" />
+    <HelpKINode Title="about ArcSegment class" Url="html/T-MPT.Geometry.Line.ArcSegment.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Line.ArcSegment.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload-MPT.Geometry.Line.ArcSegment.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Line.ArcSegment.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-MPT.Geometry.Line.ArcSegment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ArcSegment.Angle property" Url="html/P-MPT.Geometry.Line.ArcSegment.Angle.htm" />
+  <HelpKINode Title="ArcSegment.AngleDegrees property" Url="html/P-MPT.Geometry.Line.ArcSegment.AngleDegrees.htm" />
+  <HelpKINode Title="ArcSegment.ArcLength property" Url="html/P-MPT.Geometry.Line.ArcSegment.ArcLength.htm" />
+  <HelpKINode Title="ArcSegment.ArcSegment constructor" Url="html/Overload-MPT.Geometry.Line.ArcSegment.-ctor.htm" />
+  <HelpKINode Title="ArcSegment.AreCircleLineIntersecting method" Url="html/Overload-MPT.Geometry.Line.ArcSegment.AreCircleLineIntersecting.htm" />
+  <HelpKINode Title="ArcSegment.AreCircleLineTangent method" Url="html/Overload-MPT.Geometry.Line.ArcSegment.AreCircleLineTangent.htm" />
+  <HelpKINode Title="ArcSegment.AreCirclesIntersecting method" Url="html/M-MPT.Geometry.Line.ArcSegment.AreCirclesIntersecting.htm" />
+  <HelpKINode Title="ArcSegment.AreCirclesTangent method" Url="html/M-MPT.Geometry.Line.ArcSegment.AreCirclesTangent.htm" />
+  <HelpKINode Title="ArcSegment.Center property" Url="html/P-MPT.Geometry.Line.ArcSegment.Center.htm" />
+  <HelpKINode Title="ArcSegment.CentroidPolar method" Url="html/M-MPT.Geometry.Line.ArcSegment.CentroidPolar.htm" />
+  <HelpKINode Title="ArcSegment.CircleLineIntersect method" Url="html/M-MPT.Geometry.Line.ArcSegment.CircleLineIntersect.htm" />
+  <HelpKINode Title="ArcSegment.CircleLineIntersectX method" Url="html/Overload-MPT.Geometry.Line.ArcSegment.CircleLineIntersectX.htm" />
+  <HelpKINode Title="ArcSegment.CircleLineIntersectY method" Url="html/Overload-MPT.Geometry.Line.ArcSegment.CircleLineIntersectY.htm" />
+  <HelpKINode Title="ArcSegment.CirclesIntersect method" Url="html/M-MPT.Geometry.Line.ArcSegment.CirclesIntersect.htm" />
+  <HelpKINode Title="ArcSegment.CirclesIntersectX method" Url="html/M-MPT.Geometry.Line.ArcSegment.CirclesIntersectX.htm" />
+  <HelpKINode Title="ArcSegment.CirclesIntersectY method" Url="html/M-MPT.Geometry.Line.ArcSegment.CirclesIntersectY.htm" />
+  <HelpKINode Title="ArcSegment.Curvature property" Url="html/P-MPT.Geometry.Line.ArcSegment.Curvature.htm" />
+  <HelpKINode Title="ArcSegment.IPolar property" Url="html/P-MPT.Geometry.Line.ArcSegment.IPolar.htm" />
+  <HelpKINode Title="ArcSegment.JPolar property" Url="html/P-MPT.Geometry.Line.ArcSegment.JPolar.htm" />
+  <HelpKINode Title="ArcSegment.Length method" Url="html/M-MPT.Geometry.Line.ArcSegment.Length.htm" />
+  <HelpKINode Title="ArcSegment.LengthPolar method" Url="html/M-MPT.Geometry.Line.ArcSegment.LengthPolar.htm" />
+  <HelpKINode Title="ArcSegment.NormalAngle method" Url="html/M-MPT.Geometry.Line.ArcSegment.NormalAngle.htm" />
+  <HelpKINode Title="ArcSegment.NormalVector method">
+    <HelpKINode Title="NormalVector Method " Url="html/Overload-MPT.Geometry.Line.ArcSegment.NormalVector.htm" />
+    <HelpKINode Title="NormalVector Method " Url="html/M-MPT.Geometry.Line.ArcSegment.NormalVector.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ArcSegment.NormalVectorPolar method" Url="html/M-MPT.Geometry.Line.ArcSegment.NormalVectorPolar.htm" />
+  <HelpKINode Title="ArcSegment.Overlap method" Url="html/M-MPT.Geometry.Line.ArcSegment.Overlap.htm" />
+  <HelpKINode Title="ArcSegment.PointByPathPosition method" Url="html/M-MPT.Geometry.Line.ArcSegment.PointByPathPosition.htm" />
+  <HelpKINode Title="ArcSegment.PointByPathPositionPolar method" Url="html/M-MPT.Geometry.Line.ArcSegment.PointByPathPositionPolar.htm" />
+  <HelpKINode Title="ArcSegment.PointDivision method" Url="html/M-MPT.Geometry.Line.ArcSegment.PointDivision.htm" />
+  <HelpKINode Title="ArcSegment.RadicalLineLength method" Url="html/M-MPT.Geometry.Line.ArcSegment.RadicalLineLength.htm" />
+  <HelpKINode Title="ArcSegment.Radius property" Url="html/P-MPT.Geometry.Line.ArcSegment.Radius.htm" />
+  <HelpKINode Title="ArcSegment.TangentialAngle method" Url="html/M-MPT.Geometry.Line.ArcSegment.TangentialAngle.htm" />
+  <HelpKINode Title="ArcSegment.TangentVector method">
+    <HelpKINode Title="TangentVector Method " Url="html/Overload-MPT.Geometry.Line.ArcSegment.TangentVector.htm" />
+    <HelpKINode Title="TangentVector Method " Url="html/M-MPT.Geometry.Line.ArcSegment.TangentVector.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ArcSegment.TangentVectorPolar method" Url="html/M-MPT.Geometry.Line.ArcSegment.TangentVectorPolar.htm" />
+  <HelpKINode Title="ArcSegment.X method" Url="html/M-MPT.Geometry.Line.ArcSegment.X.htm" />
+  <HelpKINode Title="ArcSegment.Xo method" Url="html/M-MPT.Geometry.Line.ArcSegment.Xo.htm" />
+  <HelpKINode Title="ArcSegment.XPolar method" Url="html/M-MPT.Geometry.Line.ArcSegment.XPolar.htm" />
+  <HelpKINode Title="ArcSegment.Y method" Url="html/M-MPT.Geometry.Line.ArcSegment.Y.htm" />
+  <HelpKINode Title="ArcSegment.Yo method" Url="html/M-MPT.Geometry.Line.ArcSegment.Yo.htm" />
+  <HelpKINode Title="ArcSegment.YPolar method" Url="html/M-MPT.Geometry.Line.ArcSegment.YPolar.htm" />
+  <HelpKINode Title="Area method">
+    <HelpKINode Title="Area Method " Url="html/M-MPT.Geometry.Area.IShape.Area.htm" />
+    <HelpKINode Title="Area Method " Url="html/M-MPT.Geometry.GeometryLibrary.Area.htm" />
+  </HelpKINode>
+  <HelpKINode Title="AreCircleLineIntersecting method" Url="html/Overload-MPT.Geometry.Line.ArcSegment.AreCircleLineIntersecting.htm" />
+  <HelpKINode Title="AreCircleLineTangent method" Url="html/Overload-MPT.Geometry.Line.ArcSegment.AreCircleLineTangent.htm" />
+  <HelpKINode Title="AreCirclesIntersecting method" Url="html/M-MPT.Geometry.Line.ArcSegment.AreCirclesIntersecting.htm" />
+  <HelpKINode Title="AreCirclesTangent method" Url="html/M-MPT.Geometry.Line.ArcSegment.AreCirclesTangent.htm" />
+  <HelpKINode Title="AreLinesIntersecting method" Url="html/M-MPT.Geometry.Line.LineSegment.AreLinesIntersecting.htm" />
+  <HelpKINode Title="BezierSegment class">
+    <HelpKINode Title="BezierSegment Class" Url="html/T-MPT.Geometry.Line.BezierSegment.htm" />
+    <HelpKINode Title="BezierSegment Members" Url="html/AllMembers.T-MPT.Geometry.Line.BezierSegment.htm" />
+    <HelpKINode Title="about BezierSegment class" Url="html/T-MPT.Geometry.Line.BezierSegment.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Line.BezierSegment.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Line.BezierSegment.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-MPT.Geometry.Line.BezierSegment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="BezierSegment.I property" Url="html/P-MPT.Geometry.Line.BezierSegment.I.htm" />
+  <HelpKINode Title="BezierSegment.J property" Url="html/P-MPT.Geometry.Line.BezierSegment.J.htm" />
+  <HelpKINode Title="BezierSegment.NormalVector method" Url="html/M-MPT.Geometry.Line.BezierSegment.NormalVector.htm" />
+  <HelpKINode Title="BezierSegment.TangentVector method" Url="html/M-MPT.Geometry.Line.BezierSegment.TangentVector.htm" />
+  <HelpKINode Title="BezierSegment.X method" Url="html/M-MPT.Geometry.Line.BezierSegment.X.htm" />
+  <HelpKINode Title="BezierSegment.Y method" Url="html/M-MPT.Geometry.Line.BezierSegment.Y.htm" />
+  <HelpKINode Title="Center property">
+    <HelpKINode Title="Center Property " Url="html/P-MPT.Geometry.Line.ArcSegment.Center.htm" />
+    <HelpKINode Title="Center Property " Url="html/P-MPT.Geometry.Line.ICurve.Center.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CentroidPolar method">
+    <HelpKINode Title="CentroidPolar Method " Url="html/M-MPT.Geometry.Line.ArcSegment.CentroidPolar.htm" />
+    <HelpKINode Title="CentroidPolar Method " Url="html/M-MPT.Geometry.Line.IPolarCoordinates.CentroidPolar.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Circle class">
+    <HelpKINode Title="Circle Class" Url="html/T-MPT.Geometry.Area.Circle.htm" />
+    <HelpKINode Title="Circle Members" Url="html/AllMembers.T-MPT.Geometry.Area.Circle.htm" />
+    <HelpKINode Title="about Circle class" Url="html/T-MPT.Geometry.Area.Circle.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.Circle.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.Circle.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CircleLineIntersect method" Url="html/M-MPT.Geometry.Line.ArcSegment.CircleLineIntersect.htm" />
+  <HelpKINode Title="CircleLineIntersectX method" Url="html/Overload-MPT.Geometry.Line.ArcSegment.CircleLineIntersectX.htm" />
+  <HelpKINode Title="CircleLineIntersectY method" Url="html/Overload-MPT.Geometry.Line.ArcSegment.CircleLineIntersectY.htm" />
+  <HelpKINode Title="CirclesIntersect method" Url="html/M-MPT.Geometry.Line.ArcSegment.CirclesIntersect.htm" />
+  <HelpKINode Title="CirclesIntersectX method" Url="html/M-MPT.Geometry.Line.ArcSegment.CirclesIntersectX.htm" />
+  <HelpKINode Title="CirclesIntersectY method" Url="html/M-MPT.Geometry.Line.ArcSegment.CirclesIntersectY.htm" />
+  <HelpKINode Title="CircularSector class">
+    <HelpKINode Title="CircularSector Class" Url="html/T-MPT.Geometry.Area.CircularSector.htm" />
+    <HelpKINode Title="CircularSector Members" Url="html/AllMembers.T-MPT.Geometry.Area.CircularSector.htm" />
+    <HelpKINode Title="about CircularSector class" Url="html/T-MPT.Geometry.Area.CircularSector.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.CircularSector.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.CircularSector.htm" />
+  </HelpKINode>
+  <HelpKINode Title="CircularSegment class">
+    <HelpKINode Title="CircularSegment Class" Url="html/T-MPT.Geometry.Area.CircularSegment.htm" />
+    <HelpKINode Title="CircularSegment Members" Url="html/AllMembers.T-MPT.Geometry.Area.CircularSegment.htm" />
+    <HelpKINode Title="about CircularSegment class" Url="html/T-MPT.Geometry.Area.CircularSegment.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.CircularSegment.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.CircularSegment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Circumcirle property" Url="html/P-MPT.Geometry.Area.IRegularPolygon.Circumcirle.htm" />
+  <HelpKINode Title="ConcaveInside method" Url="html/M-MPT.Geometry.GeometryLibrary.ConcaveInside.htm" />
+  <HelpKINode Title="ConcavityColinearity method" Url="html/M-MPT.Geometry.GeometryLibrary.ConcavityColinearity.htm" />
+  <HelpKINode Title="ConvexInside method" Url="html/M-MPT.Geometry.GeometryLibrary.ConvexInside.htm" />
+  <HelpKINode Title="Cross method" Url="html/M-MPT.Geometry.GeometryLibrary.Cross.htm" />
+  <HelpKINode Title="Curvature property">
+    <HelpKINode Title="Curvature Property " Url="html/P-MPT.Geometry.Line.ICurve.Curvature.htm" />
+    <HelpKINode Title="Curvature Property " Url="html/P-MPT.Geometry.Line.ArcSegment.Curvature.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Dot method" Url="html/M-MPT.Geometry.GeometryLibrary.Dot.htm" />
+  <HelpKINode Title="Ellipse class">
+    <HelpKINode Title="Ellipse Class" Url="html/T-MPT.Geometry.Area.Ellipse.htm" />
+    <HelpKINode Title="Ellipse Members" Url="html/AllMembers.T-MPT.Geometry.Area.Ellipse.htm" />
+    <HelpKINode Title="about Ellipse class" Url="html/T-MPT.Geometry.Area.Ellipse.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.Ellipse.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.Ellipse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GeometryLibrary class">
+    <HelpKINode Title="GeometryLibrary Class" Url="html/T-MPT.Geometry.GeometryLibrary.htm" />
+    <HelpKINode Title="GeometryLibrary Members" Url="html/AllMembers.T-MPT.Geometry.GeometryLibrary.htm" />
+    <HelpKINode Title="about GeometryLibrary class" Url="html/T-MPT.Geometry.GeometryLibrary.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.GeometryLibrary.htm" />
+    <HelpKINode Title="fields" Url="html/Fields.T-MPT.Geometry.GeometryLibrary.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.GeometryLibrary.htm" />
+  </HelpKINode>
+  <HelpKINode Title="GeometryLibrary.Angle method" Url="html/M-MPT.Geometry.GeometryLibrary.Angle.htm" />
+  <HelpKINode Title="GeometryLibrary.Area method" Url="html/M-MPT.Geometry.GeometryLibrary.Area.htm" />
+  <HelpKINode Title="GeometryLibrary.ConcaveInside method" Url="html/M-MPT.Geometry.GeometryLibrary.ConcaveInside.htm" />
+  <HelpKINode Title="GeometryLibrary.ConcavityColinearity method" Url="html/M-MPT.Geometry.GeometryLibrary.ConcavityColinearity.htm" />
+  <HelpKINode Title="GeometryLibrary.ConvexInside method" Url="html/M-MPT.Geometry.GeometryLibrary.ConvexInside.htm" />
+  <HelpKINode Title="GeometryLibrary.Cross method" Url="html/M-MPT.Geometry.GeometryLibrary.Cross.htm" />
+  <HelpKINode Title="GeometryLibrary.Dot method" Url="html/M-MPT.Geometry.GeometryLibrary.Dot.htm" />
+  <HelpKINode Title="GeometryLibrary.IsColinearOppositeDirection method" Url="html/M-MPT.Geometry.GeometryLibrary.IsColinearOppositeDirection.htm" />
+  <HelpKINode Title="GeometryLibrary.IsColinearSameDirection method" Url="html/M-MPT.Geometry.GeometryLibrary.IsColinearSameDirection.htm" />
+  <HelpKINode Title="GeometryLibrary.IsConcave method" Url="html/M-MPT.Geometry.GeometryLibrary.IsConcave.htm" />
+  <HelpKINode Title="GeometryLibrary.IsConvex method" Url="html/M-MPT.Geometry.GeometryLibrary.IsConvex.htm" />
+  <HelpKINode Title="GeometryLibrary.IsOrthogonal method" Url="html/M-MPT.Geometry.GeometryLibrary.IsOrthogonal.htm" />
+  <HelpKINode Title="GeometryLibrary.NormalVector method" Url="html/M-MPT.Geometry.GeometryLibrary.NormalVector.htm" />
+  <HelpKINode Title="GeometryLibrary.TangentVector method" Url="html/M-MPT.Geometry.GeometryLibrary.TangentVector.htm" />
+  <HelpKINode Title="GeometryLibrary.ZeroTolerance field" Url="html/F-MPT.Geometry.GeometryLibrary.ZeroTolerance.htm" />
+  <HelpKINode Title="Hexagon class">
+    <HelpKINode Title="Hexagon Class" Url="html/T-MPT.Geometry.Area.Hexagon.htm" />
+    <HelpKINode Title="Hexagon Members" Url="html/AllMembers.T-MPT.Geometry.Area.Hexagon.htm" />
+    <HelpKINode Title="about Hexagon class" Url="html/T-MPT.Geometry.Area.Hexagon.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.Hexagon.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.Hexagon.htm" />
+  </HelpKINode>
+  <HelpKINode Title="I property">
+    <HelpKINode Title="I Property " Url="html/P-MPT.Geometry.Line.BezierSegment.I.htm" />
+    <HelpKINode Title="I Property " Url="html/P-MPT.Geometry.Line.IPathSegment.I.htm" />
+    <HelpKINode Title="I Property " Url="html/P-MPT.Geometry.Line.IPathSegment3D.I.htm" />
+    <HelpKINode Title="I Property " Url="html/P-MPT.Geometry.Point.OffSet3D.I.htm" />
+    <HelpKINode Title="I Property " Url="html/P-MPT.Geometry.Point.Offset.I.htm" />
+    <HelpKINode Title="I Property " Url="html/P-MPT.Geometry.Line.PathSegment.I.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ICurve interface">
+    <HelpKINode Title="ICurve Interface" Url="html/T-MPT.Geometry.Line.ICurve.htm" />
+    <HelpKINode Title="ICurve Members" Url="html/AllMembers.T-MPT.Geometry.Line.ICurve.htm" />
+    <HelpKINode Title="about ICurve interface" Url="html/T-MPT.Geometry.Line.ICurve.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Line.ICurve.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Line.ICurve.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-MPT.Geometry.Line.ICurve.htm" />
+  </HelpKINode>
+  <HelpKINode Title="ICurve.Angle property" Url="html/P-MPT.Geometry.Line.ICurve.Angle.htm" />
+  <HelpKINode Title="ICurve.AngleDegrees property" Url="html/P-MPT.Geometry.Line.ICurve.AngleDegrees.htm" />
+  <HelpKINode Title="ICurve.ArcLength property" Url="html/P-MPT.Geometry.Line.ICurve.ArcLength.htm" />
+  <HelpKINode Title="ICurve.Center property" Url="html/P-MPT.Geometry.Line.ICurve.Center.htm" />
+  <HelpKINode Title="ICurve.Curvature property" Url="html/P-MPT.Geometry.Line.ICurve.Curvature.htm" />
+  <HelpKINode Title="ICurve.NormalAngle method" Url="html/M-MPT.Geometry.Line.ICurve.NormalAngle.htm" />
+  <HelpKINode Title="ICurve.Radius property" Url="html/P-MPT.Geometry.Line.ICurve.Radius.htm" />
+  <HelpKINode Title="ICurve.TangentialAngle method" Url="html/M-MPT.Geometry.Line.ICurve.TangentialAngle.htm" />
+  <HelpKINode Title="InterceptX method" Url="html/Overload-MPT.Geometry.Line.LineSegment.InterceptX.htm" />
+  <HelpKINode Title="InterceptY method" Url="html/Overload-MPT.Geometry.Line.LineSegment.InterceptY.htm" />
+  <HelpKINode Title="InteriorAngle property" Url="html/P-MPT.Geometry.Area.IRegularPolygon.InteriorAngle.htm" />
+  <HelpKINode Title="InteriorAngleSum property" Url="html/P-MPT.Geometry.Area.IRegularPolygon.InteriorAngleSum.htm" />
+  <HelpKINode Title="Intersect method" Url="html/M-MPT.Geometry.Line.LineSegment.Intersect.htm" />
+  <HelpKINode Title="IPathDivision interface">
+    <HelpKINode Title="IPathDivision Interface" Url="html/T-MPT.Geometry.Line.IPathDivision.htm" />
+    <HelpKINode Title="IPathDivision Members" Url="html/AllMembers.T-MPT.Geometry.Line.IPathDivision.htm" />
+    <HelpKINode Title="about IPathDivision interface" Url="html/T-MPT.Geometry.Line.IPathDivision.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Line.IPathDivision.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Line.IPathDivision.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPathDivision.PointDivision method" Url="html/M-MPT.Geometry.Line.IPathDivision.PointDivision.htm" />
+  <HelpKINode Title="IPathSegment interface">
+    <HelpKINode Title="IPathSegment Interface" Url="html/T-MPT.Geometry.Line.IPathSegment.htm" />
+    <HelpKINode Title="IPathSegment Members" Url="html/AllMembers.T-MPT.Geometry.Line.IPathSegment.htm" />
+    <HelpKINode Title="about IPathSegment interface" Url="html/T-MPT.Geometry.Line.IPathSegment.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Line.IPathSegment.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Line.IPathSegment.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-MPT.Geometry.Line.IPathSegment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPathSegment.I property" Url="html/P-MPT.Geometry.Line.IPathSegment.I.htm" />
+  <HelpKINode Title="IPathSegment.J property" Url="html/P-MPT.Geometry.Line.IPathSegment.J.htm" />
+  <HelpKINode Title="IPathSegment.Length method" Url="html/M-MPT.Geometry.Line.IPathSegment.Length.htm" />
+  <HelpKINode Title="IPathSegment.NormalVector method" Url="html/M-MPT.Geometry.Line.IPathSegment.NormalVector.htm" />
+  <HelpKINode Title="IPathSegment.PointByPathPosition method" Url="html/M-MPT.Geometry.Line.IPathSegment.PointByPathPosition.htm" />
+  <HelpKINode Title="IPathSegment.TangentVector method" Url="html/M-MPT.Geometry.Line.IPathSegment.TangentVector.htm" />
+  <HelpKINode Title="IPathSegment.X method" Url="html/M-MPT.Geometry.Line.IPathSegment.X.htm" />
+  <HelpKINode Title="IPathSegment.Xo method" Url="html/M-MPT.Geometry.Line.IPathSegment.Xo.htm" />
+  <HelpKINode Title="IPathSegment.Y method" Url="html/M-MPT.Geometry.Line.IPathSegment.Y.htm" />
+  <HelpKINode Title="IPathSegment.Yo method" Url="html/M-MPT.Geometry.Line.IPathSegment.Yo.htm" />
+  <HelpKINode Title="IPathSegment3D interface">
+    <HelpKINode Title="IPathSegment3D Interface" Url="html/T-MPT.Geometry.Line.IPathSegment3D.htm" />
+    <HelpKINode Title="IPathSegment3D Members" Url="html/AllMembers.T-MPT.Geometry.Line.IPathSegment3D.htm" />
+    <HelpKINode Title="about IPathSegment3D interface" Url="html/T-MPT.Geometry.Line.IPathSegment3D.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Line.IPathSegment3D.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Line.IPathSegment3D.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-MPT.Geometry.Line.IPathSegment3D.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPathSegment3D.I property" Url="html/P-MPT.Geometry.Line.IPathSegment3D.I.htm" />
+  <HelpKINode Title="IPathSegment3D.J property" Url="html/P-MPT.Geometry.Line.IPathSegment3D.J.htm" />
+  <HelpKINode Title="IPathSegmentCollision interface">
+    <HelpKINode Title="IPathSegmentCollision Interface" Url="html/T-MPT.Geometry.Line.IPathSegmentCollision.htm" />
+    <HelpKINode Title="IPathSegmentCollision Members" Url="html/AllMembers.T-MPT.Geometry.Line.IPathSegmentCollision.htm" />
+    <HelpKINode Title="about IPathSegmentCollision interface" Url="html/T-MPT.Geometry.Line.IPathSegmentCollision.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Line.IPathSegmentCollision.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Line.IPathSegmentCollision.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPolar property">
+    <HelpKINode Title="IPolar Property " Url="html/P-MPT.Geometry.Line.ArcSegment.IPolar.htm" />
+    <HelpKINode Title="IPolar Property " Url="html/P-MPT.Geometry.Line.IPolarCoordinates.IPolar.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPolarCoordinates interface">
+    <HelpKINode Title="IPolarCoordinates Interface" Url="html/T-MPT.Geometry.Line.IPolarCoordinates.htm" />
+    <HelpKINode Title="IPolarCoordinates Members" Url="html/AllMembers.T-MPT.Geometry.Line.IPolarCoordinates.htm" />
+    <HelpKINode Title="about IPolarCoordinates interface" Url="html/T-MPT.Geometry.Line.IPolarCoordinates.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Line.IPolarCoordinates.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Line.IPolarCoordinates.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-MPT.Geometry.Line.IPolarCoordinates.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IPolarCoordinates.CentroidPolar method" Url="html/M-MPT.Geometry.Line.IPolarCoordinates.CentroidPolar.htm" />
+  <HelpKINode Title="IPolarCoordinates.IPolar property" Url="html/P-MPT.Geometry.Line.IPolarCoordinates.IPolar.htm" />
+  <HelpKINode Title="IPolarCoordinates.JPolar property" Url="html/P-MPT.Geometry.Line.IPolarCoordinates.JPolar.htm" />
+  <HelpKINode Title="IPolarCoordinates.LengthPolar method" Url="html/M-MPT.Geometry.Line.IPolarCoordinates.LengthPolar.htm" />
+  <HelpKINode Title="IPolarCoordinates.NormalVectorPolar method" Url="html/M-MPT.Geometry.Line.IPolarCoordinates.NormalVectorPolar.htm" />
+  <HelpKINode Title="IPolarCoordinates.PointByPathPositionPolar method" Url="html/M-MPT.Geometry.Line.IPolarCoordinates.PointByPathPositionPolar.htm" />
+  <HelpKINode Title="IPolarCoordinates.TangentVectorPolar method" Url="html/M-MPT.Geometry.Line.IPolarCoordinates.TangentVectorPolar.htm" />
+  <HelpKINode Title="IPolarCoordinates.XPolar method" Url="html/M-MPT.Geometry.Line.IPolarCoordinates.XPolar.htm" />
+  <HelpKINode Title="IPolarCoordinates.YPolar method" Url="html/M-MPT.Geometry.Line.IPolarCoordinates.YPolar.htm" />
+  <HelpKINode Title="IPolyLine interface">
+    <HelpKINode Title="IPolyLine Interface" Url="html/T-MPT.Geometry.Line.IPolyLine.htm" />
+    <HelpKINode Title="IPolyLine Members" Url="html/AllMembers.T-MPT.Geometry.Line.IPolyLine.htm" />
+    <HelpKINode Title="about IPolyLine interface" Url="html/T-MPT.Geometry.Line.IPolyLine.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Line.IPolyLine.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Line.IPolyLine.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IRegularPolygon interface">
+    <HelpKINode Title="IRegularPolygon Interface" Url="html/T-MPT.Geometry.Area.IRegularPolygon.htm" />
+    <HelpKINode Title="IRegularPolygon Members" Url="html/AllMembers.T-MPT.Geometry.Area.IRegularPolygon.htm" />
+    <HelpKINode Title="about IRegularPolygon interface" Url="html/T-MPT.Geometry.Area.IRegularPolygon.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.IRegularPolygon.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.IRegularPolygon.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-MPT.Geometry.Area.IRegularPolygon.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IRegularPolygon.Apothem property" Url="html/P-MPT.Geometry.Area.IRegularPolygon.Apothem.htm" />
+  <HelpKINode Title="IRegularPolygon.Circumcirle property" Url="html/P-MPT.Geometry.Area.IRegularPolygon.Circumcirle.htm" />
+  <HelpKINode Title="IRegularPolygon.InteriorAngle property" Url="html/P-MPT.Geometry.Area.IRegularPolygon.InteriorAngle.htm" />
+  <HelpKINode Title="IRegularPolygon.InteriorAngleSum property" Url="html/P-MPT.Geometry.Area.IRegularPolygon.InteriorAngleSum.htm" />
+  <HelpKINode Title="IRegularPolygon.NumberOfSides property" Url="html/P-MPT.Geometry.Area.IRegularPolygon.NumberOfSides.htm" />
+  <HelpKINode Title="IRegularPolygon.SideLength property" Url="html/P-MPT.Geometry.Area.IRegularPolygon.SideLength.htm" />
+  <HelpKINode Title="IsColinearOppositeDirection method" Url="html/M-MPT.Geometry.GeometryLibrary.IsColinearOppositeDirection.htm" />
+  <HelpKINode Title="IsColinearSameDirection method" Url="html/M-MPT.Geometry.GeometryLibrary.IsColinearSameDirection.htm" />
+  <HelpKINode Title="IsConcave method" Url="html/M-MPT.Geometry.GeometryLibrary.IsConcave.htm" />
+  <HelpKINode Title="IsConvex method" Url="html/M-MPT.Geometry.GeometryLibrary.IsConvex.htm" />
+  <HelpKINode Title="IShape interface">
+    <HelpKINode Title="IShape Interface" Url="html/T-MPT.Geometry.Area.IShape.htm" />
+    <HelpKINode Title="IShape Members" Url="html/AllMembers.T-MPT.Geometry.Area.IShape.htm" />
+    <HelpKINode Title="about IShape interface" Url="html/T-MPT.Geometry.Area.IShape.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.IShape.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.IShape.htm" />
+  </HelpKINode>
+  <HelpKINode Title="IShape.Area method" Url="html/M-MPT.Geometry.Area.IShape.Area.htm" />
+  <HelpKINode Title="IShape.Ix method" Url="html/M-MPT.Geometry.Area.IShape.Ix.htm" />
+  <HelpKINode Title="IShape.Ixo method" Url="html/M-MPT.Geometry.Area.IShape.Ixo.htm" />
+  <HelpKINode Title="IShape.IxRotation method" Url="html/M-MPT.Geometry.Area.IShape.IxRotation.htm" />
+  <HelpKINode Title="IShape.Ixy method" Url="html/Overload-MPT.Geometry.Area.IShape.Ixy.htm" />
+  <HelpKINode Title="IShape.Ixyo method" Url="html/M-MPT.Geometry.Area.IShape.Ixyo.htm" />
+  <HelpKINode Title="IShape.IxyRotation method" Url="html/M-MPT.Geometry.Area.IShape.IxyRotation.htm" />
+  <HelpKINode Title="IShape.Iy method" Url="html/M-MPT.Geometry.Area.IShape.Iy.htm" />
+  <HelpKINode Title="IShape.Iyo method" Url="html/M-MPT.Geometry.Area.IShape.Iyo.htm" />
+  <HelpKINode Title="IShape.IyRotation method" Url="html/M-MPT.Geometry.Area.IShape.IyRotation.htm" />
+  <HelpKINode Title="IShape.Perimeter method" Url="html/M-MPT.Geometry.Area.IShape.Perimeter.htm" />
+  <HelpKINode Title="IShape.Xo method" Url="html/M-MPT.Geometry.Area.IShape.Xo.htm" />
+  <HelpKINode Title="IShape.Yo method" Url="html/M-MPT.Geometry.Area.IShape.Yo.htm" />
+  <HelpKINode Title="IsIntersecting method" Url="html/Overload-MPT.Geometry.Line.LineSegment.IsIntersecting.htm" />
+  <HelpKINode Title="IsOrthogonal method" Url="html/M-MPT.Geometry.GeometryLibrary.IsOrthogonal.htm" />
+  <HelpKINode Title="IsParallel method" Url="html/Overload-MPT.Geometry.Line.LineSegment.IsParallel.htm" />
+  <HelpKINode Title="IsPerpendicular method" Url="html/Overload-MPT.Geometry.Line.LineSegment.IsPerpendicular.htm" />
+  <HelpKINode Title="IsProjectionIntersecting method" Url="html/Overload-MPT.Geometry.Line.LineSegment.IsProjectionIntersecting.htm" />
+  <HelpKINode Title="Ix method" Url="html/M-MPT.Geometry.Area.IShape.Ix.htm" />
+  <HelpKINode Title="Ixo method" Url="html/M-MPT.Geometry.Area.IShape.Ixo.htm" />
+  <HelpKINode Title="IxRotation method" Url="html/M-MPT.Geometry.Area.IShape.IxRotation.htm" />
+  <HelpKINode Title="Ixy method" Url="html/Overload-MPT.Geometry.Area.IShape.Ixy.htm" />
+  <HelpKINode Title="Ixyo method" Url="html/M-MPT.Geometry.Area.IShape.Ixyo.htm" />
+  <HelpKINode Title="IxyRotation method" Url="html/M-MPT.Geometry.Area.IShape.IxyRotation.htm" />
+  <HelpKINode Title="Iy method" Url="html/M-MPT.Geometry.Area.IShape.Iy.htm" />
+  <HelpKINode Title="Iyo method" Url="html/M-MPT.Geometry.Area.IShape.Iyo.htm" />
+  <HelpKINode Title="IyRotation method" Url="html/M-MPT.Geometry.Area.IShape.IyRotation.htm" />
+  <HelpKINode Title="J property">
+    <HelpKINode Title="J Property " Url="html/P-MPT.Geometry.Line.BezierSegment.J.htm" />
+    <HelpKINode Title="J Property " Url="html/P-MPT.Geometry.Point.OffSet3D.J.htm" />
+    <HelpKINode Title="J Property " Url="html/P-MPT.Geometry.Line.IPathSegment3D.J.htm" />
+    <HelpKINode Title="J Property " Url="html/P-MPT.Geometry.Line.IPathSegment.J.htm" />
+    <HelpKINode Title="J Property " Url="html/P-MPT.Geometry.Point.Offset.J.htm" />
+    <HelpKINode Title="J Property " Url="html/P-MPT.Geometry.Line.PathSegment.J.htm" />
+  </HelpKINode>
+  <HelpKINode Title="JPolar property">
+    <HelpKINode Title="JPolar Property " Url="html/P-MPT.Geometry.Line.ArcSegment.JPolar.htm" />
+    <HelpKINode Title="JPolar Property " Url="html/P-MPT.Geometry.Line.IPolarCoordinates.JPolar.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Length method">
+    <HelpKINode Title="Length Method " Url="html/M-MPT.Geometry.Line.LineSegment.Length.htm" />
+    <HelpKINode Title="Length Method " Url="html/M-MPT.Geometry.Line.ArcSegment.Length.htm" />
+    <HelpKINode Title="Length Method " Url="html/M-MPT.Geometry.Line.PathSegment.Length.htm" />
+    <HelpKINode Title="Length Method " Url="html/M-MPT.Geometry.Line.IPathSegment.Length.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LengthPolar method">
+    <HelpKINode Title="LengthPolar Method " Url="html/M-MPT.Geometry.Line.IPolarCoordinates.LengthPolar.htm" />
+    <HelpKINode Title="LengthPolar Method " Url="html/M-MPT.Geometry.Line.ArcSegment.LengthPolar.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LineIntersect method" Url="html/M-MPT.Geometry.Line.LineSegment.LineIntersect.htm" />
+  <HelpKINode Title="LineIntersectX method" Url="html/M-MPT.Geometry.Line.LineSegment.LineIntersectX.htm" />
+  <HelpKINode Title="LineIntersectY method" Url="html/M-MPT.Geometry.Line.LineSegment.LineIntersectY.htm" />
+  <HelpKINode Title="LineSegment class">
+    <HelpKINode Title="LineSegment Class" Url="html/T-MPT.Geometry.Line.LineSegment.htm" />
+    <HelpKINode Title="LineSegment Members" Url="html/AllMembers.T-MPT.Geometry.Line.LineSegment.htm" />
+    <HelpKINode Title="about LineSegment class" Url="html/T-MPT.Geometry.Line.LineSegment.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Line.LineSegment.htm" />
+    <HelpKINode Title="constructor" Url="html/Overload-MPT.Geometry.Line.LineSegment.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Line.LineSegment.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-MPT.Geometry.Line.LineSegment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LineSegment.AreLinesIntersecting method" Url="html/M-MPT.Geometry.Line.LineSegment.AreLinesIntersecting.htm" />
+  <HelpKINode Title="LineSegment.InterceptX method" Url="html/Overload-MPT.Geometry.Line.LineSegment.InterceptX.htm" />
+  <HelpKINode Title="LineSegment.InterceptY method" Url="html/Overload-MPT.Geometry.Line.LineSegment.InterceptY.htm" />
+  <HelpKINode Title="LineSegment.Intersect method" Url="html/M-MPT.Geometry.Line.LineSegment.Intersect.htm" />
+  <HelpKINode Title="LineSegment.IsIntersecting method" Url="html/Overload-MPT.Geometry.Line.LineSegment.IsIntersecting.htm" />
+  <HelpKINode Title="LineSegment.IsParallel method" Url="html/Overload-MPT.Geometry.Line.LineSegment.IsParallel.htm" />
+  <HelpKINode Title="LineSegment.IsPerpendicular method" Url="html/Overload-MPT.Geometry.Line.LineSegment.IsPerpendicular.htm" />
+  <HelpKINode Title="LineSegment.IsProjectionIntersecting method" Url="html/Overload-MPT.Geometry.Line.LineSegment.IsProjectionIntersecting.htm" />
+  <HelpKINode Title="LineSegment.Length method" Url="html/M-MPT.Geometry.Line.LineSegment.Length.htm" />
+  <HelpKINode Title="LineSegment.LineIntersect method" Url="html/M-MPT.Geometry.Line.LineSegment.LineIntersect.htm" />
+  <HelpKINode Title="LineSegment.LineIntersectX method" Url="html/M-MPT.Geometry.Line.LineSegment.LineIntersectX.htm" />
+  <HelpKINode Title="LineSegment.LineIntersectY method" Url="html/M-MPT.Geometry.Line.LineSegment.LineIntersectY.htm" />
+  <HelpKINode Title="LineSegment.LineSegment constructor" Url="html/Overload-MPT.Geometry.Line.LineSegment.-ctor.htm" />
+  <HelpKINode Title="LineSegment.NormalVector method">
+    <HelpKINode Title="NormalVector Method " Url="html/M-MPT.Geometry.Line.LineSegment.NormalVector.htm" />
+    <HelpKINode Title="NormalVector Method " Url="html/Overload-MPT.Geometry.Line.LineSegment.NormalVector.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LineSegment.PointByPathPosition method" Url="html/M-MPT.Geometry.Line.LineSegment.PointByPathPosition.htm" />
+  <HelpKINode Title="LineSegment.PointDivision method" Url="html/M-MPT.Geometry.Line.LineSegment.PointDivision.htm" />
+  <HelpKINode Title="LineSegment.Slope method" Url="html/Overload-MPT.Geometry.Line.LineSegment.Slope.htm" />
+  <HelpKINode Title="LineSegment.TangentVector method">
+    <HelpKINode Title="TangentVector Method " Url="html/M-MPT.Geometry.Line.LineSegment.TangentVector.htm" />
+    <HelpKINode Title="TangentVector Method " Url="html/Overload-MPT.Geometry.Line.LineSegment.TangentVector.htm" />
+  </HelpKINode>
+  <HelpKINode Title="LineSegment.ToVector method" Url="html/M-MPT.Geometry.Line.LineSegment.ToVector.htm" />
+  <HelpKINode Title="LineSegment.X method" Url="html/M-MPT.Geometry.Line.LineSegment.X.htm" />
+  <HelpKINode Title="LineSegment.Xo method" Url="html/M-MPT.Geometry.Line.LineSegment.Xo.htm" />
+  <HelpKINode Title="LineSegment.Y method" Url="html/M-MPT.Geometry.Line.LineSegment.Y.htm" />
+  <HelpKINode Title="LineSegment.Yo method" Url="html/M-MPT.Geometry.Line.LineSegment.Yo.htm" />
+  <HelpKINode Title="MPT.Geometry namespace" Url="html/N-MPT.Geometry.htm" />
+  <HelpKINode Title="MPT.Geometry.Area namespace" Url="html/N-MPT.Geometry.Area.htm" />
+  <HelpKINode Title="MPT.Geometry.Area.Circle class">
+    <HelpKINode Title="Circle Class" Url="html/T-MPT.Geometry.Area.Circle.htm" />
+    <HelpKINode Title="Circle Members" Url="html/AllMembers.T-MPT.Geometry.Area.Circle.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.CircularSector class">
+    <HelpKINode Title="CircularSector Class" Url="html/T-MPT.Geometry.Area.CircularSector.htm" />
+    <HelpKINode Title="CircularSector Members" Url="html/AllMembers.T-MPT.Geometry.Area.CircularSector.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.CircularSegment class">
+    <HelpKINode Title="CircularSegment Class" Url="html/T-MPT.Geometry.Area.CircularSegment.htm" />
+    <HelpKINode Title="CircularSegment Members" Url="html/AllMembers.T-MPT.Geometry.Area.CircularSegment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.Ellipse class">
+    <HelpKINode Title="Ellipse Class" Url="html/T-MPT.Geometry.Area.Ellipse.htm" />
+    <HelpKINode Title="Ellipse Members" Url="html/AllMembers.T-MPT.Geometry.Area.Ellipse.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.Hexagon class">
+    <HelpKINode Title="Hexagon Class" Url="html/T-MPT.Geometry.Area.Hexagon.htm" />
+    <HelpKINode Title="Hexagon Members" Url="html/AllMembers.T-MPT.Geometry.Area.Hexagon.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.IRegularPolygon interface">
+    <HelpKINode Title="IRegularPolygon Interface" Url="html/T-MPT.Geometry.Area.IRegularPolygon.htm" />
+    <HelpKINode Title="IRegularPolygon Members" Url="html/AllMembers.T-MPT.Geometry.Area.IRegularPolygon.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.IShape interface">
+    <HelpKINode Title="IShape Interface" Url="html/T-MPT.Geometry.Area.IShape.htm" />
+    <HelpKINode Title="IShape Members" Url="html/AllMembers.T-MPT.Geometry.Area.IShape.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.Parallelogram class">
+    <HelpKINode Title="Parallelogram Class" Url="html/T-MPT.Geometry.Area.Parallelogram.htm" />
+    <HelpKINode Title="Parallelogram Members" Url="html/AllMembers.T-MPT.Geometry.Area.Parallelogram.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.Polygon class">
+    <HelpKINode Title="Polygon Class" Url="html/T-MPT.Geometry.Area.Polygon.htm" />
+    <HelpKINode Title="Polygon Members" Url="html/AllMembers.T-MPT.Geometry.Area.Polygon.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.Quadrilateral class">
+    <HelpKINode Title="Quadrilateral Class" Url="html/T-MPT.Geometry.Area.Quadrilateral.htm" />
+    <HelpKINode Title="Quadrilateral Members" Url="html/AllMembers.T-MPT.Geometry.Area.Quadrilateral.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.Rectangle class">
+    <HelpKINode Title="Rectangle Class" Url="html/T-MPT.Geometry.Area.Rectangle.htm" />
+    <HelpKINode Title="Rectangle Members" Url="html/AllMembers.T-MPT.Geometry.Area.Rectangle.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.RegularPolygon class">
+    <HelpKINode Title="RegularPolygon Class" Url="html/T-MPT.Geometry.Area.RegularPolygon.htm" />
+    <HelpKINode Title="RegularPolygon Members" Url="html/AllMembers.T-MPT.Geometry.Area.RegularPolygon.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.Square class">
+    <HelpKINode Title="Square Class" Url="html/T-MPT.Geometry.Area.Square.htm" />
+    <HelpKINode Title="Square Members" Url="html/AllMembers.T-MPT.Geometry.Area.Square.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.Trapezoid class">
+    <HelpKINode Title="Trapezoid Class" Url="html/T-MPT.Geometry.Area.Trapezoid.htm" />
+    <HelpKINode Title="Trapezoid Members" Url="html/AllMembers.T-MPT.Geometry.Area.Trapezoid.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.Triangle class">
+    <HelpKINode Title="Triangle Class" Url="html/T-MPT.Geometry.Area.Triangle.htm" />
+    <HelpKINode Title="Triangle Members" Url="html/AllMembers.T-MPT.Geometry.Area.Triangle.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Area.Wedge class">
+    <HelpKINode Title="Wedge Class" Url="html/T-MPT.Geometry.Area.Wedge.htm" />
+    <HelpKINode Title="Wedge Members" Url="html/AllMembers.T-MPT.Geometry.Area.Wedge.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.GeometryLibrary class">
+    <HelpKINode Title="GeometryLibrary Class" Url="html/T-MPT.Geometry.GeometryLibrary.htm" />
+    <HelpKINode Title="GeometryLibrary Members" Url="html/AllMembers.T-MPT.Geometry.GeometryLibrary.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Line namespace" Url="html/N-MPT.Geometry.Line.htm" />
+  <HelpKINode Title="MPT.Geometry.Line.ArcSegment class">
+    <HelpKINode Title="ArcSegment Class" Url="html/T-MPT.Geometry.Line.ArcSegment.htm" />
+    <HelpKINode Title="ArcSegment Members" Url="html/AllMembers.T-MPT.Geometry.Line.ArcSegment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Line.BezierSegment class">
+    <HelpKINode Title="BezierSegment Class" Url="html/T-MPT.Geometry.Line.BezierSegment.htm" />
+    <HelpKINode Title="BezierSegment Members" Url="html/AllMembers.T-MPT.Geometry.Line.BezierSegment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Line.ICurve interface">
+    <HelpKINode Title="ICurve Interface" Url="html/T-MPT.Geometry.Line.ICurve.htm" />
+    <HelpKINode Title="ICurve Members" Url="html/AllMembers.T-MPT.Geometry.Line.ICurve.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Line.IPathDivision interface">
+    <HelpKINode Title="IPathDivision Interface" Url="html/T-MPT.Geometry.Line.IPathDivision.htm" />
+    <HelpKINode Title="IPathDivision Members" Url="html/AllMembers.T-MPT.Geometry.Line.IPathDivision.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Line.IPathSegment interface">
+    <HelpKINode Title="IPathSegment Interface" Url="html/T-MPT.Geometry.Line.IPathSegment.htm" />
+    <HelpKINode Title="IPathSegment Members" Url="html/AllMembers.T-MPT.Geometry.Line.IPathSegment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Line.IPathSegment3D interface">
+    <HelpKINode Title="IPathSegment3D Interface" Url="html/T-MPT.Geometry.Line.IPathSegment3D.htm" />
+    <HelpKINode Title="IPathSegment3D Members" Url="html/AllMembers.T-MPT.Geometry.Line.IPathSegment3D.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Line.IPathSegmentCollision interface">
+    <HelpKINode Title="IPathSegmentCollision Interface" Url="html/T-MPT.Geometry.Line.IPathSegmentCollision.htm" />
+    <HelpKINode Title="IPathSegmentCollision Members" Url="html/AllMembers.T-MPT.Geometry.Line.IPathSegmentCollision.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Line.IPolarCoordinates interface">
+    <HelpKINode Title="IPolarCoordinates Interface" Url="html/T-MPT.Geometry.Line.IPolarCoordinates.htm" />
+    <HelpKINode Title="IPolarCoordinates Members" Url="html/AllMembers.T-MPT.Geometry.Line.IPolarCoordinates.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Line.IPolyLine interface">
+    <HelpKINode Title="IPolyLine Interface" Url="html/T-MPT.Geometry.Line.IPolyLine.htm" />
+    <HelpKINode Title="IPolyLine Members" Url="html/AllMembers.T-MPT.Geometry.Line.IPolyLine.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Line.LineSegment class">
+    <HelpKINode Title="LineSegment Class" Url="html/T-MPT.Geometry.Line.LineSegment.htm" />
+    <HelpKINode Title="LineSegment Members" Url="html/AllMembers.T-MPT.Geometry.Line.LineSegment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Line.PathSegment class">
+    <HelpKINode Title="PathSegment Class" Url="html/T-MPT.Geometry.Line.PathSegment.htm" />
+    <HelpKINode Title="PathSegment Members" Url="html/AllMembers.T-MPT.Geometry.Line.PathSegment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Point namespace" Url="html/N-MPT.Geometry.Point.htm" />
+  <HelpKINode Title="MPT.Geometry.Point.Offset structure">
+    <HelpKINode Title="Offset Members" Url="html/AllMembers.T-MPT.Geometry.Point.Offset.htm" />
+    <HelpKINode Title="Offset Structure" Url="html/T-MPT.Geometry.Point.Offset.htm" />
+  </HelpKINode>
+  <HelpKINode Title="MPT.Geometry.Point.OffSet3D structure">
+    <HelpKINode Title="OffSet3D Members" Url="html/AllMembers.T-MPT.Geometry.Point.OffSet3D.htm" />
+    <HelpKINode Title="OffSet3D Structure" Url="html/T-MPT.Geometry.Point.OffSet3D.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NormalAngle method">
+    <HelpKINode Title="NormalAngle Method " Url="html/M-MPT.Geometry.Line.ICurve.NormalAngle.htm" />
+    <HelpKINode Title="NormalAngle Method " Url="html/M-MPT.Geometry.Line.ArcSegment.NormalAngle.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NormalVector method">
+    <HelpKINode Title="NormalVector Method " Url="html/M-MPT.Geometry.Line.ArcSegment.NormalVector.htm" />
+    <HelpKINode Title="NormalVector Method " Url="html/Overload-MPT.Geometry.Line.ArcSegment.NormalVector.htm" />
+    <HelpKINode Title="NormalVector Method " Url="html/M-MPT.Geometry.Line.LineSegment.NormalVector.htm" />
+    <HelpKINode Title="NormalVector Method " Url="html/M-MPT.Geometry.Line.IPathSegment.NormalVector.htm" />
+    <HelpKINode Title="NormalVector Method " Url="html/M-MPT.Geometry.Line.BezierSegment.NormalVector.htm" />
+    <HelpKINode Title="NormalVector Method " Url="html/Overload-MPT.Geometry.Line.LineSegment.NormalVector.htm" />
+    <HelpKINode Title="NormalVector Method " Url="html/M-MPT.Geometry.GeometryLibrary.NormalVector.htm" />
+    <HelpKINode Title="NormalVector Method " Url="html/Overload-MPT.Geometry.Line.PathSegment.NormalVector.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NormalVectorPolar method">
+    <HelpKINode Title="NormalVectorPolar Method " Url="html/M-MPT.Geometry.Line.IPolarCoordinates.NormalVectorPolar.htm" />
+    <HelpKINode Title="NormalVectorPolar Method " Url="html/M-MPT.Geometry.Line.ArcSegment.NormalVectorPolar.htm" />
+  </HelpKINode>
+  <HelpKINode Title="NumberOfSides property" Url="html/P-MPT.Geometry.Area.IRegularPolygon.NumberOfSides.htm" />
+  <HelpKINode Title="Offset structure">
+    <HelpKINode Title="Offset Members" Url="html/AllMembers.T-MPT.Geometry.Point.Offset.htm" />
+    <HelpKINode Title="Offset Structure" Url="html/T-MPT.Geometry.Point.Offset.htm" />
+    <HelpKINode Title="about Offset structure" Url="html/T-MPT.Geometry.Point.Offset.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Point.Offset.htm" />
+    <HelpKINode Title="constructor" Url="html/M-MPT.Geometry.Point.Offset.-ctor.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Point.Offset.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-MPT.Geometry.Point.Offset.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Offset.I property" Url="html/P-MPT.Geometry.Point.Offset.I.htm" />
+  <HelpKINode Title="Offset.J property" Url="html/P-MPT.Geometry.Point.Offset.J.htm" />
+  <HelpKINode Title="Offset.Offset constructor" Url="html/M-MPT.Geometry.Point.Offset.-ctor.htm" />
+  <HelpKINode Title="Offset.X method" Url="html/M-MPT.Geometry.Point.Offset.X.htm" />
+  <HelpKINode Title="Offset.Y method" Url="html/M-MPT.Geometry.Point.Offset.Y.htm" />
+  <HelpKINode Title="OffSet3D structure">
+    <HelpKINode Title="OffSet3D Members" Url="html/AllMembers.T-MPT.Geometry.Point.OffSet3D.htm" />
+    <HelpKINode Title="OffSet3D Structure" Url="html/T-MPT.Geometry.Point.OffSet3D.htm" />
+    <HelpKINode Title="about OffSet3D structure" Url="html/T-MPT.Geometry.Point.OffSet3D.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Point.OffSet3D.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Point.OffSet3D.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-MPT.Geometry.Point.OffSet3D.htm" />
+  </HelpKINode>
+  <HelpKINode Title="OffSet3D.I property" Url="html/P-MPT.Geometry.Point.OffSet3D.I.htm" />
+  <HelpKINode Title="OffSet3D.J property" Url="html/P-MPT.Geometry.Point.OffSet3D.J.htm" />
+  <HelpKINode Title="OffSet3D.X method" Url="html/M-MPT.Geometry.Point.OffSet3D.X.htm" />
+  <HelpKINode Title="OffSet3D.Y method" Url="html/M-MPT.Geometry.Point.OffSet3D.Y.htm" />
+  <HelpKINode Title="OffSet3D.Z method" Url="html/M-MPT.Geometry.Point.OffSet3D.Z.htm" />
+  <HelpKINode Title="Overlap method" Url="html/M-MPT.Geometry.Line.ArcSegment.Overlap.htm" />
+  <HelpKINode Title="Parallelogram class">
+    <HelpKINode Title="Parallelogram Class" Url="html/T-MPT.Geometry.Area.Parallelogram.htm" />
+    <HelpKINode Title="Parallelogram Members" Url="html/AllMembers.T-MPT.Geometry.Area.Parallelogram.htm" />
+    <HelpKINode Title="about Parallelogram class" Url="html/T-MPT.Geometry.Area.Parallelogram.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.Parallelogram.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.Parallelogram.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PathSegment class">
+    <HelpKINode Title="PathSegment Class" Url="html/T-MPT.Geometry.Line.PathSegment.htm" />
+    <HelpKINode Title="PathSegment Members" Url="html/AllMembers.T-MPT.Geometry.Line.PathSegment.htm" />
+    <HelpKINode Title="about PathSegment class" Url="html/T-MPT.Geometry.Line.PathSegment.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Line.PathSegment.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Line.PathSegment.htm" />
+    <HelpKINode Title="properties" Url="html/Properties.T-MPT.Geometry.Line.PathSegment.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PathSegment.I property" Url="html/P-MPT.Geometry.Line.PathSegment.I.htm" />
+  <HelpKINode Title="PathSegment.J property" Url="html/P-MPT.Geometry.Line.PathSegment.J.htm" />
+  <HelpKINode Title="PathSegment.Length method" Url="html/M-MPT.Geometry.Line.PathSegment.Length.htm" />
+  <HelpKINode Title="PathSegment.NormalVector method" Url="html/Overload-MPT.Geometry.Line.PathSegment.NormalVector.htm" />
+  <HelpKINode Title="PathSegment.PointByPathPosition method" Url="html/M-MPT.Geometry.Line.PathSegment.PointByPathPosition.htm" />
+  <HelpKINode Title="PathSegment.TangentVector method" Url="html/Overload-MPT.Geometry.Line.PathSegment.TangentVector.htm" />
+  <HelpKINode Title="PathSegment.Tolerance property" Url="html/P-MPT.Geometry.Line.PathSegment.Tolerance.htm" />
+  <HelpKINode Title="PathSegment.X method" Url="html/M-MPT.Geometry.Line.PathSegment.X.htm" />
+  <HelpKINode Title="PathSegment.Xo method" Url="html/M-MPT.Geometry.Line.PathSegment.Xo.htm" />
+  <HelpKINode Title="PathSegment.Y method" Url="html/M-MPT.Geometry.Line.PathSegment.Y.htm" />
+  <HelpKINode Title="PathSegment.Yo method" Url="html/M-MPT.Geometry.Line.PathSegment.Yo.htm" />
+  <HelpKINode Title="Perimeter method" Url="html/M-MPT.Geometry.Area.IShape.Perimeter.htm" />
+  <HelpKINode Title="PointByPathPosition method">
+    <HelpKINode Title="PointByPathPosition Method " Url="html/M-MPT.Geometry.Line.LineSegment.PointByPathPosition.htm" />
+    <HelpKINode Title="PointByPathPosition Method " Url="html/M-MPT.Geometry.Line.PathSegment.PointByPathPosition.htm" />
+    <HelpKINode Title="PointByPathPosition Method " Url="html/M-MPT.Geometry.Line.IPathSegment.PointByPathPosition.htm" />
+    <HelpKINode Title="PointByPathPosition Method " Url="html/M-MPT.Geometry.Line.ArcSegment.PointByPathPosition.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PointByPathPositionPolar method">
+    <HelpKINode Title="PointByPathPositionPolar Method " Url="html/M-MPT.Geometry.Line.ArcSegment.PointByPathPositionPolar.htm" />
+    <HelpKINode Title="PointByPathPositionPolar Method " Url="html/M-MPT.Geometry.Line.IPolarCoordinates.PointByPathPositionPolar.htm" />
+  </HelpKINode>
+  <HelpKINode Title="PointDivision method">
+    <HelpKINode Title="PointDivision Method " Url="html/M-MPT.Geometry.Line.ArcSegment.PointDivision.htm" />
+    <HelpKINode Title="PointDivision Method " Url="html/M-MPT.Geometry.Line.IPathDivision.PointDivision.htm" />
+    <HelpKINode Title="PointDivision Method " Url="html/M-MPT.Geometry.Line.LineSegment.PointDivision.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Polygon class">
+    <HelpKINode Title="Polygon Class" Url="html/T-MPT.Geometry.Area.Polygon.htm" />
+    <HelpKINode Title="Polygon Members" Url="html/AllMembers.T-MPT.Geometry.Area.Polygon.htm" />
+    <HelpKINode Title="about Polygon class" Url="html/T-MPT.Geometry.Area.Polygon.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.Polygon.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.Polygon.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Quadrilateral class">
+    <HelpKINode Title="Quadrilateral Class" Url="html/T-MPT.Geometry.Area.Quadrilateral.htm" />
+    <HelpKINode Title="Quadrilateral Members" Url="html/AllMembers.T-MPT.Geometry.Area.Quadrilateral.htm" />
+    <HelpKINode Title="about Quadrilateral class" Url="html/T-MPT.Geometry.Area.Quadrilateral.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.Quadrilateral.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.Quadrilateral.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RadicalLineLength method" Url="html/M-MPT.Geometry.Line.ArcSegment.RadicalLineLength.htm" />
+  <HelpKINode Title="Radius property">
+    <HelpKINode Title="Radius Property " Url="html/P-MPT.Geometry.Line.ICurve.Radius.htm" />
+    <HelpKINode Title="Radius Property " Url="html/P-MPT.Geometry.Line.ArcSegment.Radius.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Rectangle class">
+    <HelpKINode Title="Rectangle Class" Url="html/T-MPT.Geometry.Area.Rectangle.htm" />
+    <HelpKINode Title="Rectangle Members" Url="html/AllMembers.T-MPT.Geometry.Area.Rectangle.htm" />
+    <HelpKINode Title="about Rectangle class" Url="html/T-MPT.Geometry.Area.Rectangle.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.Rectangle.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.Rectangle.htm" />
+  </HelpKINode>
+  <HelpKINode Title="RegularPolygon class">
+    <HelpKINode Title="RegularPolygon Class" Url="html/T-MPT.Geometry.Area.RegularPolygon.htm" />
+    <HelpKINode Title="RegularPolygon Members" Url="html/AllMembers.T-MPT.Geometry.Area.RegularPolygon.htm" />
+    <HelpKINode Title="about RegularPolygon class" Url="html/T-MPT.Geometry.Area.RegularPolygon.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.RegularPolygon.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.RegularPolygon.htm" />
+  </HelpKINode>
+  <HelpKINode Title="SideLength property" Url="html/P-MPT.Geometry.Area.IRegularPolygon.SideLength.htm" />
+  <HelpKINode Title="Slope method" Url="html/Overload-MPT.Geometry.Line.LineSegment.Slope.htm" />
+  <HelpKINode Title="Square class">
+    <HelpKINode Title="Square Class" Url="html/T-MPT.Geometry.Area.Square.htm" />
+    <HelpKINode Title="Square Members" Url="html/AllMembers.T-MPT.Geometry.Area.Square.htm" />
+    <HelpKINode Title="about Square class" Url="html/T-MPT.Geometry.Area.Square.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.Square.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.Square.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TangentialAngle method">
+    <HelpKINode Title="TangentialAngle Method " Url="html/M-MPT.Geometry.Line.ArcSegment.TangentialAngle.htm" />
+    <HelpKINode Title="TangentialAngle Method " Url="html/M-MPT.Geometry.Line.ICurve.TangentialAngle.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TangentVector method">
+    <HelpKINode Title="TangentVector Method " Url="html/Overload-MPT.Geometry.Line.PathSegment.TangentVector.htm" />
+    <HelpKINode Title="TangentVector Method " Url="html/M-MPT.Geometry.Line.ArcSegment.TangentVector.htm" />
+    <HelpKINode Title="TangentVector Method " Url="html/Overload-MPT.Geometry.Line.LineSegment.TangentVector.htm" />
+    <HelpKINode Title="TangentVector Method " Url="html/M-MPT.Geometry.GeometryLibrary.TangentVector.htm" />
+    <HelpKINode Title="TangentVector Method " Url="html/M-MPT.Geometry.Line.LineSegment.TangentVector.htm" />
+    <HelpKINode Title="TangentVector Method " Url="html/M-MPT.Geometry.Line.BezierSegment.TangentVector.htm" />
+    <HelpKINode Title="TangentVector Method " Url="html/M-MPT.Geometry.Line.IPathSegment.TangentVector.htm" />
+    <HelpKINode Title="TangentVector Method " Url="html/Overload-MPT.Geometry.Line.ArcSegment.TangentVector.htm" />
+  </HelpKINode>
+  <HelpKINode Title="TangentVectorPolar method">
+    <HelpKINode Title="TangentVectorPolar Method " Url="html/M-MPT.Geometry.Line.IPolarCoordinates.TangentVectorPolar.htm" />
+    <HelpKINode Title="TangentVectorPolar Method " Url="html/M-MPT.Geometry.Line.ArcSegment.TangentVectorPolar.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Tolerance property" Url="html/P-MPT.Geometry.Line.PathSegment.Tolerance.htm" />
+  <HelpKINode Title="ToVector method" Url="html/M-MPT.Geometry.Line.LineSegment.ToVector.htm" />
+  <HelpKINode Title="Trapezoid class">
+    <HelpKINode Title="Trapezoid Class" Url="html/T-MPT.Geometry.Area.Trapezoid.htm" />
+    <HelpKINode Title="Trapezoid Members" Url="html/AllMembers.T-MPT.Geometry.Area.Trapezoid.htm" />
+    <HelpKINode Title="about Trapezoid class" Url="html/T-MPT.Geometry.Area.Trapezoid.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.Trapezoid.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.Trapezoid.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Triangle class">
+    <HelpKINode Title="Triangle Class" Url="html/T-MPT.Geometry.Area.Triangle.htm" />
+    <HelpKINode Title="Triangle Members" Url="html/AllMembers.T-MPT.Geometry.Area.Triangle.htm" />
+    <HelpKINode Title="about Triangle class" Url="html/T-MPT.Geometry.Area.Triangle.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.Triangle.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.Triangle.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Wedge class">
+    <HelpKINode Title="Wedge Class" Url="html/T-MPT.Geometry.Area.Wedge.htm" />
+    <HelpKINode Title="Wedge Members" Url="html/AllMembers.T-MPT.Geometry.Area.Wedge.htm" />
+    <HelpKINode Title="about Wedge class" Url="html/T-MPT.Geometry.Area.Wedge.htm" />
+    <HelpKINode Title="all members" Url="html/AllMembers.T-MPT.Geometry.Area.Wedge.htm" />
+    <HelpKINode Title="methods" Url="html/Methods.T-MPT.Geometry.Area.Wedge.htm" />
+  </HelpKINode>
+  <HelpKINode Title="X method">
+    <HelpKINode Title="X Method " Url="html/M-MPT.Geometry.Line.PathSegment.X.htm" />
+    <HelpKINode Title="X Method " Url="html/M-MPT.Geometry.Line.LineSegment.X.htm" />
+    <HelpKINode Title="X Method " Url="html/M-MPT.Geometry.Line.ArcSegment.X.htm" />
+    <HelpKINode Title="X Method " Url="html/M-MPT.Geometry.Line.BezierSegment.X.htm" />
+    <HelpKINode Title="X Method " Url="html/M-MPT.Geometry.Point.OffSet3D.X.htm" />
+    <HelpKINode Title="X Method " Url="html/M-MPT.Geometry.Point.Offset.X.htm" />
+    <HelpKINode Title="X Method " Url="html/M-MPT.Geometry.Line.IPathSegment.X.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Xo method">
+    <HelpKINode Title="Xo Method " Url="html/M-MPT.Geometry.Line.ArcSegment.Xo.htm" />
+    <HelpKINode Title="Xo Method " Url="html/M-MPT.Geometry.Line.PathSegment.Xo.htm" />
+    <HelpKINode Title="Xo Method " Url="html/M-MPT.Geometry.Area.IShape.Xo.htm" />
+    <HelpKINode Title="Xo Method " Url="html/M-MPT.Geometry.Line.IPathSegment.Xo.htm" />
+    <HelpKINode Title="Xo Method " Url="html/M-MPT.Geometry.Line.LineSegment.Xo.htm" />
+  </HelpKINode>
+  <HelpKINode Title="XPolar method">
+    <HelpKINode Title="XPolar Method " Url="html/M-MPT.Geometry.Line.IPolarCoordinates.XPolar.htm" />
+    <HelpKINode Title="XPolar Method " Url="html/M-MPT.Geometry.Line.ArcSegment.XPolar.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Y method">
+    <HelpKINode Title="Y Method " Url="html/M-MPT.Geometry.Line.IPathSegment.Y.htm" />
+    <HelpKINode Title="Y Method " Url="html/M-MPT.Geometry.Point.OffSet3D.Y.htm" />
+    <HelpKINode Title="Y Method " Url="html/M-MPT.Geometry.Line.BezierSegment.Y.htm" />
+    <HelpKINode Title="Y Method " Url="html/M-MPT.Geometry.Point.Offset.Y.htm" />
+    <HelpKINode Title="Y Method " Url="html/M-MPT.Geometry.Line.LineSegment.Y.htm" />
+    <HelpKINode Title="Y Method " Url="html/M-MPT.Geometry.Line.ArcSegment.Y.htm" />
+    <HelpKINode Title="Y Method " Url="html/M-MPT.Geometry.Line.PathSegment.Y.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Yo method">
+    <HelpKINode Title="Yo Method " Url="html/M-MPT.Geometry.Line.LineSegment.Yo.htm" />
+    <HelpKINode Title="Yo Method " Url="html/M-MPT.Geometry.Line.IPathSegment.Yo.htm" />
+    <HelpKINode Title="Yo Method " Url="html/M-MPT.Geometry.Area.IShape.Yo.htm" />
+    <HelpKINode Title="Yo Method " Url="html/M-MPT.Geometry.Line.PathSegment.Yo.htm" />
+    <HelpKINode Title="Yo Method " Url="html/M-MPT.Geometry.Line.ArcSegment.Yo.htm" />
+  </HelpKINode>
+  <HelpKINode Title="YPolar method">
+    <HelpKINode Title="YPolar Method " Url="html/M-MPT.Geometry.Line.ArcSegment.YPolar.htm" />
+    <HelpKINode Title="YPolar Method " Url="html/M-MPT.Geometry.Line.IPolarCoordinates.YPolar.htm" />
+  </HelpKINode>
+  <HelpKINode Title="Z method" Url="html/M-MPT.Geometry.Point.OffSet3D.Z.htm" />
+  <HelpKINode Title="ZeroTolerance field" Url="html/F-MPT.Geometry.GeometryLibrary.ZeroTolerance.htm" />
+</HelpKI>

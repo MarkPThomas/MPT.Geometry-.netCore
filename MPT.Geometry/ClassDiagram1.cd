@@ -1,0 +1,308 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MPT.Geometry.Line.ArcSegment" Collapsed="true">
+    <Position X="1.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AggIgoQBAAAAAAQkCAAgEABgAAAB0IESAEiAABEIcgA=</HashCode>
+      <FileName>Line\ArcSegment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MPT.Geometry.Line.BezierSpline" Collapsed="true">
+    <Position X="22.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Line\BezierSpline.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Line.BSpline" Collapsed="true">
+    <Position X="24.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Line\BSpline.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Line.CatmullRomSpline" Collapsed="true">
+    <Position X="26.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Line\CatmullRomSpline.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Line.LineSegment" Collapsed="true">
+    <Position X="3.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAQAAACAAAABgAAEAEBAAAAE0CEAAgCAwAAAYkA=</HashCode>
+      <FileName>Line\LineSegment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MPT.Geometry.Line.NURBS" Collapsed="true">
+    <Position X="24.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Line\NURBS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Line.PathSegment" Collapsed="true">
+    <Position X="2.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAACAAAAAAAAAABAAAAAwAAAAACAACABYgA=</HashCode>
+      <FileName>Line\PathSegment.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MPT.Geometry.Line.PolyLine" Collapsed="true">
+    <Position X="22.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Line\PolyLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.Circle" Collapsed="true">
+    <Position X="2.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\Circle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.CircularSector" Collapsed="true">
+    <Position X="2.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Area\CircularSector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.CircularSegment" Collapsed="true">
+    <Position X="6.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\CircularSegment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.Ellipse" Collapsed="true">
+    <Position X="20.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\Ellipse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.Hexagon" Collapsed="true">
+    <Position X="4.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\Hexagon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.Parallelogram" Collapsed="true">
+    <Position X="9" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\Parallelogram.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.Polygon" Collapsed="true">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\Polygon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.Quadrilateral" Collapsed="true">
+    <Position X="12.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\Quadrilateral.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.Rectangle" Collapsed="true">
+    <Position X="15.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\Rectangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.RegularPolygon" Collapsed="true">
+    <Position X="4.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\RegularPolygon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.Shape" Collapsed="true">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAEAAAAAAQAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\Shape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.Square" Collapsed="true">
+    <Position X="15.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\Square.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.Trapezoid" Collapsed="true">
+    <Position X="11.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\Trapezoid.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.Triangle" Collapsed="true">
+    <Position X="13.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\Triangle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Area.Wedge" Collapsed="true">
+    <Position X="18" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Area\Wedge.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Intersection.PointIntersection" Collapsed="true">
+    <Position X="26.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEA=</HashCode>
+      <FileName>Intersection\PointIntersection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Intersection.ProjectionHorizontal" Collapsed="true">
+    <Position X="24.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAACABAAAAAAAAAAABIAAAA=</HashCode>
+      <FileName>Intersection\ProjectionHorizontal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Intersection.ProjectionVertical" Collapsed="true">
+    <Position X="26.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAQAAAAAAAAAAAAAAAAAAIAAAAABIAAAA=</HashCode>
+      <FileName>Intersection\ProjectionVertical.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Tools.Boundary&lt;ICoordinate&gt;" Collapsed="true">
+    <Position X="9.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAKBAAAAAAABAAAIAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Tools\Boundary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Tools.Extents&lt;T&gt;" Collapsed="true">
+    <Position X="6.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>cAoAAAAwAAAABGAAAAEAAAAAAAAAAAAAAAAAAABAJQA=</HashCode>
+      <FileName>Tools\Extents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Tools.Extents3D&lt;T, U, TExtents&gt;" Collapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>cAIEABhwAAAEBEAAAAGAAAACAAAAAAAAAAAAAABABAA=</HashCode>
+      <FileName>Tools\Extents3D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Tools.PointBoundary" Collapsed="true">
+    <Position X="9.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Tools\PointBoundary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Tools.PointExtents" Collapsed="true">
+    <Position X="6.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAABBA=</HashCode>
+      <FileName>Tools\PointExtents.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Tools.PointExtents3D" Collapsed="true">
+    <Position X="7.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAgAAAAEAEAAAAAAAAAAAAAAAAAAAAAAAAAABBA=</HashCode>
+      <FileName>Tools\PointExtents3D.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MPT.Geometry.Aggregation.CompositeShape&lt;T, TBoundary, TExtents&gt;">
+    <Position X="18.75" Y="3.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>ACoAAEAIAAACAAQEAEAABRQKAEAABAARKAEAAIBGBAA=</HashCode>
+      <FileName>Aggregation\CompositeShape.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="MPT.Geometry.Line.ICurve" Collapsed="true">
+    <Position X="4.5" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAQAAAAAAAAAAAAgEAAgAAAAAAAAAEAAAAAIEAA=</HashCode>
+      <FileName>Line\ICurve.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MPT.Geometry.Line.ILine" Collapsed="true">
+    <Position X="22.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Line\ILine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MPT.Geometry.Line.IPathDivision" Collapsed="true">
+    <Position X="24.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Line\IPathDivision.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MPT.Geometry.Line.IPathSegment" Collapsed="true">
+    <Position X="4.5" Y="10.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAABAAAAAwAAAAACAACABYgA=</HashCode>
+      <FileName>Line\IPathSegment.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MPT.Geometry.Line.IPathSegment3D" Collapsed="true">
+    <Position X="26.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACABAAA=</HashCode>
+      <FileName>Line\IPathSegment3D.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MPT.Geometry.Line.IPathSegmentCollision" Collapsed="true">
+    <Position X="22.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Line\IPathSegmentCollision.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MPT.Geometry.Line.IPolarCoordinates" Collapsed="true">
+    <Position X="24.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAggABAAAAAAAAAAAAAAAAAAAAEAESAAgAAAAAAAA=</HashCode>
+      <FileName>Line\IPolarCoordinates.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MPT.Geometry.Line.IPolyLine" Collapsed="true">
+    <Position X="26.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Line\IPolyLine.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MPT.Geometry.Area.IRegularPolygon" Collapsed="true">
+    <Position X="1.5" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAACAEAAAAAAIAAAAAAAAAAAAAIAAIAAAAAAAA=</HashCode>
+      <FileName>Area\IRegularPolygon.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MPT.Geometry.Area.IShapeProperties" Collapsed="true">
+    <Position X="1.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAEQAAAQAAAAAAAAAAAAAAwAABBAAAAwAAAAA=</HashCode>
+      <FileName>Area\IShape.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
