@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using NMath = System.Math;
 
-
-using MPT.Math;
-
 using GL = MPT.Geometry.GeometryLibrary;
 using MPT.Math.Algebra;
 using MPT.Math.Coordinates;

@@ -62,6 +62,13 @@ namespace MPT.Geometry.Tools
         /// <value>The minimum X-coordinate.</value>
         public double MinX { get; protected set; }
 
+        // TODO: Extents Width - then update CrossSection elastic section modulus
+        // TODO: Extents Height - then update CrossSection elastic section modulus
+        // TODO: GeometricCenter - then update CrossSection elastic section modulus
+        // TODO: Translate
+        // TODO: Rotate
+
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Extents{T}"/> class.

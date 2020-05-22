@@ -1,8 +1,5 @@
-﻿using MPT.Math;
-using Num = MPT.Math.Numbers;
-
+﻿using Num = MPT.Math.Numbers;
 using MPT.Geometry.Line;
-using MPT.Math.Coordinates;
 using MPT.Math.Vectors;
 
 namespace MPT.Geometry
@@ -169,30 +166,6 @@ namespace MPT.Geometry
         public static double Area(LineSegment line1, LineSegment line2)
         {
             return (line1.ToVector().Area(line2.ToVector()));
-        }
-
-        /// <summary>
-        /// Returns the tangent vector to the supplied points.
-        /// </summary>
-        /// <param name="i">First point.</param>
-        /// <param name="j">Second point.</param>
-        /// <returns></returns>
-        public static Vector TangentVector(CartesianCoordinate i, CartesianCoordinate j)
-        {
-            return new Vector((j.X - i.X), (j.Y - i.Y));
-        }
-
-        /// <summary>
-        /// Returns a normal vector to a line connecting two points.
-        /// </summary>
-        /// <param name="i">First point.</param>
-        /// <param name="j">Second point.</param> 
-        /// <returns></returns>
-        public static Vector NormalVector(CartesianCoordinate i, CartesianCoordinate j)
-        {
-            CartesianOffset delta = new CartesianOffset(i, j);
-            return new Vector(new CartesianCoordinate(-delta.Y(), delta.X()),
-                              new CartesianCoordinate(delta.Y(), -delta.X()));
         }
         #endregion
     }

@@ -1,5 +1,4 @@
 ﻿using System;
-using MPT.Math;
 
 
 namespace MPT.Geometry.Line

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MPT.Geometry.Line
+﻿namespace MPT.Geometry.Line
 {
-    class PolyLine
+    /// <summary>
+    /// Class PolyLine.
+    /// </summary>
+    public class PolyLine
     {
     }
 }

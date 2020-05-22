@@ -18,7 +18,7 @@ using System.Collections.ObjectModel;
 
 
 using MPT.Geometry.Tools;
-using MPT.Math;
+using MPT.Math.Coordinates;
 using GL = MPT.Geometry.GeometryLibrary;
 
 namespace MPT.Geometry.Aggregation
@@ -29,6 +29,7 @@ namespace MPT.Geometry.Aggregation
     public class CompositeShape<T, TBoundary, TExtents> : List<CompositeShape<T, TBoundary, TExtents>>
         where TBoundary : Boundary<T>, new() 
         where TExtents : Extents<T>, new()
+        where T : ICoordinate
     {
         #region Properties        
         /// <summary>

@@ -1,8 +1,6 @@
 ﻿using System;
 using NMath = System.Math;
 
-using MPT.Math;
-using MPT.Geometry.Tools;
 using GL = MPT.Geometry.GeometryLibrary;
 using MPT.Math.Coordinates;
 using MPT.Math.Algebra;
@@ -229,7 +227,7 @@ namespace MPT.Geometry.Line
         /// <returns></returns>
         public bool IsParallel(LineSegment otherLine)
         {
-            return (Slope() - otherLine.Slope()).IsZero(Tolerance);
+            return (Slope() - otherLine.Slope()).IsZeroSign(Tolerance);
         }
 
         /// <summary>
@@ -329,10 +327,10 @@ namespace MPT.Geometry.Line
         /// <returns></returns>
         public static bool IsPerpendicular(double slope1, double slope2, double tolerance = GL.ZeroTolerance)
         {
-            if (double.IsNegativeInfinity(slope1) && slope2.IsZero(tolerance)) { return true; }
-            if (double.IsNegativeInfinity(slope2) && slope1.IsZero(tolerance)) { return true; }
-            if (double.IsPositiveInfinity(slope1) && slope2.IsZero(tolerance)) { return true; }
-            if (double.IsPositiveInfinity(slope2) && slope1.IsZero(tolerance)) { return true; }
+            if (double.IsNegativeInfinity(slope1) && slope2.IsZeroSign(tolerance)) { return true; }
+            if (double.IsNegativeInfinity(slope2) && slope1.IsZeroSign(tolerance)) { return true; }
+            if (double.IsPositiveInfinity(slope1) && slope2.IsZeroSign(tolerance)) { return true; }
+            if (double.IsPositiveInfinity(slope2) && slope1.IsZeroSign(tolerance)) { return true; }
             return ((slope1 * slope2).IsEqualTo(-1));
         }
         #endregion
@@ -347,9 +345,9 @@ namespace MPT.Geometry.Line
         /// <returns></returns>
         public static double Slope(double rise, double run, double tolerance = GL.ZeroTolerance)
         {
-            if (run.IsZero(tolerance) && rise.IsPositive()) { return double.PositiveInfinity; }
-            if (run.IsZero(tolerance) && rise.IsNegative()) { return double.NegativeInfinity; }
-            if (run.IsZero(tolerance) && rise.IsZero(tolerance)) { throw new ArgumentException("Rise & run are both zero. Cannot determine a slope for a point."); }
+            if (run.IsZeroSign(tolerance) && rise.IsPositiveSign()) { return double.PositiveInfinity; }
+            if (run.IsZeroSign(tolerance) && rise.IsNegativeSign()) { return double.NegativeInfinity; }
+            if (run.IsZeroSign(tolerance) && rise.IsZeroSign(tolerance)) { throw new ArgumentException("Rise & run are both zero. Cannot determine a slope for a point."); }
             return (rise / run);
         }
 
@@ -407,8 +405,8 @@ namespace MPT.Geometry.Line
         /// <returns></returns>
         public static double InterceptX(double x1, double y1, double x2, double y2, double tolerance = GL.ZeroTolerance)
         {
-            if (y1.IsZero(tolerance)) { return x1; }
-            if (y2.IsZero(tolerance)) { return x2; }
+            if (y1.IsZeroSign(tolerance)) { return x1; }
+            if (y2.IsZeroSign(tolerance)) { return x2; }
             return (-InterceptY(x1, y1, x2, y2, tolerance) / Slope(x1, y1, x2, y2, tolerance));
         }
 
@@ -435,8 +433,8 @@ namespace MPT.Geometry.Line
         /// <returns></returns>
         public static double InterceptY(double x1, double y1, double x2, double y2, double tolerance = GL.ZeroTolerance)
         {
-            if (x1.IsZero(tolerance)) { return y1; }
-            if (x2.IsZero(tolerance)) { return y2; }
+            if (x1.IsZeroSign(tolerance)) { return y1; }
+            if (x2.IsZeroSign(tolerance)) { return y2; }
             return (-Slope(x1, y1, x2, y2, tolerance) * x1 + y1);
         }
 

@@ -1,4 +1,5 @@
 ﻿using MPT.Math.Coordinates;
+using GLM = MPT.Math.Geometry.GeometryLibrary;
 using MPT.Math.Vectors;
 using GL = MPT.Geometry.GeometryLibrary;
 
@@ -52,7 +53,7 @@ namespace MPT.Geometry.Line
         /// <returns></returns>
         public Vector TangentVector()
         {
-            return GL.TangentVector(I, J);
+            return GLM.TangentVector(I, J);
         }
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace MPT.Geometry.Line
         /// <returns></returns>
         public Vector NormalVector()
         {
-            return GL.NormalVector(I, J);
+            return GLM.NormalVector(I, J);
         }
 
         

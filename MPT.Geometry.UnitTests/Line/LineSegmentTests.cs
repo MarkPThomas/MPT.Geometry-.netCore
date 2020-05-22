@@ -1,10 +1,7 @@
 ﻿using System;
-
-
 using NUnit.Framework;
 
 using MPT.Geometry.Line;
-using MPT.Math;
 using MPT.Math.Coordinates;
 
 namespace MPT.Geometry.UnitTests.Line
