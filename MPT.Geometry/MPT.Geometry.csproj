@@ -1,17 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <Authors>Mark P Thomas</Authors>
-    <Copyright>2020</Copyright>
     <Company>Mark P Thomas, Inc.</Company>
+    <Copyright>Copyright (c) 2020. All rights reserved.</Copyright>
     <Description>A library for working with geometric lines, shapes, etc.</Description>
+    <DebugType>full</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>MPT.Geometry.xml</DocumentationFile>
     <OutputPath>bin\Debug\netcoreapp3.1\</OutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Line\BezierSpline.cs" />
+    <Compile Remove="Line\BSpline.cs" />
+    <Compile Remove="Line\CatmullRomSpline.cs" />
+    <Compile Remove="Line\IPathSegment3D.cs" />
+    <Compile Remove="Line\IPathSegmentCollision.cs" />
+    <Compile Remove="Line\NURBS.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="MPT.Math">
