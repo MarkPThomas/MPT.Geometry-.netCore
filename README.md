@@ -6,7 +6,7 @@ A library for geometry operations and the basic formations and uses of paths and
 **AppVeyor** (Windows OS): [![Build status](https://ci.appveyor.com/api/projects/status/um5rb7fvj147ab20?svg=true)](https://ci.appveyor.com/project/MarkPThomas/mpt-geometry-netcore) 
 [![AppVeyor tests](https://img.shields.io/appveyor/tests/MarkPThomas/mpt-geometry-netcore.svg)](https://ci.appveyor.com/project/MarkPThomas/mpt-geometry-netcore/build/tests)
 [![Coverage Status](https://coveralls.io/repos/github/MarkPThomas/MPT.Geometry-.netCore/badge.svg?branch=master&kill_cache=1)](https://coveralls.io/github/MarkPThomas/MPT.Geometry-.netCore?branch=master&kill_cache=1) (via Coveralls)
-
+ 
 
 **SonarCloud**: [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=MarkPThomas_MPT.Geometry-.netCore&metric=alert_status)](https://sonarcloud.io/dashboard?id=MarkPThomas_MPT.Geometry-.netCore)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=MarkPThomas_MPT.Geometry-.netCore&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=MarkPThomas_MPT.Geometry-.netCore)
