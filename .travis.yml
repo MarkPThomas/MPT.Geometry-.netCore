@@ -1,0 +1,19 @@
+dist: trusty
+language: csharp
+mono: none
+dotnet: 2.1.502  #3.1.300 # For some reason .Net Core v3.1 is not working with Travis. I might have been using the wrong version. Check cmd: dotnet --version
+install:
+- dotnet restore
+addons:
+  sonarcloud:
+    organization: "markpthomas-github"
+    token:
+      # encrypted value of your token by running the command line: travis encrypt {token_provided_by_SonarCloud}
+      secure: "LlBCWIlAWweLTP5THxFSvqGlPmcKoZuGedEdzstRzyTwXWp+r/RX6AVKIFONt08Vya1gDRcVLsBl7IvnBTs+ugNtRRAn/o7E5V2JFd67UigNpC/m6199TtO3EFKFoIxJfDVWhxmnSYJIyeIH2hda1Ru0YLzrdDbFgnce6gPyX/1lWhzx7bHtNKKlE0BZanY6OBIGHgG0tzBt/948onXCnCjrm/p/rYGrE13zIPORRnQgkiVfx4Gn6+WOwaLJ1V6lWoEaomwHxXRdt8TALKwqdY6Nlz4uIWHKZkscqaSMvJ3GycaP6yxGHVXKwfJPR5wxqjmkVR/wGrnDY/gFnuar/P1sYJzQCbGUgSnMc786/KSZtZUl9TKdO0dIUJ35IN7yBxglkyZwAs7zg5thgZZycodJnKPVE17y6jALdFDLMakE0pbY3svdj6ghrb8MLMqS2Od/TaZ8uB4/BEgpefxVXvo1L15ZI0s4MBe0UkVuPJ1wco+YqAZP3J27dndY8g2igcZYcX4WXW0nMBl2c43gNfrdIFul6g16NVMn5F2LYdv2nuv8Q35M6N3oPChwKUuws2ZJzMZl9V+dhkMdRykJsjMb5r3FViG3SFvS39u9zjZwiVFx2b9FHnTCmd4RZa5iSv75IYr5eHmbHZLJDnfNqDF6jPprKVuoWfDnzf3nNK0=" 
+
+script:
+  - dotnet build MPT.Geometry/MPT.Geometry.csproj
+  - dotnet test MPT.Geometry.UnitTests/MPT.Geometry.UnitTests.csproj
+  
+  # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
+  - sonar-scanner

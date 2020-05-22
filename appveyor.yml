@@ -1,0 +1,46 @@
+version: 1.0.{build}
+skip_tags: true
+
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+  assembly_version: '{version}'
+  file_version: '{version}'
+  informational_version: '{version}'
+
+image: Visual Studio 2019
+
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: ToKXqgMP08ooAk3+smLm+kPA7f3eEfBi/r9G9YuFgbcQZ1ncGTkiJyd9smRP+oNO    # encrypt token here: https://ci.appveyor.com/tools/encrypt
+
+before_build:
+  - dotnet restore
+  
+build:
+  project: ./MPT.Geometry.sln      
+  verbosity: minimal #quiet|minimal|normal|detailed
+  
+build_script:
+  - dotnet build -c Debug
+
+#before_test:
+#  - echo script1
+#  - ps: Write-Host "script1"
+
+# to run your custom scripts instead of automatic tests
+test_script:
+ # This works fine for xUnit Tests, with or without the switch
+ - ps: dotnet test --no-build  
+ # This is needed for NUnit Tests to show up in the AppVeyor 'Tests' tab
+ - ps: dotnet test .\MPT.Geometry.UnitTests\MPT.Geometry.UnitTests.csproj --no-build --logger:Appveyor  
+ 
+# scripts to run after tests
+after_test:
+  # Performs additional installations and testing for Coveralls code coverage
+  - cmd: ./.after_test.cmd  
+
+# to disable automatic tests
+#test: off
