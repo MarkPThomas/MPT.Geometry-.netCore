@@ -4,16 +4,16 @@ mono: none
 dotnet: 2.1.502  #3.1.300 # For some reason .Net Core v3.1 is not working with Travis. I might have been using the wrong version. Check cmd: dotnet --version
 install:
   - dotnet restore
-addons:
-  sonarcloud:
-    organization: "markpthomas-github"
-    token:
-      # encrypted value of your token by running the command line: travis encrypt {token_provided_by_SonarCloud}
-      secure: "yJU4ylGbDLajmPqUdt/oSu/wf6Lu/O6a/fKvBUWLGkDD/R6hqww+4yUqz2M6xWBNr4OaU0Whzvy5MayoqfSITSGMLfX94iKD83TXV3q9xNaTKDnSK4MMnh0ufbZhWQwExb431X7P7bKKaexSB32d2CHNkk1mA6X3Ivf+GfoFWZZJNHrru2u5JDvkdE9NdxuCF+HhGoYrfD+ngC232zJhNlA2z6LZJeQArx7YY59doE6dk20Q4AFWYnxH2xFTZPDBKTSiAZ7sUpMUdXkbfOelHKf0IaP0AXUzwzdcMBxu7zl5/Jy1bZmn33ptVdSdiXP1yuifJRtIP4tUa+1XJSRaLVOEZ/P3518DLe9rsRN+pamhXsC4AP8R9ZqQozLDBlvfjunnCSJcLD1GO/M3IQLWktiCPJ9Hfp+QPG4bA5zOuLdWC8Z1jiCEfc9fAa4jw7ymvFhDzSTCIhokWRTvNz1LQuDJzx+j4k1b5zpHKR9ps2RWQUCQUaFwVhbgVXTRJbZ51H+3IFcDOsl7/pl+fM0rDuhkkmASkwyB/yV8EZfgVs17UbpRF+KfqSLvzXuiE/ftYiCcz7a7duuZz4Q6zWNhIdXcL2vuUO5/TwmJkLXgK38+jySEFKmkLn0/q0Du89U2EEjWNZEdMVxbtmBqKDS5X9TY59+voAFyleQIiWKmbTQ=" 
+# addons:
+  # sonarcloud:
+    # organization: "markpthomas-github"
+    # token:
+      # # encrypted value of your token by running the command line: travis encrypt {token_provided_by_SonarCloud}
+      # secure: "yJU4ylGbDLajmPqUdt/oSu/wf6Lu/O6a/fKvBUWLGkDD/R6hqww+4yUqz2M6xWBNr4OaU0Whzvy5MayoqfSITSGMLfX94iKD83TXV3q9xNaTKDnSK4MMnh0ufbZhWQwExb431X7P7bKKaexSB32d2CHNkk1mA6X3Ivf+GfoFWZZJNHrru2u5JDvkdE9NdxuCF+HhGoYrfD+ngC232zJhNlA2z6LZJeQArx7YY59doE6dk20Q4AFWYnxH2xFTZPDBKTSiAZ7sUpMUdXkbfOelHKf0IaP0AXUzwzdcMBxu7zl5/Jy1bZmn33ptVdSdiXP1yuifJRtIP4tUa+1XJSRaLVOEZ/P3518DLe9rsRN+pamhXsC4AP8R9ZqQozLDBlvfjunnCSJcLD1GO/M3IQLWktiCPJ9Hfp+QPG4bA5zOuLdWC8Z1jiCEfc9fAa4jw7ymvFhDzSTCIhokWRTvNz1LQuDJzx+j4k1b5zpHKR9ps2RWQUCQUaFwVhbgVXTRJbZ51H+3IFcDOsl7/pl+fM0rDuhkkmASkwyB/yV8EZfgVs17UbpRF+KfqSLvzXuiE/ftYiCcz7a7duuZz4Q6zWNhIdXcL2vuUO5/TwmJkLXgK38+jySEFKmkLn0/q0Du89U2EEjWNZEdMVxbtmBqKDS5X9TY59+voAFyleQIiWKmbTQ=" 
 
 script:
   - dotnet build MPT.Geometry/MPT.Geometry.csproj
   - dotnet test MPT.Geometry.UnitTests/MPT.Geometry.UnitTests.csproj
   
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - sonar-scanner
+  # - sonar-scanner
