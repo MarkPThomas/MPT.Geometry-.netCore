@@ -1,7 +1,7 @@
 # MPT.Geometry
 A library for geometry operations and the basic formations and uses of paths and shapes, written in C# for .Net Core.
 
-**Travis CI** (Ubuntu Linux OS): [![Build Status](https://travis-ci.org/MarkPThomas/MPT.Geometry-.netCore.svg?branch=master)](https://travis-ci.org/MarkPThomas/MPT.Geometry-.netCore)
+**Travis CI** (Ubuntu Linux OS): [![Build Status](https://travis-ci.org/MarkPThomas/MPT.Geometry-.netCore.svg?branch=master&kill_cache=1)](https://travis-ci.org/MarkPThomas/MPT.Geometry-.netCore)
 
 **AppVeyor** (Windows OS): [![Build status](https://ci.appveyor.com/api/projects/status/um5rb7fvj147ab20?svg=true)](https://ci.appveyor.com/project/MarkPThomas/mpt-geometry-netcore) 
 [![AppVeyor tests](https://img.shields.io/appveyor/tests/MarkPThomas/mpt-geometry-netcore.svg)](https://ci.appveyor.com/project/MarkPThomas/mpt-geometry-netcore/build/tests)
