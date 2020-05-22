@@ -33,7 +33,7 @@ build_script:
 # to run your custom scripts instead of automatic tests
 test_script:
  # This works fine for xUnit Tests, with or without the switch
- - ps: dotnet test --no-build  
+ #- ps: dotnet test --no-build  
  # This is needed for NUnit Tests to show up in the AppVeyor 'Tests' tab
  - ps: dotnet test .\MPT.Geometry.UnitTests\MPT.Geometry.UnitTests.csproj --no-build --logger:Appveyor  
  
