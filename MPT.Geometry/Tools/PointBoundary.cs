@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Linq;
 using MPT.Math.Coordinates;
 
 namespace MPT.Geometry.Tools
@@ -28,7 +28,6 @@ namespace MPT.Geometry.Tools
         /// <param name="coordinates">The coordinates.</param>
         public PointBoundary(IEnumerable<CartesianCoordinate> coordinates) : base(coordinates)
         {
-           // _coordinates = coordinates;
         }
         #endregion
 
@@ -41,31 +40,26 @@ namespace MPT.Geometry.Tools
             _coordinates = new List<CartesianCoordinate>();
         }
 
-        // TODO: For all boundary changes, clusters and holes occur when a shape is entirely outside of or inside of the shape group.
-        // This is to be handled by linking the shape areas by a collinear segment.
-        // All positive shapes are determined by CCW travel.
-        // All negative shapes are determined by CW travel.
-
-        // TODO: Finish
         /// <summary>
         /// Adds to boundary.
         /// </summary>
         /// <param name="coordinates">The coordinates.</param>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public override void Add(IList<CartesianCoordinate> coordinates)
+        public override void AddRange(IList<CartesianCoordinate> coordinates)
         {
-            throw new NotImplementedException();
+            List<CartesianCoordinate> list = new List<CartesianCoordinate>(_coordinates);
+            list.AddRange(coordinates);
+            _coordinates = list;
         }
 
-        // TODO: Finish
         /// <summary>
         /// Removes from boundary.
         /// </summary>
         /// <param name="coordinates">The coordinates.</param>
-        /// <exception cref="System.NotImplementedException"></exception>
-        public override void Remove(IList<CartesianCoordinate> coordinates)
+        public override void RemoveRange(IList<CartesianCoordinate> coordinates)
         {
-            throw new NotImplementedException();
+            if (_coordinates.Intersect(coordinates).Count() == 0) { return; }
+
+            _coordinates = _coordinates.Where(existing => !coordinates.Any(remove => existing.Equals(remove))); 
         }
         #endregion
     }

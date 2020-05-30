@@ -4,7 +4,7 @@
 // Created          : 12-09-2017
 //
 // Last Modified By : Mark Thomas
-// Last Modified On : 12-09-2017
+// Last Modified On : 05-29-2020
 // ***********************************************************************
 // <copyright file="Extents.cs" company="MPTinc">
 //     Copyright ©  2017
@@ -12,34 +12,39 @@
 // <summary></summary>
 // ***********************************************************************
 using System.Collections.Generic;
-
+using System.Linq;
 using MPT.Math.Coordinates;
-
 
 namespace MPT.Geometry.Tools
 {
     /// <summary>
-    /// CRepresents the coordinate bounds of a shape or line, or cluster of points.
+    /// Represents the coordinate bounds of a shape or line, or cluster of points.
     /// </summary>
     /// <typeparam name="T">The type of coordinate.</typeparam>
     public abstract class Extents<T> where T : ICoordinate
     {
+        #region Properties        
+        /// <summary>
+        /// The original coordinates
+        /// </summary>
+        protected IList<T> _originalCoordinates = new List<T>();
+
         /// <summary>
         /// The maximum allowed Y-coordinate
         /// </summary>
-        protected double _maxYLimit = double.NegativeInfinity;
+        protected double _maxYLimit = double.PositiveInfinity;
         /// <summary>
         /// The minimum allowed Y-coordinate
         /// </summary>
-        protected double _minYLimit = double.PositiveInfinity;
+        protected double _minYLimit = double.NegativeInfinity;
         /// <summary>
         /// The maximum allowed X-coordinate
         /// </summary>
-        protected double _maxXLimit = double.NegativeInfinity;
+        protected double _maxXLimit = double.PositiveInfinity;
         /// <summary>
         /// The minimum allowed X-coordinate
         /// </summary>
-        protected double _minXLimit = double.PositiveInfinity;
+        protected double _minXLimit = double.NegativeInfinity;
 
         /// <summary>
         /// Gets the maximum Y-coordinate.
@@ -62,43 +67,30 @@ namespace MPT.Geometry.Tools
         /// <value>The minimum X-coordinate.</value>
         public double MinX { get; protected set; }
 
-        // TODO: Extents Width - then update CrossSection elastic section modulus
-        // TODO: Extents Height - then update CrossSection elastic section modulus
-        // TODO: GeometricCenter - then update CrossSection elastic section modulus
-        // TODO: Translate
-        // TODO: Rotate
-
-
+        /// <summary>
+        /// Gets the width.
+        /// </summary>
+        /// <value>The width.</value>
+        public double Width => MaxX - MinX;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Extents{T}"/> class.
+        /// Gets the height.
+        /// </summary>
+        /// <value>The height.</value>
+        public double Height => MaxY - MinY;
+        #endregion
+
+        #region Initialization 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Extents{T}" /> class.
         /// </summary>
         protected Extents()
         {
-            initialize();
+            initializeEmpty();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Extents{T}"/> class.
-        /// </summary>
-        /// <param name="maxYLimit">The maximum y limit.</param>
-        /// <param name="minYLimit">The minimum y limit.</param>
-        /// <param name="maxXLimit">The maximum x limit.</param>
-        /// <param name="minXLimit">The minimum x limit.</param>
-        protected Extents(
-            double maxYLimit,
-            double minYLimit,
-            double maxXLimit,
-            double minXLimit)
-        {
-            initializeLimits(
-                maxYLimit, minYLimit,
-                maxXLimit, minXLimit);
-            initialize();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="Extents{T}"/> class.
+        /// Initializes a new instance of the <see cref="Extents{T}" /> class.
         /// </summary>
         /// <param name="coordinates">The coordinates.</param>
         /// <param name="maxYLimit">The maximum y limit.</param>
@@ -106,37 +98,36 @@ namespace MPT.Geometry.Tools
         /// <param name="maxXLimit">The maximum x limit.</param>
         /// <param name="minXLimit">The minimum x limit.</param>
         protected Extents(IEnumerable<T> coordinates,
-            double maxYLimit = double.NegativeInfinity,
-            double minYLimit = double.PositiveInfinity,
-            double maxXLimit = double.NegativeInfinity,
-            double minXLimit = double.PositiveInfinity)
+            double maxYLimit = double.PositiveInfinity,
+            double minYLimit = double.NegativeInfinity,
+            double maxXLimit = double.PositiveInfinity,
+            double minXLimit = double.NegativeInfinity)
         {
             initializeLimits(
                 maxYLimit, minYLimit,
                 maxXLimit, minXLimit);
-            initialize();
-            Add(coordinates);
+            if (coordinates.Count() > 1)
+            {
+                initializeForSetting();
+            }
+            else
+            {
+                initializeEmpty();
+            }
+            AddRange(coordinates);
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Extents{T}"/> class.
+        /// Initializes a new instance of the <see cref="Extents{T}" /> class.
         /// </summary>
         /// <param name="extents">The extents.</param>
-        /// <param name="maxYLimit">The maximum y limit.</param>
-        /// <param name="minYLimit">The minimum y limit.</param>
-        /// <param name="maxXLimit">The maximum x limit.</param>
-        /// <param name="minXLimit">The minimum x limit.</param>
-        protected Extents(Extents<T> extents,
-            double maxYLimit = double.NegativeInfinity,
-            double minYLimit = double.PositiveInfinity,
-            double maxXLimit = double.NegativeInfinity,
-            double minXLimit = double.PositiveInfinity)
+        protected Extents(Extents<T> extents)
         {
             initializeLimits(
-                maxYLimit, minYLimit,
-                maxXLimit,minXLimit);
-            initialize();
-            Add(extents.Boundary());
+                extents._maxYLimit, extents._minYLimit,
+                extents._maxXLimit, extents._minXLimit);
+            initializeForSetting();
+            AddExtents(extents);
         }
 
         /// <summary>
@@ -147,10 +138,10 @@ namespace MPT.Geometry.Tools
         /// <param name="maxXLimit">The maximum x limit.</param>
         /// <param name="minXLimit">The minimum x limit.</param>
         protected void initializeLimits(
-            double maxYLimit = double.NegativeInfinity,
-            double minYLimit = double.PositiveInfinity,
-            double maxXLimit = double.NegativeInfinity,
-            double minXLimit = double.PositiveInfinity)
+            double maxYLimit = double.PositiveInfinity,
+            double minYLimit = double.NegativeInfinity,
+            double maxXLimit = double.PositiveInfinity,
+            double minXLimit = double.NegativeInfinity)
         {
             _maxYLimit = maxYLimit;
             _minYLimit = minYLimit;
@@ -161,7 +152,7 @@ namespace MPT.Geometry.Tools
         /// <summary>
         /// Initializes this instance.
         /// </summary>
-        protected void initialize()
+        protected void initializeEmpty()
         {
             MaxY = _maxYLimit;
             MinY = _minYLimit;
@@ -170,16 +161,63 @@ namespace MPT.Geometry.Tools
         }
 
         /// <summary>
-        /// Updates the extents to include the specified coordinate.
+        /// Initializes for setting.
+        /// </summary>
+        protected void initializeForSetting()
+        {
+            MaxY = _minYLimit;
+            MinY = _maxYLimit;
+            MaxX = _minXLimit;
+            MinX = _maxXLimit;
+        }
+
+        /// <summary>
+        /// Determines whether [is extents width set].
+        /// </summary>
+        /// <returns><c>true</c> if [is extents width set]; otherwise, <c>false</c>.</returns>
+        protected bool isExtentsWidthSet()
+        {
+            return (MaxX != _maxXLimit && MinX != _minXLimit);            
+        }
+
+        /// <summary>
+        /// Determines whether [is extents height set].
+        /// </summary>
+        /// <returns><c>true</c> if [is extents height set]; otherwise, <c>false</c>.</returns>
+        protected bool isExtentsHeightSet()
+        {
+            return (MaxY != _maxYLimit && MinY != _minYLimit);
+        }
+        #endregion
+
+        #region Methods: Public 
+        /// <summary>
+        /// Adds the specified coordinate.
         /// </summary>
         /// <param name="coordinate">The coordinate.</param>
-        public abstract void Add(T coordinate);
+        public void Add(T coordinate)
+        {
+            bool xIsInitialized = isExtentsWidthSet();
+            bool yIsInitialized = isExtentsHeightSet();
+            if (!xIsInitialized && !yIsInitialized)
+            {
+                if (_originalCoordinates.Count < 1)
+                {   // Save coordinate in case a second is added later. These will be enough to then establish extents.
+                    _originalCoordinates.Add(coordinate);
+                    return;
+                }
+                initializeForSetting();
+                addCoordinate(_originalCoordinates[0]);
+                _originalCoordinates.Clear();
+            }
+            addCoordinate(coordinate);
+        }
 
         /// <summary>
         /// Updates the extents to include the specified coordinates.
         /// </summary>
         /// <param name="coordinates">The coordinates.</param>
-        public void Add(IEnumerable<T> coordinates)
+        public void AddRange(IEnumerable<T> coordinates)
         {
             foreach (T coordinate in coordinates)
             {
@@ -191,7 +229,7 @@ namespace MPT.Geometry.Tools
         /// Updates the extents to include the specified extents.
         /// </summary>
         /// <param name="extents">The extents.</param>
-        public void Add(Extents<T> extents)
+        public void AddExtents(Extents<T> extents)
         {
             if (extents.MaxY > MaxY)
             {
@@ -216,7 +254,8 @@ namespace MPT.Geometry.Tools
         /// </summary>
         public void Clear()
         {
-            initialize();
+            initializeEmpty();
+            initializeLimits();
         }
 
         /// <summary>
@@ -226,7 +265,7 @@ namespace MPT.Geometry.Tools
         public void Reset(IEnumerable<T> coordinates)
         {
             Clear();
-            Add(coordinates);
+            AddRange(coordinates);
         }
 
         /// <summary>
@@ -241,5 +280,36 @@ namespace MPT.Geometry.Tools
         /// </summary>
         /// <returns>NRectangle.</returns>
         public abstract IList<T> Boundary();
+
+        /// <summary>
+        /// Gets the geometric center.
+        /// </summary>
+        /// <returns>T.</returns>
+        /// <value>The geometric center.</value>
+        public abstract T GeometricCenter();
+
+        /// <summary>
+        /// Translates points that define the extents.
+        /// </summary>
+        /// <param name="x">The x-coordinate.</param>
+        /// <param name="y">The y-coordinate.</param>
+        /// <returns>Extents&lt;T&gt;.</returns>
+        public abstract Extents<T> Translate(double x, double y);
+
+        /// <summary>
+        /// Rotates points that define the extents.
+        /// </summary>
+        /// <param name="angle">The angle [radians].</param>
+        /// <returns>Extents&lt;T&gt;.</returns>
+        public abstract Extents<T> Rotate(double angle);
+        #endregion
+
+        #region Methods: Protected
+        /// <summary>
+        /// Adds the coordinate.
+        /// </summary>
+        /// <param name="coordinate">The coordinate.</param>
+        protected abstract void addCoordinate(T coordinate);
+        #endregion
     }
 }

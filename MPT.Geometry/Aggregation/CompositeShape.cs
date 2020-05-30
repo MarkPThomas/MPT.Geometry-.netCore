@@ -96,9 +96,9 @@ namespace MPT.Geometry.Aggregation
         {
             Name = name;
             _boundary = new TBoundary();
-            _boundary.Add(boundary);
+            _boundary.AddRange(boundary);
             _extents = new TExtents();
-            _extents.Add(boundary);
+            _extents.AddRange(boundary);
         }
 
 
@@ -124,7 +124,7 @@ namespace MPT.Geometry.Aggregation
         {
             addToBoundary(item);
             base.Add(item);
-            _extents.Add(item.Extents);
+            _extents.AddRange(item.Extents);
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace MPT.Geometry.Aggregation
         {
             addToBoundary(item);
             base.Insert(index, item);
-            _extents.Add(item.Extents);
+            _extents.AddRange(item.Extents);
         }
         
 
@@ -360,7 +360,7 @@ namespace MPT.Geometry.Aggregation
             _extents.Clear(); 
             foreach (CompositeShape<T, TBoundary, TExtents> item in this)
             {
-                _extents.Add(item.Extents);
+                _extents.AddRange(item.Extents);
             }
         }
         #endregion
@@ -406,7 +406,7 @@ namespace MPT.Geometry.Aggregation
             }
             else
             {
-                _boundary.Add(item.Boundary);
+                _boundary.AddRange(item.Boundary);
             }
         }
 
@@ -424,7 +424,7 @@ namespace MPT.Geometry.Aggregation
             }
             else
             {
-                _boundary.Remove(item.Boundary);
+                _boundary.RemoveRange(item.Boundary);
             }
         }
         #endregion

@@ -1,5 +1,5 @@
-﻿using Num = MPT.Math.Numbers;
-using MPT.Geometry.Line;
+﻿using MPT.Geometry.Line;
+using MPT.Math;
 using MPT.Math.Vectors;
 
 namespace MPT.Geometry
@@ -12,7 +12,7 @@ namespace MPT.Geometry
         /// <summary>
         /// Default zero tolerance for operations.
         /// </summary>
-        public const double ZeroTolerance = Num.ZeroTolerance;
+        public const double ZeroTolerance = Numbers.ZeroTolerance;
 
         #region Vector-Derived
         
@@ -25,7 +25,7 @@ namespace MPT.Geometry
         /// <returns></returns>
         public static bool IsCollinearSameDirection(LineSegment line1, LineSegment line2, double tolerance = ZeroTolerance)
         {
-            return (VectorLibrary.IsCollinearSameDirection(line1.ToVector(), line2.ToVector(), tolerance));
+            return (Vector.IsCollinearSameDirection(line1.ToVector(), line2.ToVector(), tolerance));
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace MPT.Geometry
         /// <returns></returns>
         public static bool IsConcave(LineSegment line1, LineSegment line2, double tolerance = ZeroTolerance)
         {
-            return (VectorLibrary.IsConcave(line1.ToVector(), line2.ToVector(), tolerance));
+            return (Vector.IsConcave(line1.ToVector(), line2.ToVector(), tolerance));
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace MPT.Geometry
         /// <returns></returns>
         public static bool IsOrthogonal(LineSegment line1, LineSegment line2, double tolerance = ZeroTolerance)
         {
-            return (VectorLibrary.IsOrthogonal(line1.ToVector(), line2.ToVector(), tolerance));
+            return (Vector.IsOrthogonal(line1.ToVector(), line2.ToVector(), tolerance));
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace MPT.Geometry
         /// <returns></returns>
         public static bool IsConvex(LineSegment line1, LineSegment line2, double tolerance = ZeroTolerance)
         {
-            return (VectorLibrary.IsConvex(line1.ToVector(), line2.ToVector(), tolerance));
+            return (Vector.IsConvex(line1.ToVector(), line2.ToVector(), tolerance));
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace MPT.Geometry
         /// <returns></returns>
         public static bool IsCollinearOppositeDirection(LineSegment line1, LineSegment line2, double tolerance = ZeroTolerance)
         {
-            return (VectorLibrary.IsCollinearOppositeDirection(line1.ToVector(), line2.ToVector(), tolerance));
+            return (Vector.IsCollinearOppositeDirection(line1.ToVector(), line2.ToVector(), tolerance));
         }
 
 
@@ -88,7 +88,7 @@ namespace MPT.Geometry
         /// <returns></returns>
         public static bool ConcaveInside(LineSegment line1, LineSegment line2, double tolerance = ZeroTolerance)
         {
-            return (VectorLibrary.IsConcaveInside(line1.ToVector(), line2.ToVector(), tolerance));
+            return (Vector.IsConcaveInside(line1.ToVector(), line2.ToVector(), tolerance));
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace MPT.Geometry
         /// <returns></returns>
         public static bool ConvexInside(LineSegment line1, LineSegment line2, double tolerance = ZeroTolerance)
         {
-            return (VectorLibrary.IsConvexInside(line1.ToVector(), line2.ToVector(), tolerance));
+            return (Vector.IsConvexInside(line1.ToVector(), line2.ToVector(), tolerance));
         }
 
 
