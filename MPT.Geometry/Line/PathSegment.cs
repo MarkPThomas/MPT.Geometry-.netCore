@@ -1,4 +1,5 @@
-﻿using MPT.Math.Coordinates;
+﻿using MPT.Math;
+using MPT.Math.Coordinates;
 using MPT.Math.Vectors;
 using GL = MPT.Geometry.GeometryLibrary;
 
@@ -7,7 +8,7 @@ namespace MPT.Geometry.Line
     /// <summary>
     /// Base class used for segment types.
     /// </summary>
-    public abstract class PathSegment : IPathSegment
+    public abstract class PathSegment : IPathSegment, ITolerance
     {
         #region Properties
         /// <summary>

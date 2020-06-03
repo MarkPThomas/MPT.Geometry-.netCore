@@ -6,6 +6,7 @@ using MPT.Math.Coordinates;
 using MPT.Math.Algebra;
 using MPT.Math.Vectors;
 using MPT.Math.NumberTypeExtensions;
+using MPT.Math;
 
 namespace MPT.Geometry.Line
 {
@@ -18,7 +19,7 @@ namespace MPT.Geometry.Line
 
         #endregion
 
-        #region Constructor
+        #region Initialization
         /// <summary>
         /// Initializes the line segment with empty points.
         /// </summary>
@@ -268,7 +269,7 @@ namespace MPT.Geometry.Line
         /// <returns></returns>
         public Vector ToVector()
         {
-            return new Vector((J.X - I.X), (J.Y - I.Y));
+            return new Vector(new CartesianCoordinate(I.X, I.Y), new CartesianCoordinate(J.X, J.Y));
         }
 
         #endregion
