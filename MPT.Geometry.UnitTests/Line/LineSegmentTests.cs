@@ -121,7 +121,6 @@ namespace MPT.Geometry.UnitTests.Line
             Assert.AreEqual(y1, vector.Location.Y);
             Assert.AreEqual(magnitudeX, vector.Xcomponent);
             Assert.AreEqual(magnitudeY, vector.Ycomponent);
-            Assert.AreEqual(Numbers.ZeroTolerance, vector.Tolerance);
         }
         #endregion
 
