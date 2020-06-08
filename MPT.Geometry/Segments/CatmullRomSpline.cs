@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MPT.Geometry.Line
+namespace MPT.Geometry.Segments
 {
     /// <summary>
     /// Class CatmullRomSpline.

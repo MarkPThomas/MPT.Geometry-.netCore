@@ -1,6 +1,6 @@
 ﻿using MPT.Math.Coordinates;
 
-namespace MPT.Geometry.Line
+namespace MPT.Geometry.Segments
 {
     /// <summary>
     /// Interface for all shapes that incorporate elements of a curve.

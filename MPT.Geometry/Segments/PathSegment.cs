@@ -1,9 +1,8 @@
 ﻿using MPT.Math;
 using MPT.Math.Coordinates;
 using MPT.Math.Vectors;
-using GL = MPT.Geometry.GeometryLibrary;
 
-namespace MPT.Geometry.Line
+namespace MPT.Geometry.Segments
 {
     /// <summary>
     /// Base class used for segment types.
@@ -14,26 +13,21 @@ namespace MPT.Geometry.Line
         /// <summary>
         /// Tolerance to use in all calculations with double types.
         /// </summary>
-        public double Tolerance { get; set; } = GL.ZeroTolerance;
+        public double Tolerance { get; set; } = 10E-6;
 
         /// <summary>
         /// First coordinate value.
         /// </summary>
-        public CartesianCoordinate I { get; set; }
+        public virtual CartesianCoordinate I { get; set; }
 
         /// <summary>
         /// Second coordinate value.
         /// </summary>
-        public CartesianCoordinate J { get; set; }
+        public virtual CartesianCoordinate J { get; set; }
 
         #endregion
 
         #region Constructor
-        /// <summary>
-        /// Initializes the segment with empty points.
-        /// </summary>
-        protected PathSegment() { }
-
         /// <summary>
         /// Initializes the segment to span between the provided points.
         /// </summary>

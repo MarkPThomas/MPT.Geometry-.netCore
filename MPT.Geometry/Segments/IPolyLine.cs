@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MPT.Geometry.Line
+namespace MPT.Geometry.Segments
 {
     /// <summary>
-    /// Interface for path segments with methods for collision detection.
+    /// Interface for any object consisting of multiple connecting objects of IPathSegment.
     /// </summary>
-    public interface IPathSegmentCollision
+    public interface IPolyLine
     {
 
     }

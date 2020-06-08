@@ -8,12 +8,12 @@ using MPT.Math.Coordinates;
 using MPT.Math.NumberTypeExtensions;
 using MPT.Math.Vectors;
 
-namespace MPT.Geometry.Line
+namespace MPT.Geometry.Segments
 {
     /// <summary>
     /// Segment that describes a circular arc between two points in a plane.
     /// </summary>
-    public class ArcSegment : PathSegment, ICurve, IPathDivision, IPolarCoordinates
+    public class ArcSegment : PathSegment, ICurve, IPathDivisionExtension, IPolarCoordinates
     {
         #region Properties
         /// <summary>
@@ -58,11 +58,6 @@ namespace MPT.Geometry.Line
         #endregion
 
         #region Constructor
-        /// <summary>
-        /// Initializes the arc segment with empty points.
-        /// </summary>
-        public ArcSegment() { }
-
         /// <summary>
         /// Initializes the arc segment to span between the provided points.
         /// </summary>
@@ -546,6 +541,11 @@ namespace MPT.Geometry.Line
         private static double incidenceLineCircle(double radius, double lineLength, double determinant)
         {
             return (radius * lineLength.Squared() - determinant.Squared());
+        }
+
+        public CartesianCoordinate PointExtension(double ratio)
+        {
+            throw new NotImplementedException();
         }
 
 

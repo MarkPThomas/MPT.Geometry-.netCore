@@ -15,12 +15,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Line\BezierSpline.cs" />
-    <Compile Remove="Line\BSpline.cs" />
-    <Compile Remove="Line\CatmullRomSpline.cs" />
-    <Compile Remove="Line\IPathSegment3D.cs" />
-    <Compile Remove="Line\IPathSegmentCollision.cs" />
-    <Compile Remove="Line\NURBS.cs" />
+    <Compile Remove="Segments\BezierSpline.cs" />
+    <Compile Remove="Segments\BSpline.cs" />
+    <Compile Remove="Segments\CatmullRomSpline.cs" />
+    <Compile Remove="Segments\IPathSegment3D.cs" />
+    <Compile Remove="Segments\IPathSegmentCollision.cs" />
+    <Compile Remove="Segments\NURBS.cs" />
+    <Compile Remove="Tools\Extents3D.cs" />
+    <Compile Remove="Tools\PointExtents3D.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace MPT.Geometry.Line
+namespace MPT.Geometry.Segments
 {
     /// <summary>
     /// Segment that describes a Bezier curve between two points in a plane.

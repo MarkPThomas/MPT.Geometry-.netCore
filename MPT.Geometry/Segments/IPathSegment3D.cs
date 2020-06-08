@@ -1,6 +1,6 @@
 ﻿using MPT.Math.Coordinates3D;
 
-namespace MPT.Geometry.Line
+namespace MPT.Geometry.Segments
 {
     /// <summary>
     /// Interface for any segment along a path in space.

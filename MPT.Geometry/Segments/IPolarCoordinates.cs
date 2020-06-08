@@ -2,7 +2,7 @@
 
 using MPT.Math.Coordinates;
 
-namespace MPT.Geometry.Line
+namespace MPT.Geometry.Segments
 {
     /// <summary>
     /// Interface related to line geometries in polar coordinates.

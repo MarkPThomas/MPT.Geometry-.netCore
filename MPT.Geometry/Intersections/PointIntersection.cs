@@ -11,15 +11,15 @@
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using NMath = System.Math;
-
-using MPT.Math;
 using GL = MPT.Geometry.GeometryLibrary;
-using hProjection = MPT.Geometry.Intersection.ProjectionHorizontal;
+using hProjection = MPT.Geometry.Intersections.ProjectionHorizontal;
+using vProjection = MPT.Geometry.Intersections.ProjectionVertical;
+using Segment = MPT.Geometry.Segments.LineSegment;
 using MPT.Math.Coordinates;
 using MPT.Math.NumberTypeExtensions;
+using MPT.Math;
 
-namespace MPT.Geometry.Intersection
+namespace MPT.Geometry.Intersections
 {
     /// <summary>
     /// Handles calculations related to point intersections.
@@ -31,15 +31,36 @@ namespace MPT.Geometry.Intersection
         /// </summary>
         /// <param name="point1">The point1.</param>
         /// <param name="point2">The point2.</param>
-        /// <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
         /// <returns><c>true</c> if the points lie in the same position, <c>false</c> otherwise.</returns>
-        public static bool PointsOverlap(
+        public static bool IsOnPoint(
             CartesianCoordinate point1,
-            CartesianCoordinate point2,
-            double tolerance = GL.ZeroTolerance)
+            CartesianCoordinate point2)
         {
-            return ((NMath.Abs(point1.X - point2.X) < tolerance && 
-                     NMath.Abs(point1.Y - point2.Y) < tolerance));
+            return point1 == point2;
+            //tolerance = Helper.GetTolerance(point1, point2, tolerance);
+            //return (point1.X.IsEqualTo(point2.X, tolerance) &&
+            //        point1.Y.IsEqualTo(point2.Y, tolerance));
+        }
+
+        /// <summary>
+        /// Determines whether the specified location is on the shape.
+        /// </summary>
+        /// <param name="coordinate">The coordinate.</param>
+        /// <param name="shapeBoundary">The shape boundary.</param>
+        /// <returns><c>true</c> if [is on shape] [the specified coordinate]; otherwise, <c>false</c>.</returns>
+        public static bool IsOnShape(
+            CartesianCoordinate coordinate,
+            CartesianCoordinate[] shapeBoundary)
+        {
+            for (int i = 0; i < shapeBoundary.Length - 1; i++)
+            {
+                Segment segment = new Segment(shapeBoundary[i], shapeBoundary[i + 1]);
+                if (segment.IncludesCoordinate(coordinate))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>

@@ -1,4 +1,4 @@
-﻿using MPT.Geometry.Line;
+﻿using MPT.Geometry.Segments;
 using MPT.Math;
 using MPT.Math.Vectors;
 

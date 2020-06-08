@@ -1,7 +1,7 @@
 ﻿using MPT.Math.Coordinates;
 using MPT.Math.Vectors;
 
-namespace MPT.Geometry.Line
+namespace MPT.Geometry.Segments
 {
     /// <summary>
     /// Interface for any segment along a path lying in a plane.
