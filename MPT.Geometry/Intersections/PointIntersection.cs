@@ -6,14 +6,13 @@
 // Last Modified By : Mark Thomas
 // Last Modified On : 12-09-2017
 // ***********************************************************************
-// <copyright file="PointIntersection.cs" company="MPTinc">
-//     Copyright ©  2017
+// <copyright file="PointBoundary.cs" company="Mark P Thomas, Inc.">
+//     Copyright (c) 2020. All rights reserved.
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
 using GL = MPT.Geometry.GeometryLibrary;
-using hProjection = MPT.Geometry.Intersections.ProjectionHorizontal;
-using vProjection = MPT.Geometry.Intersections.ProjectionVertical;
+using Projection = MPT.Geometry.Intersections.PointProjection;
 using Segment = MPT.Geometry.Segments.LineSegment;
 using MPT.Math.Coordinates;
 using MPT.Math.NumberTypeExtensions;
@@ -37,18 +36,15 @@ namespace MPT.Geometry.Intersections
             CartesianCoordinate point2)
         {
             return point1 == point2;
-            //tolerance = Helper.GetTolerance(point1, point2, tolerance);
-            //return (point1.X.IsEqualTo(point2.X, tolerance) &&
-            //        point1.Y.IsEqualTo(point2.Y, tolerance));
         }
 
         /// <summary>
-        /// Determines whether the specified location is on the shape.
+        /// Determines whether the specified location is on the path defined by straight line segments connecting the provided coordinates.
         /// </summary>
         /// <param name="coordinate">The coordinate.</param>
         /// <param name="shapeBoundary">The shape boundary.</param>
         /// <returns><c>true</c> if [is on shape] [the specified coordinate]; otherwise, <c>false</c>.</returns>
-        public static bool IsOnShape(
+        public static bool IsOnBoundary(
             CartesianCoordinate coordinate,
             CartesianCoordinate[] shapeBoundary)
         {
@@ -63,28 +59,26 @@ namespace MPT.Geometry.Intersections
             return false;
         }
 
+        // TODO: Implement IsOnBoundary for Polyline
+        // TODO: Implement IsOnBoundary for Shape
+
         /// <summary>
-        /// Determines whether the specified location is within the shape.
+        /// Determines whether the specified location is within the shape defined by straight line segments connecting the provided coordinates.
         /// </summary>
         /// <param name="coordinate">The coordinate.</param>
         /// <param name="shapeBoundary">The shape boundary composed of n points.</param>
-        /// <param name="includePointOnSegment"></param>
-        /// <param name="incluePointOnVertex"></param>
         /// <returns><c>true</c> if the specified location is within the shape; otherwise, <c>false</c>.</returns>
         public static bool IsWithinShape(
             CartesianCoordinate coordinate, 
-            CartesianCoordinate[] shapeBoundary,
-            bool includePointOnSegment = true,
-            bool incluePointOnVertex = true)
+            CartesianCoordinate[] shapeBoundary)
         {
             // 3. If # intersections%2 == 0 (even) => point is outside.
             //    If # intersections%2 == 1 (odd) => point is inside.
-            // Note: Condition of vertex intersection (# == 1) is not handled, so is treated as inside by default.
-            return (hProjection.NumberOfIntersections(
+            return (LineToLineIntersection.NumberOfIntersectionsOnHorizontalProjection(
                                     coordinate, 
-                                    shapeBoundary,
-                                    includePointOnSegment,
-                                    incluePointOnVertex).IsOdd());
+                                    shapeBoundary).IsOdd());
         }
+
+        // TODO: Implement IsWithinShape for Shape
     }
 }

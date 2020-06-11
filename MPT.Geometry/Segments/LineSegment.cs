@@ -6,6 +6,7 @@ using MPT.Math.Vectors;
 using MPT.Math.NumberTypeExtensions;
 using MPT.Math;
 using MPT.Math.Curves;
+using System.Data;
 
 namespace MPT.Geometry.Segments
 {
@@ -144,14 +145,9 @@ namespace MPT.Geometry.Segments
 
             if (_curve.IsHorizontal())
             {
-                double xMax = NMath.Max(I.X, J.X);
-                double xMin = NMath.Min(I.X, J.X);
-                return (point.X.IsGreaterThanOrEqualTo(xMin, tolerance) && point.X.IsLessThanOrEqualTo(xMax, tolerance));
+                return (point.X.IsGreaterThanOrEqualTo(_extents.MinX, tolerance) && point.X.IsLessThanOrEqualTo(_extents.MaxX, tolerance));
             }
-
-            double yMax = NMath.Max(I.Y, J.Y);
-            double yMin = NMath.Min(I.Y, J.Y);
-            return (point.Y.IsGreaterThanOrEqualTo(yMin, tolerance) && point.Y.IsLessThanOrEqualTo(yMax, tolerance));
+            return (point.Y.IsGreaterThanOrEqualTo(_extents.MinY, tolerance) && point.Y.IsLessThanOrEqualTo(_extents.MaxY, tolerance));
         }
 
         /// <summary>

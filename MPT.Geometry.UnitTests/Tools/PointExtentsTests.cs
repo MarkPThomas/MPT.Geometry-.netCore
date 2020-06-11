@@ -28,6 +28,22 @@ namespace MPT.Geometry.UnitTests.Tools
         }
 
         [Test]
+        public static void Initialization_with_2_Coordinates_Results_Object()
+        {
+            PointExtents extents = new PointExtents(
+                    new CartesianCoordinate(1, 2),
+                    new CartesianCoordinate(3, 5)
+                );
+
+            Assert.AreEqual(1, extents.MinX);
+            Assert.AreEqual(3, extents.MaxX);
+            Assert.AreEqual(2, extents.MinY);
+            Assert.AreEqual(5, extents.MaxY);
+            Assert.AreEqual(2, extents.Width);
+            Assert.AreEqual(3, extents.Height);
+        }
+
+        [Test]
         public static void Initialization_with_Empty_Coordinates_List()
         {
             PointExtents extents = new PointExtents(new List<CartesianCoordinate>());
@@ -58,7 +74,7 @@ namespace MPT.Geometry.UnitTests.Tools
         }
 
         [Test]
-        public static void Initialization_with_1_Coordinate()
+        public static void Initialization_with_1_Coordinate_List()
         {
             PointExtents extents = new PointExtents(
                 new List<CartesianCoordinate>()
@@ -75,7 +91,7 @@ namespace MPT.Geometry.UnitTests.Tools
         }
 
         [Test]
-        public static void Initialization_with_2_Collinear_Coordinates_Horizontal()
+        public static void Initialization_with_2_Collinear_Coordinates_Horizontal_List()
         {
             PointExtents extents = new PointExtents(
                 new List<CartesianCoordinate>()
@@ -93,7 +109,7 @@ namespace MPT.Geometry.UnitTests.Tools
         }
 
         [Test]
-        public static void Initialization_with_2_Collinear_Coordinates_Vertical()
+        public static void Initialization_with_2_Collinear_Coordinates_Vertical_List()
         {
             PointExtents extents = new PointExtents(
                 new List<CartesianCoordinate>()
@@ -111,7 +127,7 @@ namespace MPT.Geometry.UnitTests.Tools
         }
 
         [Test]
-        public static void Initialization_with_2_Coordinates()
+        public static void Initialization_with_2_Coordinates_List()
         {
             PointExtents extents = new PointExtents(
                 new List<CartesianCoordinate>()
@@ -129,7 +145,7 @@ namespace MPT.Geometry.UnitTests.Tools
         }
 
         [Test]
-        public static void Initialization_with_Multiple_Coordinates()
+        public static void Initialization_with_Multiple_Coordinates_List()
         {
             PointExtents extents = new PointExtents(
                 new List<CartesianCoordinate>()

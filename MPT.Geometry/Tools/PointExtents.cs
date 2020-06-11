@@ -2,7 +2,6 @@
 using NMath = System.Math;
 
 using MPT.Math.Coordinates;
-using System;
 
 namespace MPT.Geometry.Tools
 {
@@ -17,20 +16,28 @@ namespace MPT.Geometry.Tools
         // TODO: Consider if PointExtents should be able to have limits applied?
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PointExtents"/> class.
+        /// Initializes a new empty instance of the <see cref="PointExtents"/> class.
         /// </summary>
         public PointExtents()
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PointExtents"/> class.
+        /// Initializes a new instance of the <see cref="PointExtents"/> class for a path segment.
+        /// </summary>
+        /// <param name="pointI">The first point forming a path.</param>
+        /// <param name="pointJ">The second point forming a path.</param>
+        public PointExtents(CartesianCoordinate pointI, CartesianCoordinate pointJ) : base(pointI, pointJ)
+        { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PointExtents"/> class for a polyline or a shape.
         /// </summary>
         /// <param name="coordinates">The coordinates.</param>
         public PointExtents(IEnumerable<CartesianCoordinate> coordinates) : base(coordinates)
         { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PointExtents"/> class.
+        /// Initializes a new instance of the <see cref="PointExtents"/> class for cloning.
         /// </summary>
         /// <param name="extents">The extents.</param>
         protected PointExtents(Extents<CartesianCoordinate> extents) : base(extents)

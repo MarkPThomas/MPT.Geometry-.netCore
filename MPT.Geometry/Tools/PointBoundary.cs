@@ -1,4 +1,16 @@
-﻿using System;
+﻿// ***********************************************************************
+// Assembly         : MPT.Geometry
+// Author           : Mark P Thomas
+// Created          : 06-20-2018
+//
+// Last Modified By : Mark P Thomas
+// Last Modified On : 05-29-2020
+// ***********************************************************************
+// <copyright file="PointBoundary.cs" company="Mark P Thomas, Inc.">
+//     Copyright (c) 2020. All rights reserved.
+// </copyright>
+// <summary></summary>
+// ***********************************************************************
 using System.Collections.Generic;
 using System.Linq;
 using MPT.Math.Coordinates;
@@ -15,7 +27,7 @@ namespace MPT.Geometry.Tools
         #region Initialization
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PointBoundary"/> class.
+        /// Initializes a new instance of the <see cref="PointBoundary" /> class.
         /// </summary>
         public PointBoundary()
         {
@@ -23,7 +35,7 @@ namespace MPT.Geometry.Tools
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PointBoundary"/> class.
+        /// Initializes a new instance of the <see cref="PointBoundary" /> class.
         /// </summary>
         /// <param name="coordinates">The coordinates.</param>
         public PointBoundary(IEnumerable<CartesianCoordinate> coordinates) : base(coordinates)

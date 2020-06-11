@@ -82,7 +82,7 @@ namespace MPT.Geometry.Tools
 
         #region Initialization 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Extents{T}" /> class.
+        /// Initializes a new empty instance of the <see cref="Extents{T}" /> class.
         /// </summary>
         protected Extents()
         {
@@ -90,7 +90,19 @@ namespace MPT.Geometry.Tools
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Extents{T}" /> class.
+        /// Initializes a new instance of the <see cref="Extents{T}"/> class for a path segment.
+        /// </summary>
+        /// <param name="pointI">The first point forming a path.</param>
+        /// <param name="pointJ">The second point forming a path.</param>
+        protected Extents(T pointI, T pointJ)
+        {
+            initializeForSetting();
+            Add(pointI);
+            Add(pointJ);
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Extents{T}" /> class for a polyline or a shape.
         /// </summary>
         /// <param name="coordinates">The coordinates.</param>
         /// <param name="maxYLimit">The maximum y limit.</param>
@@ -118,7 +130,7 @@ namespace MPT.Geometry.Tools
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Extents{T}" /> class.
+        /// Initializes a new instance of the <see cref="Extents{T}" /> class for cloning.
         /// </summary>
         /// <param name="extents">The extents.</param>
         protected Extents(Extents<T> extents)

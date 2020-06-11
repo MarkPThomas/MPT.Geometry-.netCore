@@ -1,4 +1,5 @@
-﻿using MPT.Math;
+﻿using MPT.Geometry.Tools;
+using MPT.Math;
 using MPT.Math.Coordinates;
 using MPT.Math.Vectors;
 
@@ -14,6 +15,16 @@ namespace MPT.Geometry.Segments
         /// Tolerance to use in all calculations with double types.
         /// </summary>
         public double Tolerance { get; set; } = 10E-6;
+
+        /// <summary>
+        /// The extents
+        /// </summary>
+        protected PointExtents _extents;
+        /// <summary>
+        /// Gets or sets the extents.
+        /// </summary>
+        /// <value>The extents.</value>
+        public PointExtents Extents => _extents.Clone();
 
         /// <summary>
         /// First coordinate value.
@@ -37,6 +48,7 @@ namespace MPT.Geometry.Segments
         {
             I = i;
             J = j;
+            _extents = new PointExtents(i, j);
         }
         #endregion
 
@@ -58,8 +70,6 @@ namespace MPT.Geometry.Segments
         {
             return Vector.UnitNormalVector(I, J);
         }
-
-        
         #endregion
 
         #region Methods: Abstract
@@ -115,7 +125,6 @@ namespace MPT.Geometry.Segments
         /// </summary>
         /// <param name="sRelative">The relative position along the path.</param>
         public abstract Vector TangentVector(double sRelative);
-
         #endregion
 
     }

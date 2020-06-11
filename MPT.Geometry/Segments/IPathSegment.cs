@@ -1,4 +1,5 @@
-﻿using MPT.Math.Coordinates;
+﻿using MPT.Geometry.Tools;
+using MPT.Math.Coordinates;
 using MPT.Math.Vectors;
 
 namespace MPT.Geometry.Segments
@@ -8,6 +9,12 @@ namespace MPT.Geometry.Segments
     /// </summary>
     public interface IPathSegment
     {
+        /// <summary>
+        /// Gets the extents.
+        /// </summary>
+        /// <value>The extents.</value>
+        PointExtents Extents { get; }
+
         /// <summary>
         /// First coordinate value.
         /// </summary>
