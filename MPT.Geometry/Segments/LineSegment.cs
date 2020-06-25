@@ -7,6 +7,8 @@ using MPT.Math.NumberTypeExtensions;
 using MPT.Math;
 using MPT.Math.Curves;
 using System.Data;
+using System.Runtime.InteropServices;
+using MPT.Geometry.Intersections;
 
 namespace MPT.Geometry.Segments
 {
@@ -100,10 +102,7 @@ namespace MPT.Geometry.Segments
         /// <returns></returns>
         public override CartesianCoordinate PointByPathPosition(double sRelative)
         {
-            if(!sRelative.IsWithinInclusive(0, 1, Tolerance))
-            {
-                throw new ArgumentOutOfRangeException($"Relative position must be between 0 and 1, but was {sRelative}.");
-            }
+            validateRelativePosition(sRelative);
             double x = I.X + (J.X - I.X) * sRelative;
             double y = I.Y + (J.Y - I.Y) * sRelative;
 
@@ -126,6 +125,26 @@ namespace MPT.Geometry.Segments
         public override Vector TangentVector(double sRelative)
         {
             return TangentVector();
+        }
+
+        /// <summary>
+        /// Returns a copy of the segment with an updated I coordinate.
+        /// </summary>
+        /// <param name="newCoordinate">The new coordinate.</param>
+        /// <returns>IPathSegment.</returns>
+        public override IPathSegment UpdateI(CartesianCoordinate newCoordinate)
+        {
+            return new LineSegment(newCoordinate, J);
+        }
+
+        /// <summary>
+        /// Returns a copy of the segment with an updated J coordinate.
+        /// </summary>
+        /// <param name="newCoordinate">The new coordinate.</param>
+        /// <returns>IPathSegment.</returns>
+        public override IPathSegment UpdateJ(CartesianCoordinate newCoordinate)
+        {
+            return new LineSegment(I, newCoordinate);
         }
         #endregion
 
@@ -182,48 +201,229 @@ namespace MPT.Geometry.Segments
         }
         #endregion
 
-        #region Methods (IPathDivisionExtension)
+        #region Methods: IPathTransform        
         /// <summary>
-        /// Returns a point determined by a given fraction of the distance between point i and point j of the segment.
-        ///  <paramref name="fraction"/> must be between 0 and 1.
+        /// Translates the segment.
         /// </summary>
-        /// <param name="fraction">Fraction of the way from point 1 to point 2.</param>
-        /// <returns></returns>
-        public CartesianCoordinate PointDivision(double fraction)
+        /// <param name="translation">The amount to translate by.</param>
+        /// <returns>IPathSegment.</returns>
+        public IPathSegment TranslateSegment(CartesianOffset translation)
         {
-            if (!fraction.IsWithinInclusive(0, 1, Tolerance))
-            {
-                throw new ArgumentOutOfRangeException("Fraction must be within 0 and 1 to divide segment.");
-            }
-            return pointOffsetOnLine(fraction);
+            return new LineSegment(I + translation, J + translation);
         }
 
         /// <summary>
-        ///  Returns a point determined by a given ratio of the distance between point i and point j of the segment.
+        /// Scales the segment from point I.
         /// </summary>
-        /// <param name="ratio">Ratio of the size of the existing segment. 
-        /// If <paramref name="ratio"/>&lt; 0, returned point is offset from point i, in that direction. 
-        /// If <paramref name="ratio"/>&gt; 0, returned point is offset from point j, in that direction.</param>
-        /// <returns></returns>
-        public CartesianCoordinate PointExtension(double ratio)
+        /// <param name="scaleFromI">The amount to scale from point I.</param>
+        /// <returns>IPathSegment.</returns>
+        public IPathSegment ScaleSegmentFromI(double scaleFromI)
         {
-            if (ratio.IsGreaterThanOrEqualTo(0, Tolerance))
+            return ScaleSegmentFromPoint(scaleFromI, I);
+        }
+
+        /// <summary>
+        /// Scales the segment from point J.
+        /// </summary>
+        /// <param name="scaleFromJ">The amount to scale from point J.</param>
+        /// <returns>IPathSegment.</returns>
+        public IPathSegment ScaleSegmentFromJ(double scaleFromJ)
+        {
+            return ScaleSegmentFromPoint(scaleFromJ, J);
+        }
+
+        /// <summary>
+        /// Scales the segment from the provided reference point.
+        /// </summary>
+        /// <param name="scale">The amount to scale relative to the reference point.</param>
+        /// <param name="referencePoint">The reference point.</param>
+        /// <returns>IPathSegment.</returns>
+        public IPathSegment ScaleSegmentFromPoint(double scale, CartesianCoordinate referencePoint)
+        {
+            CartesianOffset offsetJ = scale * (J.OffsetFrom(referencePoint));
+            CartesianOffset offsetI = scale * (I.OffsetFrom(referencePoint));
+
+            return new LineSegment(
+                referencePoint + offsetI.ToCartesianCoordinate(),
+                referencePoint + offsetJ.ToCartesianCoordinate());
+        }
+
+        /// <summary>
+        /// Rotates the segment from point I.
+        /// </summary>
+        /// <param name="rotation">The amount of rotation. [rad]</param>
+        /// <returns>IPathSegment.</returns>
+        public IPathSegment RotateSegmentFromI(Angle rotation)
+        {
+            return new LineSegment(I, CartesianCoordinate.RotateAboutPoint(J, I, rotation.Radians));
+        }
+
+        /// <summary>
+        /// Rotates the segment from point J.
+        /// </summary>
+        /// <param name="rotation">The amount of rotation. [rad]</param>
+        /// <returns>IPathSegment.</returns>
+        public IPathSegment RotateSegmentFromJ(Angle rotation)
+        {
+            return new LineSegment(CartesianCoordinate.RotateAboutPoint(I, J, rotation.Radians), J);
+        }
+
+        /// <summary>
+        /// Rotates the segment about the reference point.
+        /// </summary>
+        /// <param name="rotation">The amount of rotation. [rad]</param>
+        /// <param name="referencePoint">The center of rotation reference point.</param>
+        /// <returns>IPathSegment.</returns>
+        public IPathSegment RotateSegmentFromPoint(Angle rotation, CartesianCoordinate referencePoint)
+        {
+            return new LineSegment(
+                CartesianCoordinate.RotateAboutPoint(I, referencePoint, rotation.Radians),
+                CartesianCoordinate.RotateAboutPoint(J, referencePoint, rotation.Radians));
+        }
+        #endregion
+
+        #region Methods: PathDivisionExtension
+        /// <summary>
+        /// Splits the segment by the provided point.
+        /// </summary>
+        /// <param name="pointDivision">The point to use for division.</param>
+        /// <returns>Tuple&lt;IPathSegment, IPathSegment&gt;.</returns>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
+        public Tuple<IPathSegment, IPathSegment> SplitBySegmentPoint(CartesianCoordinate pointDivision)
+        {
+            if (!IncludesCoordinate(pointDivision))
             {
-                ratio += 1;
+                throw new ArgumentOutOfRangeException("Point does not lie on the segment being split.");
             }
-            return pointOffsetOnLine(ratio);
+
+            return new Tuple<IPathSegment, IPathSegment>(
+                new LineSegment(I, pointDivision),
+                new LineSegment(pointDivision, J)
+                );
+        }
+
+        /// <summary>
+        /// Extends the segment to the provided point.
+        /// </summary>
+        /// <param name="pointExtension">The point to extend the segment to.</param>
+        /// <returns>IPathSegment.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public IPathSegment ExtendSegmentToPoint(CartesianCoordinate pointExtension)
+        {
+            if (!_curve.IsIntersectingCoordinate(pointExtension))
+            {
+                throw new ArgumentOutOfRangeException("Point being extended to does not lie on the segment curve.");
+            }
+            // TODO: Determine if point is being extended to from I or J
+            // TODO: Return curve with appropriate end extended to pointExtension
+            throw new NotImplementedException();
         }
 
         /// <summary>
         /// Returns a point determined by a given fraction of the distance between point i and point j of the segment.
+        /// <paramref name="sRelative"/> must be between 0 and 1.
         /// </summary>
-        /// <param name="fraction">Fraction of the way from point 1 to point 2.</param>
+        /// <param name="sRelative">The relative position along the path between 0 (point i) and 1 (point j).</param>
         /// <returns></returns>
-        private CartesianCoordinate pointOffsetOnLine(double fraction)
+        protected override CartesianCoordinate pointOffsetOnCurve(double sRelative)
         {
-            double x = I.X + fraction * (J.X - I.X);
-            double y = I.Y + fraction * (J.Y - I.Y);
+            double x = I.X + sRelative * (J.X - I.X);
+            double y = I.Y + sRelative * (J.Y - I.Y);
             return new CartesianCoordinate(x, y);
+        }
+
+
+        /// <summary>
+        /// Returns a copy of the segment that merges the current segment with the prior segment.
+        /// </summary>
+        /// <param name="priorSegment">The prior segment.</param>
+        /// <returns>IPathSegment.</returns>
+        public override IPathSegment MergeWithPriorSegment(IPathSegment priorSegment)
+        {
+            if (priorSegment.I == I)
+            {
+                priorSegment = new LineSegment(priorSegment.J, priorSegment.I);
+            }
+            if (priorSegment.J == J)
+            {
+                return new LineSegment(priorSegment.I, I);
+            }
+            return new LineSegment(priorSegment.I, J);
+        }
+
+        /// <summary>
+        /// Returns a copy of the segment that merges the current segment with the following segment.
+        /// </summary>
+        /// <param name="followingSegment">The following segment.</param>
+        /// <returns>IPathSegment.</returns>
+        public override IPathSegment MergeWithFollowingSegment(IPathSegment followingSegment)
+        {
+            if (followingSegment.I == I)
+            {
+                return new LineSegment(J, followingSegment.J);
+            }
+            if (followingSegment.J == J)
+            {
+                followingSegment = new LineSegment(followingSegment.J, followingSegment.I);
+            }
+            return new LineSegment(I, followingSegment.J);
+        }
+
+        /// <summary>
+        /// Returns a copy of the segment that joins the current segment with the prior segment.
+        /// </summary>
+        /// <param name="priorSegment">The prior segment.</param>
+        /// <returns>IPathSegment.</returns>
+        public override IPathSegment JoinWithPriorSegment(IPathSegment priorSegment)
+        {
+            if ((priorSegment.I == I || priorSegment.I == J) ||
+                (priorSegment.J == I || priorSegment.J == J))
+            {  // segments already joined
+                return null;
+            }
+            return new LineSegment(priorSegment.J, I);
+        }
+
+        /// <summary>
+        /// Returns a copy of the segment that joins the current segment with the following segment.
+        /// </summary>
+        /// <param name="followingSegment">The following segment.</param>
+        /// <returns>IPathSegment.</returns>
+        public override IPathSegment JoinWithFollowingSegment(IPathSegment followingSegment)
+        {
+            if ((followingSegment.I == I || followingSegment.I == J) ||
+                (followingSegment.J == I || followingSegment.J == J))
+            {  // segments already joined
+                return null;
+            }
+            return new LineSegment(J, followingSegment.I);
+        }
+
+        /// <summary>
+        /// Returns a copy of the segment that splits the segment by the relative location.
+        /// <paramref name="sRelative"/> must be between 0 and 1.
+        /// </summary>
+        /// <param name="sRelative">The relative position along the path between 0 (point i) and 1 (point j).</param>
+        /// <returns>Tuple&lt;IPathSegment, IPathSegment&gt;.</returns>
+        public override Tuple<IPathSegment, IPathSegment> SplitBySegmentPosition(double sRelative)
+        {
+            CartesianCoordinate pointDivision = PointOffsetOnSegment(sRelative);
+
+            return SplitBySegmentPoint(pointDivision);
+        }
+
+        /// <summary>
+        /// Extends the segment to intersect the provided curve.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        public IPathSegment ExtendSegmentToCurve() // TODO: Add curve parameter
+        {
+            // Provide some curve to method
+            // If never intersecting, throw exception
+            // If intersecting, get intersection point and return 'ExtendPathToPoint'
+            CartesianCoordinate pointExtension = new CartesianCoordinate(0, 0); // TODO: Finish this
+
+            return ExtendSegmentToPoint(pointExtension);
         }
         #endregion
 

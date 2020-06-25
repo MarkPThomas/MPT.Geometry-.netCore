@@ -243,6 +243,13 @@ namespace MPT.Geometry.Tools
         /// <param name="extents">The extents.</param>
         public void AddExtents(Extents<T> extents)
         {
+            bool xIsInitialized = isExtentsWidthSet();
+            bool yIsInitialized = isExtentsHeightSet();
+            if (!xIsInitialized && !yIsInitialized)
+            {
+                initializeForSetting();
+            }
+
             if (extents.MaxY > MaxY)
             {
                 MaxY = extents.MaxY;

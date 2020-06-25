@@ -13,7 +13,7 @@ namespace MPT.Geometry.Segments
         /// </summary>
         /// <param name="fraction">Fraction of the way from point 1 to point 2.</param>
         /// <returns></returns>
-        CartesianCoordinate PointDivision(double fraction);
+        CartesianCoordinate PointOffsetOnSegment(double fraction);
 
         /// <summary>
         ///  Returns a point determined by a given ratio of the distance between point i and point j of the segment.
@@ -22,6 +22,6 @@ namespace MPT.Geometry.Segments
         /// If <paramref name="ratio"/>&lt; 0, returned point is offset from point i, in that direction. 
         /// If <paramref name="ratio"/>&gt; 0, returned point is offset from point j, in that direction.</param>
         /// <returns></returns>
-        CartesianCoordinate PointExtension(double ratio);
+        CartesianCoordinate PointScaledFromSegment(double ratio);
     }
 }

@@ -1,7 +1,6 @@
 ﻿using MPT.Geometry.Segments;
 using MPT.Math.Coordinates;
 using NUnit.Framework;
-using System;
 
 namespace MPT.Geometry.UnitTests
 {
@@ -31,12 +30,6 @@ namespace MPT.Geometry.UnitTests
             double magnitudeX1, double magnitudeY1,
             double magnitudeX2, double magnitudeY2, bool expectedResult)
         {
-            //LineSegment segment1 = new LineSegment(new CartesianCoordinate(magnitudeX2, magnitudeY2), new CartesianCoordinate(0, 0));
-            //LineSegment segment2 = new LineSegment(new CartesianCoordinate(0, 0), new CartesianCoordinate(magnitudeX1, magnitudeY1));
-
-            //LineSegment segment1 = new LineSegment(new CartesianCoordinate(magnitudeX1, magnitudeY1), new CartesianCoordinate(0, 0));
-            //LineSegment segment2 = new LineSegment(new CartesianCoordinate(0, 0), new CartesianCoordinate(magnitudeX2, magnitudeY2));
-
             LineSegment segment1 = new LineSegment(new CartesianCoordinate(0, 0), new CartesianCoordinate(magnitudeX1, magnitudeY1));
             LineSegment segment2 = new LineSegment(new CartesianCoordinate(0, 0), new CartesianCoordinate(magnitudeX2, magnitudeY2));
 

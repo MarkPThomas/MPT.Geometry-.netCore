@@ -23,6 +23,12 @@ using GL = MPT.Geometry.GeometryLibrary;
 
 namespace MPT.Geometry.Aggregation
 {
+
+    // TODO: For all boundary changes, clusters and holes occur when a shape is entirely outside of or inside of the shape group.
+    // This is to be handled by linking the shape areas by a collinear segment, which requires duplicating coordinates.
+    // All positive shapes are determined by CCW travel.
+    // All negative shapes are determined by CW travel.
+
     /// <summary>
     /// Represents a composite shape derived from a collection of shapes.
     /// </summary>

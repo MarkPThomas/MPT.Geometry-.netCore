@@ -4,7 +4,7 @@
 // Created          : 06-20-2018
 //
 // Last Modified By : Mark P Thomas
-// Last Modified On : 05-29-2020
+// Last Modified On : 06-11-2020
 // ***********************************************************************
 // <copyright file="PointBoundary.cs" company="Mark P Thomas, Inc.">
 //     Copyright (c) 2020. All rights reserved.
@@ -12,26 +12,32 @@
 // <summary></summary>
 // ***********************************************************************
 using System.Collections.Generic;
-using System.Linq;
 using MPT.Math.Coordinates;
 
 namespace MPT.Geometry.Tools
 {
     /// <summary>
     /// Class PointBoundary.
-    /// Implements the <see cref="MPT.Geometry.Tools.Boundary{CartesianCoordinate}" />
+    /// Implements the <see cref="MPT.Geometry.Tools.CoordinatesBoundary{CartesianCoordinate}" />
     /// </summary>
-    /// <seealso cref="MPT.Geometry.Tools.Boundary{CartesianCoordinate}" />
-    public class PointBoundary : Boundary<CartesianCoordinate>
+    /// <seealso cref="MPT.Geometry.Tools.CoordinatesBoundary{CartesianCoordinate}" />
+    public class PointBoundary : CoordinatesBoundary<CartesianCoordinate>
     {
         #region Initialization
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="PointBoundary" /> class.
+        /// Represents a boundary defined by CartesianCoordinates.
         /// </summary>
         public PointBoundary()
         {
 
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PointBoundary"/> class.
+        /// </summary>
+        /// <param name="coordinates">The coordinates.</param>
+        public PointBoundary(CartesianCoordinate[] coordinates) : base(coordinates)
+        {
         }
 
         /// <summary>
@@ -43,13 +49,25 @@ namespace MPT.Geometry.Tools
         }
         #endregion
 
-        #region Methods: Public        
+        #region Methods: Public
+        /// <summary>
+        /// Gets the extents.
+        /// </summary>
+        /// <returns>Extents&lt;CartesianCoordinate&gt;.</returns>
+        public override Extents<CartesianCoordinate> Extents()
+        {
+            PointExtents extents = new PointExtents(_contents);
+            return extents;
+        }
+        #endregion
+
+        #region Methods: List        
         /// <summary>
         /// Clears this instance.
         /// </summary>
         public override void Clear()
         {
-            _coordinates = new List<CartesianCoordinate>();
+            base.Clear();
         }
 
         /// <summary>
@@ -58,9 +76,10 @@ namespace MPT.Geometry.Tools
         /// <param name="coordinates">The coordinates.</param>
         public override void AddRange(IList<CartesianCoordinate> coordinates)
         {
-            List<CartesianCoordinate> list = new List<CartesianCoordinate>(_coordinates);
-            list.AddRange(coordinates);
-            _coordinates = list;
+            foreach (CartesianCoordinate coordinate in coordinates)
+            {
+                Add(coordinate);
+            }
         }
 
         /// <summary>
@@ -69,9 +88,10 @@ namespace MPT.Geometry.Tools
         /// <param name="coordinates">The coordinates.</param>
         public override void RemoveRange(IList<CartesianCoordinate> coordinates)
         {
-            if (_coordinates.Intersect(coordinates).Count() == 0) { return; }
-
-            _coordinates = _coordinates.Where(existing => !coordinates.Any(remove => existing.Equals(remove))); 
+            foreach (CartesianCoordinate coordinate in coordinates)
+            {
+                Remove(coordinate);
+            } 
         }
         #endregion
     }

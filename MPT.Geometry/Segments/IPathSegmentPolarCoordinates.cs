@@ -7,7 +7,7 @@ namespace MPT.Geometry.Segments
     /// <summary>
     /// Interface related to line geometries in polar coordinates.
     /// </summary>
-    public interface IPolarCoordinates
+    public interface IPathSegmentPolarCoordinates
     {
         /// <summary>
         /// First coordinate value {radius, rotation[radians]}.

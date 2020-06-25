@@ -296,7 +296,6 @@ namespace MPT.Geometry.UnitTests.Intersection
         [TestCase(5, 1, 0)] // On vertical segment
         [TestCase(2, -4.1, 0)] // On sloped segment
         [TestCase(6, 1, 0)] // Outside path - right
-        [TestCase(6, 1, 0)] // Outside path - left
         [TestCase(1, 6, 0)] // Outside path - above
         [TestCase(-1, -6, 0)] // Outside path - below
         [TestCase(0, -4, 2)] // Outside path - below intersecting slope

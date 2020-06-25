@@ -15,6 +15,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Aggregation\CompositeShape.cs" />
     <Compile Remove="Intersections\ProjectionVertical.cs" />
     <Compile Remove="Segments\ArcSegment.cs" />
     <Compile Remove="Segments\BezierSpline.cs" />
@@ -23,7 +24,6 @@
     <Compile Remove="Segments\IPathSegment3D.cs" />
     <Compile Remove="Segments\IPathSegmentCollision.cs" />
     <Compile Remove="Segments\NURBS.cs" />
-    <Compile Remove="Segments\PolyLine.cs" />
     <Compile Remove="Tools\Extents3D.cs" />
     <Compile Remove="Tools\PointExtents3D.cs" />
     <Compile Remove="Tools\Vertex.cs" />
@@ -36,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Aggregation\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 

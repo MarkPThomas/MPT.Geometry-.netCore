@@ -4,203 +4,6 @@
         <name>MPT.Geometry</name>
     </assembly>
     <members>
-        <member name="T:MPT.Geometry.Aggregation.CompositeShape`3">
-            <summary>
-            Represents a composite shape derived from a collection of shapes.
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Aggregation.CompositeShape`3.Tolerance">
-            <summary>
-            Tolerance to use in all calculations with double types.
-            </summary>
-            <value>The tolerance.</value>
-        </member>
-        <member name="P:MPT.Geometry.Aggregation.CompositeShape`3.Name">
-            <summary>
-            The name of the shape.
-            </summary>
-            <value>The name.</value>
-        </member>
-        <member name="F:MPT.Geometry.Aggregation.CompositeShape`3._boundary">
-            <summary>
-            The boundary
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Aggregation.CompositeShape`3.Boundary">
-            <summary>
-            The boundary that wraps the composite shape.
-            </summary>
-            <value>The boundary.</value>
-        </member>
-        <member name="F:MPT.Geometry.Aggregation.CompositeShape`3._extents">
-            <summary>
-            The extents
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Aggregation.CompositeShape`3.Extents">
-            <summary>
-            The extents bounding box of all components.
-            </summary>
-            <value>The extents.</value>
-        </member>
-        <member name="P:MPT.Geometry.Aggregation.CompositeShape`3.IsVoid">
-            <summary>
-            If true, the shape is considered to be a hole, otherwise it is a solid.
-            </summary>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.#ctor(System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Aggregation.CompositeShape`3"/> class.
-            </summary>
-            <param name="name">The name.</param>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.#ctor(System.Collections.Generic.IList{`0},System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Aggregation.CompositeShape`3"/> class.
-            </summary>
-            <param name="boundary">The shape boundary.</param>
-            <param name="name">The name of the composite shape.</param>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.#ctor(System.Collections.Generic.IEnumerable{MPT.Geometry.Aggregation.CompositeShape{`0,`1,`2}},System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Aggregation.CompositeShape`3"/> class.
-            </summary>
-            <param name="shapes">A collection of shapes.</param>
-            <param name="name">The name of the composite shape.</param>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.Add(MPT.Geometry.Aggregation.CompositeShape{`0,`1,`2})">
-            <summary>
-            Adds an object to the end of the <see cref="T:System.Collections.Generic.List`1" />.
-            </summary>
-            <param name="item">The object to be added to the end of the <see cref="T:System.Collections.Generic.List`1" />. The value can be null for reference types.</param>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.AddRange(System.Collections.Generic.IEnumerable{MPT.Geometry.Aggregation.CompositeShape{`0,`1,`2}})">
-            <summary>
-            Adds the elements of the specified collection to the end of the <see cref="T:System.Collections.Generic.List`1" />.
-            </summary>
-            <param name="collection">The collection of shapes.</param>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.Insert(System.Int32,MPT.Geometry.Aggregation.CompositeShape{`0,`1,`2})">
-            <summary>
-            Inserts an element into the <see cref="T:System.Collections.Generic.List`1" /> at the specified index.
-            </summary>
-            <param name="index">The zero-based index at which <paramref name="item" /> should be inserted.</param>
-            <param name="item">The object to insert. The value can be null for reference types.</param>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.InsertRange(System.Int32,System.Collections.Generic.IEnumerable{MPT.Geometry.Aggregation.CompositeShape{`0,`1,`2}})">
-            <summary>
-            Inserts the elements of a collection into the <see cref="T:System.Collections.Generic.List`1" /> at the specified index.
-            </summary>
-            <param name="index">The zero-based index at which the new elements should be inserted.</param>
-            <param name="collection">The collection of shapes to insert.</param>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.Clear">
-            <summary>
-            Removes all elements from the <see cref="T:System.Collections.Generic.List`1" />.
-            </summary>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.Remove(MPT.Geometry.Aggregation.CompositeShape{`0,`1,`2})">
-            <summary>
-            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.List`1" />.
-            </summary>
-            <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.List`1" />. The value can be null for reference types.</param>
-            <returns>true if <paramref name="item" /> is successfully removed; otherwise, false.  This method also returns false if <paramref name="item" /> was not found in the <see cref="T:System.Collections.Generic.List`1" />.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.RemoveRange(System.Int32,System.Int32)">
-            <summary>
-            Removes a range of elements from the <see cref="T:System.Collections.Generic.List`1" />.
-            </summary>
-            <param name="index">The zero-based starting index of the range of elements to remove.</param>
-            <param name="count">The number of elements to remove.</param>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.RemoveAt(System.Int32)">
-            <summary>
-            Removes the element at the specified index of the <see cref="T:System.Collections.Generic.List`1" />.
-            </summary>
-            <param name="index">The zero-based index of the element to remove.</param>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.RemoveAll(System.Predicate{MPT.Geometry.Aggregation.CompositeShape{`0,`1,`2}})">
-            <summary>
-            Removes all the elements that match the conditions defined by the specified predicate.
-            </summary>
-            <param name="match">The <see cref="T:System.Predicate`1" /> delegate that defines the conditions of the elements to remove.</param>
-            <returns>The number of elements removed from the <see cref="T:System.Collections.Generic.List`1" /> .</returns>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.ToString">
-            <summary>
-            Returns a <see cref="T:System.String" /> that represents this instance.
-            </summary>
-            <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.IsBaseShape">
-            <summary>
-            Determines whether shape is the lowest level defined shape.
-            </summary>
-            <returns><c>true</c> if the shape is the lowest level defined shape; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.VoidBoundaries">
-            <summary>
-            The list of boundaries that wrap the composite shape voids.
-            This is recursive to the base shape.
-            </summary>
-            <value>The boundary.</value>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.SolidBoundaries">
-            <summary>
-            The list of boundaries that wrap the composite shape solids.
-            This is recursive to the base shape.
-            </summary>
-            <value>The boundary.</value>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.Split(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Splits the shape and all child shapes along the specified polyline.
-            </summary>
-            <param name="polyline">The polyline.</param>
-            <returns>Shape.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.AlignInternalBoundaries">
-            <summary>
-            Aligns the internal boundaries of all child shapes.
-            This starts with the lowest child shapes and works up to the current shape.
-            </summary>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.AlignExternalToInternalBoundaries">
-            <summary>
-            Aligns the external boundary with the internal boundaries of all child shapes.
-            </summary>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.updateBoundaryProperties">
-            <summary>
-            Updates the boundary properties.
-            </summary>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.updateExtents">
-            <summary>
-            Updates the extents.
-            </summary>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.recalculateBoundary">
-            <summary>
-            Recalculates the boundary.
-            </summary>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.addToBoundary(MPT.Geometry.Aggregation.CompositeShape{`0,`1,`2})">
-            <summary>
-            Adds to boundary.
-            </summary>
-            <param name="item">The item.</param>
-        </member>
-        <member name="M:MPT.Geometry.Aggregation.CompositeShape`3.removeFromBoundary(MPT.Geometry.Aggregation.CompositeShape{`0,`1,`2})">
-            <summary>
-            Removes from boundary.
-            </summary>
-            <param name="item">The item.</param>
-        </member>
         <member name="T:MPT.Geometry.GeometryLibrary">
             <summary>
             Library of operations related to the geometry framework.
@@ -321,36 +124,169 @@
             <param name="line2"></param>
             <returns></returns>
         </member>
+        <member name="T:MPT.Geometry.Intersections.LineToLineIntersection">
+            <summary>
+            Class LineToLineIntersection.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.LineToLineIntersection.NumberOfIntersectionsOnHorizontalProjection(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate[],System.Double)">
+            <summary>
+            The numbers of shape boundary intersections a horizontal line makes when projecting to the right from the provided point.
+            An odd number indicates the point is inside the shape.
+            An even number indicates the point is outside the shape.
+            If the point is on a vertex or segment, the function returns 0.
+            </summary>
+            <param name="coordinate">The coordinate.</param>
+            <param name="shapeBoundary">The shape boundary composed of n points.</param>
+            <param name="tolerance">The tolerance.</param>
+            <returns>System.Int32.</returns>
+            <exception cref="T:System.ArgumentException">Shape boundary describes a shape. Closure to the shape boundary is needed.</exception>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.LineToLineIntersection.PointIsWithinLineHeightInclusive(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Determines if the point lies within the straight line height.
+            </summary>
+            <param name="yPtN">The y-coordinate of pt n.</param>
+            <param name="ptI">The vertex i.</param>
+            <param name="ptJ">The vertex j.</param>
+            <returns><c>true</c> if the point lies within the segment extents height, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.LineToLineIntersection.PointIsWithinLineHeightExclusive(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Determines if the point lies within the straight line height, not including the vertex locations.
+            </summary>
+            <param name="yPtN">The y-coordinate of pt n.</param>
+            <param name="ptI">The vertex i.</param>
+            <param name="ptJ">The vertex j.</param>
+            <returns><c>true</c> if the point lies within the segment extents height, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.LineToLineIntersection.PointIsWithinLineWidthInclusive(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Determines if the point lies within the straight line width.
+            </summary>
+            <param name="xPtN">The x-coordinate of pt n.</param>
+            <param name="ptI">The vertex i.</param>
+            <param name="ptJ">The vertex j.</param>
+            <returns><c>true</c> if the point lies within the segment width, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.LineToLineIntersection.PointIsWithinLineWidthExclusive(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Determines if the point lies within the straight line width.
+            </summary>
+            <param name="xPtN">The x-coordinate of pt n.</param>
+            <param name="ptI">The vertex i.</param>
+            <param name="ptJ">The vertex j.</param>
+            <returns><c>true</c> if the point lies within the segment width, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.LineToLineIntersection.PointIsLeftOfLineEndInclusive(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Determines if the point lies to the left of the straight line end.
+            </summary>
+            <param name="xPtN">The x-coordinate of pt n.</param>
+            <param name="ptI">Vertex i.</param>
+            <param name="ptJ">Vertex j.</param>
+            <returns><c>true</c> if the point lies to the left of the straight line end, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.LineToLineIntersection.PointIsLeftOfLineEndExclusive(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Determines if the point lies to the left of the straight line end, not including the vertex locations..
+            </summary>
+            <param name="xPtN">The x-coordinate of pt n.</param>
+            <param name="ptI">Vertex i.</param>
+            <param name="ptJ">Vertex j.</param>
+            <returns><c>true</c> if the point lies to the left of the straight line end, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.LineToLineIntersection.PointIsBelowLineBottomInclusive(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Determines if the point lies below the straight line end.
+            </summary>
+            <param name="yPtN">The y-coordinate of pt n.</param>
+            <param name="ptI">Vertex i.</param>
+            <param name="ptJ">Vertex j.</param>
+            <returns><c>true</c> if the point lies to below the segment bottom, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.LineToLineIntersection.PointIsBelowLineBottomExclusive(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Determines if the point lies below the straight line end.
+            </summary>
+            <param name="yPtN">The y-coordinate of pt n.</param>
+            <param name="ptI">Vertex i.</param>
+            <param name="ptJ">Vertex j.</param>
+            <returns><c>true</c> if the point lies to below the segment bottom, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.LineToLineIntersection.PointIsLeftOfSegmentIntersection(System.Double,System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Determines if the point is to the left of the horizontally projected segment intersection.
+            </summary>
+            <param name="xPtN">The x-coordinate of pt n.</param>
+            <param name="xIntersection">The x-coordinate of the intersection of the projected line.</param>
+            <param name="vertexI">The vertex i.</param>
+            <param name="vertexJ">The vertex j.</param>
+            <returns><c>true</c> if the point is to the left of the horizontally projected segment intersection, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.LineToLineIntersection.PointIsBelowSegmentIntersection(System.Double,System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Determines if the point is below the vertically projected segment intersection.
+            </summary>
+            <param name="yPtN">The y-coordinate of pt n.</param>
+            <param name="yIntersection">The y-coordinate of the intersection of the projected line.</param>
+            <param name="vertexI">The vertex i.</param>
+            <param name="vertexJ">The vertex j.</param>
+            <returns><c>true</c> if the point is below the vertically projected segment intersection, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.LineToLineIntersection.IntersectionPointX(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            The x-coordinate of the intersection of the horizontally projected line with the provided segment.
+            </summary>
+            <param name="yPtN">The y-coordinate of pt n, where the projection starts.</param>
+            <param name="ptI">Vertex i of the segment.</param>
+            <param name="ptJ">Vertex j of the segment.</param>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.LineToLineIntersection.IntersectionPointY(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            The y-coordinate of the intersection of the vertically projected line with the provided segment.
+            </summary>
+            <param name="xPtN">The x-coordinate of pt n, where the projection starts.</param>
+            <param name="ptI">Vertex i of the segment.</param>
+            <param name="ptJ">Vertex j of the segment.</param>
+            <returns>System.Double.</returns>
+        </member>
         <member name="T:MPT.Geometry.Intersections.PointIntersection">
             <summary>
             Handles calculations related to point intersections.
             </summary>
         </member>
-        <member name="M:MPT.Geometry.Intersections.PointIntersection.PointsOverlap(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Double)">
+        <member name="M:MPT.Geometry.Intersections.PointIntersection.IsOnPoint(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
             <summary>
             Determines if the points overlap.
             </summary>
             <param name="point1">The point1.</param>
             <param name="point2">The point2.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
             <returns><c>true</c> if the points lie in the same position, <c>false</c> otherwise.</returns>
         </member>
-        <member name="M:MPT.Geometry.Intersections.PointIntersection.IsWithinShape(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate[],System.Boolean,System.Boolean)">
+        <member name="M:MPT.Geometry.Intersections.PointIntersection.IsOnBoundary(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate[])">
             <summary>
-            Determines whether the specified location is within the shape.
+            Determines whether the specified location is on the path defined by straight line segments connecting the provided coordinates.
+            </summary>
+            <param name="coordinate">The coordinate.</param>
+            <param name="shapeBoundary">The shape boundary.</param>
+            <returns><c>true</c> if [is on shape] [the specified coordinate]; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.PointIntersection.IsWithinShape(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate[])">
+            <summary>
+            Determines whether the specified location is within the shape defined by straight line segments connecting the provided coordinates.
             </summary>
             <param name="coordinate">The coordinate.</param>
             <param name="shapeBoundary">The shape boundary composed of n points.</param>
-            <param name="includePointOnSegment"></param>
-            <param name="incluePointOnVertex"></param>
             <returns><c>true</c> if the specified location is within the shape; otherwise, <c>false</c>.</returns>
         </member>
-        <member name="T:MPT.Geometry.Intersections.ProjectionHorizontal">
+        <member name="T:MPT.Geometry.Intersections.PointProjection">
             <summary>
             Handles calculations related to horizontal projections.
             </summary>
         </member>
-        <member name="M:MPT.Geometry.Intersections.ProjectionHorizontal.NumberOfIntersections(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate[],System.Boolean,System.Boolean,System.Double)">
+        <member name="M:MPT.Geometry.Intersections.PointProjection.NumberOfIntersectionsOnHorizontalProjection(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate[],System.Boolean,System.Boolean,System.Double)">
             <summary>
             The numbers of shape boundary intersections a horizontal line makes when projecting to the right from the provided point.
             If the point is on a vertex or segment, the function returns either 0 or 1.
@@ -363,437 +299,105 @@
             <returns>System.Int32.</returns>
             <exception cref="T:System.ArgumentException">Shape boundary describes a shape. Closure to the shape boundary is needed.</exception>
         </member>
-        <member name="M:MPT.Geometry.Intersections.ProjectionHorizontal.PointIsWithinSegmentHeight(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Boolean)">
+        <member name="M:MPT.Geometry.Intersections.PointProjection.PointIsWithinSegmentExtentsHeightInclusive(System.Double,MPT.Geometry.Segments.IPathSegment)">
             <summary>
-            Determines if the point lies within the segment height.
+            Determines if the point lies within the segment extents height.
             </summary>
             <param name="yPtN">The y-coordinate of pt n.</param>
-            <param name="ptI">The vertex i.</param>
-            <param name="ptJ">The vertex j.</param>
-            <param name="includeEnds">if set to <c>true</c> [include ends].</param>
-            <returns><c>true</c> if the point lies within the segment height, <c>false</c> otherwise.</returns>
+            <param name="segment">The segment.</param>
+            <returns><c>true</c> if the point lies within the segment extents height, <c>false</c> otherwise.</returns>
         </member>
-        <member name="M:MPT.Geometry.Intersections.ProjectionHorizontal.PointIsLeftOfSegmentEnd(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Boolean)">
+        <member name="M:MPT.Geometry.Intersections.PointProjection.PointIsWithinSegmentExtentsHeightExclusive(System.Double,MPT.Geometry.Segments.IPathSegment)">
             <summary>
-            Determines if the point lies to the left of the segment end.
+            Determines if the point lies within the segment extents height, not including the boundary locations.
+            </summary>
+            <param name="yPtN">The y-coordinate of pt n.</param>
+            <param name="segment">The segment.</param>
+            <returns><c>true</c> if the point lies within the segment extents height, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.PointProjection.PointIsWithinSegmentExtentsWidthInclusive(System.Double,MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Determines if the point lies within the segment extents width.
             </summary>
             <param name="xPtN">The x-coordinate of pt n.</param>
-            <param name="ptI">Vertex i.</param>
-            <param name="ptJ">Vertex j.</param>
-            <param name="includeEnds">if set to <c>true</c> [include ends].</param>
+            <param name="segment">The segment.</param>
+            <returns><c>true</c> if the point lies within the segment width, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.PointProjection.PointIsWithinSegmentExtentsWidthExclusive(System.Double,MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Determines if the point lies within the segment extents width.
+            </summary>
+            <param name="xPtN">The x-coordinate of pt n.</param>
+            <param name="segment">The segment.</param>
+            <returns><c>true</c> if the point lies within the segment width, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.PointProjection.PointIsLeftOfSegmentExtentsEndInclusive(System.Double,MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Determines if the point lies to the left of the segment extents max x-coordinate.
+            </summary>
+            <param name="xPtN">The x-coordinate of pt n.</param>
+            <param name="segment">The segment.</param>
             <returns><c>true</c> if the point lies to the left of the segment end, <c>false</c> otherwise.</returns>
         </member>
-        <member name="M:MPT.Geometry.Intersections.ProjectionHorizontal.IntersectionPointX(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+        <member name="M:MPT.Geometry.Intersections.PointProjection.PointIsLeftOfSegmentExtentsEndExclusive(System.Double,MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Determines if the point lies to the left of the segment extents max x-coordinate, not including the boundary coordinate.
+            </summary>
+            <param name="xPtN">The x-coordinate of pt n.</param>
+            <param name="segment">The segment.</param>
+            <returns><c>true</c> if the point lies to the left of the segment end, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.PointProjection.PointIsBelowSegmentExtentsInclusive(System.Double,MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Determines if the point lies below the segment extents end.
+            </summary>
+            <param name="yPtN">The y-coordinate of pt n.</param>
+            <param name="segment">The segment.</param>
+            <returns><c>true</c> if the point lies to below the segment bottom, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.PointProjection.PointIsBelowSegmentExtentsExclusive(System.Double,MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Determines if the point lies below the segment extents end.
+            </summary>
+            <param name="yPtN">The y-coordinate of pt n.</param>
+            <param name="segment">The segment.</param>
+            <returns><c>true</c> if the point lies to below the segment bottom, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Intersections.PointProjection.IntersectionPointX(System.Double,MPT.Geometry.Segments.IPathSegment)">
             <summary>
             The x-coordinate of the intersection of the horizontally projected line with the provided segment.
             </summary>
             <param name="yPtN">The y-coordinate of pt n, where the projection starts.</param>
-            <param name="ptI">Vertex i of the segment.</param>
-            <param name="ptJ">Vertex j of the segment.</param>
+            <param name="segment">The segment.</param>
             <returns>System.Double.</returns>
             <exception cref="T:System.ArgumentException">Segment is horizontal, so intersection point is either infinity or NAN.</exception>
         </member>
-        <member name="M:MPT.Geometry.Intersections.ProjectionHorizontal.PointIsLeftOfSegmentIntersection(System.Double,System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Boolean)">
+        <member name="M:MPT.Geometry.Intersections.PointProjection.PointIsLeftOfSegmentIntersection(System.Double,System.Double,MPT.Geometry.Segments.IPathSegment)">
             <summary>
             Determines if the point is to the left of the horizontally projected segment intersection.
             </summary>
             <param name="xPtN">The x-coordinate of pt n.</param>
             <param name="xIntersection">The x-coordinate of the intersection of the projected line.</param>
-            <param name="vertexI">The vertex i.</param>
-            <param name="vertexJ">The vertex j.</param>
-            <param name="includeEnds">if set to <c>true</c> [include ends].</param>
+            <param name="segment">The segment.</param>
             <returns><c>true</c> if the point is to the left of the horizontally projected segment intersection, <c>false</c> otherwise.</returns>
         </member>
-        <member name="T:MPT.Geometry.Intersections.ProjectionVertical">
-            <summary>
-            Handles calculations related to vertical projections.
-            </summary>
-        </member>
-        <member name="M:MPT.Geometry.Intersections.ProjectionVertical.NumberOfIntersections(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate[],System.Boolean,System.Boolean,System.Double)">
-            <summary>
-            The numbers of shape boundary intersections a vertical line makes when projecting to the top from the provided point.
-            If the point is on a vertex or segment, the function returns either 0 or 1.
-            </summary>
-            <param name="coordinate">The coordinate.</param>
-            <param name="shapeBoundary">The shape boundary composed of n points.</param>
-            <param name="includePointOnSegment">if set to <c>true</c> [include point on segment].</param>
-            <param name="includePointOnVertex">if set to <c>true</c> [include point on vertex].</param>
-            <param name="tolerance">The tolerance.</param>
-            <returns>System.Int32.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Intersections.ProjectionVertical.PointIsWithinSegmentWidth(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Boolean)">
-            <summary>
-            Determines if the point lies within the segment width.
-            </summary>
-            <param name="xPtN">The x-coordinate of pt n.</param>
-            <param name="ptI">The vertex i.</param>
-            <param name="ptJ">The vertex j.</param>
-            <param name="includeEnds">if set to <c>true</c> [include ends].</param>
-            <returns><c>true</c> if the point lies within the segment width, <c>false</c> otherwise.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Intersections.ProjectionVertical.PointIsBelowSegmentBottom(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Boolean)">
-            <summary>
-            Determines if the point lies below the segment end.
-            </summary>
-            <param name="yPtN">The y-coordinate of pt n.</param>
-            <param name="ptI">Vertex i.</param>
-            <param name="ptJ">Vertex j.</param>
-            <param name="includeEnds">if set to <c>true</c> [include ends].</param>
-            <returns><c>true</c> if the point lies to below the segment bottom, <c>false</c> otherwise.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Intersections.ProjectionVertical.IntersectionPointY(System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+        <member name="M:MPT.Geometry.Intersections.PointProjection.IntersectionPointY(System.Double,MPT.Geometry.Segments.IPathSegment)">
             <summary>
             The y-coordinate of the intersection of the vertically projected line with the provided segment.
             </summary>
             <param name="xPtN">The x-coordinate of pt n, where the projection starts.</param>
-            <param name="ptI">Vertex i of the segment.</param>
-            <param name="ptJ">Vertex j of the segment.</param>
+            <param name="segment">The segment.</param>
             <returns>System.Double.</returns>
             <exception cref="T:System.ArgumentException">Segment is vertical, so intersection point is either infinity or NAN.</exception>
         </member>
-        <member name="M:MPT.Geometry.Intersections.ProjectionVertical.PointIsBelowSegmentIntersection(System.Double,System.Double,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Boolean)">
+        <member name="M:MPT.Geometry.Intersections.PointProjection.PointIsBelowSegmentIntersection(System.Double,System.Double,MPT.Geometry.Segments.IPathSegment)">
             <summary>
             Determines if the point is below the vertically projected segment intersection.
             </summary>
             <param name="yPtN">The y-coordinate of pt n.</param>
             <param name="yIntersection">The y-coordinate of the intersection of the projected line.</param>
-            <param name="vertexI">The vertex i.</param>
-            <param name="vertexJ">The vertex j.</param>
-            <param name="includeEnds">if set to <c>true</c> [include ends].</param>
+            <param name="segment">The segment.</param>
             <returns><c>true</c> if the point is below the vertically projected segment intersection, <c>false</c> otherwise.</returns>
-        </member>
-        <member name="T:MPT.Geometry.Segments.ArcSegment">
-            <summary>
-            Segment that describes a circular arc between two points in a plane.
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Segments.ArcSegment.Center">
-            <summary>
-            CartesianCoordinate representing the center of the circular arc, which lies at a distance of the radius form either end point.
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Segments.ArcSegment.Radius">
-            <summary>
-            Radius of the curve.
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Segments.ArcSegment.ArcLength">
-            <summary>
-            Total length of the curve (radius*angle).
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Segments.ArcSegment.Curvature">
-            <summary>
-            The curvature of the line (1/radius).
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Segments.ArcSegment.Angle">
-            <summary>
-            Angle between the rays that connect each end of the curve to the common origin [radians].
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Segments.ArcSegment.AngleDegrees">
-            <summary>
-            Angle between the rays that connect each end of the curve to the common origin [degrees].
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Segments.ArcSegment.IPolar">
-            <summary>
-            First coordinate value {radius, rotation[radians]}.
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Segments.ArcSegment.JPolar">
-            <summary>
-            Second coordinate value {radius, rotation[radians]}.
-            </summary>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.#ctor">
-            <summary>
-            Initializes the arc segment with empty points.
-            </summary>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.#ctor(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
-            <summary>
-            Initializes the arc segment to span between the provided points.
-            </summary>
-            <param name="i">First point of the line.</param>
-            <param name="j">Second point of the line.</param>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.TangentVector(System.Double)">
-            <summary>
-            Converts the arc to a tangent vector at the midpoint.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.NormalVector(System.Double)">
-            <summary>
-            Converts the arc to a normal vector at the midpoint.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.X(System.Double)">
-            <summary>
-            X-coordinate on the arc segment that corresponds to the y-coordinate given.
-            </summary>
-            <param name="y">Y-coordinate for which an x-coordinate is desired.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.Y(System.Double)">
-            <summary>
-            Y-coordinate on the arc segment that corresponds to the x-coordinate given.
-            </summary>
-            <param name="x">X-coordinate for which a y-coordinate is desired.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.Length">
-            <summary>
-            Length of the path segment.
-            </summary>
-            <returns>System.Double.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.Xo">
-            <summary>
-            X-coordinate of the centroid of the line.
-            </summary>
-            <returns>System.Double.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.Yo">
-            <summary>
-            Y-coordinate of the centroid of the line.
-            </summary>
-            <returns>System.Double.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.PointByPathPosition(System.Double)">
-            <summary>
-            Coordinate on the path that corresponds to the position along the path.
-            </summary>
-            <param name="sRelative">The relative position along the path.</param>
-            <returns>CartesianCoordinate.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.TangentialAngle(System.Double)">
-            <summary>
-            Angle that is tangent to the slope of the curve [radians].
-            </summary>
-            <param name="angleNormal">Angle [radians] along the curve sweep where the tangential angle is desired.</param>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.NormalAngle(System.Double)">
-            <summary>
-            Angle that is normal to the slope of the curve [radians].
-            </summary>
-            <param name="angleTangential">The slope of the curve [radians] where the normal angle is desired.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.LengthPolar">
-            <summary>
-            Length of the path segment [radians].
-            </summary>
-            <returns>System.Double.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.CentroidPolar">
-            <summary>
-            Polar-coordinates of the centroid of the line {radius, rotation[radians]}.
-            </summary>
-            <returns>KeyValuePair&lt;System.Double, System.Double&gt;.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.XPolar(System.Double)">
-            <summary>
-            X-coordinate on the path that corresponds to the polar-coordinate given.
-            </summary>
-            <param name="theta">Rotation-coordinate for which an x-coordinate is desired.</param>
-            <returns>System.Double.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.YPolar(System.Double)">
-            <summary>
-            Y-coordinate on the path that corresponds to the polar-coordinate given.
-            </summary>
-            <param name="theta">Rotation-coordinate for which a y-coordinate is desired [radians].</param>
-            <returns>System.Double.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.PointByPathPositionPolar(System.Double)">
-            <summary>
-            Coordinate on the path that corresponds to the position along the path.
-            </summary>
-            <param name="theta">The relative position along the path [radians].</param>
-            <returns>CartesianCoordinate.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.NormalVectorPolar(System.Double)">
-            <summary>
-            Vector that is normal to the line connecting the defining points at the position specified.
-            </summary>
-            <param name="theta">The relative position along the path [radians].</param>
-            <returns>CartesianCoordinate.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.TangentVectorPolar(System.Double)">
-            <summary>
-            Vector that is tangential to the line connecting the defining points at the position specified.
-            </summary>
-            <param name="theta">The relative position along the path [radians].</param>
-            <returns>CartesianCoordinate.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.PointDivision(System.Double)">
-            <summary>
-            Returns a point a given fraction of the distance between point 1 and point 2 along the arc.
-            </summary>
-            <param name="fraction">Fraction of the way from point 1 to point 2.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.AreCirclesIntersecting(System.Double,System.Double,System.Double)">
-            <summary>
-            The circles intersect.
-            </summary>
-            <param name="radius1">Radius of the first circle.</param>
-            <param name="radius2">Radius of the second circle.</param>
-            <param name="centerSeparation">Separation between the centers of the two circles.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.AreCirclesTangent(System.Double,System.Double,System.Double)">
-            <summary>
-            The circles have tangent edges.
-            </summary>
-            <param name="radius1">Radius of the first circle.</param>
-            <param name="radius2">Radius of the second circle.</param>
-            <param name="centerSeparation">Separation between the centers of the two circles.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.Overlap(System.Double,System.Double,System.Double)">
-            <summary>
-            The distance of separation between the edge of two circles.
-            </summary>
-            <param name="radius1">Radius of the first circle.</param>
-            <param name="radius2">Radius of the second circle.</param>
-            <param name="centerSeparation">Separation between the centers of the two circles.</param>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.RadicalLineLength(System.Double,System.Double,System.Double)">
-            <summary>
-            Length of the chord formed by the intersection of two circles.
-            </summary>
-            <param name="radius1">Radius of the first circle.</param>
-            <param name="radius2">Radius of the second circle.</param>
-            <param name="centerSeparation">Separation between the centers of the two circles.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.CirclesIntersectX(System.Double,System.Double,System.Double,System.Double)">
-            <summary>
-            The x-coordinate of the intersection of two circles.
-            </summary>
-            <param name="radius1">Radius of the first circle.</param>
-            <param name="radius2">Radius of the second circle.</param>
-            <param name="centerSeparation">Separation between the centers of the two circles.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.CirclesIntersectY(System.Double,System.Double,System.Double)">
-            <summary>
-            The +/- y-coordinate of the intersection of two circles.
-            </summary>
-            <param name="radius1">Radius of the first circle.</param>
-            <param name="radius2">Radius of the second circle.</param>
-            <param name="centerSeparation">Separation between the centers of the two circles.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.CirclesIntersect(System.Double,System.Double,System.Double)">
-            <summary>
-            The coordinate of the intersection of two circles. 
-            Returned point is +y, but there may be a second point of equal and opposite -y.
-            </summary>
-            <param name="radius1">Radius of the first circle.</param>
-            <param name="radius2">Radius of the second circle.</param>
-            <param name="centerSeparation">Separation between the centers of the two circles.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.CircleLineIntersectX(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Double)">
-            <summary>
-            The x-coordinates of a line intersecting a circle centered at 0,0.
-            </summary>
-            <param name="point1">First point forming the line.</param>
-            <param name="point2">Second point forming the line.</param>
-            <param name="radius">Radius of the circle centered at 0,0.</param>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.CircleLineIntersectX(System.Double,System.Double,System.Double,System.Double,MPT.Math.Coordinates.CartesianOffset)">
-            <summary>
-            The x-coordinates of a line intersecting a circle centered at 0,0.
-            </summary>
-            <param name="radius">>Radius of the circle centered at 0,0.</param>
-            <param name="lineLength"></param>
-            <param name="incidence"></param>
-            <param name="determinant"></param>
-            <param name="delta"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.CircleLineIntersectY(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Double)">
-            <summary>
-            The y-coordinates of a line intersecting a circle centered at 0,0.
-            </summary>
-            <param name="point1">First point forming the line.</param>
-            <param name="point2">Second point forming the line.</param>
-            <param name="radius">Radius of the circle centered at 0,0.</param>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.CircleLineIntersectY(System.Double,System.Double,System.Double,System.Double,MPT.Math.Coordinates.CartesianOffset)">
-            <summary>
-            The y-coordinates of a line intersecting a circle centered at 0,0.
-            </summary>
-            <param name="radius"></param>
-            <param name="lineLength"></param>
-            <param name="incidence"></param>
-            <param name="determinant"></param>
-            <param name="delta"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.CircleLineIntersect(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Double)">
-            <summary>
-            
-            </summary>
-            <param name="point1"></param>
-            <param name="point2"></param>
-            <param name="radius"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.AreCircleLineIntersecting(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Double,System.Double)">
-            <summary>
-            Ares the circle line intersecting.
-            </summary>
-            <param name="point1">The point1.</param>
-            <param name="point2">The point2.</param>
-            <param name="radius">The radius.</param>
-            <param name="tolerance">The tolerance.</param>
-            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.AreCircleLineIntersecting(System.Double,System.Double)">
-            <summary>
-            Ares the circle line intersecting.
-            </summary>
-            <param name="incidence">The incidence.</param>
-            <param name="tolerance">The tolerance.</param>
-            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.AreCircleLineTangent(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Double,System.Double)">
-            <summary>
-            Ares the circle line tangent.
-            </summary>
-            <param name="point1">The point1.</param>
-            <param name="point2">The point2.</param>
-            <param name="radius">The radius.</param>
-            <param name="tolerance">The tolerance.</param>
-            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ArcSegment.AreCircleLineTangent(System.Double,System.Double)">
-            <summary>
-            Ares the circle line tangent.
-            </summary>
-            <param name="incidence">The incidence.</param>
-            <param name="tolerance">The tolerance.</param>
-            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         </member>
         <member name="T:MPT.Geometry.Segments.ICurve">
             <summary>
@@ -848,34 +452,38 @@
             Interface ILine
             </summary>
         </member>
-        <member name="M:MPT.Geometry.Segments.ILine.IsHorizontal">
-            <summary>
-            Determines whether this instance is horizontal.
-            </summary>
-            <returns><c>true</c> if this instance is horizontal; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.ILine.IsVertical">
-            <summary>
-            Determines whether this instance is vertical.
-            </summary>
-            <returns><c>true</c> if this instance is vertical; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="T:MPT.Geometry.Segments.IPathDivision">
+        <member name="T:MPT.Geometry.Segments.IPathDivisionExtension">
             <summary>
             Interface for paths that are divisible.
             </summary>
         </member>
-        <member name="M:MPT.Geometry.Segments.IPathDivision.PointDivision(System.Double)">
+        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.PointDivision(System.Double)">
             <summary>
-            Returns a point a given fraction of the distance between two points.
+            Returns a point determined by a given fraction of the distance between point i and point j of the segment.
+             <paramref name="fraction"/> must be between 0 and 1.
             </summary>
             <param name="fraction">Fraction of the way from point 1 to point 2.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.PointExtension(System.Double)">
+            <summary>
+             Returns a point determined by a given ratio of the distance between point i and point j of the segment.
+            </summary>
+            <param name="ratio">Ratio of the size of the existing segment. 
+            If <paramref name="ratio"/>&lt; 0, returned point is offset from point i, in that direction. 
+            If <paramref name="ratio"/>&gt; 0, returned point is offset from point j, in that direction.</param>
             <returns></returns>
         </member>
         <member name="T:MPT.Geometry.Segments.IPathSegment">
             <summary>
             Interface for any segment along a path lying in a plane.
             </summary>
+        </member>
+        <member name="P:MPT.Geometry.Segments.IPathSegment.Extents">
+            <summary>
+            Gets the extents.
+            </summary>
+            <value>The extents.</value>
         </member>
         <member name="P:MPT.Geometry.Segments.IPathSegment.I">
             <summary>
@@ -918,6 +526,13 @@
             </summary>
             <param name="x">X-coordinate for which a y-coordinate is desired.</param>
             <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathSegment.HasSameCoordinates(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Determines whether the segment [has same coordinates] as [the specified segment].
+            </summary>
+            <param name="segment">The segment.</param>
+            <returns><c>true</c> if [has same coordinates] [the specified segment]; otherwise, <c>false</c>.</returns>
         </member>
         <member name="M:MPT.Geometry.Segments.IPathSegment.PointByPathPosition(System.Double)">
             <summary>
@@ -1008,9 +623,19 @@
             Segment that describes a straight line in a plane.
             </summary>
         </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.#ctor">
+        <member name="P:MPT.Geometry.Segments.LineSegment.Curve">
             <summary>
-            Initializes the line segment with empty points.
+            Curve that spans between the I and J coordinates.
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Segments.LineSegment.I">
+            <summary>
+            First coordinate value.
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Segments.LineSegment.J">
+            <summary>
+            Second coordinate value.
             </summary>
         </member>
         <member name="M:MPT.Geometry.Segments.LineSegment.#ctor(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
@@ -1026,6 +651,18 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:MPT.Geometry.Segments.LineSegment.Xo">
+            <summary>
+            X-coordinate of the centroid of the line.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.LineSegment.Yo">
+            <summary>
+            Y-coordinate of the centroid of the line.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:MPT.Geometry.Segments.LineSegment.X(System.Double)">
             <summary>
             X-coordinate on the line segment that corresponds to the y-coordinate given.
@@ -1038,18 +675,6 @@
             Y-coordinate on the line segment that corresponds to the x-coordinate given.
             </summary>
             <param name="x">X-coordinate for which a y-coordinate is desired.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.Xo">
-            <summary>
-            X-coordinate of the centroid of the line.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.Yo">
-            <summary>
-            Y-coordinate of the centroid of the line.
-            </summary>
             <returns></returns>
         </member>
         <member name="M:MPT.Geometry.Segments.LineSegment.PointByPathPosition(System.Double)">
@@ -1071,7 +696,7 @@
             </summary>
             <param name="sRelative">The relative position along the path.</param>
         </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.IsIntersecting(MPT.Math.Coordinates.CartesianCoordinate)">
+        <member name="M:MPT.Geometry.Segments.LineSegment.IncludesCoordinate(MPT.Math.Coordinates.CartesianCoordinate)">
             <summary>
             Provided point lies on the line segment between or on the defining points.
             </summary>
@@ -1085,7 +710,7 @@
             <param name="otherLine"></param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.Intersect(MPT.Geometry.Segments.LineSegment)">
+        <member name="M:MPT.Geometry.Segments.LineSegment.IntersectionCoordinate(MPT.Geometry.Segments.LineSegment)">
             <summary>
             Returns a point where the line segment intersects the provided line segment.
             </summary>
@@ -1094,229 +719,32 @@
         </member>
         <member name="M:MPT.Geometry.Segments.LineSegment.PointDivision(System.Double)">
             <summary>
-            Returns a point a given fraction of the distance between point 1 and point 2.
+            Returns a point determined by a given fraction of the distance between point i and point j of the segment.
+             <paramref name="fraction"/> must be between 0 and 1.
             </summary>
             <param name="fraction">Fraction of the way from point 1 to point 2.</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.IsHorizontal">
+        <member name="M:MPT.Geometry.Segments.LineSegment.PointExtension(System.Double)">
             <summary>
-            Determines whether this instance is horizontal.
+             Returns a point determined by a given ratio of the distance between point i and point j of the segment.
             </summary>
-            <returns><c>true</c> if this instance is horizontal; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.IsVertical">
-            <summary>
-            Determines whether this instance is vertical.
-            </summary>
-            <returns><c>true</c> if this instance is vertical; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.Slope">
-            <summary>
-            Slope of the line segment.
-            </summary>
+            <param name="ratio">Ratio of the size of the existing segment. 
+            If <paramref name="ratio"/>&lt; 0, returned point is offset from point i, in that direction. 
+            If <paramref name="ratio"/>&gt; 0, returned point is offset from point j, in that direction.</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.InterceptX">
+        <member name="M:MPT.Geometry.Segments.LineSegment.pointOffsetOnLine(System.Double)">
             <summary>
-            X-Intercept of the line segment.
+            Returns a point determined by a given fraction of the distance between point i and point j of the segment.
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.InterceptY">
-            <summary>
-            Y-Intercept of the line segment.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.IsParallel(MPT.Geometry.Segments.LineSegment)">
-            <summary>
-            Lines are parallel to each other.
-            </summary>
-            <param name="otherLine"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.IsPerpendicular(MPT.Geometry.Segments.LineSegment)">
-            <summary>
-            Lines are perpendicular to each other.
-            </summary>
-            <param name="otherLine"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.IsProjectionIntersecting(MPT.Math.Coordinates.CartesianCoordinate)">
-            <summary>
-            Provided point lies on an infinitely long line projecting off of the line segment. 
-            It isn't necessarily intersecting between the defining points.
-            </summary>
-            <param name="point"></param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.IsProjectionIntersecting(MPT.Geometry.Segments.LineSegment)">
-            <summary>
-            Provided line segment intersects an infinitely long line projecting off of the line segment. 
-            It isn't necessarily intersecting between the defining points.
-            </summary>
-            <param name="otherLine"></param>
+            <param name="fraction">Fraction of the way from point 1 to point 2.</param>
             <returns></returns>
         </member>
         <member name="M:MPT.Geometry.Segments.LineSegment.ToVector">
             <summary>
             Converts the line segment to a vector.
             </summary>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.IsHorizontal(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Double)">
-            <summary>
-            Determines if the shape segment is horizontal.
-            </summary>
-            <param name="ptI">The point i.</param>
-            <param name="ptJ">The point j.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns><c>true</c> if the shape segment is horizontal, <c>false</c> otherwise.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.IsVertical(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Double)">
-            <summary>
-            Determines if the segment is vertical.
-            </summary>
-            <param name="ptI">The point i.</param>
-            <param name="ptJ">The point j.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns><c>true</c> if the segment is vertical, <c>false</c> otherwise.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.IsParallel(System.Double,System.Double,System.Double)">
-            <summary>
-            True: Slopes are parallel.
-            </summary>
-            <param name="slope1"></param>
-            <param name="slope2"></param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.IsPerpendicular(System.Double,System.Double,System.Double)">
-            <summary>
-            True: Slopes are perpendicular.
-            </summary>
-            <param name="slope1"></param>
-            <param name="slope2"></param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.Slope(System.Double,System.Double,System.Double)">
-            <summary>
-            Returns the slope of a line (y2-y1)/(x2-x1).
-            </summary>
-            <param name="rise">Difference in y-coordinate values or equivalent.</param>
-            <param name="run">Difference in x-coordinate values or equivalent.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.Slope(System.Double,System.Double,System.Double,System.Double,System.Double)">
-            <summary>
-            Returns the slope of a line (y2-y1)/(x2-x1).
-            </summary>
-            <param name="x1">First x-coordinate.</param>
-            <param name="y1">First y-coordinate.</param>
-            <param name="x2">Second x-coordinate.</param>
-            <param name="y2">Second y-coordinate.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns>System.Double.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.Slope(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Double)">
-            <summary>
-            Returns the slope of a line (y2-y1)/(x2-x1).
-            </summary>
-            <param name="point1">First point.</param>
-            <param name="point2">Second point.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.Slope(MPT.Math.Coordinates.CartesianOffset,System.Double)">
-            <summary>
-            Returns the slope of a line (y2-y1)/(x2-x1).
-            </summary>
-            <param name="delta">The difference between two points.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.InterceptX(System.Double,System.Double,System.Double,System.Double,System.Double)">
-            <summary>
-            Returns the x-intercept.
-            </summary>
-            <param name="y1">First y-coordinate.</param>
-            <param name="y2">Second y-coordinate.</param>
-            <param name="x1">First x-coordinate.</param>
-            <param name="x2">Second x-coordinate.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.InterceptX(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Double)">
-            <summary>
-            Returns the x-intercept.
-            </summary>
-            <param name="point1">First point defining a line.</param>
-            <param name="point2">Second point defining a line.</param>
-            <param name="tolerance">>Tolerance by which a double is considered to be zero or equal.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.InterceptY(System.Double,System.Double,System.Double,System.Double,System.Double)">
-            <summary>
-            Returns the y-intercept.
-            </summary>
-            <param name="y1">First y-coordinate.</param>
-            <param name="y2">Second y-coordinate.</param>
-            <param name="x1">First x-coordinate.</param>
-            <param name="x2">Second x-coordinate.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.InterceptY(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,System.Double)">
-            <summary>
-            Returns the y-intercept.
-            </summary>
-            <param name="point1">First point defining a line.</param>
-            <param name="point2">Second point defining a line.</param>
-            <param name="tolerance">>Tolerance by which a double is considered to be zero or equal.</param>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.AreLinesIntersecting(System.Double,System.Double,System.Double)">
-            <summary>
-            The lines intersect.
-            </summary>
-            <param name="slope1">Slope of the first line.</param>
-            <param name="slope2">Slope of the second line.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.LineIntersectX(System.Double,System.Double,System.Double,System.Double,System.Double)">
-            <summary>
-            The x-coordinate of the intersection of two lines.
-            </summary>
-            <param name="slope1">Slope of the first line.</param>
-            <param name="yIntercept1">Y-intercept of the first line.</param>
-            <param name="slope2">Slope of the second line.</param>
-            <param name="yIntercept2">Y-intercept of the second line.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.LineIntersectY(System.Double,System.Double,System.Double,System.Double,System.Double)">
-            <summary>
-            The y-coordinate of the intersection of two lines.
-            </summary>
-            <param name="slope1">Slope of the first line.</param>
-            <param name="yIntercept1">Y-intercept of the first line.</param>
-            <param name="slope2">Slope of the second line.</param>
-            <param name="yIntercept2">Y-intercept of the second line.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.LineIntersect(System.Double,System.Double,System.Double,System.Double,System.Double)">
-            <summary>
-            The coordinates of the intersection of two lines.
-            </summary>
-            <param name="slope1">Slope of the first line.</param>
-            <param name="yIntercept1">Y-intercept of the first line.</param>
-            <param name="slope2">Slope of the second line.</param>
-            <param name="yIntercept2">Y-intercept of the second line.</param>
-            <param name="tolerance">Tolerance by which a double is considered to be zero or equal.</param>
             <returns></returns>
         </member>
         <member name="T:MPT.Geometry.Segments.PathSegment">
@@ -1329,6 +757,17 @@
             Tolerance to use in all calculations with double types.
             </summary>
         </member>
+        <member name="F:MPT.Geometry.Segments.PathSegment._extents">
+            <summary>
+            The extents
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Segments.PathSegment.Extents">
+            <summary>
+            Gets or sets the extents.
+            </summary>
+            <value>The extents.</value>
+        </member>
         <member name="P:MPT.Geometry.Segments.PathSegment.I">
             <summary>
             First coordinate value.
@@ -1339,17 +778,19 @@
             Second coordinate value.
             </summary>
         </member>
-        <member name="M:MPT.Geometry.Segments.PathSegment.#ctor">
-            <summary>
-            Initializes the segment with empty points.
-            </summary>
-        </member>
         <member name="M:MPT.Geometry.Segments.PathSegment.#ctor(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
             <summary>
             Initializes the segment to span between the provided points.
             </summary>
             <param name="i">First point of the line.</param>
             <param name="j">Second point of the line.</param>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.HasSameCoordinates(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Determines whether the segment [has same coordinates] as [the specified segment].
+            </summary>
+            <param name="segment">The segment.</param>
+            <returns><c>true</c> if [has same coordinates] [the specified segment]; otherwise, <c>false</c>.</returns>
         </member>
         <member name="M:MPT.Geometry.Segments.PathSegment.TangentVector">
             <summary>
@@ -1414,10 +855,156 @@
             </summary>
             <param name="sRelative">The relative position along the path.</param>
         </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.Equals(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>true if the current object is equal to the <paramref name="other">other</paramref> parameter; otherwise, false.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" /> is equal to this instance.
+            </summary>
+            <param name="obj">The object to compare with the current instance.</param>
+            <returns><c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        </member>
         <member name="T:MPT.Geometry.Segments.PolyLine">
             <summary>
             Class PolyLine.
             </summary>
+        </member>
+        <member name="P:MPT.Geometry.Segments.PolyLine.Tolerance">
+            <summary>
+            Tolerance to use in all calculations with double types.
+            </summary>
+            <value>The tolerance.</value>
+        </member>
+        <member name="F:MPT.Geometry.Segments.PolyLine._contents">
+            <summary>
+            The contents
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Segments.PolyLine._pointBoundary">
+            <summary>
+            The point boundary
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Segments.PolyLine.CountCoordinates">
+            <summary>
+            Gets the count coordinates.
+            </summary>
+            <value>The count coordinates.</value>
+        </member>
+        <member name="P:MPT.Geometry.Segments.PolyLine.Coordinates">
+            <summary>
+            Gets the coordinates.
+            </summary>
+            <value>The coordinates.</value>
+        </member>
+        <member name="P:MPT.Geometry.Segments.PolyLine.CoordinateEnumerator">
+            <summary>
+            Gets the coordinate enumerator.
+            </summary>
+            <value>The coordinate enumerator.</value>
+        </member>
+        <member name="F:MPT.Geometry.Segments.PolyLine._segmentBoundary">
+            <summary>
+            The segment boundary
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Segments.PolyLine._segments">
+            <summary>
+            The segments
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Segments.PolyLine.CountSegments">
+            <summary>
+            Gets the count segments.
+            </summary>
+            <value>The count segments.</value>
+        </member>
+        <member name="P:MPT.Geometry.Segments.PolyLine.SegmentEnumerator">
+            <summary>
+            Gets the segment enumerator.
+            </summary>
+            <value>The segment enumerator.</value>
+        </member>
+        <member name="P:MPT.Geometry.Segments.PolyLine.Item(System.Int32)">
+            <summary>
+            Gets or sets the <see cref="T:MPT.Geometry.Segments.IPathSegment"/> at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="P:MPT.Geometry.Segments.PolyLine.IsReadOnly">
+            <summary>
+            Gets a value indicating whether this instance is read only.
+            </summary>
+            <value><c>true</c> if this instance is read only; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.#ctor(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Segments.PolyLine" /> class.
+            </summary>
+            <param name="i">The i.</param>
+            <param name="j">The j.</param>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.#ctor(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Segments.PolyLine" /> class.
+            </summary>
+            <param name="segment">The segment.</param>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.#ctor(System.Collections.Generic.IEnumerable{MPT.Math.Coordinates.CartesianCoordinate})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Segments.PolyLine" /> class.
+            </summary>
+            <param name="coordinates">The coordinates.</param>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.Coordinate(System.Int32)">
+            <summary>
+            Coordinates the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.FirstPoint">
+            <summary>
+            Returns the first point of the polyline.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.LastPoint">
+            <summary>
+            Returns the last point of the polyline.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.Segment(System.Int32)">
+            <summary>
+            Segments the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"></see> object that can be used to iterate through the collection.</returns>
         </member>
         <member name="T:MPT.Geometry.Shapes.Circle">
             <summary>
@@ -1661,62 +1248,271 @@
             Represents a rectangular shape, with the origin at the lower left corner.
             </summary>
         </member>
-        <member name="T:MPT.Geometry.Tools.Boundary`1">
+        <member name="T:MPT.Geometry.Tools.CoordinatesBoundary`1">
             <summary>
             Represents boundary coordinates.
             </summary>
             <typeparam name="T">The type of coordinate.</typeparam>
         </member>
-        <member name="P:MPT.Geometry.Tools.Boundary`1.Tolerance">
+        <member name="P:MPT.Geometry.Tools.CoordinatesBoundary`1.Tolerance">
             <summary>
             Tolerance to use in all calculations with double types.
             </summary>
             <value>The tolerance.</value>
         </member>
-        <member name="F:MPT.Geometry.Tools.Boundary`1._coordinates">
+        <member name="F:MPT.Geometry.Tools.CoordinatesBoundary`1._contents">
+            <summary>
+            The contents
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Tools.CoordinatesBoundary`1._coordinates">
             <summary>
             The coordinates.
             </summary>
         </member>
-        <member name="P:MPT.Geometry.Tools.Boundary`1.Coordinates">
+        <member name="P:MPT.Geometry.Tools.CoordinatesBoundary`1.Coordinates">
             <summary>
             The coordinates that compose the boundary.
             </summary>
             <value>The boundary.</value>
         </member>
-        <member name="M:MPT.Geometry.Tools.Boundary`1.#ctor">
+        <member name="P:MPT.Geometry.Tools.CoordinatesBoundary`1.Count">
             <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.Boundary`1" /> class.
+            Gets the number of elements contained in the <see cref="T:System.Collections.Generic.ICollection`1"></see>.
+            </summary>
+            <value>The count.</value>
+        </member>
+        <member name="P:MPT.Geometry.Tools.CoordinatesBoundary`1.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"></see> is read-only.
+            </summary>
+            <value><c>true</c> if this instance is read only; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:MPT.Geometry.Tools.CoordinatesBoundary`1.Item(System.Int32)">
+            <summary>
+            Gets or sets the <see cref="F:MPT.Geometry.Tools.CoordinatesBoundary`1._contents" /> at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>T.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.CoordinatesBoundary`1" /> class.
             </summary>
         </member>
-        <member name="M:MPT.Geometry.Tools.Boundary`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.#ctor(`0[])">
             <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.Boundary`1" /> class.
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.CoordinatesBoundary`1"/> class.
             </summary>
             <param name="coordinates">The coordinates.</param>
         </member>
-        <member name="M:MPT.Geometry.Tools.Boundary`1.Clear">
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.#ctor(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.CoordinatesBoundary`1" /> class.
+            </summary>
+            <param name="coordinates">The coordinates.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.Clear">
             <summary>
             Clears this instance.
             </summary>
         </member>
-        <member name="M:MPT.Geometry.Tools.Boundary`1.Reset(System.Collections.Generic.IList{`0})">
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.Reset(System.Collections.Generic.IList{`0})">
             <summary>
             Resets the specified coordinates.
             </summary>
             <param name="coordinates">The coordinates.</param>
         </member>
-        <member name="M:MPT.Geometry.Tools.Boundary`1.AddRange(System.Collections.Generic.IList{`0})">
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.Add(`0)">
+            <summary>
+            Adds an item to the <see cref="T:System.Collections.Generic.ICollection`1"></see>.
+            </summary>
+            <param name="item">The object to add to the <see cref="T:System.Collections.Generic.ICollection`1"></see>.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.AddRange(System.Collections.Generic.IList{`0})">
             <summary>
             Adds to boundary.
             </summary>
             <param name="coordinates">The coordinates.</param>
         </member>
-        <member name="M:MPT.Geometry.Tools.Boundary`1.RemoveRange(System.Collections.Generic.IList{`0})">
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.Remove(`0)">
+            <summary>
+            Removes the first occurrence of a specific object from the <see cref="T:System.Collections.Generic.ICollection`1"></see>.
+            </summary>
+            <param name="item">The object to remove from the <see cref="T:System.Collections.Generic.ICollection`1"></see>.</param>
+            <returns>true if <paramref name="item">item</paramref> was successfully removed from the <see cref="T:System.Collections.Generic.ICollection`1"></see>; otherwise, false. 
+            This method also returns false if <paramref name="item">item</paramref> is not found in the original <see cref="T:System.Collections.Generic.ICollection`1"></see>.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.RemoveRange(System.Collections.Generic.IList{`0})">
             <summary>
             Removes from boundary.
             </summary>
             <param name="coordinates">The coordinates.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.RemoveAt(System.Int32)">
+            <summary>
+            Removes the <see cref="T:System.Collections.Generic.IList`1"></see> item at the specified index.
+            </summary>
+            <param name="index">The zero-based index of the item to remove.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.Insert(System.Int32,`0)">
+            <summary>
+            Inserts an item to the <see cref="T:System.Collections.Generic.IList`1"></see> at the specified index.
+            </summary>
+            <param name="index">The zero-based index at which item should be inserted.</param>
+            <param name="item">The object to insert into the <see cref="T:System.Collections.Generic.IList`1"></see>.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.InsertRange(System.Int32,System.Collections.Generic.IList{`0})">
+            <summary>
+            Inserts the range.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="items">The items.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.Replace(`0,`0)">
+            <summary>
+            Replaces the specified original item.
+            </summary>
+            <param name="originalItem">The original item.</param>
+            <param name="newItem">The new item.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.ReplaceAt(System.Int32,`0)">
+            <summary>
+            Replaces at.
+            </summary>
+            <param name="index">The index.</param>
+            <param name="item">The item.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.IndexOf(`0)">
+            <summary>
+            Determines the index of a specific item in the <see cref="T:System.Collections.Generic.IList`1"></see>.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.IList`1"></see>.</param>
+            <returns>The index of <paramref name="item">item</paramref> if found in the list; otherwise, -1.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.Contains(`0)">
+            <summary>
+            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"></see> contains a specific value.
+            </summary>
+            <param name="item">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"></see>.</param>
+            <returns>true if <paramref name="item">item</paramref> is found in the <see cref="T:System.Collections.Generic.ICollection`1"></see>; otherwise, false.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.CopyTo(`0[],System.Int32)">
+            <summary>
+            Copies the elements of the <see cref="T:System.Collections.Generic.ICollection`1"></see> to an <see cref="T:System.Array"></see>, starting at a particular <see cref="T:System.Array"></see> index.
+            </summary>
+            <param name="array">The one-dimensional <see cref="T:System.Array"></see> that is the destination of the elements copied from <see cref="T:System.Collections.Generic.ICollection`1"></see>. 
+            The <see cref="T:System.Array"></see> must have zero-based indexing.</param>
+            <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.FirstCoordinate">
+            <summary>
+            Returns the first point of the boundary.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.LastCoordinate">
+            <summary>
+            Returns the last point of the boundary.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.Extents">
+            <summary>
+            Gets the extents.
+            </summary>
+            <returns>Extents&lt;T&gt;.</returns>
+        </member>
+        <member name="F:MPT.Geometry.Tools.CoordinatesBoundary`1._arrayResizeRatio">
+            <summary>
+            The array resize ratio
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Tools.CoordinatesBoundary`1._minArraySize">
+            <summary>
+            The minimum array size
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.resizeArraySizeIfNecessary">
+            <summary>
+            Resizes the array size if necessary.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.reduceArraySizeIfNecessary">
+            <summary>
+            Reduces the array size if necessary.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.resizeArray(System.Int32)">
+            <summary>
+            Resizes the array.
+            </summary>
+            <param name="newSize">The new size.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"></see> object that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="T:MPT.Geometry.Tools.CoordinatesBoundary`1.CoordinatesEnumerator`1">
+            <summary>
+            Class CoordinatesEnumerator.
+            Implements the <see cref="T:System.Collections.Generic.IEnumerator`1" />
+            </summary>
+            <typeparam name="U"></typeparam>
+            <seealso cref="T:System.Collections.Generic.IEnumerator`1" />
+        </member>
+        <member name="F:MPT.Geometry.Tools.CoordinatesBoundary`1.CoordinatesEnumerator`1._position">
+            <summary>
+            The position
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Tools.CoordinatesBoundary`1.CoordinatesEnumerator`1._contents">
+            <summary>
+            The contents
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Tools.CoordinatesBoundary`1.CoordinatesEnumerator`1.System#Collections#IEnumerator#Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+            <value>The current.</value>
+        </member>
+        <member name="P:MPT.Geometry.Tools.CoordinatesBoundary`1.CoordinatesEnumerator`1.Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+            <value>The current.</value>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.CoordinatesEnumerator`1.#ctor(`1[])">
+            <summary>
+            Initializes a new instance of the <see cref="U:CoordinatesEnumerator`1"/> class.
+            </summary>
+            <param name="list">The list.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.CoordinatesEnumerator`1.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.CoordinatesEnumerator`1.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns>true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.CoordinatesEnumerator`1.Reset">
+            <summary>
+            Sets the enumerator to its initial position, which is before the first element in the collection.
+            </summary>
         </member>
         <member name="T:MPT.Geometry.Tools.Extents`1">
             <summary>
@@ -1787,12 +1583,19 @@
         </member>
         <member name="M:MPT.Geometry.Tools.Extents`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.Extents`1" /> class.
+            Initializes a new empty instance of the <see cref="T:MPT.Geometry.Tools.Extents`1" /> class.
             </summary>
+        </member>
+        <member name="M:MPT.Geometry.Tools.Extents`1.#ctor(`0,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.Extents`1"/> class for a path segment.
+            </summary>
+            <param name="pointI">The first point forming a path.</param>
+            <param name="pointJ">The second point forming a path.</param>
         </member>
         <member name="M:MPT.Geometry.Tools.Extents`1.#ctor(System.Collections.Generic.IEnumerable{`0},System.Double,System.Double,System.Double,System.Double)">
             <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.Extents`1" /> class.
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.Extents`1" /> class for a polyline or a shape.
             </summary>
             <param name="coordinates">The coordinates.</param>
             <param name="maxYLimit">The maximum y limit.</param>
@@ -1802,7 +1605,7 @@
         </member>
         <member name="M:MPT.Geometry.Tools.Extents`1.#ctor(MPT.Geometry.Tools.Extents{`0})">
             <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.Extents`1" /> class.
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.Extents`1" /> class for cloning.
             </summary>
             <param name="extents">The extents.</param>
         </member>
@@ -1907,192 +1710,27 @@
             </summary>
             <param name="coordinate">The coordinate.</param>
         </member>
-        <member name="T:MPT.Geometry.Tools.Extents3D`3">
-            <summary>
-            Represents the coordinate bounds of a shape or line, or cluster of points in 3D-space.
-            </summary>
-            <typeparam name="T"></typeparam>
-            <typeparam name="U"></typeparam>
-            <typeparam name="TExtents">The type of the t extents.</typeparam>
-        </member>
-        <member name="F:MPT.Geometry.Tools.Extents3D`3._maxY">
-            <summary>
-            The maximum Y-coordinate
-            </summary>
-        </member>
-        <member name="F:MPT.Geometry.Tools.Extents3D`3._minY">
-            <summary>
-            The minimum Y-coordinate
-            
-            </summary>
-        </member>
-        <member name="F:MPT.Geometry.Tools.Extents3D`3._maxX">
-            <summary>
-            The maximum X-coordinate
-            </summary>
-        </member>
-        <member name="F:MPT.Geometry.Tools.Extents3D`3._minX">
-            <summary>
-            The minimum X-coordinate
-            </summary>
-        </member>
-        <member name="F:MPT.Geometry.Tools.Extents3D`3._maxZ">
-            <summary>
-            The maximum Z-coordinate
-            </summary>
-        </member>
-        <member name="F:MPT.Geometry.Tools.Extents3D`3._minZ">
-            <summary>
-            The minimum Z-coordinate
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Tools.Extents3D`3.MaxY">
-            <summary>
-            Gets the maximum Y-coordinate.
-            </summary>
-            <value>The maximum Y-coordinate.</value>
-        </member>
-        <member name="P:MPT.Geometry.Tools.Extents3D`3.MinY">
-            <summary>
-            Gets the minimum Y-coordinate.
-            </summary>
-            <value>The minimum Y-coordinate.</value>
-        </member>
-        <member name="P:MPT.Geometry.Tools.Extents3D`3.MaxX">
-            <summary>
-            Gets the maximum X-coordinate.
-            </summary>
-            <value>The maximum X-coordinate.</value>
-        </member>
-        <member name="P:MPT.Geometry.Tools.Extents3D`3.MinX">
-            <summary>
-            Gets the minimum X-coordinate.
-            </summary>
-            <value>The minimum X-coordinate.</value>
-        </member>
-        <member name="P:MPT.Geometry.Tools.Extents3D`3.MaxZ">
-            <summary>
-            Gets the maximum Z-coordinate.
-            </summary>
-            <value>The maximum Z-coordinate.</value>
-        </member>
-        <member name="P:MPT.Geometry.Tools.Extents3D`3.MinZ">
-            <summary>
-            Gets the minimum Z-coordinate.
-            </summary>
-            <value>The minimum Z-coordinate.</value>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.Extents3D`3"/> class.
-            </summary>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.#ctor(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.Extents3D`3"/> class.
-            </summary>
-            <param name="coordinates">The coordinates.</param>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.#ctor(MPT.Geometry.Tools.Extents3D{`0,`1,`2})">
-            <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.Extents3D`3"/> class.
-            </summary>
-            <param name="extents">The extents.</param>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.#ctor(MPT.Geometry.Tools.Extents{`1},System.Double)">
-            <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.Extents3D`3"/> class.
-            </summary>
-            <param name="extents">The extents.</param>
-            <param name="offsetZ">The vertical to project the extents object from.</param>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.initialize">
-            <summary>
-            Initializes this instance.
-            </summary>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.Add(`0)">
-            <summary>
-            Updates the extents to include the specified coordinate.
-            </summary>
-            <param name="coordinate">The coordinate.</param>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.Add(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Updates the extents to include the specified coordinates.
-            </summary>
-            <param name="coordinates">The coordinates.</param>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.Add(MPT.Geometry.Tools.Extents{`1},System.Double)">
-            <summary>
-            Adds the specified extents.
-            </summary>
-            <param name="extents">The extents.</param>
-            <param name="zCoordinate">The z-coordinate of the extents object.</param>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.Add(MPT.Geometry.Tools.Extents3D{`0,`1,`2})">
-            <summary>
-            Updates the extents to include the specified extents.
-            </summary>
-            <param name="extents">The extents.</param>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.ProjectXY">
-            <summary>
-            Projects this instance to a 2-dimensional extents object in the X-Y plane.
-            </summary>
-            <returns>Extents.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.ProjectXZ">
-            <summary>
-            Projects this instance to a 2-dimensional extents object in the X-Z plane, where the y-coordinate is to be taken as the y-coordinate.
-            </summary>
-            <returns>Extents.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.ProjectYZ">
-            <summary>
-            Projects this instance to a 2-dimensional extents object in the Y-Z plane, where the x-coordinate is to be taken as the z-coordinate.
-            </summary>
-            <returns>Extents.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.Clear">
-            <summary>
-            Clears this instance.
-            </summary>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.Reset(System.Collections.Generic.IEnumerable{`0})">
-            <summary>
-            Resets the specified coordinates.
-            </summary>
-            <param name="coordinates">The coordinates.</param>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.IsWithinExtents(MPT.Math.Coordinates3D.CartesianCoordinate3D)">
-            <summary>
-            Determines whether the coordinate lies within the extents.
-            </summary>
-            <param name="coordinate">The coordinate.</param>
-            <returns><c>true</c> if the specified coordinates are within the extents; otherwise, <c>false</c>.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Tools.Extents3D`3.Boundary">
-            <summary>
-            Returns a rectangle boundary of this instance.
-            </summary>
-            <returns>NRectangle.</returns>
-        </member>
         <member name="T:MPT.Geometry.Tools.PointBoundary">
             <summary>
             Class PointBoundary.
-            Implements the <see cref="T:MPT.Geometry.Tools.Boundary`1" />
+            Implements the <see cref="T:MPT.Geometry.Tools.CoordinatesBoundary`1" />
             </summary>
-            <seealso cref="T:MPT.Geometry.Tools.Boundary`1" />
+            <seealso cref="T:MPT.Geometry.Tools.CoordinatesBoundary`1" />
         </member>
         <member name="M:MPT.Geometry.Tools.PointBoundary.#ctor">
             <summary>
+            Represents a boundary defined by CartesianCoordinates.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Tools.PointBoundary.#ctor(MPT.Math.Coordinates.CartesianCoordinate[])">
+            <summary>
             Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.PointBoundary"/> class.
             </summary>
+            <param name="coordinates">The coordinates.</param>
         </member>
         <member name="M:MPT.Geometry.Tools.PointBoundary.#ctor(System.Collections.Generic.IEnumerable{MPT.Math.Coordinates.CartesianCoordinate})">
             <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.PointBoundary"/> class.
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.PointBoundary" /> class.
             </summary>
             <param name="coordinates">The coordinates.</param>
         </member>
@@ -2113,6 +1751,12 @@
             </summary>
             <param name="coordinates">The coordinates.</param>
         </member>
+        <member name="M:MPT.Geometry.Tools.PointBoundary.Extents">
+            <summary>
+            Gets the extents.
+            </summary>
+            <returns>Extents&lt;CartesianCoordinate&gt;.</returns>
+        </member>
         <member name="T:MPT.Geometry.Tools.PointExtents">
             <summary>
             Class PointExtents.
@@ -2122,18 +1766,25 @@
         </member>
         <member name="M:MPT.Geometry.Tools.PointExtents.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.PointExtents"/> class.
+            Initializes a new empty instance of the <see cref="T:MPT.Geometry.Tools.PointExtents"/> class.
             </summary>
+        </member>
+        <member name="M:MPT.Geometry.Tools.PointExtents.#ctor(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.PointExtents"/> class for a path segment.
+            </summary>
+            <param name="pointI">The first point forming a path.</param>
+            <param name="pointJ">The second point forming a path.</param>
         </member>
         <member name="M:MPT.Geometry.Tools.PointExtents.#ctor(System.Collections.Generic.IEnumerable{MPT.Math.Coordinates.CartesianCoordinate})">
             <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.PointExtents"/> class.
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.PointExtents"/> class for a polyline or a shape.
             </summary>
             <param name="coordinates">The coordinates.</param>
         </member>
         <member name="M:MPT.Geometry.Tools.PointExtents.#ctor(MPT.Geometry.Tools.Extents{MPT.Math.Coordinates.CartesianCoordinate})">
             <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.PointExtents"/> class.
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.PointExtents"/> class for cloning.
             </summary>
             <param name="extents">The extents.</param>
         </member>
@@ -2184,86 +1835,265 @@
             </summary>
             <returns>Extents.</returns>
         </member>
-        <member name="T:MPT.Geometry.Tools.PointExtents3D">
+        <member name="T:MPT.Geometry.Tools.SegmentsBoundary">
             <summary>
-            Class PointExtents3D.
-            Implements the <see cref="T:MPT.Geometry.Tools.Extents3D`3" />
+            Represents a boundary defined by contiguous segments.
+            Implements the <see cref="T:MPT.Math.ITolerance" />
+            Implements the <see cref="T:System.Collections.Generic.IEnumerable`1" />
             </summary>
-            <seealso cref="T:MPT.Geometry.Tools.Extents3D`3" />
+            <seealso cref="T:MPT.Math.ITolerance" />
+            <seealso cref="T:System.Collections.Generic.IEnumerable`1" />
         </member>
-        <member name="M:MPT.Geometry.Tools.PointExtents3D.#ctor">
+        <member name="P:MPT.Geometry.Tools.SegmentsBoundary.Tolerance">
             <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.PointExtents3D"/> class.
+            Tolerance to use in all calculations with double types.
+            </summary>
+            <value>The tolerance.</value>
+        </member>
+        <member name="F:MPT.Geometry.Tools.SegmentsBoundary._contents">
+            <summary>
+            The contents
             </summary>
         </member>
-        <member name="M:MPT.Geometry.Tools.PointExtents3D.#ctor(System.Collections.Generic.IEnumerable{MPT.Math.Coordinates3D.CartesianCoordinate3D})">
+        <member name="P:MPT.Geometry.Tools.SegmentsBoundary.Count">
             <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.PointExtents3D"/> class.
+            Gets the count.
+            </summary>
+            <value>The count.</value>
+        </member>
+        <member name="P:MPT.Geometry.Tools.SegmentsBoundary.Item(System.Int32)">
+            <summary>
+            Gets or sets the <see cref="T:MPT.Geometry.Segments.IPathSegment"/> at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.CoordinatesBoundary`1" /> class.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.#ctor(MPT.Geometry.Segments.IPathSegment[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.SegmentsBoundary"/> class.
             </summary>
             <param name="coordinates">The coordinates.</param>
         </member>
-        <member name="M:MPT.Geometry.Tools.PointExtents3D.#ctor(MPT.Geometry.Tools.PointExtents3D)">
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.#ctor(System.Collections.Generic.IEnumerable{MPT.Geometry.Segments.IPathSegment})">
             <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.PointExtents3D"/> class.
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.CoordinatesBoundary`1" /> class.
             </summary>
-            <param name="extents">The extents.</param>
+            <param name="segments">The coordinates.</param>
         </member>
-        <member name="M:MPT.Geometry.Tools.PointExtents3D.#ctor(MPT.Geometry.Tools.Extents{MPT.Math.Coordinates.CartesianCoordinate},System.Double)">
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.AddFirst(MPT.Geometry.Segments.IPathSegment)">
             <summary>
-            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.PointExtents3D"/> class.
+            Adds the segment as the first segment in the boundary.
             </summary>
-            <param name="extents">The extents.</param>
-            <param name="zCoordinate">The z coordinate.</param>
+            <param name="item">The item.</param>
         </member>
-        <member name="M:MPT.Geometry.Tools.PointExtents3D.Add(MPT.Geometry.Tools.Extents{MPT.Math.Coordinates.CartesianCoordinate},System.Double)">
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.AddLast(MPT.Geometry.Segments.IPathSegment)">
             <summary>
-            Adds the specified extents.
+            Adds the segment as the last segment in the boundary.
             </summary>
-            <param name="extents">The extents.</param>
-            <param name="zCoordinate">The z-coordinate of the extents object.</param>
+            <param name="item">The item.</param>
         </member>
-        <member name="M:MPT.Geometry.Tools.PointExtents3D.Add(MPT.Math.Coordinates3D.CartesianCoordinate3D)">
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.insert(System.Int32,MPT.Geometry.Segments.IPathSegment)">
             <summary>
-            Updates the extents to include the specified coordinate.
+            Inserts the specified index.
             </summary>
-            <param name="coordinate">The coordinate.</param>
+            <param name="index">The index.</param>
+            <param name="item">The item.</param>
         </member>
-        <member name="M:MPT.Geometry.Tools.PointExtents3D.IsWithinExtents(MPT.Math.Coordinates3D.CartesianCoordinate3D)">
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.RemoveFirst">
             <summary>
-            Determines whether the coordinate lies within the extents.
+            Removes the first segment.
             </summary>
-            <param name="coordinate">The coordinate.</param>
-            <returns><c>true</c> if the specified coordinates are within the extents; otherwise, <c>false</c>.</returns>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         </member>
-        <member name="M:MPT.Geometry.Tools.PointExtents3D.ProjectXY">
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.RemoveLast">
             <summary>
-            Projects this instance to a 2-dimensional extents object in the X-Y plane.
+            Removes the last segment.
             </summary>
-            <returns>Extents.</returns>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         </member>
-        <member name="M:MPT.Geometry.Tools.PointExtents3D.ProjectXZ">
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.removeAt(System.Int32)">
             <summary>
-            Projects this instance to a 2-dimensional extents object in the X-Z plane, where the y-coordinate is to be taken as the y-coordinate.
+            Removes segment at the specified index.
             </summary>
-            <returns>Extents.</returns>
+            <param name="index">The index.</param>
         </member>
-        <member name="M:MPT.Geometry.Tools.PointExtents3D.ProjectYZ">
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.Clear">
             <summary>
-            Projects this instance to a 2-dimensional extents object in the Y-Z plane, where the x-coordinate is to be taken as the z-coordinate.
+            Clears this instance.
             </summary>
-            <returns>Extents.</returns>
         </member>
-        <member name="M:MPT.Geometry.Tools.PointExtents3D.Boundary">
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.Replace(MPT.Geometry.Segments.IPathSegment,MPT.Geometry.Segments.IPathSegment)">
             <summary>
-            Returns a rectangle boundary of this instance.
+            Replaces the specified original segment with the provided segment.
+            Coordinates defining the segments must match.
             </summary>
-            <returns>NRectangle.</returns>
+            <param name="originalItem">The original item.</param>
+            <param name="newItem">The new item.</param>
         </member>
-        <member name="M:MPT.Geometry.Tools.PointExtents3D.Clone">
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.ReplaceAt(System.Int32,MPT.Geometry.Segments.IPathSegment)">
             <summary>
-            Clones this instance.
+            Replaces the segment at the specified index with the provided segment.
+            Coordinates defining the segments must match.
             </summary>
-            <returns>Extents.</returns>
+            <param name="index">The index.</param>
+            <param name="item">The item.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.IndexOf(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Gets the index of the specified segment.
+            Returns -1 if the segment is not found.
+            </summary>
+            <param name="item">The item.</param>
+            <returns>System.Int32.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.Contains(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Determines whether this instance contains the segment.
+            </summary>
+            <param name="item">The item.</param>
+            <returns><c>true</c> if [contains] [the specified item]; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.CopyTo(MPT.Geometry.Segments.IPathSegment[],System.Int32)">
+            <summary>
+            Copies to array.
+            </summary>
+            <param name="array">The array.</param>
+            <param name="arrayIndex">Index of the array.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.FirstPoint">
+            <summary>
+            The first point defining the segment boundary.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.LastPoint">
+            <summary>
+            The last point defining the segment boundary.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.PointBoundary">
+            <summary>
+            Returns the points that define the boundary between segments.
+            </summary>
+            <returns>PointBoundary.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.Extents">
+            <summary>
+            Returns the overall extents of the segments boundary. 
+            This includes extends for curve shapes in between vertices.
+            </summary>
+            <returns>PointExtents.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.isValidFirstSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Determines whether [is valid first segment] [the specified segment].
+            </summary>
+            <param name="segment">The segment.</param>
+            <returns><c>true</c> if [is valid first segment] [the specified segment]; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.isValidLastSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Determines whether [is valid last segment] [the specified segment].
+            </summary>
+            <param name="segment">The segment.</param>
+            <returns><c>true</c> if [is valid last segment] [the specified segment]; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="F:MPT.Geometry.Tools.SegmentsBoundary._arrayResizeRatio">
+            <summary>
+            The array resize ratio
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Tools.SegmentsBoundary._minArraySize">
+            <summary>
+            The minimum array size
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.resizeArraySizeIfNecessary">
+            <summary>
+            Resizes the array size if necessary.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.reduceArraySizeIfNecessary">
+            <summary>
+            Reduces the array size if necessary.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.resizeArray(System.Int32)">
+            <summary>
+            Resizes the array.
+            </summary>
+            <param name="newSize">The new size.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through the collection.
+            </summary>
+            <returns>An enumerator that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.System#Collections#IEnumerable#GetEnumerator">
+            <summary>
+            Returns an enumerator that iterates through a collection.
+            </summary>
+            <returns>An <see cref="T:System.Collections.IEnumerator"></see> object that can be used to iterate through the collection.</returns>
+        </member>
+        <member name="T:MPT.Geometry.Tools.SegmentsBoundary.SegmentsEnumerator`1">
+            <summary>
+            Class SegmentsEnumerator.
+            Implements the <see cref="T:System.Collections.Generic.IEnumerator`1" />
+            </summary>
+            <typeparam name="T"></typeparam>
+            <seealso cref="T:System.Collections.Generic.IEnumerator`1" />
+        </member>
+        <member name="F:MPT.Geometry.Tools.SegmentsBoundary.SegmentsEnumerator`1._position">
+            <summary>
+            The position
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Tools.SegmentsBoundary.SegmentsEnumerator`1._contents">
+            <summary>
+            The contents
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Tools.SegmentsBoundary.SegmentsEnumerator`1.System#Collections#IEnumerator#Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+            <value>The current.</value>
+        </member>
+        <member name="P:MPT.Geometry.Tools.SegmentsBoundary.SegmentsEnumerator`1.Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+            <value>The current.</value>
+            <exception cref="T:System.InvalidOperationException"></exception>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.SegmentsEnumerator`1.#ctor(`0[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.SegmentsBoundary.SegmentsEnumerator`1"/> class.
+            </summary>
+            <param name="list">The list.</param>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.SegmentsEnumerator`1.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.SegmentsEnumerator`1.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns>true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.SegmentsEnumerator`1.Reset">
+            <summary>
+            Sets the enumerator to its initial position, which is before the first element in the collection.
+            </summary>
         </member>
     </members>
 </doc>
