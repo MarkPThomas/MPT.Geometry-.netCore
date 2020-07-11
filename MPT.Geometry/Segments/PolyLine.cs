@@ -18,14 +18,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 
 namespace MPT.Geometry.Segments
 {
     /// <summary>
     /// Class PolyLine.
     /// </summary>
-    public class PolyLine : ITolerance, IEnumerable<IPathSegment>
+    public class PolyLine : ITolerance, IEnumerable<IPathSegment>, ICloneable
     {
         #region Properties
         /// <summary>
@@ -117,9 +116,18 @@ namespace MPT.Geometry.Segments
                 }
             }
         }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PolyLine"/> class.
+        /// </summary>
+        /// <param name="segmentBoundary">The segment boundary.</param>
+        public PolyLine(SegmentsBoundary segmentBoundary)
+        {
+            _segmentBoundary = segmentBoundary;
+        }
         #endregion
 
-        #region Methods: Public
+        #region Methods: Query
         /// <summary>
         /// Returns the points that define the boundary between segments.
         /// </summary>
@@ -221,13 +229,22 @@ namespace MPT.Geometry.Segments
             return _segmentBoundary.RemoveLast();
         }
 
-
+        /// <summary>
+        /// Removes the specified point if it is present.
+        /// </summary>
+        /// <param name="point">The coordinate of the point to remove.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public bool RemovePoint(CartesianCoordinate point)
         {
             return _segmentBoundary.RemovePoint(point);
         }
 
-
+        /// <summary>
+        /// Moves the specified point to the provided coordinate.
+        /// </summary>
+        /// <param name="originalPoint">The original point.</param>
+        /// <param name="newPoint">The new point to move the original point to.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public bool MovePoint(CartesianCoordinate originalPoint, CartesianCoordinate newPoint)
         {
             return _segmentBoundary.MovePoint(originalPoint, newPoint);
@@ -258,6 +275,17 @@ namespace MPT.Geometry.Segments
         public IPathSegment Segment(int index)
         {
             return _segmentBoundary[index];
+        }
+
+        /// <summary>
+        /// Returns the pair of segments that join at the provided point index.
+        /// If the point is the first or last point, the leading or following segment will be null.
+        /// </summary>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <returns>Tuple&lt;IPathSegment, IPathSegment&gt;.</returns>
+        public Tuple<IPathSegment, IPathSegment> AdjacentSegmentsAt(int pointIndex)
+        {
+            return _segmentBoundary.AdjacentSegmentsAt(pointIndex);
         }
 
         /// <summary>
@@ -302,6 +330,12 @@ namespace MPT.Geometry.Segments
             return _segmentBoundary.AddLast(segment);
         }
 
+        /// <summary>
+        /// Splits the segment at the specified relative location.
+        /// </summary>
+        /// <param name="segment">The segment.</param>
+        /// <param name="sRelative">The relative.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         public bool SplitSegment(IPathSegment segment, double sRelative)
         {
             return _segmentBoundary.SplitSegment(segment, sRelative);
@@ -360,6 +394,75 @@ namespace MPT.Geometry.Segments
         //}
         #endregion
 
+        #region Methods: IPathTransform        
+        /// <summary>
+        /// Translates the polyline.
+        /// </summary>
+        /// <param name="translation">The amount to translate by.</param>
+        /// <returns>IPathSegment.</returns>
+        public PolyLine Translate(CartesianOffset translation)
+        {
+            SegmentsBoundary segmentBoundary = new SegmentsBoundary();
+            foreach (IPathSegment segment in _segmentBoundary)
+            {
+                segmentBoundary.AddLast(segment.Translate(translation));
+            }
+            return new PolyLine(segmentBoundary);
+        }
+
+        /// <summary>
+        /// Scales the polyline from the provided reference point.
+        /// </summary>
+        /// <param name="scale">The amount to scale relative to the reference point.</param>
+        /// <param name="referencePoint">The reference point.</param>
+        /// <returns>IPathSegment.</returns>
+        public PolyLine ScaleFromPoint(double scale, CartesianCoordinate referencePoint)
+        {
+            SegmentsBoundary segmentBoundary = new SegmentsBoundary();
+            foreach (IPathSegment segment in _segmentBoundary)
+            {
+                segmentBoundary.AddLast(segment.ScaleFromPoint(scale, referencePoint));
+            }
+            return new PolyLine(segmentBoundary);
+        }
+
+        /// <summary>
+        /// Rotates the polyline about the reference point.
+        /// </summary>
+        /// <param name="rotation">The amount of rotation. [rad]</param>
+        /// <param name="referencePoint">The center of rotation reference point.</param>
+        /// <returns>IPathSegment.</returns>
+        public PolyLine RotateAboutPoint(Angle rotation, CartesianCoordinate referencePoint)
+        {
+            SegmentsBoundary segmentBoundary = new SegmentsBoundary();
+            foreach (IPathSegment segment in _segmentBoundary)
+            {
+                segmentBoundary.AddLast(segment.RotateAboutPoint(rotation, referencePoint));
+            }
+            return new PolyLine(segmentBoundary);
+        }
+        #endregion
+
+        #region ICloneable        
+        /// <summary>
+        /// Clones the line.
+        /// </summary>
+        /// <returns>PolyLine.</returns>
+        public PolyLine CloneLine()
+        {
+            return new PolyLine(_segmentBoundary);
+        }
+
+        /// <summary>
+        /// Creates a new object that is a copy of the current instance.
+        /// </summary>
+        /// <returns>A new object that is a copy of this instance.</returns>
+        public object Clone()
+        {
+            return CloneLine();
+        }
+        #endregion
+
         #region Enumerator
         /// <summary>
         /// Gets the coordinate enumerator.
@@ -396,6 +499,7 @@ namespace MPT.Geometry.Segments
         {
             return GetEnumerator();
         }
+
         // ncrunch: no coverage end
         #endregion
 

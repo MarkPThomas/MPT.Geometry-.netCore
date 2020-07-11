@@ -1,28 +1,23 @@
 ﻿using System;
-using NMath = System.Math;
 
 using MPT.Math.Coordinates;
 using MPT.Math.Vectors;
 using MPT.Math.NumberTypeExtensions;
 using MPT.Math;
 using MPT.Math.Curves;
-using System.Data;
-using System.Runtime.InteropServices;
-using MPT.Geometry.Intersections;
 
 namespace MPT.Geometry.Segments
 {
     /// <summary>
     /// Segment that describes a straight line in a plane.
     /// </summary>
-    public class LineSegment : PathSegment, IPathDivisionExtension, ILine
+    public class LineSegment: PathSegment<LinearCurve>, IPathDivisionExtension, ILine
     {
         #region Properties
-        private readonly LinearCurve _curve;
         /// <summary>
         /// Curve that spans between the I and J coordinates.
         /// </summary>
-        public LinearCurve Curve => new LinearCurve(I, J);
+        public override LinearCurve Curve => new LinearCurve(I, J);
 
         /// <summary>
         /// First coordinate value.
@@ -154,7 +149,7 @@ namespace MPT.Geometry.Segments
         /// </summary>
         /// <param name="point"></param>
         /// <returns></returns>
-        public bool IncludesCoordinate(CartesianCoordinate point)
+        public override bool IncludesCoordinate(CartesianCoordinate point)
         {
             double tolerance = Helper.GetTolerance(point, Tolerance);
             if (!_curve.IsIntersectingCoordinate(point)) 
@@ -174,7 +169,7 @@ namespace MPT.Geometry.Segments
         /// </summary>
         /// <param name="otherLine"></param>
         /// <returns></returns>
-        public bool IsIntersecting(LineSegment otherLine)
+        public override bool IsIntersecting(LineSegment otherLine)
         {
             if (!_curve.IsIntersectingCurve(otherLine._curve)) 
             {
@@ -190,7 +185,7 @@ namespace MPT.Geometry.Segments
         /// </summary>
         /// <param name="otherLine">Line segment that intersects the current line segment.</param>
         /// <returns></returns>
-        public CartesianCoordinate IntersectionCoordinate(LineSegment otherLine)
+        public override CartesianCoordinate IntersectionCoordinate(LineSegment otherLine)
         {
             CartesianCoordinate intersection = _curve.IntersectionCoordinate(otherLine._curve);
             if(IncludesCoordinate(intersection) && otherLine.IncludesCoordinate(intersection))
@@ -198,87 +193,6 @@ namespace MPT.Geometry.Segments
                 return intersection;
             }
             throw new ArgumentOutOfRangeException("Segments do not intersect between starting and ending coordinates.");
-        }
-        #endregion
-
-        #region Methods: IPathTransform        
-        /// <summary>
-        /// Translates the segment.
-        /// </summary>
-        /// <param name="translation">The amount to translate by.</param>
-        /// <returns>IPathSegment.</returns>
-        public IPathSegment TranslateSegment(CartesianOffset translation)
-        {
-            return new LineSegment(I + translation, J + translation);
-        }
-
-        /// <summary>
-        /// Scales the segment from point I.
-        /// </summary>
-        /// <param name="scaleFromI">The amount to scale from point I.</param>
-        /// <returns>IPathSegment.</returns>
-        public IPathSegment ScaleSegmentFromI(double scaleFromI)
-        {
-            return ScaleSegmentFromPoint(scaleFromI, I);
-        }
-
-        /// <summary>
-        /// Scales the segment from point J.
-        /// </summary>
-        /// <param name="scaleFromJ">The amount to scale from point J.</param>
-        /// <returns>IPathSegment.</returns>
-        public IPathSegment ScaleSegmentFromJ(double scaleFromJ)
-        {
-            return ScaleSegmentFromPoint(scaleFromJ, J);
-        }
-
-        /// <summary>
-        /// Scales the segment from the provided reference point.
-        /// </summary>
-        /// <param name="scale">The amount to scale relative to the reference point.</param>
-        /// <param name="referencePoint">The reference point.</param>
-        /// <returns>IPathSegment.</returns>
-        public IPathSegment ScaleSegmentFromPoint(double scale, CartesianCoordinate referencePoint)
-        {
-            CartesianOffset offsetJ = scale * (J.OffsetFrom(referencePoint));
-            CartesianOffset offsetI = scale * (I.OffsetFrom(referencePoint));
-
-            return new LineSegment(
-                referencePoint + offsetI.ToCartesianCoordinate(),
-                referencePoint + offsetJ.ToCartesianCoordinate());
-        }
-
-        /// <summary>
-        /// Rotates the segment from point I.
-        /// </summary>
-        /// <param name="rotation">The amount of rotation. [rad]</param>
-        /// <returns>IPathSegment.</returns>
-        public IPathSegment RotateSegmentFromI(Angle rotation)
-        {
-            return new LineSegment(I, CartesianCoordinate.RotateAboutPoint(J, I, rotation.Radians));
-        }
-
-        /// <summary>
-        /// Rotates the segment from point J.
-        /// </summary>
-        /// <param name="rotation">The amount of rotation. [rad]</param>
-        /// <returns>IPathSegment.</returns>
-        public IPathSegment RotateSegmentFromJ(Angle rotation)
-        {
-            return new LineSegment(CartesianCoordinate.RotateAboutPoint(I, J, rotation.Radians), J);
-        }
-
-        /// <summary>
-        /// Rotates the segment about the reference point.
-        /// </summary>
-        /// <param name="rotation">The amount of rotation. [rad]</param>
-        /// <param name="referencePoint">The center of rotation reference point.</param>
-        /// <returns>IPathSegment.</returns>
-        public IPathSegment RotateSegmentFromPoint(Angle rotation, CartesianCoordinate referencePoint)
-        {
-            return new LineSegment(
-                CartesianCoordinate.RotateAboutPoint(I, referencePoint, rotation.Radians),
-                CartesianCoordinate.RotateAboutPoint(J, referencePoint, rotation.Radians));
         }
         #endregion
 

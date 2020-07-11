@@ -7,13 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="NewFolder\**" />
-    <EmbeddedResource Remove="NewFolder\**" />
-    <None Remove="NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Intersection\ProjectionVerticalTests.cs" />
+    <Compile Remove="Shapes\CircleTests.cs" />
+    <Compile Remove="Shapes\CircularSectorTests.cs" />
+    <Compile Remove="Shapes\CircularSegmentTests.cs" />
+    <Compile Remove="Shapes\EllipseTests.cs" />
+    <Compile Remove="Shapes\WedgeTests.cs" />
   </ItemGroup>
 
   <ItemGroup>

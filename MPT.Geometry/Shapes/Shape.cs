@@ -1,30 +1,50 @@
 ﻿// ***********************************************************************
 // Assembly         : MPT.Geometry
-// Author           : Mark Thomas
+// Author           : Mark P Thomas
 // Created          : 12-09-2017
 //
-// Last Modified By : Mark Thomas
+// Last Modified By : Mark P Thomas
 // Last Modified On : 12-09-2017
 // ***********************************************************************
-// <copyright file="Shape.cs" company="MPTinc">
+// <copyright file="Shape.cs" company="Mark P Thomas, Inc.">
 //     Copyright ©  2017
 // </copyright>
 // <summary></summary>
 // ***********************************************************************
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-
+using MPT.Geometry.Intersections;
+using MPT.Geometry.Segments;
 using MPT.Geometry.Tools;
 using MPT.Math;
+using MPT.Math.Coordinates;
+using MPT.Math.Curves;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MPT.Geometry.Shapes
 {
     /// <summary>
     /// Base abstract Shape.
     /// </summary>
-    public abstract class Shape
+    public abstract class Shape : ITolerance, IShapeProperties, ITransform<Shape>
     {
-        #region Properties
+        #region Properties        
+        /// <summary>
+        /// The polyline that describes the shape.
+        /// </summary>
+        protected PolyLine _polyline;
+
+        /// <summary>
+        /// The offset of the shape from it's default local coordinates.
+        /// </summary>
+        protected CartesianCoordinate _translation;
+
+        /// <summary>
+        /// The rotation of the shape from it's default local orientation.
+        /// </summary>
+        protected Angle _rotation;
+                
+
         /// <summary>
         /// Tolerance to use in all calculations with double types.
         /// </summary>
@@ -37,40 +57,181 @@ namespace MPT.Geometry.Shapes
         /// <value>The name.</value>
         public string Name { get; private set; }
 
-        ///// <summary>
-        ///// The boundary
-        ///// </summary>
-        //protected Boundary _boundary = new Boundary();
-        ///// <summary>
-        ///// The boundary coordinates that wraps the shape.
-        ///// This assumes straight lines between vertices.
-        ///// </summary>
-        ///// <value>The boundary.</value>
-        //public IList<CartesianCoordinate> Boundary => new ReadOnlyCollection<CartesianCoordinate>(_boundary.Coordinates);
-
-        ///// <summary>
-        ///// The extents
-        ///// </summary>
-        //protected Extents _extents = new Extents();
-        ///// <summary>
-        ///// The extents bounding box of the shape.
-        ///// </summary>
-        ///// <value>The extents.</value>
-        //public IList<CartesianCoordinate> Extents => _extents.Boundary();
-
         /// <summary>
         /// If true, the shape is considered to be a hole, otherwise it is a solid.
         /// </summary>
-        public bool IsHole { get; set; }
-        #endregion        
+        public bool IsHole { get; set; } = false;
+
+        /// <summary>
+        /// The centroid of the shape.
+        /// </summary>
+        /// <value>The centroid.</value>
+        public virtual CartesianCoordinate Centroid => new CartesianCoordinate(Xo(), Yo());
+        #endregion
+
+        #region Initialization
         /// <summary>
         /// Initializes a new instance of the <see cref="Shape"/> class.
         /// </summary>
         protected Shape()
         {
-           // _boundary.Tolerance = Tolerance;
+
+        }
+        #endregion
+
+        #region Validation
+        /// <summary>
+        /// Determines whether shape is properly formed.
+        /// </summary>
+        /// <returns><c>true</c> if [is valid shape]; otherwise, <c>false</c>.</returns>
+        public abstract bool CheckValidShape();
+
+        /// <summary>
+        /// Determines whether the specified polyline is a valid shape.
+        /// </summary>
+        /// <param name="polyline">The polyline.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        /// <exception cref="ArgumentException">Invalid shape: Polyline does not form a closed shape.</exception>
+        /// <exception cref="ArgumentException">Invalid shape: Polyline has a point intersecting another segment.</exception>
+        /// <exception cref="ArgumentException">Invalid shape: Polyline has crossing segments.</exception>
+        /// <exception cref="ArgumentException">Invalid shape: Polyline joins back in on itself, which is only allowed for composite shapes.</exception>
+        public static bool CheckValidShape(PolyLine polyline)
+        {   
+            if (!IsClosedShape(polyline))
+            {
+                throw new ArgumentException("Invalid shape: Polyline does not form a closed shape.");
+            }
+            if (IsJoiningPointOnAnotherSegment(polyline))
+            {
+                throw new ArgumentException("Invalid shape: Polyline has a point intersecting another segment.");
+            }
+            if (IsAnySegmentCrossingAnotherSegment(polyline))
+            {
+                throw new ArgumentException("Invalid shape: Polyline has crossing segments.");
+            }
+            if (!IsValidPointOccurrences(polyline))
+            {
+                throw new ArgumentException("Invalid shape: Polyline joins back in on itself, which is only allowed for composite shapes.");
+            }
+            return true;
         }
 
+        /// <summary>
+        /// Determines whether [is closed shape].
+        /// </summary>
+        /// <returns>System.Boolean.</returns>
+        public static bool IsClosedShape(PolyLine polyline)
+        {
+            return polyline.FirstPoint() == polyline.LastPoint();
+        }
+
+        /// <summary>
+        /// Closes the shape if needed.
+        /// </summary>
+        protected void closeShapeIfNeeded()
+        {
+            if (!IsClosedShape(_polyline))
+            {
+                _polyline.AddLastPoint(_polyline.FirstPoint());
+            }
+        }
+
+        /// <summary>
+        /// Determines whether [is any segment crossing another segment] [the specified polyline].
+        /// </summary>
+        /// <param name="polyline">The polyline.</param>
+        /// <returns><c>true</c> if [is any segment crossing another segment] [the specified polyline]; otherwise, <c>false</c>.</returns>
+        public static bool IsAnySegmentCrossingAnotherSegment(PolyLine polyline)
+        {
+            for (int i = 0; i < polyline.CountSegments - 1; i++)
+            {   // Skips last segment since it will be compared in the inner loop
+                if (polyline[i] is LineSegment)
+                {
+                    LineSegment segmentI = polyline[i] as LineSegment;
+                    for (int j = i + 1; j < polyline.CountSegments; j++)
+                    {   // Gets next segment and every other remaining segment to check
+                        if (polyline[j] is LineSegment)
+                        {
+                            LineSegment segmentJ = polyline[j] as LineSegment;
+                            if (segmentI.IsIntersecting(segmentJ) &&
+                            segmentI.I != segmentJ.I &&
+                            segmentI.I != segmentJ.J &&
+                            segmentI.J != segmentJ.I &&
+                            segmentI.J != segmentJ.J)
+                            {
+                                return true;
+                            }
+                        } 
+                    }
+                }
+                
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Determines whether [is any point on segment and not ends] [the specified polyline].
+        /// </summary>
+        /// <param name="polyline">The polyline.</param>
+        /// <returns><c>true</c> if [is any point on segment and not ends] [the specified polyline]; otherwise, <c>false</c>.</returns>
+        public static bool IsJoiningPointOnAnotherSegment(PolyLine polyline)
+        {
+            CartesianCoordinate firstPoint = polyline.FirstPoint();
+            CartesianCoordinate lastPoint = polyline.LastPoint();
+            for (int i = 1; i < polyline.CountSegments - 1; i++)
+            {   // Loop is skipping first and last segments
+                if (polyline[i] is LineSegment)
+                {
+                    LineSegment segment = (LineSegment)polyline[i];
+                    if ((segment.IncludesCoordinate(firstPoint) &&
+                        !PointIntersection.IsOnPoint(firstPoint, segment.I) &&
+                        !PointIntersection.IsOnPoint(firstPoint, segment.J))
+                        || (segment.IncludesCoordinate(lastPoint) &&
+                        !PointIntersection.IsOnPoint(lastPoint, segment.I) &&
+                        !PointIntersection.IsOnPoint(lastPoint, segment.J)))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Determines whether the specified polyline has valid point occurrences.
+        /// If a point occurs once, the point connects a chain of segments.
+        /// If a point occurs twice, and this only occurs for one point, this point is the point that closes the polyline to form a shape.
+        /// If a point occurs more than twice, the shape is connecting back on itself. This case is best handled as a composite shape.
+        /// </summary>
+        /// <param name="polyline">The polyline.</param>
+        /// <returns><c>true</c> if [is valid point ordering] [the specified polyline]; otherwise, <c>false</c>.</returns>
+        public static bool IsValidPointOccurrences(PolyLine polyline)
+        {
+            
+            PointBoundary points = polyline.PointBoundary();
+            bool closureCounted = false;
+            var selectQuery =
+                from point in points
+                group point by point into g
+                select new { Point = g.Key, Count = g.Count() };
+            foreach (var point in selectQuery)
+            {
+                if (point.Count == 2 && !closureCounted)
+                {
+                    closureCounted = true;
+                    continue;
+                }
+                if (point.Count > 1)
+                {
+                    return false;
+                }
+            }
+
+                return true;
+        }
+        #endregion
+
+        #region Methods
         /// <summary>
         /// Returns a <see cref="string" /> that represents this instance.
         /// </summary>
@@ -79,5 +240,167 @@ namespace MPT.Geometry.Shapes
         {
             return string.IsNullOrEmpty(Name) ? base.ToString() : Name;
         }
+
+        /// <summary>
+        /// Gets the perimeter length from polyline.
+        /// </summary>
+        /// <returns>System.Double.</returns>
+        public double GetPerimeterFromPolyline()
+        {
+            double length = 0;
+            foreach (IPathSegment segment in _polyline)
+            {
+                length += segment.Length();
+            }
+            return length;
+        }
+
+        /// <summary>
+        /// Returns a copy of the polyline that forms the shape.
+        /// </summary>
+        /// <returns>PolyLine.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public PolyLine PolyLine()
+        {
+            return _polyline.CloneLine();
+        }
+
+        /// <summary>
+        /// Returns the points that define the shape.
+        /// </summary>
+        /// <returns>PointBoundary.</returns>
+        public PointBoundary PointBoundary()
+        {
+            return _polyline.PointBoundary();
+        }
+
+        /// <summary>
+        /// Returns the overall extents of the shape. 
+        /// This includes extents for curve segments in between vertices.
+        /// </summary>
+        /// <returns>PointExtents.</returns>
+        public PointExtents Extents()
+        {
+            return _polyline.Extents();
+        }
+        #endregion
+
+        #region IShapeProperties
+        /// <summary>
+        /// Area of the shape.
+        /// </summary>
+        /// <returns></returns>
+        public abstract double Area();
+
+        /// <summary>
+        /// Length of all sides of the shape.
+        /// </summary>
+        /// <returns></returns>
+        public virtual double Perimeter()
+        {
+            return GetPerimeterFromPolyline();
+        }
+
+        /// <summary>
+        /// X-coordinate of the centroid of the shape.
+        /// </summary>
+        /// <returns></returns>
+        public abstract double Xo();
+
+        /// <summary>
+        /// Y-coordinate of the centroid of the shape.
+        /// </summary>
+        /// <returns></returns>
+        public abstract double Yo();
+        #endregion
+
+        #region ITransform
+        /// <summary>
+        /// Translates the object.
+        /// </summary>
+        /// <param name="translation">The amount to translate by.</param>
+        /// <returns>IPathSegment.</returns>
+        public Shape Translate(CartesianOffset translation)
+        {
+            _polyline = new PolyLine(translateSegments(translation));
+            _translation += translation;
+            return this;
+        }
+
+        /// <summary>
+        /// Translates the segments.
+        /// </summary>
+        /// <param name="translation">The amount to translate by.</param>
+        /// <returns>IList&lt;IPathSegment&gt;.</returns>
+        protected SegmentsBoundary translateSegments(CartesianOffset translation)
+        {
+            IList<IPathSegment> segments = new List<IPathSegment>();
+            foreach (IPathSegment segment in _polyline)
+            {
+                segments.Add(segment.Translate(translation));
+            }
+            return new SegmentsBoundary(segments);
+        }
+
+        /// <summary>
+        /// Scales the object from the provided reference point.
+        /// </summary>
+        /// <param name="scale">The amount to scale relative to the reference point.</param>
+        /// <param name="referencePoint">The reference point.</param>
+        /// <returns>IPathSegment.</returns>
+        public Shape ScaleFromPoint(double scale, CartesianCoordinate referencePoint)
+        {
+            _polyline = new PolyLine(scaleSegmentsFromPoint(scale, referencePoint));
+            _translation += scale * Centroid;
+            return this;
+        }
+
+        /// <summary>
+        /// Scales the segments from the provided reference point.
+        /// </summary>
+        /// <param name="scale">The amount to scale relative to the reference point.</param>
+        /// <param name="referencePoint">The reference point.</param>
+        /// <returns>IList&lt;IPathSegment&gt;.</returns>
+        protected SegmentsBoundary scaleSegmentsFromPoint(double scale, CartesianCoordinate referencePoint)
+        {
+            IList<IPathSegment> segments = new List<IPathSegment>();
+            foreach (IPathSegment segment in _polyline)
+            {
+                segments.Add(segment.ScaleFromPoint(scale, referencePoint));
+            }
+            return new SegmentsBoundary(segments);
+        }
+
+        /// <summary>
+        /// Rotates the object about the reference point.
+        /// </summary>
+        /// <param name="rotation">The amount of rotation. [rad]</param>
+        /// <param name="referencePoint">The center of rotation reference point.</param>
+        /// <returns>IPathSegment.</returns>
+        public Shape RotateAboutPoint(Angle rotation, CartesianCoordinate referencePoint)
+        {
+            _polyline = new PolyLine(rotateSegmentsAboutPoint(rotation, referencePoint));
+            _rotation += rotation;
+            CartesianCoordinate newCentroid = CartesianCoordinate.RotateAboutPoint(Centroid, referencePoint, rotation.Radians);
+            _translation += newCentroid - Centroid;
+            return this;
+        }
+
+        /// <summary>
+        /// Rotates the segments about the reference point.
+        /// </summary>
+        /// <param name="rotation">The amount of rotation. [rad]</param>
+        /// <param name="referencePoint">The center of rotation reference point.</param>
+        /// <returns>IList&lt;IPathSegment&gt;.</returns>
+        protected SegmentsBoundary rotateSegmentsAboutPoint(Angle rotation, CartesianCoordinate referencePoint)
+        {
+            IList<IPathSegment> segments = new List<IPathSegment>();
+            foreach (IPathSegment segment in _polyline)
+            {
+                segments.Add(segment.RotateAboutPoint(rotation, referencePoint));
+            }
+            return new SegmentsBoundary(segments);
+        }
+        #endregion
     }
 }

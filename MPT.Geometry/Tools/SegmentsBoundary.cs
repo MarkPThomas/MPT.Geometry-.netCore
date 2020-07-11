@@ -171,7 +171,7 @@ namespace MPT.Geometry.Tools
         /// <param name="item">The item.</param>
         private void insert(int index, IPathSegment item)
         {
-            if ((index < Count) && (index >= 0))
+            if (index >= 0)
             {
                 resizeArraySizeIfNecessary();
                 Count++;
@@ -215,9 +215,16 @@ namespace MPT.Geometry.Tools
         {
             if ((index >= 0) && (index < Count))
             {
-                for (int i = index; i < Count - 1; i++)
+                if (index == Count - 1)
                 {
-                    _contents[i] = _contents[i + 1];
+                    _contents[index] = null;
+                }
+                else
+                {
+                    for (int i = index; i < Count - 1; i++)
+                    {
+                        _contents[i] = _contents[i + 1];
+                    }
                 }
                 Count--;
             }
@@ -281,6 +288,10 @@ namespace MPT.Geometry.Tools
         /// <returns>System.Int32.</returns>
         public int IndexOf(IPathSegment item)
         {
+            if (item == null)
+            {
+                return -1;
+            }
             for (int i = 0; i < Count; i++)
             {
                 if (_contents[i].Equals(item))
@@ -361,6 +372,17 @@ namespace MPT.Geometry.Tools
         }
 
         /// <summary>
+        /// Returns the pair of segments that join at the point specified by index.
+        /// If the point is the first or last point, the leading or following segment will be null.
+        /// </summary>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <returns>Tuple&lt;IPathSegment, IPathSegment&gt;.</returns>
+        public Tuple<IPathSegment, IPathSegment> AdjacentSegmentsAt(int pointIndex)
+        {
+            return AdjacentSegments(PointBoundary()[pointIndex]);
+        }
+
+        /// <summary>
         /// Returns the pair of segments that join at the provided coordinate.
         /// If the point is the first or last point, the leading or following segment will be null.
         /// </summary>
@@ -375,7 +397,7 @@ namespace MPT.Geometry.Tools
 
             IPathSegment itemI = null;
             IPathSegment itemJ = null;
-            foreach (IPathSegment segment in _contents)
+            foreach (IPathSegment segment in this)
             {
                 if (segment.I == point)
                 {
@@ -386,6 +408,10 @@ namespace MPT.Geometry.Tools
                 {
                     itemI = segment;
                     continue;
+                }
+                if (itemI != null && itemJ != null)
+                {
+                    break;
                 }
             }
             return new Tuple<IPathSegment, IPathSegment>(itemI, itemJ);
@@ -422,8 +448,13 @@ namespace MPT.Geometry.Tools
         }
         #endregion
 
-        #region Methods: Modify Points
-
+        #region Methods: Modify Points        
+        /// <summary>
+        /// Splits the segment at the relative position.
+        /// </summary>
+        /// <param name="segment">The segment.</param>
+        /// <param name="sRelative">The relative position along the path.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         internal bool SplitSegment(IPathSegment segment, double sRelative)
         {
             int index = IndexOf(segment);
@@ -434,7 +465,12 @@ namespace MPT.Geometry.Tools
             return SplitSegment(index, sRelative);
         }
 
-
+        /// <summary>
+        /// Splits the segment at the relative position.
+        /// </summary>
+        /// <param name="index">The index of the segment to split.</param>
+        /// <param name="sRelative">The relative position along the path.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         internal bool SplitSegment(int index, double sRelative)
         {
             IPathSegment segment = _contents[index];
@@ -446,27 +482,39 @@ namespace MPT.Geometry.Tools
             return true;
         }
 
-
+        /// <summary>
+        /// Removes the point, if present.
+        /// </summary>
+        /// <param name="point">The point.</param>
+        /// <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
         internal bool RemovePoint(CartesianCoordinate point)
         {
             Tuple<IPathSegment, IPathSegment> adjacentSegments = AdjacentSegments(point);
-            
+            if (adjacentSegments.Item1 == null && adjacentSegments.Item2 == null)
+            {
+                return false;
+            }
+            if (adjacentSegments.Item1 == null && adjacentSegments.Item2 != null)
+            {   // First segment
+                return RemoveFirst();
+            }
+            if (adjacentSegments.Item1 != null && adjacentSegments.Item2 == null)
+            {   // Last segment
+                return RemoveLast();
+            }
+
             IPathSegment newPathSegment;
             if (areOfSamePathSegmentType(adjacentSegments.Item1, adjacentSegments.Item2))
             {
                 newPathSegment = adjacentSegments.Item1.MergeWithFollowingSegment(adjacentSegments.Item2);
             }
-            else
+            else 
             {
                 newPathSegment = new LineSegment(adjacentSegments.Item1.I, adjacentSegments.Item2.J);
             }
 
             // Insert new segment and remove the two original ones.
             int leadingSegmentIndex = IndexOf(adjacentSegments.Item1);
-            if (leadingSegmentIndex < 0)
-            {
-                return false;
-            }
             removeAt(leadingSegmentIndex); // Remove leading segment
             removeAt(leadingSegmentIndex); // Remove following segment
             insert(leadingSegmentIndex, newPathSegment);
@@ -493,19 +541,20 @@ namespace MPT.Geometry.Tools
         {
             Tuple<IPathSegment, IPathSegment> adjacentSegments = AdjacentSegments(originalPoint);
             int leadingSegmentIndex = IndexOf(adjacentSegments.Item1);
-            int followingSegmentIndex = IndexOf(adjacentSegments.Item2);
-            if (leadingSegmentIndex < 0 || followingSegmentIndex < 0)
+            if (leadingSegmentIndex >= 0)
             {
-                return false;
+                removeAt(leadingSegmentIndex);
+                insert(leadingSegmentIndex, adjacentSegments.Item1.UpdateJ(newPoint));
             }
 
-            removeAt(leadingSegmentIndex);
-            insert(leadingSegmentIndex, adjacentSegments.Item1.UpdateJ(newPoint));
-
-            removeAt(followingSegmentIndex);
-            insert(followingSegmentIndex, adjacentSegments.Item2.UpdateI(newPoint));
-
-            return true;
+            int followingSegmentIndex = IndexOf(adjacentSegments.Item2);
+            if (followingSegmentIndex >= 0)
+            {
+                removeAt(followingSegmentIndex);
+                insert(followingSegmentIndex, adjacentSegments.Item2.UpdateI(newPoint));
+            }
+                
+            return !(leadingSegmentIndex < 0 && followingSegmentIndex < 0);
         }
         #endregion
 

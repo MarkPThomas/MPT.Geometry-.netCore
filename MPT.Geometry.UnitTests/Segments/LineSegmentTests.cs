@@ -7,7 +7,7 @@ using MPT.Math.Vectors;
 using Num = MPT.Math.Numbers;
 using System.Collections.Generic;
 
-namespace MPT.Geometry.UnitTests.Line
+namespace MPT.Geometry.UnitTests.Segments
 {
     [TestFixture]
     public static class LineSegmentTests
@@ -304,7 +304,7 @@ namespace MPT.Geometry.UnitTests.Line
 
             CartesianOffset translation = new CartesianOffset(deltaX, deltaY);
 
-            IPathSegment translatedSegment = segment.TranslateSegment(translation);
+            IPathSegment translatedSegment = segment.Translate(translation);
             Assert.AreEqual(expectedI_x, translatedSegment.I.X);
             Assert.AreEqual(expectedI_y, translatedSegment.I.Y);
             Assert.AreEqual(expectedJ_x, translatedSegment.J.X);
@@ -322,7 +322,7 @@ namespace MPT.Geometry.UnitTests.Line
             CartesianCoordinate pointJ = new CartesianCoordinate(5, 9);
             LineSegment segment = new LineSegment(pointI, pointJ);
 
-            IPathSegment scaledSegment = segment.ScaleSegmentFromI(scaleFromI);
+            IPathSegment scaledSegment = segment.ScaleFromI(scaleFromI);
 
             Assert.AreEqual(pointI.X, scaledSegment.I.X);
             Assert.AreEqual(pointI.Y, scaledSegment.I.Y);
@@ -341,7 +341,7 @@ namespace MPT.Geometry.UnitTests.Line
             CartesianCoordinate pointJ = new CartesianCoordinate(5, 9);
             LineSegment segment = new LineSegment(pointI, pointJ);
 
-            IPathSegment scaledSegment = segment.ScaleSegmentFromJ(scaleFromJ);
+            IPathSegment scaledSegment = segment.ScaleFromJ(scaleFromJ);
 
             Assert.AreEqual(pointJ.X, scaledSegment.J.X);
             Assert.AreEqual(pointJ.Y, scaledSegment.J.Y);
@@ -354,6 +354,7 @@ namespace MPT.Geometry.UnitTests.Line
         [TestCase(1, 4, 2, 1, 1, 5, 9)]
         [TestCase(1.5, 4, 2, -0.5, 0.5, 5.5, 12.5)]
         [TestCase(-0.25, 4, 2, 4.75, 2.25, 3.75, 0.25)]
+        [TestCase(-1, 4, 2, 7, 3, 3, -5)]
         public static void ScaleFromPoint(double scale, 
             double point_x, double point_y,
             double expectedI_x, double expectedI_y,
@@ -364,7 +365,7 @@ namespace MPT.Geometry.UnitTests.Line
             LineSegment segment = new LineSegment(pointI, pointJ);
 
             CartesianCoordinate referencePoint = new CartesianCoordinate(point_x, point_y);
-            IPathSegment scaledSegment = segment.ScaleSegmentFromPoint(scale, referencePoint);
+            IPathSegment scaledSegment = segment.ScaleFromPoint(scale, referencePoint);
 
             Assert.AreEqual(expectedI_x, scaledSegment.I.X);
             Assert.AreEqual(expectedI_y, scaledSegment.I.Y);
@@ -388,7 +389,7 @@ namespace MPT.Geometry.UnitTests.Line
             CartesianCoordinate pointJ = new CartesianCoordinate(8, 4);
             LineSegment segment = new LineSegment(pointI, pointJ);
 
-            IPathSegment scaledSegment = segment.RotateSegmentFromI(rotation);
+            IPathSegment scaledSegment = segment.RotateAboutI(rotation);
 
             Assert.AreEqual(pointI.X, scaledSegment.I.X, Tolerance);
             Assert.AreEqual(pointI.Y, scaledSegment.I.Y, Tolerance);
@@ -412,7 +413,7 @@ namespace MPT.Geometry.UnitTests.Line
             CartesianCoordinate pointJ = new CartesianCoordinate(8, 4);
             LineSegment segment = new LineSegment(pointI, pointJ);
 
-            IPathSegment scaledSegment = segment.RotateSegmentFromJ(rotation);
+            IPathSegment scaledSegment = segment.RotateAboutJ(rotation);
 
             Assert.AreEqual(pointJ.X, scaledSegment.J.X, Tolerance);
             Assert.AreEqual(pointJ.Y, scaledSegment.J.Y, Tolerance);
@@ -440,7 +441,7 @@ namespace MPT.Geometry.UnitTests.Line
             LineSegment segment = new LineSegment(pointI, pointJ);
 
             CartesianCoordinate referencePoint = new CartesianCoordinate(13, -12);
-            IPathSegment scaledSegment = segment.RotateSegmentFromPoint(radianRotation, referencePoint);
+            IPathSegment scaledSegment = segment.RotateAboutPoint(radianRotation, referencePoint);
 
             Assert.AreEqual(expectedI_x, scaledSegment.I.X, Tolerance);
             Assert.AreEqual(expectedI_y, scaledSegment.I.Y, Tolerance);

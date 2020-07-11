@@ -1,11 +1,12 @@
 ﻿using MPT.Math.Coordinates;
+using MPT.Math.Curves;
 
 namespace MPT.Geometry.Segments
 {
     /// <summary>
     /// Interface for all shapes that incorporate elements of a curve.
     /// </summary>
-    public interface ICurve : IPathSegment
+    public interface ICircularSegment : IPathSegment
     {
         /// <summary>
         /// CartesianCoordinaterepresenting the center of the circular arc, which lies at a distance of the radius form either end point.

@@ -399,6 +399,34 @@
             <param name="segment">The segment.</param>
             <returns><c>true</c> if the point is below the vertically projected segment intersection, <c>false</c> otherwise.</returns>
         </member>
+        <member name="T:MPT.Geometry.ITransform`1">
+            <summary>
+            Interface ITransform
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.ITransform`1.Translate(MPT.Math.Coordinates.CartesianOffset)">
+            <summary>
+            Translates the segment.
+            </summary>
+            <param name="translation">The amount to translate by.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.ITransform`1.ScaleFromPoint(System.Double,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Scales the segment from the provided reference point.
+            </summary>
+            <param name="scale">The amount to scale relative to the reference point.</param>
+            <param name="referencePoint">The reference point.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.ITransform`1.RotateAboutPoint(MPT.Math.Coordinates.Angle,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Rotates the segment about the reference point.
+            </summary>
+            <param name="rotation">The amount of rotation. [rad]</param>
+            <param name="referencePoint">The center of rotation reference point.</param>
+            <returns>IPathSegment.</returns>
+        </member>
         <member name="T:MPT.Geometry.Segments.ICurve">
             <summary>
             Interface for all shapes that incorporate elements of a curve.
@@ -457,7 +485,7 @@
             Interface for paths that are divisible.
             </summary>
         </member>
-        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.PointDivision(System.Double)">
+        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.PointOffsetOnSegment(System.Double)">
             <summary>
             Returns a point determined by a given fraction of the distance between point i and point j of the segment.
              <paramref name="fraction"/> must be between 0 and 1.
@@ -465,7 +493,7 @@
             <param name="fraction">Fraction of the way from point 1 to point 2.</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.PointExtension(System.Double)">
+        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.PointScaledFromSegment(System.Double)">
             <summary>
              Returns a point determined by a given ratio of the distance between point i and point j of the segment.
             </summary>
@@ -553,61 +581,96 @@
             </summary>
             <param name="sRelative">The relative position along the path.</param>
         </member>
-        <member name="T:MPT.Geometry.Segments.IPolarCoordinates">
+        <member name="M:MPT.Geometry.Segments.IPathSegment.UpdateI(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Returns a copy of the segment with an updated I coordinate.
+            </summary>
+            <param name="newCoordinate">The new coordinate.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathSegment.UpdateJ(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Returns a copy of the segment with an updated J coordinate.
+            </summary>
+            <param name="newCoordinate">The new coordinate.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathSegment.MergeWithPriorSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Merges the with leading segment.
+            </summary>
+            <param name="leadingSegment">The leading segment.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathSegment.MergeWithFollowingSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Merges the with following segment.
+            </summary>
+            <param name="followingSegment">The following segment.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathSegment.SplitBySegmentPosition(System.Double)">
+            <summary>
+            Splits the segment by the relative location.
+            </summary>
+            <param name="sRelative">The relative position along the path.</param>
+            <returns>Tuple&lt;IPathSegment, IPathSegment&gt;.</returns>
+        </member>
+        <member name="T:MPT.Geometry.Segments.IPathSegmentPolarCoordinates">
             <summary>
             Interface related to line geometries in polar coordinates.
             </summary>
         </member>
-        <member name="P:MPT.Geometry.Segments.IPolarCoordinates.IPolar">
+        <member name="P:MPT.Geometry.Segments.IPathSegmentPolarCoordinates.IPolar">
             <summary>
             First coordinate value {radius, rotation[radians]}.
             </summary>
         </member>
-        <member name="P:MPT.Geometry.Segments.IPolarCoordinates.JPolar">
+        <member name="P:MPT.Geometry.Segments.IPathSegmentPolarCoordinates.JPolar">
             <summary>
             Second coordinate value {radius, rotation[radians]}.
             </summary>
         </member>
-        <member name="M:MPT.Geometry.Segments.IPolarCoordinates.LengthPolar">
+        <member name="M:MPT.Geometry.Segments.IPathSegmentPolarCoordinates.LengthPolar">
             <summary>
             Length of the path segment [radians].
             </summary>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Segments.IPolarCoordinates.CentroidPolar">
+        <member name="M:MPT.Geometry.Segments.IPathSegmentPolarCoordinates.CentroidPolar">
             <summary>
             Polar-coordinates of the centroid of the line {radius, rotation[radians]}.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Segments.IPolarCoordinates.XPolar(System.Double)">
+        <member name="M:MPT.Geometry.Segments.IPathSegmentPolarCoordinates.XPolar(System.Double)">
             <summary>
             X-coordinate on the path that corresponds to the polar-coordinate given.
             </summary>
             <param name="theta">Rotation-coordinate for which an x-coordinate is desired.</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Segments.IPolarCoordinates.YPolar(System.Double)">
+        <member name="M:MPT.Geometry.Segments.IPathSegmentPolarCoordinates.YPolar(System.Double)">
             <summary>
             Y-coordinate on the path that corresponds to the polar-coordinate given.
             </summary>
             <param name="theta">Rotation-coordinate for which a y-coordinate is desired [radians].</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Segments.IPolarCoordinates.PointByPathPositionPolar(System.Double)">
+        <member name="M:MPT.Geometry.Segments.IPathSegmentPolarCoordinates.PointByPathPositionPolar(System.Double)">
             <summary>
             Coordinate on the path that corresponds to the position along the path.
             </summary>
             <param name="theta">The relative position along the path [radians].</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Segments.IPolarCoordinates.NormalVectorPolar(System.Double)">
+        <member name="M:MPT.Geometry.Segments.IPathSegmentPolarCoordinates.NormalVectorPolar(System.Double)">
             <summary>
             Vector that is normal to the line connecting the defining points at the position specified.
             </summary>
             <param name="theta">The relative position along the path [radians].</param>
         </member>
-        <member name="M:MPT.Geometry.Segments.IPolarCoordinates.TangentVectorPolar(System.Double)">
+        <member name="M:MPT.Geometry.Segments.IPathSegmentPolarCoordinates.TangentVectorPolar(System.Double)">
             <summary>
             Vector that is tangential to the line connecting the defining points at the position specified.
             </summary>
@@ -696,6 +759,20 @@
             </summary>
             <param name="sRelative">The relative position along the path.</param>
         </member>
+        <member name="M:MPT.Geometry.Segments.LineSegment.UpdateI(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Returns a copy of the segment with an updated I coordinate.
+            </summary>
+            <param name="newCoordinate">The new coordinate.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.LineSegment.UpdateJ(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Returns a copy of the segment with an updated J coordinate.
+            </summary>
+            <param name="newCoordinate">The new coordinate.</param>
+            <returns>IPathSegment.</returns>
+        </member>
         <member name="M:MPT.Geometry.Segments.LineSegment.IncludesCoordinate(MPT.Math.Coordinates.CartesianCoordinate)">
             <summary>
             Provided point lies on the line segment between or on the defining points.
@@ -717,29 +794,71 @@
             <param name="otherLine">Line segment that intersects the current line segment.</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.PointDivision(System.Double)">
+        <member name="M:MPT.Geometry.Segments.LineSegment.SplitBySegmentPoint(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Splits the segment by the provided point.
+            </summary>
+            <param name="pointDivision">The point to use for division.</param>
+            <returns>Tuple&lt;IPathSegment, IPathSegment&gt;.</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:MPT.Geometry.Segments.LineSegment.ExtendSegmentToPoint(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Extends the segment to the provided point.
+            </summary>
+            <param name="pointExtension">The point to extend the segment to.</param>
+            <returns>IPathSegment.</returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:MPT.Geometry.Segments.LineSegment.pointOffsetOnCurve(System.Double)">
             <summary>
             Returns a point determined by a given fraction of the distance between point i and point j of the segment.
-             <paramref name="fraction"/> must be between 0 and 1.
+            <paramref name="sRelative"/> must be between 0 and 1.
             </summary>
-            <param name="fraction">Fraction of the way from point 1 to point 2.</param>
+            <param name="sRelative">The relative position along the path between 0 (point i) and 1 (point j).</param>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.PointExtension(System.Double)">
+        <member name="M:MPT.Geometry.Segments.LineSegment.MergeWithPriorSegment(MPT.Geometry.Segments.IPathSegment)">
             <summary>
-             Returns a point determined by a given ratio of the distance between point i and point j of the segment.
+            Returns a copy of the segment that merges the current segment with the prior segment.
             </summary>
-            <param name="ratio">Ratio of the size of the existing segment. 
-            If <paramref name="ratio"/>&lt; 0, returned point is offset from point i, in that direction. 
-            If <paramref name="ratio"/>&gt; 0, returned point is offset from point j, in that direction.</param>
-            <returns></returns>
+            <param name="priorSegment">The prior segment.</param>
+            <returns>IPathSegment.</returns>
         </member>
-        <member name="M:MPT.Geometry.Segments.LineSegment.pointOffsetOnLine(System.Double)">
+        <member name="M:MPT.Geometry.Segments.LineSegment.MergeWithFollowingSegment(MPT.Geometry.Segments.IPathSegment)">
             <summary>
-            Returns a point determined by a given fraction of the distance between point i and point j of the segment.
+            Returns a copy of the segment that merges the current segment with the following segment.
             </summary>
-            <param name="fraction">Fraction of the way from point 1 to point 2.</param>
-            <returns></returns>
+            <param name="followingSegment">The following segment.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.LineSegment.JoinWithPriorSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Returns a copy of the segment that joins the current segment with the prior segment.
+            </summary>
+            <param name="priorSegment">The prior segment.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.LineSegment.JoinWithFollowingSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Returns a copy of the segment that joins the current segment with the following segment.
+            </summary>
+            <param name="followingSegment">The following segment.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.LineSegment.SplitBySegmentPosition(System.Double)">
+            <summary>
+            Returns a copy of the segment that splits the segment by the relative location.
+            <paramref name="sRelative"/> must be between 0 and 1.
+            </summary>
+            <param name="sRelative">The relative position along the path between 0 (point i) and 1 (point j).</param>
+            <returns>Tuple&lt;IPathSegment, IPathSegment&gt;.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.LineSegment.ExtendSegmentToCurve">
+            <summary>
+            Extends the segment to intersect the provided curve.
+            </summary>
+            <returns>IPathSegment.</returns>
         </member>
         <member name="M:MPT.Geometry.Segments.LineSegment.ToVector">
             <summary>
@@ -804,6 +923,21 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.validateRelativePosition(System.Double)">
+            <summary>
+            Validates the relative position provided.
+            </summary>
+            <param name="sRelative">The relative position, s.</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">Relative position must be between 0 and 1, but was {sRelative}.</exception>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.pointOffsetOnCurve(System.Double)">
+            <summary>
+            Returns a point determined by a given fraction of the distance between point i and point j of the segment.
+            <paramref name="sRelative"/> must be between 0 and 1.
+            </summary>
+            <param name="sRelative">The relative position along the path between 0 (point i) and 1 (point j).</param>
+            <returns></returns>
+        </member>
         <member name="M:MPT.Geometry.Segments.PathSegment.Length">
             <summary>
             Length of the path segment.
@@ -855,6 +989,124 @@
             </summary>
             <param name="sRelative">The relative position along the path.</param>
         </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.Translate(MPT.Math.Coordinates.CartesianOffset)">
+            <summary>
+            Translates the segment.
+            </summary>
+            <param name="translation">The amount to translate by.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.ScaleFromI(System.Double)">
+            <summary>
+            Scales the segment from point I.
+            </summary>
+            <param name="scaleFromI">The amount to scale from point I.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.ScaleFromJ(System.Double)">
+            <summary>
+            Scales the segment from point J.
+            </summary>
+            <param name="scaleFromJ">The amount to scale from point J.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.ScaleFromPoint(System.Double,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Scales the segment from the provided reference point.
+            </summary>
+            <param name="scale">The amount to scale relative to the reference point.</param>
+            <param name="referencePoint">The reference point.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.RotateAboutI(MPT.Math.Coordinates.Angle)">
+            <summary>
+            Rotates the segment from point I.
+            </summary>
+            <param name="rotation">The amount of rotation. [rad]</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.RotateAboutJ(MPT.Math.Coordinates.Angle)">
+            <summary>
+            Rotates the segment from point J.
+            </summary>
+            <param name="rotation">The amount of rotation. [rad]</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.RotateAboutPoint(MPT.Math.Coordinates.Angle,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Rotates the segment about the reference point.
+            </summary>
+            <param name="rotation">The amount of rotation. [rad]</param>
+            <param name="referencePoint">The center of rotation reference point.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.PointOffsetOnSegment(System.Double)">
+            <summary>
+            Returns a point determined by a given fraction of the distance between point i and point j of the segment.
+            <paramref name="sRelative"/> must be between 0 and 1.
+            </summary>
+            <param name="sRelative">The relative position along the path between 0 (point i) and 1 (point j).</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.PointScaledFromSegment(System.Double)">
+            <summary>
+             Returns a point determined by a given ratio of the distance between point i and point j of the segment.
+            </summary>
+            <param name="ratio">Ratio of the size of the existing segment. 
+            If <paramref name="ratio"/>&lt; 0, returned point is offset from point i, in that direction. 
+            If <paramref name="ratio"/>&gt; 0, returned point is offset from point j, in that direction.</param>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.UpdateI(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Returns a copy of the segment with an updated I coordinate.
+            </summary>
+            <param name="newCoordinate">The new coordinate.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.UpdateJ(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Returns a copy of the segment with an updated J coordinate.
+            </summary>
+            <param name="newCoordinate">The new coordinate.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.MergeWithPriorSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Returns a copy of the segment that merges the current segment with the prior segment.
+            </summary>
+            <param name="priorSegment">The prior segment.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.MergeWithFollowingSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Returns a copy of the segment that merges the current segment with the following segment.
+            </summary>
+            <param name="followingSegment">The following segment.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.JoinWithPriorSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Returns a copy of the segment that joins the current segment with the prior segment.
+            </summary>
+            <param name="priorSegment">The prior segment.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.JoinWithFollowingSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Returns a copy of the segment that joins the current segment with the following segment.
+            </summary>
+            <param name="followingSegment">The following segment.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment.SplitBySegmentPosition(System.Double)">
+            <summary>
+            Returns a copy of the segment that splits the segment by the relative location.
+            <paramref name="sRelative"/> must be between 0 and 1.
+            </summary>
+            <param name="sRelative">The relative position along the path between 0 (point i) and 1 (point j).</param>
+            <returns>Tuple&lt;IPathSegment, IPathSegment&gt;.</returns>
+        </member>
         <member name="M:MPT.Geometry.Segments.PathSegment.Equals(MPT.Geometry.Segments.IPathSegment)">
             <summary>
             Indicates whether the current object is equal to another object of the same type.
@@ -886,17 +1138,7 @@
             </summary>
             <value>The tolerance.</value>
         </member>
-        <member name="F:MPT.Geometry.Segments.PolyLine._contents">
-            <summary>
-            The contents
-            </summary>
-        </member>
-        <member name="F:MPT.Geometry.Segments.PolyLine._pointBoundary">
-            <summary>
-            The point boundary
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Segments.PolyLine.CountCoordinates">
+        <member name="P:MPT.Geometry.Segments.PolyLine.CountPoints">
             <summary>
             Gets the count coordinates.
             </summary>
@@ -908,20 +1150,9 @@
             </summary>
             <value>The coordinates.</value>
         </member>
-        <member name="P:MPT.Geometry.Segments.PolyLine.CoordinateEnumerator">
-            <summary>
-            Gets the coordinate enumerator.
-            </summary>
-            <value>The coordinate enumerator.</value>
-        </member>
         <member name="F:MPT.Geometry.Segments.PolyLine._segmentBoundary">
             <summary>
             The segment boundary
-            </summary>
-        </member>
-        <member name="F:MPT.Geometry.Segments.PolyLine._segments">
-            <summary>
-            The segments
             </summary>
         </member>
         <member name="P:MPT.Geometry.Segments.PolyLine.CountSegments">
@@ -929,12 +1160,6 @@
             Gets the count segments.
             </summary>
             <value>The count segments.</value>
-        </member>
-        <member name="P:MPT.Geometry.Segments.PolyLine.SegmentEnumerator">
-            <summary>
-            Gets the segment enumerator.
-            </summary>
-            <value>The segment enumerator.</value>
         </member>
         <member name="P:MPT.Geometry.Segments.PolyLine.Item(System.Int32)">
             <summary>
@@ -968,6 +1193,25 @@
             </summary>
             <param name="coordinates">The coordinates.</param>
         </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.#ctor(MPT.Geometry.Tools.SegmentsBoundary)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Segments.PolyLine"/> class.
+            </summary>
+            <param name="segmentBoundary">The segment boundary.</param>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.PointBoundary">
+            <summary>
+            Returns the points that define the boundary between segments.
+            </summary>
+            <returns>PointBoundary.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.Extents">
+            <summary>
+            Returns the overall extents of the polyline. 
+            This includes extents for curve shapes in between vertices.
+            </summary>
+            <returns>PointExtents.</returns>
+        </member>
         <member name="M:MPT.Geometry.Segments.PolyLine.Coordinate(System.Int32)">
             <summary>
             Coordinates the specified index.
@@ -987,12 +1231,132 @@
             </summary>
             <returns>CartesianCoordinate.</returns>
         </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.ContainsPoint(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Determines whether the <see cref="T:System.Collections.Generic.ICollection`1"></see> contains a specific value.
+            </summary>
+            <param name="point">The object to locate in the <see cref="T:System.Collections.Generic.ICollection`1"></see>.</param>
+            <returns>true if <paramref name="point">item</paramref> is found in the <see cref="T:System.Collections.Generic.ICollection`1"></see>; otherwise, false.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.AddFirstPoint(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Adds the point as the first point in the polyline.
+            Segment created will be of the same type as the prior first segment.
+            </summary>
+            <param name="point">The point.</param>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.AddLastPoint(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Adds the point as the last point in the polyline.
+            Segment created will be the same type as the prior last segment.
+            </summary>
+            <param name="point">The point.</param>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.RemoveFirstPoint">
+            <summary>
+            Removes the first point and corresponding segment.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.RemoveLastPoint">
+            <summary>
+            Removes the last point and corresponding segment.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.RemovePoint(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Removes the specified point if it is present.
+            </summary>
+            <param name="point">The coordinate of the point to remove.</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.MovePoint(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Moves the specified point to the provided coordinate.
+            </summary>
+            <param name="originalPoint">The original point.</param>
+            <param name="newPoint">The new point to move the original point to.</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
         <member name="M:MPT.Geometry.Segments.PolyLine.Segment(System.Int32)">
             <summary>
-            Segments the specified index.
+            Returns the segment at the specified index.
             </summary>
             <param name="index">The index.</param>
             <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.ContainsSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Determines whether the specified polyline contains the specified segment.
+            </summary>
+            <param name="segment">The segment.</param>
+            <returns><c>true</c> if the polyline contains the specified segment; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.AddFirstSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Adds the segment as the first segment in the polyline.
+            Segment created will be of the same type as the prior first segment.
+            </summary>
+            <param name="segment">The segment.</param>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.AddLastSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Adds the segment as the last segment in the polyline.
+            Segment created will be the same type as the prior last segment.
+            </summary>
+            <param name="segment">The segment.</param>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.SplitSegment(MPT.Geometry.Segments.IPathSegment,System.Double)">
+            <summary>
+            Splits the segment at the specified relative location.
+            </summary>
+            <param name="segment">The segment.</param>
+            <param name="sRelative">The relative.</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.RemoveFirstSegment">
+            <summary>
+            Removes the first segment and corresponding point.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.RemoveLastSegment">
+            <summary>
+            Removes the last segment and corresponding point.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.Translate(MPT.Math.Coordinates.CartesianOffset)">
+            <summary>
+            Translates the polyline.
+            </summary>
+            <param name="translation">The amount to translate by.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.ScaleFromPoint(System.Double,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Scales the polyline from the provided reference point.
+            </summary>
+            <param name="scale">The amount to scale relative to the reference point.</param>
+            <param name="referencePoint">The reference point.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.RotateAboutPoint(MPT.Math.Coordinates.Angle,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Rotates the polyline about the reference point.
+            </summary>
+            <param name="rotation">The amount of rotation. [rad]</param>
+            <param name="referencePoint">The center of rotation reference point.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.GetCoordinateEnumerator">
+            <summary>
+            Gets the coordinate enumerator.
+            </summary>
+            <value>The coordinate enumerator.</value>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PolyLine.GetSegmentEnumerator">
+            <summary>
+            Gets the segment enumerator.
+            </summary>
+            <value>The segment enumerator.</value>
         </member>
         <member name="M:MPT.Geometry.Segments.PolyLine.GetEnumerator">
             <summary>
@@ -1006,69 +1370,251 @@
             </summary>
             <returns>An <see cref="T:System.Collections.IEnumerator"></see> object that can be used to iterate through the collection.</returns>
         </member>
-        <member name="T:MPT.Geometry.Shapes.Circle">
+        <member name="T:MPT.Geometry.Shapes.Decagon">
             <summary>
-            Represents a circle shape, with the origin at the lower left corner of the lower left quadrant.
+            A regular polygon of 10 sides.
+            Implements the <see cref="T:MPT.Geometry.Shapes.RegularPolygon" />
+            </summary>
+            <seealso cref="T:MPT.Geometry.Shapes.RegularPolygon" />
+        </member>
+        <member name="F:MPT.Geometry.Shapes.Decagon._setNumberOfSides">
+            <summary>
+            The number of sides.
             </summary>
         </member>
-        <member name="T:MPT.Geometry.Shapes.CircularSector">
+        <member name="M:MPT.Geometry.Shapes.Decagon.#ctor(System.Double)">
             <summary>
-            Represents a circular wedge shape, with the origin at the common origin of the arc segment capping the end. 
-            The x-axis forms a line of symmetry.
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Decagon"/> class.
+            </summary>
+            <param name="circumRadius">The circumradius.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Decagon.DecagonByInradius(System.Double)">
+            <summary>
+            Returns a decagon sized by the inradius.
+            </summary>
+            <param name="inRadius">The inradius.</param>
+            <returns>RegularPolygon.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Decagon.DecagonByCircumradius(System.Double)">
+            <summary>
+            Returns a decagon sized by the circumradius.
+            </summary>
+            <returns>RegularPolygon.</returns>
+        </member>
+        <member name="T:MPT.Geometry.Shapes.EquilateralTriangle">
+            <summary>
+            Any triangle of 3 equal sides (3 equal angles).
+            Implements the <see cref="T:MPT.Geometry.Shapes.Triangle" />
+            </summary>
+            <seealso cref="T:MPT.Geometry.Shapes.Triangle" />
+        </member>
+        <member name="F:MPT.Geometry.Shapes.EquilateralTriangle._sidesEqual">
+            <summary>
+            Length of the equal-length sides of the triangle.
             </summary>
         </member>
-        <member name="T:MPT.Geometry.Shapes.CircularSegment">
+        <member name="P:MPT.Geometry.Shapes.EquilateralTriangle.AngleA">
             <summary>
-            Represents the lense shape of an arc segment with a straight-line cap between the segment ends. 
-            The origin is at the first vertex of the arc segment.
+            The angle, α, which is opposite of side a and is 60°.
             </summary>
+            <value>The alpha.</value>
         </member>
-        <member name="T:MPT.Geometry.Shapes.Ellipse">
+        <member name="P:MPT.Geometry.Shapes.EquilateralTriangle.AngleB">
             <summary>
-            Represents an ellipse shape, with the origin at...
+            The angle, β, which is opposite of side b and is 60°.
             </summary>
+            <value>The beta.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.EquilateralTriangle.AngleC">
+            <summary>
+            The angle, γ, which is opposite of side c and is 60°.
+            </summary>
+            <value>The beta.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.EquilateralTriangle.a">
+            <summary>
+            Length of side a.
+            </summary>
+            <value>a.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.EquilateralTriangle.b">
+            <summary>
+            Length of side b, which lies horizontally as the base.
+            </summary>
+            <value>a.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.EquilateralTriangle.c">
+            <summary>
+            Length of side c.
+            </summary>
+            <value>a.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.EquilateralTriangle.h">
+            <summary>
+            Gets the height, which is the measurement of the line formed from any point to a perpendicular intersection with a side.
+            </summary>
+            <value>The h.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.EquilateralTriangle.CircumRadius">
+            <summary>
+            Gets the circumcenter radius, R, which describes a circle whose edges are defined by the 3 defining points of the triangle.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.EquilateralTriangle.InRadius">
+            <summary>
+            Gets the inradius, r, which describes a circle whose edge is tangent to all 3 sides of the triangle.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.EquilateralTriangle.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.EquilateralTriangle" /> class.
+            </summary>
+            <param name="sideLength">Length of the side.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.EquilateralTriangle.#ctor(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.EquilateralTriangle" /> class.
+            </summary>
+            <param name="apexCoordinate">The apex coordinate.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.EquilateralTriangle.Area">
+            <summary>
+            Area of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.EquilateralTriangle.Perimeter">
+            <summary>
+            Length of all sides of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.EquilateralTriangle.FormulateCoordinates">
+            <summary>
+            Formulates the local coordinates for the shape.
+            </summary>
+            <returns>IList&lt;CartesianCoordinate&gt;.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.EquilateralTriangle.getHeight(System.Double)">
+            <summary>
+            Gets the height.
+            </summary>
+            <param name="sidesEqual">The sides equal.</param>
+            <returns>System.Double.</returns>
         </member>
         <member name="T:MPT.Geometry.Shapes.Hexagon">
             <summary>
-            Represents a hexagon shape, with the origin at the lower left corner of the lower left quadrant, and the flat edge aligned with the x-axis.
+             A regular polygon of 6 sides.
             </summary>
+        </member>
+        <member name="F:MPT.Geometry.Shapes.Hexagon._setNumberOfSides">
+            <summary>
+            The number of sides.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Hexagon.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Hexagon"/> class.
+            </summary>
+            <param name="circumRadius">The circumradius.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Hexagon.HexagonByInradius(System.Double)">
+            <summary>
+            Returns a hexagon sized by the inradius.
+            </summary>
+            <param name="inRadius">The inradius.</param>
+            <returns>RegularPolygon.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Hexagon.HexagonByCircumradius(System.Double)">
+            <summary>
+            Returns a hexagon sized by the circumradius.
+            </summary>
+            <returns>RegularPolygon.</returns>
+        </member>
+        <member name="T:MPT.Geometry.Shapes.ICircumCircle">
+            <summary>
+            A circle that passes through all vertices of a plane figure and contains the entire figure in its interior. 
+            All triangles have circumcircles and so do all regular polygons. Most other polygons do not.
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.ICircumCircle.CircumRadius">
+            <summary>
+            Gets the circumradius, which is the radius of a circle whose edges are defined by the defining points of the shape.
+            </summary>
+            <value>The circumradius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.ICircumCircle.CircumCenter">
+            <summary>
+            Gets the circumcenter, which describes the center of a circle whose edges are defined by the defining points of the shape.
+            </summary>
+            <value>The in center.</value>
+        </member>
+        <member name="T:MPT.Geometry.Shapes.IDefinedShape">
+            <summary>
+            Interface for shapes of a pre-defined type that provides constraints on the more general shape geometry.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IDefinedShape.FormulateCoordinates">
+            <summary>
+            Formulates the local coordinates for the shape.
+            </summary>
+            <returns>IList&lt;CartesianCoordinate&gt;.</returns>
+        </member>
+        <member name="T:MPT.Geometry.Shapes.IIncircle">
+            <summary>
+            A circle that is tangent to all segments of a plane figure, or does not intersect, and contains the entire figure in its exterior. 
+            All triangles have incircles and so do all regular polygons. Most other polygons do not.
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IIncircle.InRadius">
+            <summary>
+            Gets the inradius, which is the radius of a circle whose edge is tangent to all sides of the shape where an intersection occurs.
+            </summary>
+            <value>The inradius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IIncircle.InCenter">
+            <summary>
+            Gets the incenter, which describes the center of a circle whose edge is tangent to all sides of the shape where an intersection occurs.
+            </summary>
+            <value>The in center.</value>
         </member>
         <member name="T:MPT.Geometry.Shapes.IRegularPolygon">
             <summary>
             Interface for all paths that create a closed shape where all sides and angles are congruent.
             </summary>
         </member>
-        <member name="P:MPT.Geometry.Shapes.IRegularPolygon.Circumcirle">
-            <summary>
-            A circle that passes through all vertices of a plane figure and contains the entire figure in its interior. 
-            All triangles have circumcircles and so do all regular polygons. Most other polygons do not.
-            </summary>
-        </member>
         <member name="P:MPT.Geometry.Shapes.IRegularPolygon.Apothem">
             <summary>
-            The line segment from the center of a regular polygon to the midpoint of a side, or the length of this segment. 
+            The line segment from the center of a regular polygon to the midpoint of a side, or the length of this segment.
             Same as the inradius; that is, the radius of a regular polygon's inscribed circle.
             </summary>
+            <value>The apothem.</value>
         </member>
         <member name="P:MPT.Geometry.Shapes.IRegularPolygon.NumberOfSides">
             <summary>
             Number of sides (n) of the polygon.
             </summary>
+            <value>The number of sides.</value>
         </member>
         <member name="P:MPT.Geometry.Shapes.IRegularPolygon.SideLength">
             <summary>
             Length of any side of the polygon.
             </summary>
+            <value>The length of the side.</value>
         </member>
-        <member name="P:MPT.Geometry.Shapes.IRegularPolygon.InteriorAngle">
+        <member name="P:MPT.Geometry.Shapes.IRegularPolygon.AngleInterior">
             <summary>
             Angle between any two sides of the polygon on the inside of the shape.
             </summary>
+            <value>The angle interior.</value>
         </member>
-        <member name="P:MPT.Geometry.Shapes.IRegularPolygon.InteriorAngleSum">
+        <member name="P:MPT.Geometry.Shapes.IRegularPolygon.AngleInteriorSum">
             <summary>
             Sum of all interior angles of the shape.
             </summary>
+            <value>The angle interior sum.</value>
         </member>
         <member name="T:MPT.Geometry.Shapes.IShapeProperties">
             <summary>
@@ -1099,105 +1645,888 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Shapes.IShapeProperties.Ixo">
+        <member name="T:MPT.Geometry.Shapes.IsoscelesRightTriangle">
             <summary>
-            Rotational inertia about the x-axis, passing through the centroid of the shape.
+            Represents an isoscesles triangle (2 sides of equal length) with one angle as 90&#176; &amp; the other two angles as 45&#176;.
+            Implements the <see cref="T:MPT.Geometry.Shapes.IsoscelesTriangle" />
+            </summary>
+            <seealso cref="T:MPT.Geometry.Shapes.IsoscelesTriangle" />
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesRightTriangle.AngleA">
+            <summary>
+            The two angles of equal magnitude, α, which are opposite of the two sides of equal length. 45&#176; in this case.
+            </summary>
+            <value>The alpha.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesRightTriangle.AngleB">
+            <summary>
+            The angle of differing magnitude, β, which is opposite of the side of unequal length, b. 90&#176; in this case.
+            </summary>
+            <value>The beta.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesRightTriangle.h">
+            <summary>
+            Gets the height, which is measured perpendicular to side b.
+            </summary>
+            <value>The h.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesRightTriangle.InRadius">
+            <summary>
+            Gets the inradius, r, which describes a circle whose edge is tangent to all 3 sides of the triangle.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesRightTriangle.CircumRadius">
+            <summary>
+            Gets the circumcenter radius, R, which describes a circle whose edges are defined by the 3 defining points of the triangle.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IsoscelesRightTriangle.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.IsoscelesRightTriangle"/> class.
+            </summary>
+            <param name="lengthsEqualA">Length of sides of equal length, a.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IsoscelesRightTriangle.Area">
+            <summary>
+            Area of the shape.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Shapes.IShapeProperties.Iyo">
+        <member name="T:MPT.Geometry.Shapes.IsoscelesTrapezoid">
             <summary>
-            Rotational inertia about the y-axis, passing through the centroid of the shape.
+            Represents an isosceles trapezoid, with the origin at the lower left corner.
+            Implements the <see cref="T:MPT.Geometry.Shapes.Quadrilateral" />
+            </summary>
+            <seealso cref="T:MPT.Geometry.Shapes.Quadrilateral" />
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesTrapezoid.g">
+            <summary>
+            The skew of the shape, i.e. the offset of the left side of the top segment from the local y-axis.
+            </summary>
+            <value>The skew.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesTrapezoid.a">
+            <summary>
+            Length of the sloped sides of the shape.
+            </summary>
+            <value>a.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesTrapezoid.CircumRadius">
+            <summary>
+            Gets the circumcenter radius, R, which describes a circle whose edges are defined by the 4 defining points of the shape.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IsoscelesTrapezoid.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Trapezoid" /> class.
+            </summary>
+            <param name="height">The height.</param>
+            <param name="topWidth">Width of the top.</param>
+            <param name="bottomWidth">Width of the bottom.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IsoscelesTrapezoid.getSkew(System.Double,System.Double)">
+            <summary>
+            Gets the skew.
+            </summary>
+            <param name="topWidth">Width of the top.</param>
+            <param name="bottomWidth">Width of the bottom.</param>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="T:MPT.Geometry.Shapes.IsoscelesTriangle">
+            <summary>
+            Any triangle that has two sides of equal length, a, or two angles of equal magnitude, α.
+            Implements the <see cref="T:MPT.Geometry.Shapes.Triangle" />
+            </summary>
+            <seealso cref="T:MPT.Geometry.Shapes.Triangle" />
+        </member>
+        <member name="F:MPT.Geometry.Shapes.IsoscelesTriangle._sideUnequal">
+            <summary>
+            The length of the unequal side.
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Shapes.IsoscelesTriangle._sidesEqual">
+            <summary>
+            The length of the two equal-length sides.
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesTriangle.AngleA">
+            <summary>
+            The two angles of equal magnitude, α, which are opposite of the two sides of equal length.
+            </summary>
+            <value>The alpha.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesTriangle.AngleB">
+            <summary>
+            The angle of differing magnitude, β, which is opposite of the side of unequal length, b.
+            </summary>
+            <value>The beta.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesTriangle.AngleC">
+            <summary>
+            The angle, γ, which is opposite of side c, and is equal in magnitude to angle α.
+            </summary>
+            <value>The beta.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesTriangle.a">
+            <summary>
+            Length of sides of equal length, a.
+            </summary>
+            <value>a.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesTriangle.b">
+            <summary>
+            Length of the unequal length side, b.
+            </summary>
+            <value>The b.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesTriangle.c">
+            <summary>
+            Length of side c, which is equal to side a.
+            </summary>
+            <value>The c.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesTriangle.h">
+            <summary>
+            Gets the height, which is measured perpendicular to side b.
+            </summary>
+            <value>The h.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesTriangle.InRadius">
+            <summary>
+            Gets the inradius, r, which describes a circle whose edge is tangent to all 3 sides of the triangle.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.IsoscelesTriangle.CircumRadius">
+            <summary>
+            Gets the circumcenter radius, R, which describes a circle whose edges are defined by the 3 defining points of the triangle.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IsoscelesTriangle.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.IsoscelesTriangle" /> class.
+            </summary>
+            <param name="lengthsEqualA">Length of sides of equal length, a.</param>
+            <param name="lengthB">The length b, of the base of the triangle. This is the unequal length.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IsoscelesTriangle.#ctor(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.IsoscelesTriangle" /> class.
+            </summary>
+            <param name="apexCoordinate">The apex coordinate.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IsoscelesTriangle.#ctor(System.Double,MPT.Math.Coordinates.Angle)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.IsoscelesTriangle" /> class.
+            </summary>
+            <param name="lengthB">The length b, of the base of the triangle. This is the unequal length.</param>
+            <param name="anglesEqualAlpha">The two angles of equal magnitude, α, which are opposite of the two sides of equal length.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IsoscelesTriangle.Area">
+            <summary>
+            Area of the shape.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Shapes.IShapeProperties.Ixyo">
+        <member name="M:MPT.Geometry.Shapes.IsoscelesTriangle.FormulateCoordinates">
             <summary>
-            Polar rotational inertia, passing through the centroid of the shape.
+            Formulates the local coordinates for the shape.
+            </summary>
+            <returns>IList&lt;CartesianCoordinate&gt;.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IsoscelesTriangle.getAlpha(System.Double,System.Double)">
+            <summary>
+            Gets the alpha angle.
+            </summary>
+            <param name="halfBase">Half of the base width.</param>
+            <param name="height">The height.</param>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IsoscelesTriangle.getBeta(System.Double,System.Double)">
+            <summary>
+            Gets the beta angle.
+            </summary>
+            <param name="halfBase">Half of the base width.</param>
+            <param name="height">The height.</param>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IsoscelesTriangle.getHeight">
+            <summary>
+            Gets the height.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IsoscelesTriangle.getInRadius">
+            <summary>
+            Gets the in radius.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.IsoscelesTriangle.getCircumRadius">
+            <summary>
+            Gets the circum radius.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="T:MPT.Geometry.Shapes.Kite">
+            <summary>
+            Represents a kite shape, which is a diamond shape with two different axes of symmetry.
+            Implements the <see cref="T:MPT.Geometry.Shapes.Quadrilateral" />
+            Implements the <see cref="T:MPT.Geometry.Shapes.IDefinedShape" />
+            </summary>
+            <seealso cref="T:MPT.Geometry.Shapes.Quadrilateral" />
+            <seealso cref="T:MPT.Geometry.Shapes.IDefinedShape" />
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Kite.g">
+            <summary>
+            The skew of the shape, i.e. the offset of the the top center point from the local y-axis.
+            </summary>
+            <value>The skew.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Kite.w">
+            <summary>
+            The overall/outside width.
+            </summary>
+            <value>The w.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Kite.q">
+            <summary>
+            The overall/outside height.
+            </summary>
+            <value>The q.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Kite.a">
+            <summary>
+            The length of the sloping segments to the left of the center points of the shape.
+            </summary>
+            <value>a.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Kite.b">
+            <summary>
+            The length of the sloping segments to the right of the center points of the shape.
+            </summary>
+            <value>a.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Kite.h">
+            <summary>
+            The height of the center points from the center of the shape.
+            </summary>
+            <value>The height.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Kite.Centroid">
+            <summary>
+            The centroid of the shape.
+            </summary>
+            <value>The centroid.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Kite.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Kite" /> class.
+            </summary>
+            <param name="width">The overall width.</param>
+            <param name="height">The overall height.</param>
+            <param name="skew">The skew, i.e. offset of the center point from the y-axis.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Kite.Area">
+            <summary>
+            Area of the shape.
             </summary>
             <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Shapes.IShapeProperties.Ix(System.Double)">
+        <member name="M:MPT.Geometry.Shapes.Kite.FormulateCoordinates">
             <summary>
-            Rotational inertia about the x-axis, passing through an axis offset from the centroid of the shape.
+            Formulates the local coordinates for the shape.
             </summary>
-            <param name="yOffset">Distance along the y-axis that the new coordinate axis is offset.</param>
-            <returns></returns>
+            <returns>IList&lt;CartesianCoordinate&gt;.</returns>
         </member>
-        <member name="M:MPT.Geometry.Shapes.IShapeProperties.Iy(System.Double)">
+        <member name="T:MPT.Geometry.Shapes.Octagon">
             <summary>
-            Rotational inertia about the y-axis, passing through an axis offset from the centroid of the shape.
+            A regular polygon of 8 sides.
+            Implements the <see cref="T:MPT.Geometry.Shapes.RegularPolygon" />
             </summary>
-            <param name="xOffset">Distance along the x-axis that the new coordinate axis is offset.</param>
-            <returns></returns>
+            <seealso cref="T:MPT.Geometry.Shapes.RegularPolygon" />
         </member>
-        <member name="M:MPT.Geometry.Shapes.IShapeProperties.Ixy(System.Double,System.Double)">
+        <member name="F:MPT.Geometry.Shapes.Octagon._setNumberOfSides">
             <summary>
-            Rotational inertia about the y-axis, passing through an axis offset from the centroid of the shape.
+            The number of sides.
             </summary>
-            <param name="xOffset">Distance along the x-axis that the new coordinate axis is offset.</param>
-            <param name="yOffset">Distance along the y-axis that the new coordinate axis is offset.</param>
-            <returns></returns>
         </member>
-        <member name="M:MPT.Geometry.Shapes.IShapeProperties.Ixy(MPT.Math.Coordinates.CartesianCoordinate)">
+        <member name="M:MPT.Geometry.Shapes.Octagon.#ctor(System.Double)">
             <summary>
-            Coordinate for the point offset from the origin.
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Octagon"/> class.
             </summary>
-            <param name="coordsOffset"></param>
-            <returns></returns>
+            <param name="circumRadius">The circumradius.</param>
         </member>
-        <member name="M:MPT.Geometry.Shapes.IShapeProperties.IxRotation(System.Double)">
+        <member name="M:MPT.Geometry.Shapes.Octagon.OctagonByInradius(System.Double)">
             <summary>
-            Rotational inertia about the x-axis, passing through an axis rotated off from the principal axes.
+            Returns an octagon sized by the inradius.
             </summary>
-            <param name="alpha">Rotation of the axes from the principal axes [radians].</param>
-            <returns></returns>
+            <param name="inRadius">The inradius.</param>
+            <returns>RegularPolygon.</returns>
         </member>
-        <member name="M:MPT.Geometry.Shapes.IShapeProperties.IyRotation(System.Double)">
+        <member name="M:MPT.Geometry.Shapes.Octagon.OctagonByCircumradius(System.Double)">
             <summary>
-            Rotational inertia about the y-axis, passing through an axis rotated off from the principal axes.
+            Returns an octagon sized by the circumradius.
             </summary>
-            <param name="alpha">Rotation of the axes from the principal axes [radians].</param>
-            <returns></returns>
-        </member>
-        <member name="M:MPT.Geometry.Shapes.IShapeProperties.IxyRotation(System.Double)">
-            <summary>
-            Rotational inertia about the x-axis, passing through an axis rotated off from the principal axes.
-            </summary>
-            <param name="alpha">Rotation of the axes from the principal axes [radians].</param>
-            <returns></returns>
+            <returns>RegularPolygon.</returns>
         </member>
         <member name="T:MPT.Geometry.Shapes.Parallelogram">
             <summary>
             Represents a parallelogram shape, with the origin at the lower left corner, and the bottom edge aligned with the x-axis.
             </summary>
         </member>
+        <member name="P:MPT.Geometry.Shapes.Parallelogram.b_b">
+            <summary>
+            The bottom width.
+            </summary>
+            <value>The width bottom.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Parallelogram.a">
+            <summary>
+            Length of the sloped sides of the shape.
+            </summary>
+            <value>a.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Parallelogram.#ctor(System.Double,System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Trapezoid" /> class.
+            </summary>
+            <param name="height">The height.</param>
+            <param name="width">The width.</param>
+            <param name="skew">The skew offset of the top segment.</param>
+        </member>
+        <member name="T:MPT.Geometry.Shapes.Pentagon">
+            <summary>
+            A regular polygon of 5 sides.
+            Implements the <see cref="T:MPT.Geometry.Shapes.RegularPolygon" />
+            </summary>
+            <seealso cref="T:MPT.Geometry.Shapes.RegularPolygon" />
+        </member>
+        <member name="F:MPT.Geometry.Shapes.Pentagon._setNumberOfSides">
+            <summary>
+            The number of sides.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Pentagon.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Pentagon"/> class.
+            </summary>
+            <param name="circumRadius">The circumradius.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Pentagon.PentagonByInradius(System.Double)">
+            <summary>
+            Returns a pentagon sized by the inradius.
+            </summary>
+            <param name="inRadius">The inradius.</param>
+            <returns>RegularPolygon.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Pentagon.PentagonByCircumradius(System.Double)">
+            <summary>
+            Returns a pentagon sized by the circumradius.
+            </summary>
+            <returns>RegularPolygon.</returns>
+        </member>
         <member name="T:MPT.Geometry.Shapes.Polygon">
             <summary>
             Represents a polygon shape.
+            A plane figure that is described by a finite number of straight line segments connected to form a closed polygonal chain or polygonal circuit.
             </summary>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Polygon.Points">
+            <summary>
+            The points that define the polygon.
+            </summary>
+            <value>The points.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Polygon.Sides">
+            <summary>
+            The sides that define the polygon.
+            </summary>
+            <value>The sides.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Polygon.Angles">
+            <summary>
+            The interior angles that are formed within the polygon.
+            </summary>
+            <value>The angles.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Polygon" /> class.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.#ctor(System.Collections.Generic.IEnumerable{MPT.Math.Coordinates.CartesianCoordinate})">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Segments.PolyLine" /> class.
+            </summary>
+            <param name="coordinates">The coordinates.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.IsValidShape">
+            <summary>
+            Determines whether shape is properly formed.
+            </summary>
+            <returns><c>true</c> if [is valid shape]; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.isClosedShape">
+            <summary>
+            Determines whether [is closed shape].
+            </summary>
+            <returns>System.Boolean.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.closeShapeIfNeeded">
+            <summary>
+            Closes the shape if needed.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.PointAt(System.Int32)">
+            <summary>
+            Returns the point at the specified point index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.SideAt(System.Int32)">
+            <summary>
+            Returns the side at the specified side index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>LineSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.AngleInteriorAt(System.Int32)">
+            <summary>
+            Returns the interior angle at the specified point index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>Angle.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.getAllCoordinates">
+            <summary>
+            Gets all coordinates defining the polygon.
+            This does not include the wrap-around coordinate used for closure.
+            </summary>
+            <returns>List&lt;CartesianCoordinate&gt;.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.getAllSides">
+            <summary>
+            Gets all sides defining the polygon.
+            </summary>
+            <returns>List&lt;LineSegment&gt;.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.getAnglesBetweenAllSides">
+            <summary>
+            Gets all of the interior angles of the polygon.
+            </summary>
+            <returns>List&lt;Angle&gt;.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.getAngleBetweenSides(MPT.Geometry.Segments.LineSegment,MPT.Geometry.Segments.LineSegment)">
+            <summary>
+            Gets the angle between two adjacent sides of the shape.
+            </summary>
+            <param name="side1">The side1.</param>
+            <param name="side2">The side2.</param>
+            <returns>Angle.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.Area">
+            <summary>
+            Area of the shape.
+            + if points are ordered counter-clockwise.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.Xo">
+            <summary>
+            X-coordinate of the centroid of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.Yo">
+            <summary>
+            Y-coordinate of the centroid of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.Area_i(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Returns twice the area under the quadrilateral formed between the segment and the y-axis.
+            + if points are ordered counter-clockwise.
+            </summary>
+            <param name="segment">The segment.</param>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Polygon.SetCoordinates(System.Collections.Generic.IEnumerable{MPT.Math.Coordinates.CartesianCoordinate})">
+            <summary>
+            Sets the coordinates and ensures that a valid shape is formed.
+            </summary>
+            <param name="coordinates">The coordinates.</param>
         </member>
         <member name="T:MPT.Geometry.Shapes.Quadrilateral">
             <summary>
-            Represents any quadrilateral shape, with the origin at the lower left corner. 
-            This can include triangles
+            Represents any quadrilateral shape, with the origin at the lower left corner.
+            A four-sided polygon with four angles.
+            The five most common types are the parallelogram, the rectangle, the square, the trapezoid, and the rhombus.
             </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Quadrilateral.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Quadrilateral" /> class.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Quadrilateral.#ctor(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Quadrilateral" /> class.
+            </summary>
+            <param name="point1">The point1.</param>
+            <param name="point2">The point2.</param>
+            <param name="point3">The point3.</param>
+            <param name="point4">The point4.</param>
         </member>
         <member name="T:MPT.Geometry.Shapes.Rectangle">
             <summary>
             Represents a rectangular shape, with the origin at the lower left corner.
             </summary>
         </member>
+        <member name="P:MPT.Geometry.Shapes.Rectangle.b_b">
+            <summary>
+            The bottom width.
+            </summary>
+            <value>The width bottom.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Rectangle.g">
+            <summary>
+            The skew of the shape, i.e. the offset of the left side of the top segment from the local y-axis.
+            </summary>
+            <value>The skew.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Rectangle.Centroid">
+            <summary>
+            The centroid of the shape.
+            </summary>
+            <value>The centroid.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Rectangle.CircumRadius">
+            <summary>
+            Gets the circumcenter radius, R, which describes a circle whose edges are defined by the 4 defining points of the shape.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Rectangle.CircumCenter">
+            <summary>
+            Gets the circumcenter, which describes the center of a circle whose edges are defined by the 4 defining points of the shape.
+            </summary>
+            <value>The in center.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Rectangle.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Rectangle" /> class.
+            </summary>
+            <param name="width">The width.</param>
+            <param name="height">The height.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Rectangle.Area">
+            <summary>
+            Area of the shape.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:MPT.Geometry.Shapes.RegularPolygon">
             <summary>
-            Class RegularPolygon.
+            Represents a polygon shape where all sides and angles are congruent.
             Implements the <see cref="T:MPT.Geometry.Shapes.Polygon" />
             </summary>
             <seealso cref="T:MPT.Geometry.Shapes.Polygon" />
         </member>
+        <member name="F:MPT.Geometry.Shapes.RegularPolygon._minNumberOfSides">
+            <summary>
+            The minimum number of sides (5): 4 sides is a square,  3 sides is an equilateral triangle, 2 sides or fewer is not a shape.
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Shapes.RegularPolygon._numberOfSides">
+            <summary>
+            The number of sides
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Shapes.RegularPolygon._lengthOfSides">
+            <summary>
+            The length of the sides
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RegularPolygon.NumberOfSides">
+            <summary>
+            Gets the number of sides.
+            </summary>
+            <value>The number of sides.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RegularPolygon.SideLength">
+            <summary>
+            Length of any side of the polygon.
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RegularPolygon.Apothem">
+            <summary>
+            The line segment from the center of a regular polygon to the midpoint of a side, or the length of this segment.
+            Same as the inradius; that is, the radius of a regular polygon's inscribed circle.
+            </summary>
+            <value>The apothem.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RegularPolygon.InRadius">
+            <summary>
+            Gets the inradius.
+            </summary>
+            <value>The inradius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RegularPolygon.InCenter">
+            <summary>
+            Gets the incenter, which describes the center of a circle whose edge is tangent to all sides of the shape.
+            </summary>
+            <value>The in center.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RegularPolygon.CircumRadius">
+            <summary>
+            Gets the circumradius.
+            </summary>
+            <value>The circumradius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RegularPolygon.CircumCenter">
+            <summary>
+            Gets the circumcenter, which describes the center of a circle whose edges are defined by the defining points of the shape.
+            </summary>
+            <value>The in center.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RegularPolygon.AngleInterior">
+            <summary>
+            Gets the interior angle.
+            </summary>
+            <value>The interior angle.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RegularPolygon.AngleInteriorSum">
+            <summary>
+            Gets the sum of the interior angles.
+            </summary>
+            <value>The sum of the interior angles.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RegularPolygon.#ctor(System.Int32,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.RegularPolygon"/> class.
+            </summary>
+            <param name="numberOfSides">The number of sides, &gt;= 5</param>
+            <param name="circumRadius">The circumradius.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RegularPolygon.RegularPolygonByInradius(System.Int32,System.Double)">
+            <summary>
+            Returns a regular polygon sized by the inradius.
+            </summary>
+            <param name="numberOfSides">The number of sides.</param>
+            <param name="inRadius">The inradius.</param>
+            <returns>RegularPolygon.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RegularPolygon.RegularPolygonByCircumradius(System.Int32,System.Double)">
+            <summary>
+            Returns a regular polygon sized by the circumradius.
+            </summary>
+            <param name="numberOfSides">The number of sides.</param>
+            <param name="circumRadius">The circumradius.</param>
+            <returns>RegularPolygon.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RegularPolygon.formulateCoordinates">
+            <summary>
+            Formulates the coordinates.
+            </summary>
+            <returns>IList&lt;CartesianCoordinate&gt;.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RegularPolygon.Area">
+            <summary>
+            Area of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RegularPolygon.Perimeter">
+            <summary>
+            Length of all sides of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RegularPolygon.Xo">
+            <summary>
+            X-coordinate of the centroid of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RegularPolygon.Yo">
+            <summary>
+            Y-coordinate of the centroid of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:MPT.Geometry.Shapes.Rhombus">
+            <summary>
+            Represents a rhombus shape, which is a doubly-symmetric diamond.
+            Implements the <see cref="T:MPT.Geometry.Shapes.Kite" />
+            </summary>
+            <seealso cref="T:MPT.Geometry.Shapes.Kite" />
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Rhombus.g">
+            <summary>
+            The skew of the shape, i.e. the offset of the the top center point from the local y-axis.
+            </summary>
+            <value>The skew.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Rhombus.b">
+            <summary>
+            The length of the sloping segments to the right of the center points of the shape.
+            </summary>
+            <value>a.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Rhombus.InRadius">
+            <summary>
+            Gets the inradius, r, which describes a circle whose edge is tangent to all 4 sides of the shape.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Rhombus.InCenter">
+            <summary>
+            Gets the incenter, which describes the center of a circle whose edge is tangent to all 4 sides of the shape.
+            </summary>
+            <value>The in center.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Rhombus.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Rhombus" /> class.
+            </summary>
+            <param name="width">The overall width.</param>
+            <param name="height">The overall height.</param>
+        </member>
+        <member name="T:MPT.Geometry.Shapes.RightTriangle">
+            <summary>
+            Any triangle where one of the three angles is 90°.
+            Implements the <see cref="T:MPT.Geometry.Shapes.Triangle" />
+            </summary>
+            <seealso cref="T:MPT.Geometry.Shapes.Triangle" />
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RightTriangle.AngleA">
+            <summary>
+            The angle, α, which is opposite of side a.
+            </summary>
+            <value>The alpha.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RightTriangle.AngleB">
+            <summary>
+            The angle, β, which is opposite of side b.
+            </summary>
+            <value>The beta.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RightTriangle.AngleC">
+            <summary>
+            The angle, γ, which is opposite of side c and is 90°.
+            </summary>
+            <value>The beta.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RightTriangle.c">
+            <summary>
+            Length of the hypotenuse side, c.
+            </summary>
+            <value>The c.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RightTriangle.e">
+            <summary>
+            Length of segment e, which spans from point a to the perpendicular intersection of h along side c.
+            </summary>
+            <value>The e.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RightTriangle.d">
+            <summary>
+            Length of segment d, which spans from point b to the perpendicular intersection of h along side c.
+            </summary>
+            <value>The e.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RightTriangle.h">
+            <summary>
+            Gets the height, which is the measurement of the line formed from any point to a perpendicular intersection with a side.
+            </summary>
+            <value>The h.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RightTriangle.InRadius">
+            <summary>
+            Gets the inradius, r, which describes a circle whose edge is tangent to all 3 sides of the triangle.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.RightTriangle.CircumRadius">
+            <summary>
+            Gets the circumcenter radius, R, which describes a circle whose edges are defined by the 3 defining points of the triangle.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RightTriangle.#ctor(System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.RightTriangle" /> class.
+            </summary>
+            <param name="width">The width.</param>
+            <param name="height">The height.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RightTriangle.#ctor(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.RightTriangle" /> class.
+            </summary>
+            <param name="apexCoordinate">The apex coordinate.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RightTriangle.Area">
+            <summary>
+            Area of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RightTriangle.FormulateCoordinates">
+            <summary>
+            Formulates the local coordinates for the shape.
+            </summary>
+            <returns>IList&lt;CartesianCoordinate&gt;.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RightTriangle.getAlpha(System.Double,System.Double)">
+            <summary>
+            Gets the alpha angle.
+            </summary>
+            <param name="width">The width.</param>
+            <param name="height">The height.</param>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RightTriangle.getBeta(System.Double,System.Double)">
+            <summary>
+            Gets the beta angle.
+            </summary>
+            <param name="width">The width.</param>
+            <param name="height">The height.</param>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.RightTriangle.getHypotenuse(System.Double,System.Double)">
+            <summary>
+            Gets the hypotenuse.
+            </summary>
+            <param name="width">The width.</param>
+            <param name="height">The height.</param>
+            <returns>System.Double.</returns>
+        </member>
         <member name="T:MPT.Geometry.Shapes.Shape">
             <summary>
             Base abstract Shape.
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Shapes.Shape._polyline">
+            <summary>
+            The polyline that describes the shape.
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Shapes.Shape._translation">
+            <summary>
+            The offset of the shape from it's default local coordinates.
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Shapes.Shape._rotation">
+            <summary>
+            The rotation of the shape from it's default local orientation.
             </summary>
         </member>
         <member name="P:MPT.Geometry.Shapes.Shape.Tolerance">
@@ -1217,6 +2546,12 @@
             If true, the shape is considered to be a hole, otherwise it is a solid.
             </summary>
         </member>
+        <member name="P:MPT.Geometry.Shapes.Shape.Centroid">
+            <summary>
+            The centroid of the shape.
+            </summary>
+            <value>The centroid.</value>
+        </member>
         <member name="M:MPT.Geometry.Shapes.Shape.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Shape"/> class.
@@ -1228,25 +2563,800 @@
             </summary>
             <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
         </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.GetPerimeterFromPolyline">
+            <summary>
+            Gets the perimeter length from polyline.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.PolyLine">
+            <summary>
+            Returns a copy of the polyline that forms the shape.
+            </summary>
+            <returns>PolyLine.</returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.PointBoundary">
+            <summary>
+            Returns the points that define the shape.
+            </summary>
+            <returns>PointBoundary.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.Extents">
+            <summary>
+            Returns the overall extents of the shape. 
+            This includes extents for curve segments in between vertices.
+            </summary>
+            <returns>PointExtents.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.Area">
+            <summary>
+            Area of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.Perimeter">
+            <summary>
+            Length of all sides of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.Xo">
+            <summary>
+            X-coordinate of the centroid of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.Yo">
+            <summary>
+            Y-coordinate of the centroid of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.Translate(MPT.Math.Coordinates.CartesianOffset)">
+            <summary>
+            Translates the object.
+            </summary>
+            <param name="translation">The amount to translate by.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.translateSegments(MPT.Math.Coordinates.CartesianOffset)">
+            <summary>
+            Translates the segments.
+            </summary>
+            <param name="translation">The amount to translate by.</param>
+            <returns>IList&lt;IPathSegment&gt;.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.ScaleFromPoint(System.Double,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Scales the object from the provided reference point.
+            </summary>
+            <param name="scale">The amount to scale relative to the reference point.</param>
+            <param name="referencePoint">The reference point.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.scaleSegmentsFromPoint(System.Double,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Scales the segments from the provided reference point.
+            </summary>
+            <param name="scale">The amount to scale relative to the reference point.</param>
+            <param name="referencePoint">The reference point.</param>
+            <returns>IList&lt;IPathSegment&gt;.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.RotateAboutPoint(MPT.Math.Coordinates.Angle,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Rotates the object about the reference point.
+            </summary>
+            <param name="rotation">The amount of rotation. [rad]</param>
+            <param name="referencePoint">The center of rotation reference point.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Shape.rotateSegmentsAboutPoint(MPT.Math.Coordinates.Angle,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Rotates the segments about the reference point.
+            </summary>
+            <param name="rotation">The amount of rotation. [rad]</param>
+            <param name="referencePoint">The center of rotation reference point.</param>
+            <returns>IList&lt;IPathSegment&gt;.</returns>
+        </member>
         <member name="T:MPT.Geometry.Shapes.Square">
             <summary>
-            Represents a sqauare shape, with the origin at the lower left corner.
+            Represents a square shape, with the origin at the lower left corner.
             </summary>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Square.h">
+            <summary>
+            The height.
+            </summary>
+            <value>The height.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Square.InRadius">
+            <summary>
+            Gets the inradius, r, which describes a circle whose edge is tangent to all 4 sides of the shape.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Square.InCenter">
+            <summary>
+            Gets the incenter, which describes the center of a circle whose edge is tangent to all 4 sides of the shape.
+            </summary>
+            <value>The in center.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Square.CircumRadius">
+            <summary>
+            Gets the circumcenter radius, R, which describes a circle whose edges are defined by the 4 defining points of the shape.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Square.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Square" /> class.
+            </summary>
+            <param name="width">The width.</param>
         </member>
         <member name="T:MPT.Geometry.Shapes.Trapezoid">
             <summary>
             Represents a trapezoidal shape, with the origin at the lower left corner.
             </summary>
         </member>
+        <member name="P:MPT.Geometry.Shapes.Trapezoid.b_t">
+            <summary>
+            The top width.
+            </summary>
+            <value>The width top.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Trapezoid.b_b">
+            <summary>
+            The bottom width.
+            </summary>
+            <value>The width bottom.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Trapezoid.h">
+            <summary>
+            The height.
+            </summary>
+            <value>The height.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Trapezoid.g">
+            <summary>
+            The skew of the shape, i.e. the offset of the left side of the top segment from the local y-axis.
+            </summary>
+            <value>The skew.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Trapezoid.#ctor(System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Trapezoid" /> class.
+            </summary>
+            <param name="height">The height.</param>
+            <param name="topWidth">Width of the top.</param>
+            <param name="bottomWidth">Width of the bottom.</param>
+            <param name="skew">The skew offset of the top segment.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Trapezoid.Area">
+            <summary>
+            Area of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Trapezoid.Xo">
+            <summary>
+            The x centroid in local coordinatesfor the shape.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Trapezoid.Yo">
+            <summary>
+            The y centroid in local coordinatesfor the shape.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Trapezoid.FormulateCoordinates">
+            <summary>
+            Formulates the local coordinates for the shape.
+            </summary>
+            <returns>IList&lt;CartesianCoordinate&gt;.</returns>
+        </member>
         <member name="T:MPT.Geometry.Shapes.Triangle">
             <summary>
             Represents a triangular shape, with the origin at the lower left corner.
+            This is any closed shape of 3 straight sides formed by 3 distinct coordinates.
             </summary>
         </member>
-        <member name="T:MPT.Geometry.Shapes.Wedge">
+        <member name="P:MPT.Geometry.Shapes.Triangle.PointA">
             <summary>
-            Represents a rectangular shape, with the origin at the lower left corner.
+            Gets the coordinate for point a.
             </summary>
+            <value>The point a.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.PointB">
+            <summary>
+            Gets the coordinate for point b.
+            </summary>
+            <value>The point b.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.PointC">
+            <summary>
+            Gets the coordinate for point c.
+            </summary>
+            <value>The point c.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.SideA">
+            <summary>
+            Gets the side a.
+            </summary>
+            <value>The side a.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.SideB">
+            <summary>
+            Gets the side b.
+            </summary>
+            <value>The side b.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.SideC">
+            <summary>
+            Gets the side c.
+            </summary>
+            <value>The side c.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.AngleA">
+            <summary>
+            The angle which is opposite of side a.
+            </summary>
+            <value>The alpha.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.AngleB">
+            <summary>
+            The angle which is opposite of side b.
+            </summary>
+            <value>The beta.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.AngleC">
+            <summary>
+            The angle which is opposite of side c.
+            </summary>
+            <value>The beta.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.a">
+            <summary>
+            Length of the vertical side, if applicable, a .
+            </summary>
+            <value>a.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.b">
+            <summary>
+            Length of the base/horizontal side, if applicable, b.
+            </summary>
+            <value>The b.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.c">
+            <summary>
+            Length of the hypotenuse side, if applicable, c.
+            </summary>
+            <value>The c.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.h">
+            <summary>
+            Gets the height, which is the measurement of the line formed from any point to a perpendicular intersection with a side.
+            This is one of the altitudes defined for the shape.
+            </summary>
+            <value>The h.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.InRadius">
+            <summary>
+            Gets the inradius, r, which describes a circle whose edge is tangent to all 3 sides of the triangle.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.InCenter">
+            <summary>
+            Gets the incenter, which describes the center of a circle whose edge is tangent to all 3 sides of the triangle.
+            This is also the intersection of projected lines from angle bisectors.
+            </summary>
+            <value>The in center.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.CircumRadius">
+            <summary>
+            Gets the circumcenter radius, R, which describes a circle whose edges are defined by the 3 defining points of the triangle.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.CircumCenter">
+            <summary>
+            Gets the circumcenter, which describes the center of a circle whose edges are defined by the 3 defining points of the triangle.
+            This is also the intersection location of projected lines from perpendicular side bisectors.
+            </summary>
+            <value>The in center.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.OrthoCenter">
+            <summary>
+            The intersection of the three altitude lines, which are formed by a line drawn from an angle to a perpendicular intersection with the opposite side.
+            </summary>
+            <value>The ortho center.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.SemiPerimeter">
+            <summary>
+            Gets the semi-perimeter.
+            </summary>
+            <value>The semi perimeter.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle.Centroid">
+            <summary>
+            The intersection of the three median lines, which are formed by a line drawn from the midpoint of a side through the opposite angle.
+            </summary>
+            <value>The centroid.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Triangle" /> class.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.#ctor(MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Quadrilateral" /> class.
+            </summary>
+            <param name="pointA">The point opposite side a.</param>
+            <param name="pointB">The point opposite side b.</param>
+            <param name="pointC">The point opposite side c.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.setCenterCoordinates">
+            <summary>
+            Sets the center coordinates.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.setSides">
+            <summary>
+            Sets the sides.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.setInCenter">
+            <summary>
+            Sets the in-center.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.setInRadius">
+            <summary>
+            Sets the in-radius.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.setCircumcenter">
+            <summary>
+            Sets the circumcenter.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.setCircumradius">
+            <summary>
+            Sets the circumradius.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.setOrthocenter">
+            <summary>
+            Sets the orthocenter.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.Area">
+            <summary>
+            Area of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.Perimeter">
+            <summary>
+            Length of all sides of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AltitudeLengthA">
+            <summary>
+            The length of altitude line A, which spans from point A to a perpendicular intersection with side A.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AltitudeCoordinateA">
+            <summary>
+            The coordinate where altitude line A intersects side A.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AltitudeLineA">
+            <summary>
+            The line which spans from point A to a perpendicular intersection with side A.
+            </summary>
+            <returns>LineSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AltitudeLengthB">
+            <summary>
+            The length of altitude line B, which spans from point B to a perpendicular intersection with side B.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AltitudeCoordinateB">
+            <summary>
+            The coordinate where altitude line B intersects side B.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AltitudeLineB">
+            <summary>
+            The line which spans from point B to a perpendicular intersection with side B.
+            </summary>
+            <returns>LineSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AltitudeLengthC">
+            <summary>
+            The length of altitude line C, which spans from point C to a perpendicular intersection with side C.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AltitudeCoordinateC">
+            <summary>
+            The coordinate where altitude line C intersects side C.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AltitudeLineC">
+            <summary>
+            The line which spans from point C to a perpendicular intersection with side C.
+            </summary>
+            <returns>LineSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.MedianLengthA">
+            <summary>
+            The length of median line A, which spans from point A to an intersection at the midpoint of side A.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.MedianCoordinateA">
+            <summary>
+            The coordinate where median line A intersects side A.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.MedianLineA">
+            <summary>
+            The line which spans from point A to an intersection at the midpoint of side A.
+            </summary>
+            <returns>LineSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.MedianLengthB">
+            <summary>
+            The length of median line B, which spans from point B to an intersection at the midpoint of side B.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.MedianCoordinateB">
+            <summary>
+            The coordinate where median line B intersects side B.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.MedianLineB">
+            <summary>
+            The line which spans from point B to an intersection at the midpoint of side B.
+            </summary>
+            <returns>LineSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.MedianLengthC">
+            <summary>
+            The length of median line C, which spans from point C to an intersection at the midpoint of side C.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.MedianCoordinateC">
+            <summary>
+            The coordinate where median line C intersects side C.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.MedianLineC">
+            <summary>
+            The line which spans from point C to an intersection at the midpoint of side C.
+            </summary>
+            <returns>LineSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AngleBisectorA">
+            <summary>
+            The length of angle bisector line A, which spans from point A to an intersection with side A such that angle A is bisected.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AngleBisectorCoordinateA">
+            <summary>
+            The coordinate where angle bisector line A intersects side A.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AngleBisectorLineA">
+            <summary>
+            The line which spans from point A to an intersection with side A such that angle A is bisected.
+            </summary>
+            <returns>LineSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AngleBisectorB">
+            <summary>
+            The length of angle bisector line B, which spans from point B to an intersection with side B such that angle B is bisected.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AngleBisectorCoordinateB">
+            <summary>
+            The coordinate where angle bisector line B intersects side B.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AngleBisectorLineB">
+            <summary>
+            The line which spans from point B to an intersection with side B such that angle B is bisected.
+            </summary>
+            <returns>LineSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AngleBisectorC">
+            <summary>
+            The length of angle bisector line C, which spans from point C to an intersection with side C such that angle C is bisected.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AngleBisectorCoordinateC">
+            <summary>
+            The coordinate where angle bisector line C intersects side C.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.AngleBisectorLineC">
+            <summary>
+            The line which spans from point C to an intersection with side C such that angle C is bisected.
+            </summary>
+            <returns>LineSegment.</returns>
+        </member>
+        <member name="F:MPT.Geometry.Shapes.Triangle._A">
+            <summary>
+            a
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Shapes.Triangle._B">
+            <summary>
+            The b
+            </summary>
+        </member>
+        <member name="F:MPT.Geometry.Shapes.Triangle._C">
+            <summary>
+            The c
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.setPerpendicularSideBisectors">
+            <summary>
+            Sets the perpendicular side bisectors sides arranged in descending order.
+            </summary>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.PerpendicularSideBisectorA">
+            <summary>
+            The length of perpendicular side bisector line A, which spans from the circumcenter to a perpendicular intersection with side A such that side A is bisected.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.PerpendicularSideBisectorCoordinateA">
+            <summary>
+            The coordinate where perpendicular side bisector line A intersects side A.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.PerpendicularSideBisectorLineA">
+            <summary>
+            The line which spans from the circumcenter to a perpendicular intersection with side A such that side A is bisected.
+            </summary>
+            <returns>LineSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.PerpendicularSideBisectorB">
+            <summary>
+            The length of perpendicular side bisector line B, which spans from the circumcenter to a perpendicular intersection with side B such that side B is bisected.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.PerpendicularSideBisectorCoordinateB">
+            <summary>
+            The coordinate where perpendicular side bisector line BA intersects side B.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.PerpendicularSideBisectorLineB">
+            <summary>
+            The line which spans from the circumcenter to a perpendicular intersection with side B such that side B is bisected.
+            </summary>
+            <returns>LineSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.PerpendicularSideBisectorC">
+            <summary>
+            The length of perpendicular side bisector line C, which spans from the circumcenter to a perpendicular intersection with side C such that side C is bisected.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.PerpendicularSideBisectorCoordinateC">
+            <summary>
+            The coordinate where perpendicular side bisector line C intersects side C.
+            </summary>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.PerpendicularSideBisectorLineC">
+            <summary>
+            The line which spans from the circumcenter to a perpendicular intersection with side C such that side C is bisected.
+            </summary>
+            <returns>LineSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.projectionIntersection(MPT.Math.Coordinates.CartesianCoordinate,MPT.Geometry.Segments.LineSegment,MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Returns a coordinate that is the intersection of a line projected from a corner through a midpoint into the opposite side.
+            </summary>
+            <param name="point">The corner point.</param>
+            <param name="opposingSide">The opposing side.</param>
+            <param name="center">The center point used for creating the projection line.</param>
+            <returns>CartesianCoordinate.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.getAngleA">
+            <summary>
+            Gets the angle alpha.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.getAngleB">
+            <summary>
+            Gets the angle beta.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle.getAngleC">
+            <summary>
+            Gets the angle gamma.
+            </summary>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="T:MPT.Geometry.Shapes.Triangle306090">
+            <summary>
+            A triangle of angles 30°, 60° &amp; 90°.
+            Implements the <see cref="T:MPT.Geometry.Shapes.RightTriangle" />
+            </summary>
+            <seealso cref="T:MPT.Geometry.Shapes.RightTriangle" />
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle306090.AngleA">
+            <summary>
+            The angle, α, which is opposite of side a and is 30°.
+            </summary>
+            <value>The alpha.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle306090.AngleB">
+            <summary>
+            The angle, β, which is opposite of side b and is 60°.
+            </summary>
+            <value>The beta.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle306090.AngleC">
+            <summary>
+            The angle, γ, which is opposite of side c and is 90°.
+            </summary>
+            <value>The beta.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle306090.b">
+            <summary>
+            Length of the base/horizontal side, b.
+            </summary>
+            <value>The b.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle306090.c">
+            <summary>
+            Length of the hypotenuse side, c.
+            </summary>
+            <value>The c.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle306090.InRadius">
+            <summary>
+            Gets the inradius, r, which describes a circle whose edge is tangent to all 3 sides of the triangle.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle306090.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Triangle306090" /> class.
+            </summary>
+            <param name="heightA">The height a.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle306090.Area">
+            <summary>
+            Area of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle306090.getWidth(System.Double)">
+            <summary>
+            Gets the width.
+            </summary>
+            <param name="heightA">The height a.</param>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle306090.getHypotenuse(System.Double)">
+            <summary>
+            Gets the hypotenuse.
+            </summary>
+            <param name="heightA">The height a.</param>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="T:MPT.Geometry.Shapes.Triangle345">
+            <summary>
+            Smallest possible integer lengths for a right triangle.
+            Implements the <see cref="T:MPT.Geometry.Shapes.RightTriangle" />
+            </summary>
+            <seealso cref="T:MPT.Geometry.Shapes.RightTriangle" />
+        </member>
+        <member name="F:MPT.Geometry.Shapes.Triangle345._scale">
+            <summary>
+            The scale that is applied to the sides of length 3, 4 &amp; 5 and all other derived properties.
+            </summary>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle345.a">
+            <summary>
+            Length of the vertical side, a .
+            </summary>
+            <value>a.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle345.b">
+            <summary>
+            Length of the base/horizontal side, b.
+            </summary>
+            <value>The b.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle345.c">
+            <summary>
+            Length of the hypotenuse side, c.
+            </summary>
+            <value>The c.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle345.InRadius">
+            <summary>
+            Gets the inradius, r, which describes a circle whose edge is tangent to all 3 sides of the triangle.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="P:MPT.Geometry.Shapes.Triangle345.CircumRadius">
+            <summary>
+            Gets the circumcenter radius, R, which describes a circle whose edges are defined by the 3 defining points of the triangle.
+            </summary>
+            <value>The in radius.</value>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle345.#ctor(System.Double)">
+            <summary>
+            Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Triangle345" /> class.
+            </summary>
+            <param name="scale">The scale to apply to the sides of lengths 3, 4 &amp; 5.</param>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle345.Area">
+            <summary>
+            Area of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle345.Perimeter">
+            <summary>
+            Length of all sides of the shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle345.getWidth(System.Double)">
+            <summary>
+            Gets the width.
+            </summary>
+            <param name="scale">The scale.</param>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle345.getHeight(System.Double)">
+            <summary>
+            Gets the height.
+            </summary>
+            <param name="scale">The scale.</param>
+            <returns>System.Double.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Shapes.Triangle345.getHypotenuse(System.Double)">
+            <summary>
+            Gets the hypotenuse.
+            </summary>
+            <param name="scale">The scale.</param>
+            <returns>System.Double.</returns>
         </member>
         <member name="T:MPT.Geometry.Tools.CoordinatesBoundary`1">
             <summary>
@@ -1264,17 +3374,6 @@
             <summary>
             The contents
             </summary>
-        </member>
-        <member name="F:MPT.Geometry.Tools.CoordinatesBoundary`1._coordinates">
-            <summary>
-            The coordinates.
-            </summary>
-        </member>
-        <member name="P:MPT.Geometry.Tools.CoordinatesBoundary`1.Coordinates">
-            <summary>
-            The coordinates that compose the boundary.
-            </summary>
-            <value>The boundary.</value>
         </member>
         <member name="P:MPT.Geometry.Tools.CoordinatesBoundary`1.Count">
             <summary>
@@ -1405,6 +3504,12 @@
             The <see cref="T:System.Array"></see> must have zero-based indexing.</param>
             <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
         </member>
+        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.Extents">
+            <summary>
+            Gets the extents.
+            </summary>
+            <returns>Extents&lt;T&gt;.</returns>
+        </member>
         <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.FirstCoordinate">
             <summary>
             Returns the first point of the boundary.
@@ -1416,12 +3521,6 @@
             Returns the last point of the boundary.
             </summary>
             <returns>CartesianCoordinate.</returns>
-        </member>
-        <member name="M:MPT.Geometry.Tools.CoordinatesBoundary`1.Extents">
-            <summary>
-            Gets the extents.
-            </summary>
-            <returns>Extents&lt;T&gt;.</returns>
         </member>
         <member name="F:MPT.Geometry.Tools.CoordinatesBoundary`1._arrayResizeRatio">
             <summary>
@@ -1734,6 +3833,12 @@
             </summary>
             <param name="coordinates">The coordinates.</param>
         </member>
+        <member name="M:MPT.Geometry.Tools.PointBoundary.Extents">
+            <summary>
+            Gets the extents.
+            </summary>
+            <returns>Extents&lt;CartesianCoordinate&gt;.</returns>
+        </member>
         <member name="M:MPT.Geometry.Tools.PointBoundary.Clear">
             <summary>
             Clears this instance.
@@ -1750,12 +3855,6 @@
             Removes from boundary.
             </summary>
             <param name="coordinates">The coordinates.</param>
-        </member>
-        <member name="M:MPT.Geometry.Tools.PointBoundary.Extents">
-            <summary>
-            Gets the extents.
-            </summary>
-            <returns>Extents&lt;CartesianCoordinate&gt;.</returns>
         </member>
         <member name="T:MPT.Geometry.Tools.PointExtents">
             <summary>
@@ -1861,6 +3960,12 @@
             </summary>
             <value>The count.</value>
         </member>
+        <member name="P:MPT.Geometry.Tools.SegmentsBoundary.IsReadOnly">
+            <summary>
+            Gets a value indicating whether the <see cref="T:System.Collections.Generic.ICollection`1"></see> is read-only.
+            </summary>
+            <value><c>true</c> if this instance is read only; otherwise, <c>false</c>.</value>
+        </member>
         <member name="P:MPT.Geometry.Tools.SegmentsBoundary.Item(System.Int32)">
             <summary>
             Gets or sets the <see cref="T:MPT.Geometry.Segments.IPathSegment"/> at the specified index.
@@ -1877,13 +3982,13 @@
             <summary>
             Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.SegmentsBoundary"/> class.
             </summary>
-            <param name="coordinates">The coordinates.</param>
+            <param name="segments">The segments.</param>
         </member>
         <member name="M:MPT.Geometry.Tools.SegmentsBoundary.#ctor(System.Collections.Generic.IEnumerable{MPT.Geometry.Segments.IPathSegment})">
             <summary>
             Initializes a new instance of the <see cref="T:MPT.Geometry.Tools.CoordinatesBoundary`1" /> class.
             </summary>
-            <param name="segments">The coordinates.</param>
+            <param name="segments">The segments.</param>
         </member>
         <member name="M:MPT.Geometry.Tools.SegmentsBoundary.AddFirst(MPT.Geometry.Segments.IPathSegment)">
             <summary>
@@ -1977,6 +4082,26 @@
             </summary>
             <returns>CartesianCoordinate.</returns>
         </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.FirstSegment">
+            <summary>
+            The first segment defining the segment boundary.
+            </summary>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.LastSegment">
+            <summary>
+            The last segment defining the segment boundary.
+            </summary>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.AdjacentSegments(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Returns the pair of segments that join at the provided coordinate.
+            If the point is the first or last point, the leading or following segment will be null.
+            </summary>
+            <param name="point">The point.</param>
+            <returns>Tuple&lt;IPathSegment, IPathSegment&gt;.</returns>
+        </member>
         <member name="M:MPT.Geometry.Tools.SegmentsBoundary.PointBoundary">
             <summary>
             Returns the points that define the boundary between segments.
@@ -1986,18 +4111,49 @@
         <member name="M:MPT.Geometry.Tools.SegmentsBoundary.Extents">
             <summary>
             Returns the overall extents of the segments boundary. 
-            This includes extends for curve shapes in between vertices.
+            This includes extents for curve shapes in between vertices.
             </summary>
             <returns>PointExtents.</returns>
         </member>
-        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.isValidFirstSegment(MPT.Geometry.Segments.IPathSegment)">
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.SplitSegment(MPT.Geometry.Segments.IPathSegment,System.Double)">
+            <summary>
+            Splits the segment at the relative position.
+            </summary>
+            <param name="segment">The segment.</param>
+            <param name="sRelative">The relative position along the path.</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.SplitSegment(System.Int32,System.Double)">
+            <summary>
+            Splits the segment at the relative position.
+            </summary>
+            <param name="index">The index of the segment to split.</param>
+            <param name="sRelative">The relative position along the path.</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.RemovePoint(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Removes the point, if present.
+            </summary>
+            <param name="point">The point.</param>
+            <returns><c>true</c> if XXXX, <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.areOfSamePathSegmentType(MPT.Geometry.Segments.IPathSegment,MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Determines if the path segments are of the same type.
+            </summary>
+            <param name="segment1">The segment1.</param>
+            <param name="segment2">The segment2.</param>
+            <returns>System.Boolean.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.IsValidFirstSegment(MPT.Geometry.Segments.IPathSegment)">
             <summary>
             Determines whether [is valid first segment] [the specified segment].
             </summary>
             <param name="segment">The segment.</param>
             <returns><c>true</c> if [is valid first segment] [the specified segment]; otherwise, <c>false</c>.</returns>
         </member>
-        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.isValidLastSegment(MPT.Geometry.Segments.IPathSegment)">
+        <member name="M:MPT.Geometry.Tools.SegmentsBoundary.IsValidLastSegment(MPT.Geometry.Segments.IPathSegment)">
             <summary>
             Determines whether [is valid last segment] [the specified segment].
             </summary>
