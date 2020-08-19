@@ -44,30 +44,18 @@ namespace MPT.Geometry.Shapes
         public override Angle AngleC => Numbers.PiOver2;
 
         /// <summary>
-        /// Length of the base/horizontal side, b.
-        /// </summary>
-        /// <value>The b.</value>
-        public override double b => getWidth(a);
-
-        /// <summary>
-        /// Length of the hypotenuse side, c.
-        /// </summary>
-        /// <value>The c.</value>
-        public override double c => getHypotenuse(a);
-
-        /// <summary>
         /// Gets the inradius, r, which describes a circle whose edge is tangent to all 3 sides of the triangle.
         /// </summary>
         /// <value>The in radius.</value>
-        public override double InRadius => 0.25 * a * (3.Sqrt() - 1);
+        public override double InRadius => 0.25 * SideLengthC() * (3.Sqrt() - 1);
         #endregion
 
         #region Initialization        
         /// <summary>
         /// Initializes a new instance of the <see cref="Triangle306090" /> class.
         /// </summary>
-        /// <param name="heightA">The height a.</param>
-        public Triangle306090(double heightA) : base(getWidth(heightA), heightA)
+        /// <param name="widthA">The length of side a.</param>
+        public Triangle306090(double widthA) : base(widthA, getHeight(widthA))
         {
 
         }
@@ -80,27 +68,40 @@ namespace MPT.Geometry.Shapes
         /// <returns></returns>
         public override double Area()
         {
-            return a.Squared() * 3.Sqrt() / 8;
+            return SideLengthC().Squared() * 3.Sqrt() / 8;
         }
+
+
+        /// <summary>
+        /// Length of the base/horizontal side, b.
+        /// </summary>
+        /// <value>The b.</value>
+        public override double SideLengthB() => getHeight(SideLengthA());
+
+        /// <summary>
+        /// Length of the hypotenuse side, c.
+        /// </summary>
+        /// <value>The c.</value>
+        public override double SideLengthC() => getHypotenuse(SideLengthA());
 
         /// <summary>
         /// Gets the width.
         /// </summary>
-        /// <param name="heightA">The height a.</param>
+        /// <param name="widthA">The length of side a.</param>
         /// <returns>System.Double.</returns>
-        private static double getWidth(double heightA)
+        private static double getHeight(double widthA)
         {
-            return 0.5 * heightA * 3.Sqrt();
+            return widthA * 3.Sqrt();
         }
 
         /// <summary>
         /// Gets the hypotenuse.
         /// </summary>
-        /// <param name="heightA">The height a.</param>
+        /// <param name="widthA">The length of side a.</param>
         /// <returns>System.Double.</returns>
-        private static double getHypotenuse(double heightA)
+        private static double getHypotenuse(double widthA)
         {
-            return 0.5 * heightA;
+            return 2 * widthA;
         }
         #endregion
     }

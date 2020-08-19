@@ -50,24 +50,6 @@ namespace MPT.Geometry.Shapes
         public override Angle AngleC => Numbers.PiOver3;
 
         /// <summary>
-        /// Length of side a.
-        /// </summary>
-        /// <value>a.</value>
-        public override double a => _sidesEqual;
-
-        /// <summary>
-        /// Length of side b, which lies horizontally as the base.
-        /// </summary>
-        /// <value>a.</value>
-        public override double b => _sidesEqual;
-
-        /// <summary>
-        /// Length of side c.
-        /// </summary>
-        /// <value>a.</value>
-        public override double c => _sidesEqual;
-
-        /// <summary>
         /// Gets the height, which is the measurement of the line formed from any point to a perpendicular intersection with a side.
         /// </summary>
         /// <value>The h.</value>
@@ -95,6 +77,7 @@ namespace MPT.Geometry.Shapes
         {
             _sidesEqual = sideLength.Abs();
             SetCoordinates(LocalCoordinates());
+            setCenterCoordinates();
         }
 
         /// <summary>
@@ -105,6 +88,7 @@ namespace MPT.Geometry.Shapes
         {
             _sidesEqual = 2 * apexCoordinate.X;
             SetCoordinates(LocalCoordinates());
+            setCenterCoordinates();
         }
         #endregion
 
@@ -126,6 +110,24 @@ namespace MPT.Geometry.Shapes
         {
             return 3 * _sidesEqual;
         }
+
+        /// <summary>
+        /// Length of side a.
+        /// </summary>
+        /// <value>a.</value>
+        public override double SideLengthA() => _sidesEqual;
+
+        /// <summary>
+        /// Length of side b, which lies horizontally as the base.
+        /// </summary>
+        /// <value>a.</value>
+        public override double SideLengthB() => _sidesEqual;
+
+        /// <summary>
+        /// Length of side c.
+        /// </summary>
+        /// <value>a.</value>
+        public override double SideLengthC() => _sidesEqual;
 
         /// <summary>
         /// Formulates the local coordinates for the shape.

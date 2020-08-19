@@ -122,6 +122,7 @@ namespace MPT.Geometry.Segments
             return TangentVector();
         }
 
+        // TODO: Test UpdateI
         /// <summary>
         /// Returns a copy of the segment with an updated I coordinate.
         /// </summary>
@@ -132,6 +133,7 @@ namespace MPT.Geometry.Segments
             return new LineSegment(newCoordinate, J);
         }
 
+        // TODO: Test UpdateJ
         /// <summary>
         /// Returns a copy of the segment with an updated J coordinate.
         /// </summary>
@@ -140,6 +142,16 @@ namespace MPT.Geometry.Segments
         public override IPathSegment UpdateJ(CartesianCoordinate newCoordinate)
         {
             return new LineSegment(I, newCoordinate);
+        }
+
+        // TODO: Test Reverse
+        /// <summary>
+        /// Returns a copy of the segment with the I- &amp; J-coordinates reversed.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        public IPathSegment Reverse()
+        {
+            return new LineSegment(J, I);
         }
         #endregion
 
@@ -228,9 +240,18 @@ namespace MPT.Geometry.Segments
             {
                 throw new ArgumentOutOfRangeException("Point being extended to does not lie on the segment curve.");
             }
-            // TODO: Determine if point is being extended to from I or J
-            // TODO: Return curve with appropriate end extended to pointExtension
-            throw new NotImplementedException();
+
+            if (((I.X <= J.X && pointExtension.X <= I.X) &&
+                ((I.Y <= J.Y && pointExtension.Y <= I.Y) || (I.Y >= J.Y && pointExtension.Y >= I.Y))) ||
+                ((I.X >= J.X && pointExtension.X >= I.X) &&
+                ((I.Y <= J.Y && pointExtension.Y <= I.Y) || (I.Y >= J.Y && pointExtension.Y >= I.Y))))
+            {
+                return new LineSegment(pointExtension, J);
+            }
+            else
+            {
+                return new LineSegment(I, pointExtension);
+            }
         }
 
         /// <summary>
@@ -329,15 +350,46 @@ namespace MPT.Geometry.Segments
         /// <summary>
         /// Extends the segment to intersect the provided curve.
         /// </summary>
+        /// <param name="curve">The curve.</param>
         /// <returns>IPathSegment.</returns>
-        public IPathSegment ExtendSegmentToCurve() // TODO: Add curve parameter
+        public IPathSegment ExtendSegmentToCurve(LinearCurve curve) 
         {
-            // Provide some curve to method
-            // If never intersecting, throw exception
-            // If intersecting, get intersection point and return 'ExtendPathToPoint'
-            CartesianCoordinate pointExtension = new CartesianCoordinate(0, 0); // TODO: Finish this
+            CartesianCoordinate pointExtension = CoordinateOfSegmentProjectedToCurve(curve);
 
             return ExtendSegmentToPoint(pointExtension);
+        }
+
+        /// <summary>
+        /// Coordinate of where the segment projection intersects the provided curve.
+        /// </summary>
+        /// <param name="curve">The curve.</param>
+        /// <returns>CartesianCoordinate.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">Curves never intersect.</exception>
+        public CartesianCoordinate CoordinateOfSegmentProjectedToCurve(LinearCurve curve)
+        {
+            if (!_curve.IsIntersectingCurve(curve))
+            {
+                throw new ArgumentOutOfRangeException("Curves never intersect.");
+            }
+
+            return _curve.IntersectionCoordinate(curve);
+        }
+
+        /// <summary>
+        /// Coordinate of where a perpendicular projection intersects the provided coordinate.
+        /// </summary>
+        /// <param name="point">The point.</param>
+        /// <returns>CartesianCoordinate.</returns>
+        public CartesianCoordinate CoordinateOfPerpendicularProjection(CartesianCoordinate point)
+        {
+            // 1. Get normal vector to curve
+            Vector normalVector = _curve.NormalVector();
+
+            // 2. Create new curve B by applying normal vector to point
+            LinearCurve offsetCurve = new LinearCurve(point, point + new CartesianOffset(normalVector.Xcomponent, normalVector.Ycomponent));
+
+            // 3. Return intersection of curve B to current segment curve
+            return  _curve.IntersectionCoordinate(offsetCurve);
         }
         #endregion
 

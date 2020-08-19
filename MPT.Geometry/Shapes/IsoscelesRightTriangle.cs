@@ -1,5 +1,6 @@
 ﻿using MPT.Math.Coordinates;
 using MPT.Math.NumberTypeExtensions;
+using System.Collections.Generic;
 using Numbers = MPT.Math.Numbers;
 
 namespace MPT.Geometry.Shapes
@@ -63,6 +64,19 @@ namespace MPT.Geometry.Shapes
             return 0.5 * _sidesEqual.Squared();
         }
 
+        /// <summary>
+        /// Formulates the local coordinates for the shape.
+        /// </summary>
+        /// <returns>IList&lt;CartesianCoordinate&gt;.</returns>
+        public override IList<CartesianCoordinate> LocalCoordinates()
+        {
+            return new List<CartesianCoordinate>()
+            {
+                new CartesianCoordinate(0, 0),
+                new CartesianCoordinate(_sidesEqual, 0),
+                new CartesianCoordinate(0, _sidesEqual),
+            };
+        }
         #endregion
     }
 }

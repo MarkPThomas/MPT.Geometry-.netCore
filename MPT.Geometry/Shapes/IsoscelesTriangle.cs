@@ -56,24 +56,6 @@ namespace MPT.Geometry.Shapes
         public override Angle AngleC => AngleA;
 
         /// <summary>
-        /// Length of sides of equal length, a.
-        /// </summary>
-        /// <value>a.</value>
-        public override double a => _sidesEqual;
-
-        /// <summary>
-        /// Length of the unequal length side, b.
-        /// </summary>
-        /// <value>The b.</value>
-        public override double b => _sideUnequal;
-
-        /// <summary>
-        /// Length of side c, which is equal to side a.
-        /// </summary>
-        /// <value>The c.</value>
-        public override double c => _sidesEqual;
-
-        /// <summary>
         /// Gets the height, which is measured perpendicular to side b.
         /// </summary>
         /// <value>The h.</value>
@@ -103,8 +85,7 @@ namespace MPT.Geometry.Shapes
             _sidesEqual = lengthsEqualA.Abs();
             _sideUnequal = lengthB.Abs();
             SetCoordinates(LocalCoordinates());
-            setInCenter();
-            setCircumcenter();
+            setCenterCoordinates();
         }
 
         /// <summary>
@@ -114,11 +95,10 @@ namespace MPT.Geometry.Shapes
         public IsoscelesTriangle(CartesianCoordinate apexCoordinate)
         {
             double alphaRadians = getAlpha(apexCoordinate.X, apexCoordinate.Y);
-            _sidesEqual = apexCoordinate.X * Trig.Cos(alphaRadians);
+            _sidesEqual = apexCoordinate.X / Trig.Cos(alphaRadians);
             _sideUnequal = 2 * apexCoordinate.X;
             SetCoordinates(LocalCoordinates());
-            setInCenter();
-            setCircumcenter();
+            setCenterCoordinates();
         }
 
         /// <summary>
@@ -131,8 +111,7 @@ namespace MPT.Geometry.Shapes
             _sidesEqual = 0.5 * lengthB / Trig.Cos(anglesEqualAlpha.Radians);
             _sideUnequal = lengthB;
             SetCoordinates(LocalCoordinates());
-            setInCenter();
-            setCircumcenter();
+            setCenterCoordinates();
         }
         #endregion
 
@@ -143,20 +122,38 @@ namespace MPT.Geometry.Shapes
         /// <returns></returns>
         public override double Area()
         {
-            return 0.25 * b * (4 * a.Squared() - b.Squared()).Sqrt();
+            return 0.25 * _sideUnequal * (4 * _sidesEqual.Squared() - _sideUnequal.Squared()).Sqrt();
         }
+
+        /// <summary>
+        /// Length of sides of equal length, a.
+        /// </summary>
+        /// <value>a.</value>
+        public override double SideLengthA() => _sidesEqual;
+
+        /// <summary>
+        /// Length of the unequal length side, b.
+        /// </summary>
+        /// <value>The b.</value>
+        public override double SideLengthB() => _sideUnequal;
+
+        /// <summary>
+        /// Length of side c, which is equal to side a.
+        /// </summary>
+        /// <value>The c.</value>
+        public override double SideLengthC() => _sidesEqual;
 
         /// <summary>
         /// Formulates the local coordinates for the shape.
         /// </summary>
         /// <returns>IList&lt;CartesianCoordinate&gt;.</returns>
-        public IList<CartesianCoordinate> LocalCoordinates()
+        public virtual IList<CartesianCoordinate> LocalCoordinates()
         {
             return new List<CartesianCoordinate>()
             {
+                new CartesianCoordinate(_sideUnequal / 2, getHeight()),
                 new CartesianCoordinate(0, 0),
                 new CartesianCoordinate(_sideUnequal, 0),
-                new CartesianCoordinate(_sideUnequal / 2, getHeight()),
             };
         }
 
@@ -183,12 +180,12 @@ namespace MPT.Geometry.Shapes
         }
 
         /// <summary>
-        /// Gets the height.
+        /// Gets the height, which is the altitude from the apex to the unequal side.
         /// </summary>
         /// <returns>System.Double.</returns>
         protected double getHeight()
         {
-            return 0.5 * (4 * a.Squared() - b.Squared()).Sqrt();
+            return 0.5 * (4 * _sidesEqual.Squared() - _sideUnequal.Squared()).Sqrt();
         }
 
         /// <summary>
@@ -197,8 +194,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>System.Double.</returns>
         protected double getInRadius()
         {
-            double h = this.h;
-            return 0.25 * a * ((a.Squared() + 4 * h.Squared()).Sqrt() - a) / h;
+            return 0.25 * _sideUnequal * ((_sideUnequal.Squared() + 4 * h.Squared()).Sqrt() - _sideUnequal) / h;
         }
 
         /// <summary>
@@ -207,8 +203,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>System.Double.</returns>
         protected double getCircumRadius()
         {
-            double h = this.h;
-            return (1d / 8) * (a.Squared() / h + 4 * h);
+            return (1d / 8) * (_sideUnequal.Squared() / h + 4 * h);
         }
         #endregion
     }

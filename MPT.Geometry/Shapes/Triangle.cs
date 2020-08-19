@@ -15,8 +15,8 @@ using MPT.Math.Coordinates;
 using MPT.Math.NumberTypeExtensions;
 using Algebra = MPT.Math.Algebra.AlgebraLibrary;
 using Trig = MPT.Math.Trigonometry.TrigonometryLibrary;
+using Num = MPT.Math.Numbers;
 using System.Collections.Generic;
-using System.Linq;
 using MPT.Geometry.Segments;
 
 namespace MPT.Geometry.Shapes
@@ -38,13 +38,13 @@ namespace MPT.Geometry.Shapes
         /// Gets the coordinate for point b.
         /// </summary>
         /// <value>The point b.</value>
-        public CartesianCoordinate PointB => _polyline.Coordinate(1);
+        public CartesianCoordinate PointB => _polyline.Coordinate(0);
 
         /// <summary>
         /// Gets the coordinate for point c.
         /// </summary>
         /// <value>The point c.</value>
-        public CartesianCoordinate PointC => _polyline.Coordinate(0);
+        public CartesianCoordinate PointC => _polyline.Coordinate(1);
 
         /// <summary>
         /// Gets the side a.
@@ -56,13 +56,13 @@ namespace MPT.Geometry.Shapes
         /// Gets the side b.
         /// </summary>
         /// <value>The side b.</value>
-        public LineSegment SideB => _polyline[2] as LineSegment;
+        public LineSegment SideB => _polyline[1] as LineSegment; //_polyline[2] as LineSegment;
 
         /// <summary>
         /// Gets the side c.
         /// </summary>
         /// <value>The side c.</value>
-        public LineSegment SideC => _polyline[1] as LineSegment;
+        public LineSegment SideC => _polyline[2] as LineSegment; //_polyline[1] as LineSegment;
 
         /// <summary>
         /// The angle which is opposite of side a.
@@ -83,30 +83,11 @@ namespace MPT.Geometry.Shapes
         public virtual Angle AngleC => new Angle(getAngleC());
 
         /// <summary>
-        /// Length of the vertical side, if applicable, a .
-        /// </summary>
-        /// <value>a.</value>
-        public virtual double a { get; protected set; }
-
-        /// <summary>
-        /// Length of the base/horizontal side, if applicable, b.
-        /// </summary>
-        /// <value>The b.</value>
-        public virtual double b { get; protected set; }
-
-        /// <summary>
-        /// Length of the hypotenuse side, if applicable, c.
-        /// </summary>
-        /// <value>The c.</value>
-        public virtual double c { get; protected set; }
-
-
-        /// <summary>
         /// Gets the height, which is the measurement of the line formed from any point to a perpendicular intersection with a side.
         /// This is one of the altitudes defined for the shape.
         /// </summary>
         /// <value>The h.</value>
-        public virtual double h { get; protected set; } // TODO: define this for the generic triangle case, which should be based on aligned local coords.
+        public virtual double h => getAltitude();
 
         /// <summary>
         /// Gets the inradius, r, which describes a circle whose edge is tangent to all 3 sides of the triangle.
@@ -141,12 +122,6 @@ namespace MPT.Geometry.Shapes
         public virtual CartesianCoordinate OrthoCenter { get; protected set; }
 
         /// <summary>
-        /// Gets the semi-perimeter.
-        /// </summary>
-        /// <value>The semi perimeter.</value>
-        public virtual double SemiPerimeter => Perimeter() / 2;
-
-        /// <summary>
         /// The intersection of the three median lines, which are formed by a line drawn from the midpoint of a side through the opposite angle.
         /// </summary>
         /// <value>The centroid.</value>
@@ -162,7 +137,7 @@ namespace MPT.Geometry.Shapes
         /// </summary>
         protected Triangle()
         {
-            setCenterCoordinates();
+            //setCenterCoordinates();
         }
 
         /// <summary>
@@ -174,9 +149,8 @@ namespace MPT.Geometry.Shapes
         public Triangle(
             CartesianCoordinate pointA,
             CartesianCoordinate pointB,
-            CartesianCoordinate pointC) : base(new List<CartesianCoordinate>() { pointC, pointB, pointA })
+            CartesianCoordinate pointC) : base(new List<CartesianCoordinate>() { pointA, pointB, pointC })/*base(new List<CartesianCoordinate>() { pointC, pointB, pointA })*/
         {
-            setSides();
             setCenterCoordinates();
 
             setInRadius();
@@ -194,33 +168,12 @@ namespace MPT.Geometry.Shapes
         }
 
         /// <summary>
-        /// Sets the sides.
-        /// </summary>
-        protected void setSides()
-        {
-            a = Algebra.SRSS(
-                PointC.X - PointB.X,
-                PointC.Y - PointB.Y);
-            b = Algebra.SRSS(
-                PointC.X - PointA.X,
-                PointC.Y - PointA.Y);
-            c = Algebra.SRSS(
-                PointA.X - PointB.X,
-                PointA.Y - PointB.Y);
-        }
-
-        /// <summary>
         /// Sets the in-center.
         /// </summary>
         protected void setInCenter()
         {
-            IList<CartesianCoordinate> points = _polyline.Coordinates;
-            CartesianCoordinate pointA = points[0];
-            CartesianCoordinate pointB = points[1];
-            CartesianCoordinate pointC = points[2];
-
-            double x_ic = (b * pointB.X + c * pointC.X) / Perimeter();
-            double y_ic = c * pointC.Y / Perimeter();
+            double x_ic = (SideLengthA() * PointA.X + SideLengthB() * PointB.X + SideLengthC() * PointC.X) / Perimeter();
+            double y_ic = (SideLengthA() * PointA.Y + SideLengthB() * PointB.Y + SideLengthC() * PointC.Y) / Perimeter();
             InCenter = new CartesianCoordinate(x_ic, y_ic);
         }
 
@@ -229,7 +182,9 @@ namespace MPT.Geometry.Shapes
         /// </summary>
         protected void setInRadius()
         {
-            InRadius = 0.5 * (((b + c - a) * (c + a - b) * (a + b - c)) / Perimeter()).Sqrt();
+            InRadius = 0.5 * (((SideLengthB() + SideLengthC() - SideLengthA()) * 
+                               (SideLengthC() + SideLengthA() - SideLengthB()) * 
+                               (SideLengthA() + SideLengthB() - SideLengthC())) / Perimeter()).Sqrt();
         }
 
         /// <summary>
@@ -242,13 +197,18 @@ namespace MPT.Geometry.Shapes
             CartesianCoordinate pointB = points[1];
             CartesianCoordinate pointC = points[2];
 
-            double d = 2 * (pointA.X * (pointB.Y - pointC.Y) + pointB.X * (pointC.Y - pointA.Y) + pointC.X * (pointA.Y - pointB.Y));
+            double d = 2 * (pointA.X * (pointB.Y - pointC.Y) + 
+                            pointB.X * (pointC.Y - pointA.Y) + 
+                            pointC.X * (pointA.Y - pointB.Y));
+
             double x_cc = ((pointA.X.Squared() + pointA.Y.Squared()) * (pointB.Y - pointC.Y) +
                            (pointB.X.Squared() + pointB.Y.Squared()) * (pointC.Y - pointA.Y) +
                            (pointC.X.Squared() + pointC.Y.Squared()) * (pointA.Y - pointB.Y)) / d;
+
             double y_cc = ((pointA.X.Squared() + pointA.Y.Squared()) * (pointC.X - pointB.X) +
                            (pointB.X.Squared() + pointB.Y.Squared()) * (pointA.X - pointC.X) +
                            (pointC.X.Squared() + pointC.Y.Squared()) * (pointB.X - pointA.X)) / d;
+
             CircumCenter = new CartesianCoordinate(x_cc, y_cc);
         }
 
@@ -257,7 +217,10 @@ namespace MPT.Geometry.Shapes
         /// </summary>
         protected void setCircumradius()
         {
-            CircumRadius = a * b * c / (Perimeter() * (b + c - a) * (c + a - b) * (a + b - c)).Sqrt();
+            CircumRadius = SideLengthA() * SideLengthB() * SideLengthC() / 
+                (Perimeter() * (SideLengthB() + SideLengthC() - SideLengthA()) * 
+                               (SideLengthC() + SideLengthA() - SideLengthB()) * 
+                               (SideLengthA() + SideLengthB() - SideLengthC())).Sqrt();
         }
 
         /// <summary>
@@ -265,9 +228,28 @@ namespace MPT.Geometry.Shapes
         /// </summary>
         protected void setOrthocenter()
         {
+            // If any angle is 90 degrees, the orthocenter lies at the vertex at that angle
             double angleA = getAngleA();
+            if (angleA.IsEqualTo(Num.PiOver2, 10E-10))
+            {
+                OrthoCenter = PointA;
+                return;
+            }
+
             double angleB = getAngleB();
+            if (angleB.IsEqualTo(Num.PiOver2, 10E-10))
+            {
+                OrthoCenter = PointB;
+                return;
+            }
+
             double angleC = getAngleC();
+            if (angleC.IsEqualTo(Num.PiOver2, 10E-10))
+            {
+                OrthoCenter = PointC;
+                return;
+            }
+
             double denominator = Trig.Tan(angleA) + Trig.Tan(angleB) + Trig.Tan(angleC);
             OrthoCenter = new CartesianCoordinate(
                 (PointA.X * Trig.Tan(angleA) + PointB.X * Trig.Tan(angleB) + PointC.X * Trig.Tan(angleC)) / denominator,
@@ -283,7 +265,10 @@ namespace MPT.Geometry.Shapes
         /// <returns></returns>
         public override double Area()
         {
-            return (SemiPerimeter * (SemiPerimeter - a) * (SemiPerimeter - b) * (SemiPerimeter - c)).Sqrt();
+            return (SemiPerimeter() * 
+                    (SemiPerimeter() - SideLengthA()) * 
+                    (SemiPerimeter() - SideLengthB()) * 
+                    (SemiPerimeter() - SideLengthC())).Sqrt();
         }
 
         /// <summary>
@@ -292,18 +277,82 @@ namespace MPT.Geometry.Shapes
         /// <returns></returns>
         public override double Perimeter()
         {
-            return a + b + c;
+            return SideLengthA() + SideLengthB() + SideLengthC();
+        }
+
+        /// <summary>
+        /// Gets the semi-perimeter.
+        /// </summary>
+        /// <value>The semi perimeter.</value>
+        public virtual double SemiPerimeter() => Perimeter() / 2;
+        #endregion
+
+        #region Methods: Sides
+        /// <summary>
+        /// Length of the vertical side, if applicable, a .
+        /// </summary>
+        /// <value>a.</value>
+        public virtual double SideLengthA()
+        {
+            return Algebra.SRSS(
+                PointC.X - PointB.X,
+                PointC.Y - PointB.Y);
+        }
+
+        /// <summary>
+        /// Length of the base/horizontal side, if applicable, b.
+        /// </summary>
+        /// <value>The b.</value>
+        public virtual double SideLengthB()
+        {
+            return Algebra.SRSS(
+                PointC.X - PointA.X,
+                PointC.Y - PointA.Y);
+        }
+
+        /// <summary>
+        /// Length of the hypotenuse side, if applicable, c.
+        /// </summary>
+        /// <value>The c.</value>
+        public virtual double SideLengthC()
+        {
+            return Algebra.SRSS(
+                PointA.X - PointB.X,
+                PointA.Y - PointB.Y);
         }
         #endregion
 
-        #region Methods: Altitudes       
+        #region Methods: Altitudes           
+        /// <summary>
+        /// Gets the altitude.
+        /// </summary>
+        /// <returns>System.Double.</returns>
+        internal double getAltitude()
+        {
+            // get altitude for 90 deg angle if exists
+            if (AngleA.Degrees.IsEqualTo(90, Tolerance))
+            {
+                return AltitudeLengthA();
+            }
+            if (AngleB.Degrees.IsEqualTo(90, Tolerance))
+            {
+                return AltitudeLengthB();
+            }
+            if (AngleC.Degrees.IsEqualTo(90, Tolerance))
+            {
+                return AltitudeLengthC();
+            }
+
+            return AltitudeLengthC();
+        }
+
         /// <summary>
         /// The length of altitude line A, which spans from point A to a perpendicular intersection with side A.
         /// </summary>
         /// <returns>System.Double.</returns>
         public double AltitudeLengthA()
         {
-            return 2 * Area() / a;
+            return 2 * Area() / SideLengthA();
         }
 
         /// <summary>
@@ -330,7 +379,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>System.Double.</returns>
         public double AltitudeLengthB()
         {
-            return 2 * Area() / b;
+            return 2 * Area() / SideLengthB();
         }
 
         /// <summary>
@@ -357,7 +406,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>System.Double.</returns>
         public double AltitudeLengthC()
         {
-            return 2 * Area() / c;
+            return 2 * Area() / SideLengthC();
         }
 
         /// <summary>
@@ -386,7 +435,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>System.Double.</returns>
         public double MedianLengthA()
         {
-            return 0.5 * (2 * b.Squared() + 2 * c.Squared() - a.Squared()).Sqrt();
+            return 0.5 * (2 * SideLengthB().Squared() + 2 * SideLengthC().Squared() - SideLengthA().Squared()).Sqrt();
         }
 
         /// <summary>
@@ -413,7 +462,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>System.Double.</returns>
         public double MedianLengthB()
         {
-            return 0.5 * (2 * a.Squared() + 2 * c.Squared() - b.Squared()).Sqrt();
+            return 0.5 * (2 * SideLengthA().Squared() + 2 * SideLengthC().Squared() - SideLengthB().Squared()).Sqrt();
         }
 
         /// <summary>
@@ -440,7 +489,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>System.Double.</returns>
         public double MedianLengthC()
         {
-            return 0.5 * (2 * b.Squared() + 2 * a.Squared() - c.Squared()).Sqrt();
+            return 0.5 * (2 * SideLengthB().Squared() + 2 * SideLengthA().Squared() - SideLengthC().Squared()).Sqrt();
         }
 
         /// <summary>
@@ -467,9 +516,9 @@ namespace MPT.Geometry.Shapes
         /// The length of angle bisector line A, which spans from point A to an intersection with side A such that angle A is bisected.
         /// </summary>
         /// <returns>System.Double.</returns>
-        public double AngleBisectorA()
+        public double AngleBisectorLengthA()
         {
-            return (b * c * (1 - (a / (b + c)).Squared())).Sqrt();
+            return (SideLengthB() * SideLengthC() * (1 - (SideLengthA() / (SideLengthB() + SideLengthC())).Squared())).Sqrt();
         }
 
         /// <summary>
@@ -494,9 +543,9 @@ namespace MPT.Geometry.Shapes
         /// The length of angle bisector line B, which spans from point B to an intersection with side B such that angle B is bisected.
         /// </summary>
         /// <returns>System.Double.</returns>
-        public double AngleBisectorB()
+        public double AngleBisectorLengthB()
         {
-            return (a * c * (1 - (b / (a + c)).Squared())).Sqrt();
+            return (SideLengthA() * SideLengthC() * (1 - (SideLengthB() / (SideLengthA() + SideLengthC())).Squared())).Sqrt();
         }
 
         /// <summary>
@@ -521,9 +570,9 @@ namespace MPT.Geometry.Shapes
         /// The length of angle bisector line C, which spans from point C to an intersection with side C such that angle C is bisected.
         /// </summary>
         /// <returns>System.Double.</returns>
-        public double AngleBisectorC()
+        public double AngleBisectorLengthC()
         {
-            return (b * a * (1 - (c / (b + a)).Squared())).Sqrt();
+            return (SideLengthB() * SideLengthA() * (1 - (SideLengthC() / (SideLengthB() + SideLengthA())).Squared())).Sqrt();
         }
 
         /// <summary>
@@ -564,18 +613,18 @@ namespace MPT.Geometry.Shapes
         /// </summary>
         private void setPerpendicularSideBisectors()
         {
-            List<double> sides = new List<double>() { a, b, c };
-            sides.OrderBy(d => d);
-            _A = sides[0];
+            List<double> sides = new List<double>() { SideLengthA(), SideLengthB(), SideLengthC() };
+            sides.Sort();
+            _A = sides[2];
             _B = sides[1];
-            _C = sides[2];
+            _C = sides[0];
         }
 
         /// <summary>
         /// The length of perpendicular side bisector line A, which spans from the circumcenter to a perpendicular intersection with side A such that side A is bisected.
         /// </summary>
         /// <returns>System.Double.</returns>
-        public double PerpendicularSideBisectorA()
+        public double PerpendicularSideBisectorLengthA()
         {
             setPerpendicularSideBisectors();
             return 2 * _A * Area() / (_A.Squared() + _B.Squared() - _C.Squared());
@@ -587,7 +636,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>CartesianCoordinate.</returns>
         public CartesianCoordinate PerpendicularSideBisectorCoordinateA()
         {
-            return projectionIntersection(PointA, SideA, CircumCenter);
+            return MedianCoordinateA();
         }
 
         /// <summary>
@@ -596,14 +645,14 @@ namespace MPT.Geometry.Shapes
         /// <returns>LineSegment.</returns>
         public LineSegment PerpendicularSideBisectorLineA()
         {
-            return new LineSegment(PointA, PerpendicularSideBisectorCoordinateA());
+            return new LineSegment(PerpendicularSideBisectorCoordinateA(), CircumCenter);
         }
 
         /// <summary>
         /// The length of perpendicular side bisector line B, which spans from the circumcenter to a perpendicular intersection with side B such that side B is bisected.
         /// </summary>
         /// <returns>System.Double.</returns>
-        public double PerpendicularSideBisectorB()
+        public double PerpendicularSideBisectorLengthB()
         {
             setPerpendicularSideBisectors();
             return 2 * _B * Area() / (_A.Squared() + _B.Squared() - _C.Squared());
@@ -615,7 +664,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>CartesianCoordinate.</returns>
         public CartesianCoordinate PerpendicularSideBisectorCoordinateB()
         {
-            return projectionIntersection(PointB, SideB, CircumCenter);
+            return MedianCoordinateB();
         }
 
         /// <summary>
@@ -624,14 +673,14 @@ namespace MPT.Geometry.Shapes
         /// <returns>LineSegment.</returns>
         public LineSegment PerpendicularSideBisectorLineB()
         {
-            return new LineSegment(PointB, PerpendicularSideBisectorCoordinateB());
+            return new LineSegment(PerpendicularSideBisectorCoordinateB(), CircumCenter);
         }
 
         /// <summary>
         /// The length of perpendicular side bisector line C, which spans from the circumcenter to a perpendicular intersection with side C such that side C is bisected.
         /// </summary>
         /// <returns>System.Double.</returns>
-        public double PerpendicularSideBisectorC()
+        public double PerpendicularSideBisectorLengthC()
         {
             setPerpendicularSideBisectors();
             return 2 * _C * Area() / (_A.Squared() - _B.Squared() + _C.Squared());
@@ -643,7 +692,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>CartesianCoordinate.</returns>
         public CartesianCoordinate PerpendicularSideBisectorCoordinateC()
         {
-            return projectionIntersection(PointC, SideC, CircumCenter);
+            return MedianCoordinateC();
         }
 
         /// <summary>
@@ -652,7 +701,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>LineSegment.</returns>
         public LineSegment PerpendicularSideBisectorLineC()
         {
-            return new LineSegment(PointC, PerpendicularSideBisectorCoordinateC());
+            return new LineSegment(PerpendicularSideBisectorCoordinateC(), CircumCenter);
         }
         #endregion
 
@@ -669,8 +718,12 @@ namespace MPT.Geometry.Shapes
             LineSegment opposingSide,
             CartesianCoordinate center)
         {
+            if (point == center)
+            {
+                return opposingSide.CoordinateOfPerpendicularProjection(center);
+            }
             LineSegment segmentProjectionPartial = new LineSegment(point, center);
-            return segmentProjectionPartial.IntersectionCoordinate(opposingSide);
+            return segmentProjectionPartial.CoordinateOfSegmentProjectedToCurve(opposingSide.Curve);
         }
 
         /// <summary>
@@ -679,7 +732,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>System.Double.</returns>
         protected double getAngleA()
         {
-            return Trig.ArcCos((b.Squared() + c.Squared() - a.Squared()) / (2 * b * c));
+            return Trig.ArcCos((SideLengthB().Squared() + SideLengthC().Squared() - SideLengthA().Squared()) / (2 * SideLengthB() * SideLengthC()));
         }
 
         /// <summary>
@@ -688,7 +741,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>System.Double.</returns>
         protected double getAngleB()
         {
-            return Trig.ArcCos((a.Squared() + c.Squared() - b.Squared()) / (2 * a * c));
+            return Trig.ArcCos((SideLengthA().Squared() + SideLengthC().Squared() - SideLengthB().Squared()) / (2 * SideLengthA() * SideLengthC()));
         }
 
         /// <summary>
@@ -697,7 +750,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>System.Double.</returns>
         protected double getAngleC()
         {
-            return Trig.ArcCos((a.Squared() + b.Squared() - c.Squared()) / (2 * a * b));
+            return Trig.ArcCos((SideLengthA().Squared() + SideLengthB().Squared() - SideLengthC().Squared()) / (2 * SideLengthA() * SideLengthB()));
         }
         #endregion
     }

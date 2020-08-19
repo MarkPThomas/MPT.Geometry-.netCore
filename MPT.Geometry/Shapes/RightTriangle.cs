@@ -28,16 +28,26 @@ namespace MPT.Geometry.Shapes
     {
         #region Properties
         /// <summary>
+        /// The side length a
+        /// </summary>
+        private double _sideLengthA;
+
+        /// <summary>
+        /// The side length b
+        /// </summary>
+        private double _sideLengthB;
+
+        /// <summary>
         /// The angle, α, which is opposite of side a.
         /// </summary>
         /// <value>The alpha.</value>
-        public override Angle AngleA => new Angle(getAlpha(b, a));
+        public override Angle AngleA => new Angle(getBeta(_sideLengthA, _sideLengthB));
 
         /// <summary>
         /// The angle, β, which is opposite of side b.
         /// </summary>
         /// <value>The beta.</value>
-        public override Angle AngleB => new Angle(getBeta(b, a));
+        public override Angle AngleB => new Angle(getAlpha(_sideLengthA, _sideLengthB));
 
         /// <summary>
         /// The angle, γ, which is opposite of side c and is 90°.
@@ -46,40 +56,34 @@ namespace MPT.Geometry.Shapes
         public override Angle AngleC => Numbers.PiOver2;
 
         /// <summary>
-        /// Length of the hypotenuse side, c.
-        /// </summary>
-        /// <value>The c.</value>
-        public override double c => getHypotenuse(b, a);
-
-        /// <summary>
         /// Length of segment e, which spans from point a to the perpendicular intersection of h along side c.
         /// </summary>
         /// <value>The e.</value>
-        public double e => b.Squared() / c;
+        public double e => _sideLengthB.Squared() / SideLengthC();
 
         /// <summary>
         /// Length of segment d, which spans from point b to the perpendicular intersection of h along side c.
         /// </summary>
         /// <value>The e.</value>
-        public double d => a.Squared() / c;
+        public double d => _sideLengthA.Squared() / SideLengthC();
 
         /// <summary>
         /// Gets the height, which is the measurement of the line formed from any point to a perpendicular intersection with a side.
         /// </summary>
         /// <value>The h.</value>
-        public override double h => a * b / c;
+        public override double h => _sideLengthA * _sideLengthB / SideLengthC();
 
         /// <summary>
         /// Gets the inradius, r, which describes a circle whose edge is tangent to all 3 sides of the triangle.
         /// </summary>
         /// <value>The in radius.</value>
-        public override double InRadius => a * b / (a + b + c);
+        public override double InRadius => _sideLengthA * _sideLengthB / (_sideLengthA + _sideLengthB + SideLengthC());
 
         /// <summary>
         /// Gets the circumcenter radius, R, which describes a circle whose edges are defined by the 3 defining points of the triangle.
         /// </summary>
         /// <value>The in radius.</value>
-        public override double CircumRadius => 0.5 * c;
+        public override double CircumRadius => 0.5 * SideLengthC();
         #endregion
 
         #region Initialization        
@@ -90,11 +94,10 @@ namespace MPT.Geometry.Shapes
         /// <param name="height">The height.</param>
         public RightTriangle(double width, double height)
         {
-            a = height.Abs();
-            b = width.Abs();
+            _sideLengthA = width.Abs();
+            _sideLengthB = height.Abs();
             SetCoordinates(LocalCoordinates());
-            setInCenter();
-            setCircumcenter();
+            setCenterCoordinates();
         }
 
         /// <summary>
@@ -103,11 +106,10 @@ namespace MPT.Geometry.Shapes
         /// <param name="apexCoordinate">The apex coordinate.</param>
         public RightTriangle(CartesianCoordinate apexCoordinate)
         {
-            a = apexCoordinate.Y;
-            b = apexCoordinate.X;
+            _sideLengthA = apexCoordinate.X;
+            _sideLengthB = apexCoordinate.Y;
             SetCoordinates(LocalCoordinates());
-            setInCenter();
-            setCircumcenter();
+            setCenterCoordinates();
         }
         #endregion
 
@@ -118,8 +120,24 @@ namespace MPT.Geometry.Shapes
         /// <returns></returns>
         public override double Area()
         {
-            return 0.5 * b * a;
+            return 0.5 * _sideLengthA * _sideLengthB;
         }
+
+        /// <summary>
+        /// Length of sides of equal length, a.
+        /// </summary>
+        /// <value>a.</value>
+        public override double SideLengthA() => _sideLengthA;
+        /// <summary>
+        /// Length of the unequal length side, b.
+        /// </summary>
+        /// <value>The b.</value>
+        public override double SideLengthB() => _sideLengthB;
+        /// <summary>
+        /// Length of the hypotenuse side, c.
+        /// </summary>
+        /// <value>The c.</value>
+        public override double SideLengthC() => getHypotenuse(_sideLengthA, _sideLengthB);
 
         /// <summary>
         /// Formulates the local coordinates for the shape.
@@ -130,8 +148,8 @@ namespace MPT.Geometry.Shapes
             return new List<CartesianCoordinate>()
             {
                 new CartesianCoordinate(0, 0),
-                new CartesianCoordinate(b, 0),
-                new CartesianCoordinate(b, a),
+                new CartesianCoordinate(_sideLengthA , 0),
+                new CartesianCoordinate(_sideLengthA , _sideLengthB),
             };
         }
 
@@ -154,7 +172,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>System.Double.</returns>
         protected double getBeta(double width, double height)
         {
-            return 2 * (Numbers.PiOver2 - getAlpha(width, height));
+            return (Numbers.PiOver2 - getAlpha(width, height));
         }
 
         /// <summary>

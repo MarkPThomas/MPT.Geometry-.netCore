@@ -30,24 +30,6 @@ namespace MPT.Geometry.Shapes
         private double _scale;
 
         /// <summary>
-        /// Length of the vertical side, a .
-        /// </summary>
-        /// <value>a.</value>
-        public override double a => getHeight(_scale);
-
-        /// <summary>
-        /// Length of the base/horizontal side, b.
-        /// </summary>
-        /// <value>The b.</value>
-        public override double b => getWidth(_scale);
-
-        /// <summary>
-        /// Length of the hypotenuse side, c.
-        /// </summary>
-        /// <value>The c.</value>
-        public override double c => getHypotenuse(_scale);
-
-        /// <summary>
         /// Gets the inradius, r, which describes a circle whose edge is tangent to all 3 sides of the triangle.
         /// </summary>
         /// <value>The in radius.</value>
@@ -57,7 +39,7 @@ namespace MPT.Geometry.Shapes
         /// Gets the circumcenter radius, R, which describes a circle whose edges are defined by the 3 defining points of the triangle.
         /// </summary>
         /// <value>The in radius.</value>
-        public override double CircumRadius => 5d / 2;
+        public override double CircumRadius => 5d / 2 * _scale;
         #endregion
 
         #region Initialization
@@ -78,7 +60,7 @@ namespace MPT.Geometry.Shapes
         /// <returns></returns>
         public override double Area()
         {
-            return 6 * _scale;
+            return _scale == 0 ? base.Area() : 6 * _scale.Squared();
         }
 
         /// <summary>
@@ -87,8 +69,26 @@ namespace MPT.Geometry.Shapes
         /// <returns></returns>
         public override double Perimeter()
         {
-            return 12 * _scale;
+            return _scale == 0 ? base.Perimeter() : 12 * _scale;
         }
+
+        /// <summary>
+        /// Length of the vertical side, a .
+        /// </summary>
+        /// <value>a.</value>
+        public override double SideLengthA() => _scale == 0 ? base.SideLengthA() : getHeight(_scale);
+
+        /// <summary>
+        /// Length of the base/horizontal side, b.
+        /// </summary>
+        /// <value>The b.</value>
+        public override double SideLengthB() => _scale == 0 ? base.SideLengthB() : getWidth(_scale);
+
+        /// <summary>
+        /// Length of the hypotenuse side, c.
+        /// </summary>
+        /// <value>The c.</value>
+        public override double SideLengthC() => _scale == 0 ? base.SideLengthC() : getHypotenuse(_scale);
 
         /// <summary>
         /// Gets the width.
@@ -97,7 +97,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>System.Double.</returns>
         private static double getWidth(double scale)
         {
-            return scale * 4;
+            return scale * 3;
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace MPT.Geometry.Shapes
         /// <returns>System.Double.</returns>
         private static double getHeight(double scale)
         {
-            return scale * 3;
+            return scale * 4;
         }
 
         /// <summary>

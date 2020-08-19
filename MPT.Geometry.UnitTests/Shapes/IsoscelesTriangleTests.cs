@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using MPT.Geometry.Tools;
+﻿using System.Collections.Generic;
+using MPT.Geometry.Shapes;
 using MPT.Math.Coordinates;
 using NUnit.Framework;
 
@@ -11,73 +8,171 @@ namespace MPT.Geometry.UnitTests.Shapes
     [TestFixture]
     public static class IsoscelesTriangleTests
     {
-        #region Initialization        
-        ///// <summary>
-        ///// Initializes a new instance of the <see cref="IsoscelesTriangleTests" /> class.
-        ///// </summary>
-        ///// <param name="lengthsEqualA">Length of sides of equal length, a.</param>
-        ///// <param name="lengthB">The length b, of the base of the triangle. This is the unequal length.</param>
-        //public IsoscelesTriangleTests(double lengthsEqualA, double lengthB)
-        //{
-        //    _sidesEqual = lengthsEqualA.Abs();
-        //    _sideUnequal = lengthB.Abs();
-        //    SetCoordinates(FormulateCoordinates());
-        //    setInCenter();
-        //    setCircumcenter();
-        //}
+        public static double Tolerance = 0.00001;
 
-        ///// <summary>
-        ///// Initializes a new instance of the <see cref="IsoscelesTriangleTests" /> class.
-        ///// </summary>
-        ///// <param name="apexCoordinate">The apex coordinate.</param>
-        //public IsoscelesTriangleTests(CartesianCoordinate apexCoordinate)
-        //{
-        //    double alphaRadians = getAlpha(apexCoordinate.X, apexCoordinate.Y);
-        //    _sidesEqual = apexCoordinate.X * Trig.Cos(alphaRadians);
-        //    _sideUnequal = 2 * apexCoordinate.X;
-        //    SetCoordinates(FormulateCoordinates());
-        //    setInCenter();
-        //    setCircumcenter();
-        //}
+        private static List<CartesianCoordinate> triangleCoordinates = new List<CartesianCoordinate>()
+        {
+            new CartesianCoordinate(2, 5.656855), // Apex coordinate
+            new CartesianCoordinate(0, 0),
+            new CartesianCoordinate(4, 0),
+        };
 
-        ///// <summary>
-        ///// Initializes a new instance of the <see cref="IsoscelesTriangleTests" /> class.
-        ///// </summary>
-        ///// <param name="lengthB">The length b, of the base of the triangle. This is the unequal length.</param>
-        ///// <param name="anglesEqualAlpha">The two angles of equal magnitude, α, which are opposite of the two sides of equal length.</param>
-        //public IsoscelesTriangleTests(double lengthB, Angle anglesEqualAlpha)
-        //{
-        //    _sidesEqual = 0.5 * lengthB / Trig.Cos(anglesEqualAlpha.Radians);
-        //    _sideUnequal = lengthB;
-        //    SetCoordinates(FormulateCoordinates());
-        //    setInCenter();
-        //    setCircumcenter();
-        //}
+        #region Initialization      
+        [Test]
+        public static void Initialization_with_Side_Lengths_Creates_Shape()
+        {
+            IsoscelesTriangle triangle = new IsoscelesTriangle(6, 4);
+
+            Assert.AreEqual(GeometryLibrary.ZeroTolerance, triangle.Tolerance);
+
+            Assert.AreEqual(3, triangle.Points.Count);
+            Assert.AreEqual(triangleCoordinates[0].X, triangle.SideA.I.X);
+            Assert.AreEqual(triangleCoordinates[0].Y, triangle.SideA.I.Y, Tolerance);
+            Assert.AreEqual(triangleCoordinates[1], triangle.SideA.J);
+            Assert.AreEqual(triangleCoordinates[1], triangle.SideB.I);
+            Assert.AreEqual(triangleCoordinates[2], triangle.SideB.J);
+            Assert.AreEqual(triangleCoordinates[2], triangle.SideC.I);
+            Assert.AreEqual(triangleCoordinates[0].X, triangle.SideC.J.X);
+            Assert.AreEqual(triangleCoordinates[0].Y, triangle.SideC.J.Y, Tolerance);
+
+            Assert.AreEqual(3, triangle.Sides.Count);
+            Assert.AreEqual(6, triangle.SideA.Length(), Tolerance);
+            Assert.AreEqual(4, triangle.SideB.Length(), Tolerance);
+            Assert.AreEqual(6, triangle.SideC.Length(), Tolerance);
+
+            Assert.AreEqual(3, triangle.Angles.Count);
+            Assert.AreEqual(70.52878175, triangle.AngleA.Degrees, Tolerance);
+            Assert.AreEqual(38.94243649, triangle.AngleB.Degrees, Tolerance);
+            Assert.AreEqual(70.52878175, triangle.AngleC.Degrees, Tolerance);
+
+            Assert.AreEqual(5.65686, triangle.h, Tolerance);
+
+            Assert.AreEqual(2, triangle.Centroid.X, Tolerance);
+            Assert.AreEqual(1.885618333, triangle.Centroid.Y, Tolerance);
+
+            Assert.AreEqual(2, triangle.OrthoCenter.X, Tolerance);
+            Assert.AreEqual(0.707106687, triangle.OrthoCenter.Y, Tolerance);
+
+            Assert.AreEqual(3.181980844, triangle.CircumRadius, Tolerance);
+            Assert.AreEqual(2, triangle.CircumCenter.X, Tolerance);
+            Assert.AreEqual(2.474874156, triangle.CircumCenter.Y, Tolerance);
+
+            Assert.AreEqual(1.414213625, triangle.InRadius, Tolerance);
+            Assert.AreEqual(2, triangle.InCenter.X, Tolerance);
+            Assert.AreEqual(1.414213625, triangle.InCenter.Y, Tolerance);
+        }
+
+        [Test]
+        public static void Initialization_with_Apex_Coordinate_Creates_Shape()
+        {
+            IsoscelesTriangle triangle = new IsoscelesTriangle(triangleCoordinates[0]);
+
+            Assert.AreEqual(GeometryLibrary.ZeroTolerance, triangle.Tolerance);
+
+            Assert.AreEqual(3, triangle.Points.Count);
+            Assert.AreEqual(triangleCoordinates[0].X, triangle.SideA.I.X);
+            Assert.AreEqual(triangleCoordinates[0].Y, triangle.SideA.I.Y, Tolerance);
+            Assert.AreEqual(triangleCoordinates[1], triangle.SideA.J);
+            Assert.AreEqual(triangleCoordinates[1], triangle.SideB.I);
+            Assert.AreEqual(triangleCoordinates[2], triangle.SideB.J);
+            Assert.AreEqual(triangleCoordinates[2], triangle.SideC.I);
+            Assert.AreEqual(triangleCoordinates[0].X, triangle.SideC.J.X);
+            Assert.AreEqual(triangleCoordinates[0].Y, triangle.SideC.J.Y, Tolerance);
+
+            Assert.AreEqual(3, triangle.Sides.Count);
+            Assert.AreEqual(6, triangle.SideA.Length(), Tolerance);
+            Assert.AreEqual(4, triangle.SideB.Length(), Tolerance);
+            Assert.AreEqual(6, triangle.SideC.Length(), Tolerance);
+
+            Assert.AreEqual(3, triangle.Angles.Count);
+            Assert.AreEqual(70.52878175, triangle.AngleA.Degrees, Tolerance);
+            Assert.AreEqual(38.94243649, triangle.AngleB.Degrees, Tolerance);
+            Assert.AreEqual(70.52878175, triangle.AngleC.Degrees, Tolerance);
+
+            Assert.AreEqual(5.65686, triangle.h, Tolerance);
+
+            Assert.AreEqual(2, triangle.Centroid.X, Tolerance);
+            Assert.AreEqual(1.885618333, triangle.Centroid.Y, Tolerance);
+
+            Assert.AreEqual(2, triangle.OrthoCenter.X, Tolerance);
+            Assert.AreEqual(0.707106687, triangle.OrthoCenter.Y, Tolerance);
+
+            Assert.AreEqual(3.181980844, triangle.CircumRadius, Tolerance);
+            Assert.AreEqual(2, triangle.CircumCenter.X, Tolerance);
+            Assert.AreEqual(2.474874156, triangle.CircumCenter.Y, Tolerance);
+
+            Assert.AreEqual(1.414213625, triangle.InRadius, Tolerance);
+            Assert.AreEqual(2, triangle.InCenter.X, Tolerance);
+            Assert.AreEqual(1.414213625, triangle.InCenter.Y, Tolerance);
+        }
+
+        [Test]
+        public static void Initialization_with_Equal_Angles_Creates_Shape()
+        {
+            IsoscelesTriangle triangle = new IsoscelesTriangle(4, Angle.CreateFromDegree(70.52878175));
+
+            Assert.AreEqual(GeometryLibrary.ZeroTolerance, triangle.Tolerance);
+
+            Assert.AreEqual(3, triangle.Points.Count);
+            Assert.AreEqual(triangleCoordinates[0].X, triangle.SideA.I.X);
+            Assert.AreEqual(triangleCoordinates[0].Y, triangle.SideA.I.Y, Tolerance);
+            Assert.AreEqual(triangleCoordinates[1], triangle.SideA.J);
+            Assert.AreEqual(triangleCoordinates[1], triangle.SideB.I);
+            Assert.AreEqual(triangleCoordinates[2], triangle.SideB.J);
+            Assert.AreEqual(triangleCoordinates[2], triangle.SideC.I);
+            Assert.AreEqual(triangleCoordinates[0].X, triangle.SideC.J.X);
+            Assert.AreEqual(triangleCoordinates[0].Y, triangle.SideC.J.Y, Tolerance);
+
+            Assert.AreEqual(3, triangle.Sides.Count);
+            Assert.AreEqual(6, triangle.SideA.Length(), Tolerance);
+            Assert.AreEqual(4, triangle.SideB.Length(), Tolerance);
+            Assert.AreEqual(6, triangle.SideC.Length(), Tolerance);
+
+            Assert.AreEqual(3, triangle.Angles.Count);
+            Assert.AreEqual(70.52878175, triangle.AngleA.Degrees, Tolerance);
+            Assert.AreEqual(38.94243649, triangle.AngleB.Degrees, Tolerance);
+            Assert.AreEqual(70.52878175, triangle.AngleC.Degrees, Tolerance);
+
+            Assert.AreEqual(5.65686, triangle.h, Tolerance);
+
+            Assert.AreEqual(2, triangle.Centroid.X, Tolerance);
+            Assert.AreEqual(1.885618333, triangle.Centroid.Y, Tolerance);
+
+            Assert.AreEqual(2, triangle.OrthoCenter.X, Tolerance);
+            Assert.AreEqual(0.707106687, triangle.OrthoCenter.Y, Tolerance);
+
+            Assert.AreEqual(3.181980844, triangle.CircumRadius, Tolerance);
+            Assert.AreEqual(2, triangle.CircumCenter.X, Tolerance);
+            Assert.AreEqual(2.474874156, triangle.CircumCenter.Y, Tolerance);
+
+            Assert.AreEqual(1.414213625, triangle.InRadius, Tolerance);
+            Assert.AreEqual(2, triangle.InCenter.X, Tolerance);
+            Assert.AreEqual(1.414213625, triangle.InCenter.Y, Tolerance);
+        }
         #endregion
 
         #region Methods   
-        ///// <summary>
-        ///// Area of the shape.
-        ///// </summary>
-        ///// <returns></returns>
-        //public override double Area()
-        //{
-        //    return 0.25 * b * (4 * a.Squared() - b.Squared()).Sqrt();
-        //}
+        [Test]
+        public static void Area()
+        {
+            IsoscelesTriangle triangle = new IsoscelesTriangle(6, 4);
+            double area = triangle.Area();
 
-        ///// <summary>
-        ///// Formulates the coordinates for the shape.
-        ///// </summary>
-        ///// <returns>IList&lt;CartesianCoordinate&gt;.</returns>
-        //public IList<CartesianCoordinate> FormulateCoordinates()
-        //{
-        //    return new List<CartesianCoordinate>()
-        //    {
-        //        new CartesianCoordinate(0, 0),
-        //        new CartesianCoordinate(_sideUnequal, 0),
-        //        new CartesianCoordinate(_sideUnequal / 2, getHeight()),
-        //    };
-        //}
+            Assert.AreEqual(11.31371, area, Tolerance);
+        }
+
+        [Test]
+        public static void LocalCoordinates()
+        {
+            IsoscelesTriangle triangle = new IsoscelesTriangle(6, 4);
+            IList<CartesianCoordinate> coordinates = triangle.LocalCoordinates();
+
+            Assert.AreEqual(3, coordinates.Count);
+            Assert.AreEqual(triangleCoordinates[0].X, coordinates[0].X);
+            Assert.AreEqual(triangleCoordinates[0].Y, coordinates[0].Y, Tolerance);
+            Assert.AreEqual(triangleCoordinates[1], coordinates[1]);
+            Assert.AreEqual(triangleCoordinates[2], coordinates[2]);
+        }
         #endregion
     }
 }
