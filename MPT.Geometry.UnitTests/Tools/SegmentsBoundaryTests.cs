@@ -193,6 +193,63 @@ namespace MPT.Geometry.UnitTests.Tools
             Assert.AreEqual(segments[2], boundary.LastSegment());
         }
 
+        [Test]
+        public static void AdjacentSegmentsAt__Returns_Segments_Sharing_Common_Point_by_Index()
+        {
+            List<CartesianCoordinate> coordinates = new List<CartesianCoordinate>(){
+                new CartesianCoordinate(0,0),
+                new CartesianCoordinate(1,2),
+                new CartesianCoordinate(3,4),
+                new CartesianCoordinate(5,6),
+                new CartesianCoordinate(7,8),
+                new CartesianCoordinate(9,10),
+                new CartesianCoordinate(11,12)};
+
+            List<LineSegment> segments = new List<LineSegment>()
+            {
+                new LineSegment(coordinates[0], coordinates[1]),
+                new LineSegment(coordinates[1], coordinates[2]),
+                new LineSegment(coordinates[2], coordinates[3]),
+                new LineSegment(coordinates[3], coordinates[4]),
+                new LineSegment(coordinates[4], coordinates[5]),
+                new LineSegment(coordinates[5], coordinates[6])
+            };
+
+            SegmentsBoundary boundary = new SegmentsBoundary(segments);
+
+            Tuple<IPathSegment, IPathSegment> segmentPair = boundary.AdjacentSegmentsAt(3);
+            Assert.AreEqual(segments[2], segmentPair.Item1);
+            Assert.AreEqual(segments[3], segmentPair.Item2);
+        }
+
+        [Test]
+        public static void AdjacentSegmentsAt__Throws_Exception_for_Index_Out_of_Range()
+        {
+            List<CartesianCoordinate> coordinates = new List<CartesianCoordinate>(){
+                new CartesianCoordinate(0,0),
+                new CartesianCoordinate(1,2),
+                new CartesianCoordinate(3,4),
+                new CartesianCoordinate(5,6),
+                new CartesianCoordinate(7,8),
+                new CartesianCoordinate(9,10),
+                new CartesianCoordinate(11,12)};
+
+            List<LineSegment> segments = new List<LineSegment>()
+            {
+                new LineSegment(coordinates[0], coordinates[1]),
+                new LineSegment(coordinates[1], coordinates[2]),
+                new LineSegment(coordinates[2], coordinates[3]),
+                new LineSegment(coordinates[3], coordinates[4]),
+                new LineSegment(coordinates[4], coordinates[5]),
+                new LineSegment(coordinates[5], coordinates[6])
+            };
+
+            SegmentsBoundary boundary = new SegmentsBoundary(segments);
+
+            Assert.Throws<IndexOutOfRangeException>(() => boundary.AdjacentSegmentsAt(-1));
+            Assert.Throws<IndexOutOfRangeException>(() => boundary.AdjacentSegmentsAt(7));
+        }
+
         // No segments
         [Test]
         public static void AdjacentSegments_at_Included_Point_Returns_Segments_Sharing_Common_Point()

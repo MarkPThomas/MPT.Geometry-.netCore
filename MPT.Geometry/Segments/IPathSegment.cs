@@ -102,6 +102,12 @@ namespace MPT.Geometry.Segments
         IPathSegment UpdateJ(CartesianCoordinate newCoordinate);
 
         /// <summary>
+        /// Returns a copy of the segment with the I- &amp; J-coordinates reversed, as well as any other relevant control points.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        IPathSegment Reverse();
+
+        /// <summary>
         /// Merges the with leading segment.
         /// </summary>
         /// <param name="leadingSegment">The leading segment.</param>

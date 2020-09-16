@@ -31,7 +31,7 @@ namespace MPT.Geometry.Segments
         /// Gets the curve.
         /// </summary>
         /// <value>The curve.</value>
-        public virtual T Curve => _curve; //.Clone();
+        public virtual T Curve => _curve.Clone() as T;
 
         /// <summary>
         /// The extents

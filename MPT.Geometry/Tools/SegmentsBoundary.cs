@@ -379,7 +379,12 @@ namespace MPT.Geometry.Tools
         /// <returns>Tuple&lt;IPathSegment, IPathSegment&gt;.</returns>
         public Tuple<IPathSegment, IPathSegment> AdjacentSegmentsAt(int pointIndex)
         {
-            return AdjacentSegments(PointBoundary()[pointIndex]);
+            PointBoundary boundary = PointBoundary();
+            if (pointIndex < 0 || pointIndex > boundary.Count - 1)
+            {
+                throw new IndexOutOfRangeException();
+            }
+            return AdjacentSegments(boundary[pointIndex]);
         }
 
         /// <summary>
@@ -509,7 +514,7 @@ namespace MPT.Geometry.Tools
                 newPathSegment = adjacentSegments.Item1.MergeWithFollowingSegment(adjacentSegments.Item2);
             }
             else 
-            {
+            {   // TODO: Test once other line segment types available
                 newPathSegment = new LineSegment(adjacentSegments.Item1.I, adjacentSegments.Item2.J);
             }
 

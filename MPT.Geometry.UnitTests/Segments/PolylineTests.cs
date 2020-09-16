@@ -637,6 +637,12 @@ namespace MPT.Geometry.UnitTests.Segments
 
         #region Segments
         [Test]
+        public static void AdjacentSegmentsAt()
+        {
+
+        }
+
+        [Test]
         public static void Segment_Returns_Segment_by_Index()
         {
             List<CartesianCoordinate> coordinates = new List<CartesianCoordinate>()

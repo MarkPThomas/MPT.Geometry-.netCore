@@ -168,6 +168,24 @@ namespace MPT.Geometry.UnitTests.Segments
             Assert.AreEqual(expectedXMagnitude, vector.Xcomponent, Tolerance);
             Assert.AreEqual(expectedYMagnitude, vector.Ycomponent, Tolerance);
         }
+
+        [Test]
+        public static void UpdateI()
+        {
+
+        }
+
+        [Test]
+        public static void UpdateJ()
+        {
+
+        }
+
+        [Test]
+        public static void Reverse()
+        {
+
+        }
         #endregion
 
         #region Methods: IPathSegmentCollision
@@ -501,6 +519,30 @@ namespace MPT.Geometry.UnitTests.Segments
             CartesianCoordinate position = new CartesianCoordinate(0, 0);  
 
             Assert.Throws<ArgumentOutOfRangeException>(() => segment.SplitBySegmentPoint(position));
+        }
+
+        [Test]
+        public static void ExtendSegmentToPoint()
+        {
+
+        }
+
+        [Test]
+        public static void ExtendSegmentToCurve()
+        {
+
+        }
+
+        [Test]
+        public static void CoordinateOfSegmentProjectedToCurve()
+        {
+
+        }
+
+        [Test]
+        public static void CoordinateOfPerpendicularProjection()
+        {
+
         }
 
         [TestCase(-3, 4, 5, 6, 0, -3, 4)]

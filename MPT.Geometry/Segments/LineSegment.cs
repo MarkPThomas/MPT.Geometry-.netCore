@@ -15,11 +15,6 @@ namespace MPT.Geometry.Segments
     {
         #region Properties
         /// <summary>
-        /// Curve that spans between the I and J coordinates.
-        /// </summary>
-        public override LinearCurve Curve => new LinearCurve(I, J);
-
-        /// <summary>
         /// First coordinate value.
         /// </summary>
         public override CartesianCoordinate I => _curve.ControlPointI;
@@ -122,7 +117,6 @@ namespace MPT.Geometry.Segments
             return TangentVector();
         }
 
-        // TODO: Test UpdateI
         /// <summary>
         /// Returns a copy of the segment with an updated I coordinate.
         /// </summary>
@@ -133,7 +127,6 @@ namespace MPT.Geometry.Segments
             return new LineSegment(newCoordinate, J);
         }
 
-        // TODO: Test UpdateJ
         /// <summary>
         /// Returns a copy of the segment with an updated J coordinate.
         /// </summary>
@@ -144,7 +137,6 @@ namespace MPT.Geometry.Segments
             return new LineSegment(I, newCoordinate);
         }
 
-        // TODO: Test Reverse
         /// <summary>
         /// Returns a copy of the segment with the I- &amp; J-coordinates reversed.
         /// </summary>
@@ -233,7 +225,6 @@ namespace MPT.Geometry.Segments
         /// </summary>
         /// <param name="pointExtension">The point to extend the segment to.</param>
         /// <returns>IPathSegment.</returns>
-        /// <exception cref="NotImplementedException"></exception>
         public IPathSegment ExtendSegmentToPoint(CartesianCoordinate pointExtension)
         {
             if (!_curve.IsIntersectingCoordinate(pointExtension))

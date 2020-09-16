@@ -251,7 +251,7 @@ namespace MPT.Geometry.Segments
         }
         #endregion
 
-        //#region Point Tangents
+        #region Point Tangents
         //public void AlignPointTangents(int index)
         //{
 
@@ -264,7 +264,7 @@ namespace MPT.Geometry.Segments
         //{
 
         //}
-        //#endregion
+        #endregion
 
         #region Segments
         /// <summary>
