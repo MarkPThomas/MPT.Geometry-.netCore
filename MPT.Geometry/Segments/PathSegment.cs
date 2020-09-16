@@ -391,6 +391,12 @@ namespace MPT.Geometry.Segments
         {
             return I.GetHashCode() ^ J.GetHashCode();
         }
+
+        /// <summary>
+        /// Returns a copy of the segment with the I- &amp; J-coordinates reversed, as well as any other relevant control points.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        public abstract IPathSegment Reverse();
         #endregion
     }
 }

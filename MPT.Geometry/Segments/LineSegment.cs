@@ -141,7 +141,7 @@ namespace MPT.Geometry.Segments
         /// Returns a copy of the segment with the I- &amp; J-coordinates reversed.
         /// </summary>
         /// <returns>IPathSegment.</returns>
-        public IPathSegment Reverse()
+        public override IPathSegment Reverse()
         {
             return new LineSegment(J, I);
         }
@@ -155,7 +155,7 @@ namespace MPT.Geometry.Segments
         /// <returns></returns>
         public override bool IncludesCoordinate(CartesianCoordinate point)
         {
-            double tolerance = Helper.GetTolerance(point, Tolerance);
+            double tolerance = Generics.GetTolerance(point, Tolerance);
             if (!_curve.IsIntersectingCoordinate(point)) 
             { 
                 return false; 

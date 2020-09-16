@@ -485,6 +485,35 @@
             Interface for paths that are divisible.
             </summary>
         </member>
+        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.SplitBySegmentPoint(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Splits the segment by the provided point.
+            </summary>
+            <param name="pointDivision">The point to use for division.</param>
+            <returns>Tuple&lt;IPathSegment, IPathSegment&gt;.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.SplitBySegmentPosition(System.Double)">
+            <summary>
+            Returns a copy of the segment that splits the segment by the relative location.
+            <paramref name="sRelative"/> must be between 0 and 1.
+            </summary>
+            <param name="sRelative">The relative position along the path between 0 (point i) and 1 (point j).</param>
+            <returns>Tuple&lt;IPathSegment, IPathSegment&gt;.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.ExtendSegmentToPoint(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Extends the segment to the provided point.
+            </summary>
+            <param name="pointExtension">The point to extend the segment to.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.CoordinateOfPerpendicularProjection(MPT.Math.Coordinates.CartesianCoordinate)">
+            <summary>
+            Coordinate of where a perpendicular projection intersects the provided coordinate.
+            </summary>
+            <param name="point">The point.</param>
+            <returns>CartesianCoordinate.</returns>
+        </member>
         <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.PointOffsetOnSegment(System.Double)">
             <summary>
             Returns a point determined by a given fraction of the distance between point i and point j of the segment.
@@ -501,6 +530,34 @@
             If <paramref name="ratio"/>&lt; 0, returned point is offset from point i, in that direction. 
             If <paramref name="ratio"/>&gt; 0, returned point is offset from point j, in that direction.</param>
             <returns></returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.MergeWithPriorSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Returns a copy of the segment that merges the current segment with the prior segment.
+            </summary>
+            <param name="priorSegment">The prior segment.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.MergeWithFollowingSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Returns a copy of the segment that merges the current segment with the following segment.
+            </summary>
+            <param name="followingSegment">The following segment.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.JoinWithPriorSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Returns a copy of the segment that joins the current segment with the prior segment.
+            </summary>
+            <param name="priorSegment">The prior segment.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathDivisionExtension.JoinWithFollowingSegment(MPT.Geometry.Segments.IPathSegment)">
+            <summary>
+            Returns a copy of the segment that joins the current segment with the following segment.
+            </summary>
+            <param name="followingSegment">The following segment.</param>
+            <returns>IPathSegment.</returns>
         </member>
         <member name="T:MPT.Geometry.Segments.IPathSegment">
             <summary>
@@ -593,6 +650,12 @@
             Returns a copy of the segment with an updated J coordinate.
             </summary>
             <param name="newCoordinate">The new coordinate.</param>
+            <returns>IPathSegment.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.IPathSegment.Reverse">
+            <summary>
+            Returns a copy of the segment with the I- &amp; J-coordinates reversed, as well as any other relevant control points.
+            </summary>
             <returns>IPathSegment.</returns>
         </member>
         <member name="M:MPT.Geometry.Segments.IPathSegment.MergeWithPriorSegment(MPT.Geometry.Segments.IPathSegment)">
@@ -718,11 +781,6 @@
             Segment that describes a straight line in a plane.
             </summary>
         </member>
-        <member name="P:MPT.Geometry.Segments.LineSegment.Curve">
-            <summary>
-            Curve that spans between the I and J coordinates.
-            </summary>
-        </member>
         <member name="P:MPT.Geometry.Segments.LineSegment.I">
             <summary>
             First coordinate value.
@@ -846,7 +904,6 @@
             </summary>
             <param name="pointExtension">The point to extend the segment to.</param>
             <returns>IPathSegment.</returns>
-            <exception cref="T:System.NotImplementedException"></exception>
         </member>
         <member name="M:MPT.Geometry.Segments.LineSegment.pointOffsetOnCurve(System.Double)">
             <summary>
@@ -1212,6 +1269,12 @@
             Returns a hash code for this instance.
             </summary>
             <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.</returns>
+        </member>
+        <member name="M:MPT.Geometry.Segments.PathSegment`1.Reverse">
+            <summary>
+            Returns a copy of the segment with the I- &amp; J-coordinates reversed, as well as any other relevant control points.
+            </summary>
+            <returns>IPathSegment.</returns>
         </member>
         <member name="T:MPT.Geometry.Segments.PolyLine">
             <summary>
@@ -3492,7 +3555,7 @@
             <summary>
             Initializes a new instance of the <see cref="T:MPT.Geometry.Shapes.Triangle306090" /> class.
             </summary>
-            <param name="heightB">The height b.</param>
+            <param name="widthA">The length of side a.</param>
         </member>
         <member name="M:MPT.Geometry.Shapes.Triangle306090.Area">
             <summary>
@@ -3512,18 +3575,18 @@
             </summary>
             <value>The c.</value>
         </member>
-        <member name="M:MPT.Geometry.Shapes.Triangle306090.getWidth(System.Double)">
+        <member name="M:MPT.Geometry.Shapes.Triangle306090.getHeight(System.Double)">
             <summary>
             Gets the width.
             </summary>
-            <param name="heightA">The height a.</param>
+            <param name="widthA">The length of side a.</param>
             <returns>System.Double.</returns>
         </member>
         <member name="M:MPT.Geometry.Shapes.Triangle306090.getHypotenuse(System.Double)">
             <summary>
             Gets the hypotenuse.
             </summary>
-            <param name="heightA">The height a.</param>
+            <param name="widthA">The length of side a.</param>
             <returns>System.Double.</returns>
         </member>
         <member name="T:MPT.Geometry.Shapes.Triangle345">
