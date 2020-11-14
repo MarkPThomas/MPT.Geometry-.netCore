@@ -12,7 +12,7 @@ namespace MPT.Geometry
         /// <summary>
         /// Default zero tolerance for operations.
         /// </summary>
-        public const double ZeroTolerance = Numbers.ZeroTolerance;
+        public const double ZeroTolerance = 1E-5;
 
         #region Vector-Derived
         

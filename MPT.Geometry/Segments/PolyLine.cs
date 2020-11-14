@@ -22,16 +22,30 @@ using System.Data;
 namespace MPT.Geometry.Segments
 {
     /// <summary>
-    /// Class PolyLine.
+    /// Represents a multi-line segment.
     /// </summary>
     public class PolyLine : ITolerance, IEnumerable<IPathSegment>, ICloneable
     {
         #region Properties
         /// <summary>
+        /// The tolerance
+        /// </summary>
+        protected double _tolerance = GeometryLibrary.ZeroTolerance;
+        /// <summary>
         /// Tolerance to use in all calculations with double types.
         /// </summary>
-        /// <value>The tolerance.</value>
-        public double Tolerance { get; set; } = GeometryLibrary.ZeroTolerance;
+        public double Tolerance
+        {
+            get { return _tolerance; }
+            set
+            {
+                _tolerance = value;
+                if (_segmentBoundary != null)
+                {
+                    _segmentBoundary.Tolerance = _tolerance;
+                }
+            }
+        }
 
         /// <summary>
         /// Gets the count coordinates.
@@ -88,6 +102,8 @@ namespace MPT.Geometry.Segments
         /// <param name="j">The j.</param>
         public PolyLine(CartesianCoordinate i, CartesianCoordinate j)
         {
+            i.Tolerance = _tolerance;
+            j.Tolerance = _tolerance;
             _segmentBoundary = new SegmentsBoundary(new List<IPathSegment>() { new LineSegment(i, j) });
         }
 
@@ -97,6 +113,7 @@ namespace MPT.Geometry.Segments
         /// <param name="segment">The segment.</param>
         public PolyLine(IPathSegment segment)
         {
+            segment.Tolerance = _tolerance;
             _segmentBoundary = new SegmentsBoundary(new List<IPathSegment>() { segment });
         }
 
@@ -115,6 +132,7 @@ namespace MPT.Geometry.Segments
                     _segmentBoundary.AddLast(new LineSegment(boundaryCoordinates[i], boundaryCoordinates[i + 1]));
                 }
             }
+            _segmentBoundary.Tolerance = _tolerance;
         }
 
         /// <summary>
@@ -124,6 +142,7 @@ namespace MPT.Geometry.Segments
         public PolyLine(SegmentsBoundary segmentBoundary)
         {
             _segmentBoundary = segmentBoundary;
+            _segmentBoundary.Tolerance = _tolerance;
         }
         #endregion
 

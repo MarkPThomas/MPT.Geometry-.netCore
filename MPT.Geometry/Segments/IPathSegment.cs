@@ -1,4 +1,5 @@
 ﻿using MPT.Geometry.Tools;
+using MPT.Math;
 using MPT.Math.Coordinates;
 using MPT.Math.Curves;
 using MPT.Math.Vectors;
@@ -10,6 +11,7 @@ namespace MPT.Geometry.Segments
     /// Interface for any segment along a path lying in a plane.
     /// </summary>
     public interface IPathSegment: 
+        ITolerance,
         IEquatable<IPathSegment>, 
         ITransform<IPathSegment>
     {

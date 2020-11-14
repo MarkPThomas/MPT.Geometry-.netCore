@@ -448,6 +448,206 @@ namespace MPT.Geometry.UnitTests.Shapes
             Assert.AreEqual(7, pointBoundary[5].X, Tolerance);
             Assert.AreEqual(0, pointBoundary[5].Y, Tolerance);
         }
+
+
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 3, 1, 6, 3, 8, 4, 6, 6, 5, 4)]    // Default - +x, y, Quadrant I
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, -3, 1, 0, 3, 2, 4, 0, 6, -1, 4)]    // Negative x
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 3, -1, 6, 1, 8, 2, 6, 4, 5, 2)]    // Negative y
+        [TestCase(-3, 2, -5, 3, -3, 5, -2, 3, 3, 1, 0, 3, -2, 4, 0, 6, 1, 4)]    // Default in Quadrant II
+        [TestCase(-3, -2, -5, -3, -3, -5, -2, -3, 3, 1, 0, -1, -2, -2, 0, -4, 1, -2)]    // Default in Quadrant III
+        [TestCase(3, -2, 5, -3, 3, -5, 2, -3, 3, 1, 6, -1, 8, -2, 6, -4, 5, -2)]    // Default in Quadrant IV
+        public static void Translate(
+            double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4,
+            double deltaX, double deltaY,
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result, double x4Result, double y4Result)
+        {
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1, y1),
+                new CartesianCoordinate(x2, y2),
+                new CartesianCoordinate(x3, y3),
+                new CartesianCoordinate(x4, y4),
+            };
+            Polygon shape = new Polygon(coordinates);
+
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result),
+                new CartesianCoordinate(x2Result, y2Result),
+                new CartesianCoordinate(x3Result, y3Result),
+                new CartesianCoordinate(x4Result, y4Result),
+            };
+            Polygon shapeResult = new Polygon(coordinatesResult);
+
+            Polygon newShape = shape.Translate(new CartesianOffset(deltaX, deltaY)) as Polygon;
+
+            Assert.AreEqual(shapeResult.PointAt(0), newShape.PointAt(0));
+            Assert.AreEqual(shapeResult.PointAt(1), newShape.PointAt(1));
+            Assert.AreEqual(shapeResult.PointAt(2), newShape.PointAt(2));
+            Assert.AreEqual(shapeResult.PointAt(3), newShape.PointAt(3));
+        }
+
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 2, 6, 4, 10, 6, 6, 10, 4, 6)]    // Default - larger, Quadrant I
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 0.5, 1.5, 1, 2.5, 1.5, 1.5, 2.5, 1, 1.5)]    // Smaller
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, -2, -6, -4, -10, -6, -6, -10, -4, -6)]    // Negative
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0)]    // 0
+        [TestCase(-3, 2, -5, 3, -3, 5, -2, 3, 2, -6, 4, -10, 6, -6, 10, -4, 6)]    // Default in Quadrant II
+        [TestCase(-3, -2, -5, -3, -3, -5, -2, -3, 2, -6, -4, -10, -6, -6, -10, -4, -6)]    // Default in Quadrant III
+        [TestCase(3, -2, 5, -3, 3, -5, 2, -3, 2, 6, -4, 10, -6, 6, -10, 4, -6)]    // Default in Quadrant IV
+        public static void ScaleFromPoint_As_Origin(
+            double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4,
+            double scale,
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result, double x4Result, double y4Result)
+        {
+            CartesianCoordinate point = new CartesianCoordinate(0, 0);
+
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1, y1),
+                new CartesianCoordinate(x2, y2),
+                new CartesianCoordinate(x3, y3),
+                new CartesianCoordinate(x4, y4),
+            };
+            Polygon shape = new Polygon(coordinates);
+
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result),
+                new CartesianCoordinate(x2Result, y2Result),
+                new CartesianCoordinate(x3Result, y3Result),
+                new CartesianCoordinate(x4Result, y4Result),
+            };
+            Polygon shapeResult = new Polygon(coordinatesResult);
+
+            Polygon newShape = shape.ScaleFromPoint(scale, point) as Polygon;
+
+            Assert.AreEqual(shapeResult.PointAt(0), newShape.PointAt(0));
+            Assert.AreEqual(shapeResult.PointAt(1), newShape.PointAt(1));
+            Assert.AreEqual(shapeResult.PointAt(2), newShape.PointAt(2));
+            Assert.AreEqual(shapeResult.PointAt(3), newShape.PointAt(3));
+        }
+
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 2, 6, 4, 10, 6, 6, 10, 4, 6)]    // Default - larger, Quadrant I
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 0.5, 1.5, 1, 2.5, 1.5, 1.5, 2.5, 1, 1.5)]    // Smaller
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, -2, -6, -4, -10, -6, -6, -10, -4, -6)]    // Negative
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0)]    // 0
+        [TestCase(-3, 2, -5, 3, -3, 5, -2, 3, 2, -6, 4, -10, 6, -6, 10, -4, 6)]    // Default in Quadrant II
+        [TestCase(-3, -2, -5, -3, -3, -5, -2, -3, 2, -6, -4, -10, -6, -6, -10, -4, -6)]    // Default in Quadrant III
+        [TestCase(3, -2, 5, -3, 3, -5, 2, -3, 2, 6, -4, 10, -6, 6, -10, 4, -6)]    // Default in Quadrant IV
+        public static void ScaleFromPoint(
+            double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4,
+            double scale,
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result, double x4Result, double y4Result)
+        {
+            CartesianCoordinate point = new CartesianCoordinate(2, -3);
+
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1, y1) + point,
+                new CartesianCoordinate(x2, y2) + point,
+                new CartesianCoordinate(x3, y3) + point,
+                new CartesianCoordinate(x4, y4) + point,
+            };
+            Polygon shape = new Polygon(coordinates);
+
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result) + point,
+                new CartesianCoordinate(x2Result, y2Result) + point,
+                new CartesianCoordinate(x3Result, y3Result) + point,
+                new CartesianCoordinate(x4Result, y4Result) + point,
+            };
+            Polygon shapeResult = new Polygon(coordinatesResult);
+
+
+            Polygon newShape = shape.ScaleFromPoint(scale, point) as Polygon;
+
+            Assert.AreEqual(shapeResult.PointAt(0), newShape.PointAt(0));
+            Assert.AreEqual(shapeResult.PointAt(1), newShape.PointAt(1));
+            Assert.AreEqual(shapeResult.PointAt(2), newShape.PointAt(2));
+            Assert.AreEqual(shapeResult.PointAt(3), newShape.PointAt(3));
+        }
+
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 90, -2, 3, -3, 4, -3, 5, -5, 3, -3, 2)]    // Rotate + to quadrant II
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 180, -3, -2, -4, -3, -5, -3, -3, -5, -2, -3)]    // Rotate + to quadrant III
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 270, 2, -3, 3, -4, 3, -5, 5, -3, 3, -2)]    // Rotate + to quadrant IV
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 360, 3, 2, 4, 3, 5, 3, 3, 5, 2, 3)]    // Rotate + full circle
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, -90, 2, -3, 3, -4, 3, -5, 5, -3, 3, -2)]    // Rotate - to quadrant II
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, -180, -3, -2, -4, -3, -5, -3, -3, -5, -2, -3)]    // Rotate - to quadrant III
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, -270, -2, 3, -3, 4, -3, 5, -5, 3, -3, 2)]    // Rotate - to quadrant IV
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, -360, 3, 2, 4, 3, 5, 3, 3, 5, 2, 3)]    // Rotate - full circle
+        public static void RotateAboutPoint_As_Origin(
+            double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, double x5, double y5,
+            double rotationDegrees,
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result, double x4Result, double y4Result, double x5Result, double y5Result)
+        {
+            CartesianCoordinate point = new CartesianCoordinate(0, 0);
+
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1, y1),
+                new CartesianCoordinate(x2, y2),
+                new CartesianCoordinate(x3, y3),
+                new CartesianCoordinate(x4, y4),
+                new CartesianCoordinate(x5, y5),
+            };
+            Polygon shape = new Polygon(coordinates);
+
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result) + point,
+                new CartesianCoordinate(x2Result, y2Result) + point,
+                new CartesianCoordinate(x3Result, y3Result) + point,
+                new CartesianCoordinate(x4Result, y4Result) + point,
+                new CartesianCoordinate(x5Result, y5Result) + point,
+            };
+            Polygon shapeResult = new Polygon(coordinatesResult);
+
+            Polygon newShape = shape.RotateAboutPoint(Angle.CreateFromDegree(rotationDegrees), point) as Polygon;
+
+            Assert.AreEqual(shapeResult.PointAt(0), newShape.PointAt(0));
+            Assert.AreEqual(shapeResult.PointAt(1), newShape.PointAt(1));
+            Assert.AreEqual(shapeResult.PointAt(2), newShape.PointAt(2));
+            Assert.AreEqual(shapeResult.PointAt(3), newShape.PointAt(3));
+            Assert.AreEqual(shapeResult.PointAt(4), newShape.PointAt(4));
+        }
+
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 90, -2, 3, -3, 4, -3, 5, -5, 3, -3, 2)]    // Rotate + to quadrant II
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 180, -3, -2, -4, -3, -5, -3, -3, -5, -2, -3)]    // Rotate + to quadrant III
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 270, 2, -3, 3, -4, 3, -5, 5, -3, 3, -2)]    // Rotate + to quadrant IV
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 360, 3, 2, 4, 3, 5, 3, 3, 5, 2, 3)]    // Rotate + full circle
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, -90, 2, -3, 3, -4, 3, -5, 5, -3, 3, -2)]    // Rotate - to quadrant II
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, -180, -3, -2, -4, -3, -5, -3, -3, -5, -2, -3)]    // Rotate - to quadrant III
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, -270, -2, 3, -3, 4, -3, 5, -5, 3, -3, 2)]    // Rotate - to quadrant IV
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, -360, 3, 2, 4, 3, 5, 3, 3, 5, 2, 3)]    // Rotate - full circle
+        public static void RotateAboutPoint(
+            double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, double x5, double y5,
+            double rotationDegrees,
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result, double x4Result, double y4Result, double x5Result, double y5Result)
+        {
+            CartesianCoordinate point = new CartesianCoordinate(2, -3);
+
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1, y1) + point,
+                new CartesianCoordinate(x2, y2) + point,
+                new CartesianCoordinate(x3, y3) + point,
+                new CartesianCoordinate(x4, y4) + point,
+                new CartesianCoordinate(x5, y5) + point,
+            };
+            Polygon shape = new Polygon(coordinates);
+
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result) + point,
+                new CartesianCoordinate(x2Result, y2Result) + point,
+                new CartesianCoordinate(x3Result, y3Result) + point,
+                new CartesianCoordinate(x4Result, y4Result) + point,
+                new CartesianCoordinate(x5Result, y5Result) + point,
+            };
+            Polygon shapeResult = new Polygon(coordinatesResult);
+
+            Polygon newShape = shape.RotateAboutPoint(Angle.CreateFromDegree(rotationDegrees), point) as Polygon;
+
+            Assert.AreEqual(shapeResult.PointAt(0), newShape.PointAt(0));
+            Assert.AreEqual(shapeResult.PointAt(1), newShape.PointAt(1));
+            Assert.AreEqual(shapeResult.PointAt(2), newShape.PointAt(2));
+            Assert.AreEqual(shapeResult.PointAt(3), newShape.PointAt(3));
+            Assert.AreEqual(shapeResult.PointAt(4), newShape.PointAt(4));
+        }
+
+        // TODO: Implement Skew for this & Segments : https://en.wikipedia.org/wiki/Shear_matrix
+        // TODO: Implement Mirror for this & Segments & Shapes: https://en.wikipedia.org/wiki/Transformation_matrix, https://www.gatevidyalay.com/2d-reflection-in-computer-graphics-definition-examples/
         #endregion
     }
 }

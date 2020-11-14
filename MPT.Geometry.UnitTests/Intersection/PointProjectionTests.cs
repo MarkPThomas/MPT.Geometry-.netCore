@@ -160,12 +160,12 @@ namespace MPT.Geometry.UnitTests.Intersection
 
         #region NumberOfIntersections
         #region NumberOfIntersectionsOnHorizontalProjection
-        [Test]
-        public static void NumberOfIntersectionsOnHorizontalProjection_Of_Polyline_Throws_Argument_Exception_for_Path()
-        {
-            CartesianCoordinate coordinate = new CartesianCoordinate(1, 1);
-            Assert.Throws<ArgumentException>(() => PointProjection.NumberOfIntersectionsOnHorizontalProjection(coordinate, polyline.ToArray()));
-        }
+        //[Test]
+        //public static void NumberOfIntersectionsOnHorizontalProjection_Of_Polyline_Throws_Argument_Exception_for_Path()
+        //{
+        //    CartesianCoordinate coordinate = new CartesianCoordinate(1, 1);
+        //    Assert.Throws<ArgumentException>(() => PointProjection.NumberOfIntersectionsOnHorizontalProjection(coordinate, polyline.ToArray()));
+        //}
 
 
         //[TestCase(-6, ExpectedResult = 2)]

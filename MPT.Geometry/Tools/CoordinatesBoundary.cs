@@ -33,10 +33,24 @@ namespace MPT.Geometry.Tools
     {
         #region Properties
         /// <summary>
+        /// The tolerance
+        /// </summary>
+        protected double _tolerance = GL.ZeroTolerance;
+        /// <summary>
         /// Tolerance to use in all calculations with double types.
         /// </summary>
-        /// <value>The tolerance.</value>
-        public double Tolerance { get; set; } = GL.ZeroTolerance;
+        public double Tolerance
+        {
+            get { return _tolerance; }
+            set
+            {
+                _tolerance = value;
+                foreach (T coordinate in _contents)
+                {
+                    coordinate.Tolerance = _tolerance;
+                }
+            }
+        }
 
         /// <summary>
         /// The contents
@@ -99,6 +113,7 @@ namespace MPT.Geometry.Tools
             {
                 _contents[i] = coordinates[i];
             }
+            Tolerance = _tolerance;
         }
 
         /// <summary>
@@ -115,6 +130,7 @@ namespace MPT.Geometry.Tools
                 _contents[i] = coordinate;
                 i++;
             }
+            Tolerance = _tolerance;
         }
         #endregion
 

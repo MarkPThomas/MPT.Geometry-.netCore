@@ -146,6 +146,51 @@ namespace MPT.Geometry.UnitTests.Segments
             Assert.AreEqual(-5, polyLine[3].J.X);
             Assert.AreEqual(2, polyLine[3].J.Y);
         }
+
+        [Test]
+        public static void Changing_Tolerance_Cascades_to_Properties()
+        {
+            double defaultTolerance = 10E-6;
+            List<CartesianCoordinate> points = new List<CartesianCoordinate>()
+            {
+                new CartesianCoordinate(-5, -5),
+                new CartesianCoordinate(6, -5),
+                new CartesianCoordinate(4, 5),
+                new CartesianCoordinate(-5, 5),
+                new CartesianCoordinate(-5, 2)
+            };
+
+            List<IPathSegment> segments = new List<IPathSegment>()
+            {
+                new LineSegment(points[0], points[1]),
+                new LineSegment(points[1], points[2]),
+                new LineSegment(points[2], points[3]),
+                new LineSegment(points[3], points[4]),
+            };
+
+            SegmentsBoundary segmentsBoundary = new SegmentsBoundary(segments);
+
+            PolyLine polyLine = new PolyLine(segmentsBoundary);
+
+            Assert.AreEqual(defaultTolerance, polyLine.Tolerance);
+            IList<CartesianCoordinate> coordinates = polyLine.Coordinates;
+            Assert.AreEqual(defaultTolerance, coordinates[0].Tolerance);
+            Assert.AreEqual(defaultTolerance, coordinates[1].Tolerance);
+            Assert.AreEqual(defaultTolerance, coordinates[2].Tolerance);
+            Assert.AreEqual(defaultTolerance, coordinates[3].Tolerance);
+            Assert.AreEqual(defaultTolerance, coordinates[4].Tolerance);
+
+            double newTolerance = 10E-3;
+            polyLine.Tolerance = newTolerance;
+            IList<CartesianCoordinate> updatedCoordinates = polyLine.Coordinates;
+
+            Assert.AreEqual(newTolerance, polyLine.Tolerance);
+            Assert.AreEqual(newTolerance, updatedCoordinates[0].Tolerance);
+            Assert.AreEqual(newTolerance, updatedCoordinates[1].Tolerance);
+            Assert.AreEqual(newTolerance, updatedCoordinates[2].Tolerance);
+            Assert.AreEqual(newTolerance, updatedCoordinates[3].Tolerance);
+            Assert.AreEqual(newTolerance, updatedCoordinates[4].Tolerance);
+        }
         #endregion
 
         #region Methods: List
@@ -223,7 +268,6 @@ namespace MPT.Geometry.UnitTests.Segments
 
             PolyLine polyLine = new PolyLine(points);
 
-            Assert.AreEqual(GeometryLibrary.ZeroTolerance, polyLine.Tolerance);
             Assert.IsTrue(polyLine.IsReadOnly);
             Assert.AreEqual(4, polyLine.CountPoints);
             Assert.AreEqual(3, polyLine.CountSegments);
@@ -639,7 +683,38 @@ namespace MPT.Geometry.UnitTests.Segments
         [Test]
         public static void AdjacentSegmentsAt()
         {
+            List<CartesianCoordinate> coordinates = new List<CartesianCoordinate>()
+            {
+                new CartesianCoordinate(-5, -5),
+                new CartesianCoordinate(6, -5),
+                new CartesianCoordinate(4, 5),
+                new CartesianCoordinate(-5, 5),
+                new CartesianCoordinate(-5, 2),
+                new CartesianCoordinate(6, 4)
+            };
 
+            List<LineSegment> segments = new List<LineSegment>()
+            {
+                new LineSegment(coordinates[0], coordinates[1]),
+                new LineSegment(coordinates[1], coordinates[2]),
+                new LineSegment(coordinates[2], coordinates[3]),
+                new LineSegment(coordinates[3], coordinates[4]),
+                new LineSegment(coordinates[4], coordinates[5])
+            };
+
+            PolyLine polyLine = new PolyLine(coordinates);
+
+            Tuple<IPathSegment, IPathSegment> adjacentSegmentsAtMiddle = polyLine.AdjacentSegmentsAt(2);
+            Assert.AreEqual(segments[1], adjacentSegmentsAtMiddle.Item1);
+            Assert.AreEqual(segments[2], adjacentSegmentsAtMiddle.Item2);
+
+            Tuple<IPathSegment, IPathSegment> adjacentSegmentsAtStart = polyLine.AdjacentSegmentsAt(0);
+            Assert.IsNull(adjacentSegmentsAtStart.Item1);
+            Assert.AreEqual(segments[0], adjacentSegmentsAtStart.Item2);
+
+            Tuple<IPathSegment, IPathSegment> adjacentSegmentsAtEnd = polyLine.AdjacentSegmentsAt(5);
+            Assert.AreEqual(segments[4], adjacentSegmentsAtEnd.Item1);
+            Assert.IsNull(adjacentSegmentsAtEnd.Item2);
         }
 
         [Test]
@@ -1031,27 +1106,184 @@ namespace MPT.Geometry.UnitTests.Segments
         #endregion
 
         #region Methods: IPathTransform        
-        
 
-        public static void Translate()
+        [TestCase(3, 2, 5, 3, 3, 5, 3, 1, 6, 3, 8, 4, 6, 6)]    // Default - +x, y, Quadrant I
+        [TestCase(3, 2, 5, 3, 3, 5, -3, 1, 0, 3, 2, 4, 0, 6)]    // Negative x
+        [TestCase(3, 2, 5, 3, 3, 5, 3, -1, 6, 1, 8, 2, 6, 4)]    // Negative y
+        [TestCase(-3, 2, -5, 3, -3, 5, 3, 1, 0, 3, -2, 4, 0, 6)]    // Default in Quadrant II
+        [TestCase(-3, -2, -5, -3, -3, -5, 3, 1, 0, -1, -2, -2, 0, -4)]    // Default in Quadrant III
+        [TestCase(3, -2, 5, -3, 3, -5, 3, 1, 6, -1, 8, -2, 6, -4)]    // Default in Quadrant IV
+        public static void Translate(
+            double x1, double y1, double x2, double y2, double x3, double y3,
+            double deltaX, double deltaY,
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result)
         {
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() { 
+                new CartesianCoordinate(x1, y1),
+                new CartesianCoordinate(x2, y2),
+                new CartesianCoordinate(x3, y3),
+            };
+            PolyLine line = new PolyLine(coordinates);
 
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result),
+                new CartesianCoordinate(x2Result, y2Result),
+                new CartesianCoordinate(x3Result, y3Result),
+            };
+            PolyLine lineResult = new PolyLine(coordinatesResult);
+
+            PolyLine newLine = line.Translate(new CartesianOffset(deltaX, deltaY));
+
+            Assert.AreEqual(lineResult.Coordinates[0], newLine.Coordinates[0]);
+            Assert.AreEqual(lineResult.Coordinates[1], newLine.Coordinates[1]);
+            Assert.AreEqual(lineResult.Coordinates[2], newLine.Coordinates[2]);
         }
 
-
-        public static void ScaleFromPoint()
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 6, 4, 10, 6, 6, 10)]    // Default - larger, Quadrant I
+        [TestCase(3, 2, 5, 3, 3, 5, 0.5, 1.5, 1, 2.5, 1.5, 1.5, 2.5)]    // Smaller
+        [TestCase(3, 2, 5, 3, 3, 5, -2, -6, -4, -10, -6, -6, -10)]    // Negative
+        [TestCase(3, 2, 5, 3, 3, 5, 0, 0, 0, 0, 0, 0, 0)]    // 0
+        [TestCase(-3, 2, -5, 3, -3, 5, 2, -6, 4, -10, 6, -6, 10)]    // Default in Quadrant II
+        [TestCase(-3, -2, -5, -3, -3, -5, 2, -6, -4, -10, -6, -6, -10)]    // Default in Quadrant III
+        [TestCase(3, -2, 5, -3, 3, -5, 2, 6, -4, 10, -6, 6, -10)]    // Default in Quadrant IV
+        public static void ScaleFromPoint_As_Origin(
+            double x1, double y1, double x2, double y2, double x3, double y3,
+            double scale, 
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result)
         {
+            CartesianCoordinate point = new CartesianCoordinate(0, 0);
 
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1, y1),
+                new CartesianCoordinate(x2, y2),
+                new CartesianCoordinate(x3, y3),
+            };
+            PolyLine line = new PolyLine(coordinates);
+
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result),
+                new CartesianCoordinate(x2Result, y2Result),
+                new CartesianCoordinate(x3Result, y3Result),
+            };
+            PolyLine lineResult = new PolyLine(coordinatesResult);
+
+            PolyLine newLine = line.ScaleFromPoint(scale, point);
+
+            Assert.AreEqual(lineResult.Coordinates[0], newLine.Coordinates[0]);
+            Assert.AreEqual(lineResult.Coordinates[1], newLine.Coordinates[1]);
+            Assert.AreEqual(lineResult.Coordinates[2], newLine.Coordinates[2]);
         }
 
-
-        public static void RotateAboutPoint()
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 6, 4, 10, 6, 6, 10)]    // Default - larger, Quadrant I
+        [TestCase(3, 2, 5, 3, 3, 5, 0.5, 1.5, 1, 2.5, 1.5, 1.5, 2.5)]    // Smaller
+        [TestCase(3, 2, 5, 3, 3, 5, -2, -6, -4, -10, -6, -6, -10)]    // Negative
+        [TestCase(3, 2, 5, 3, 3, 5, 0, 0, 0, 0, 0, 0, 0)]    // 0
+        [TestCase(-3, 2, -5, 3, -3, 5, 2, -6, 4, -10, 6, -6, 10)]    // Default in Quadrant II
+        [TestCase(-3, -2, -5, -3, -3, -5, 2, -6, -4, -10, -6, -6, -10)]    // Default in Quadrant III
+        [TestCase(3, -2, 5, -3, 3, -5, 2, 6, -4, 10, -6, 6, -10)]    // Default in Quadrant IV
+        public static void ScaleFromPoint(
+            double x1, double y1, double x2, double y2, double x3, double y3,
+            double scale,
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result)
         {
+            CartesianCoordinate point = new CartesianCoordinate(2, -3);
 
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1, y1) + point,
+                new CartesianCoordinate(x2, y2) + point,
+                new CartesianCoordinate(x3, y3) + point,
+            };
+            PolyLine line = new PolyLine(coordinates);
+
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result) + point,
+                new CartesianCoordinate(x2Result, y2Result) + point,
+                new CartesianCoordinate(x3Result, y3Result) + point,
+            };
+            PolyLine lineResult = new PolyLine(coordinatesResult);
+
+
+            PolyLine newLine = line.ScaleFromPoint(scale, point);
+
+            Assert.AreEqual(lineResult.Coordinates[0], newLine.Coordinates[0]);
+            Assert.AreEqual(lineResult.Coordinates[1], newLine.Coordinates[1]);
+            Assert.AreEqual(lineResult.Coordinates[2], newLine.Coordinates[2]);
         }
 
-        // TODO: Implement Skew for this & Segments
-        // TODO: Implement Mirror for this & Segments
+        [TestCase(3, 2, 4, 3, 5, 3, 90, -2, 3, -3, 4, -3, 5)]    // Rotate + to quadrant II
+        [TestCase(3, 2, 4, 3, 5, 3, 180, -3, -2, -4, -3, -5, -3)]    // Rotate + to quadrant III
+        [TestCase(3, 2, 4, 3, 5, 3, 270, 2, -3, 3, -4, 3, -5)]    // Rotate + to quadrant IV
+        [TestCase(3, 2, 4, 3, 5, 3, 360, 3, 2, 4, 3, 5, 3)]    // Rotate + full circle
+        [TestCase(3, 2, 4, 3, 5, 3, -90, 2, -3, 3, -4, 3, -5)]    // Rotate - to quadrant II
+        [TestCase(3, 2, 4, 3, 5, 3, -180, -3, -2, -4, -3, -5, -3)]    // Rotate - to quadrant III
+        [TestCase(3, 2, 4, 3, 5, 3, -270, -2, 3, -3, 4, -3, 5)]    // Rotate - to quadrant IV
+        [TestCase(3, 2, 4, 3, 5, 3, -360, 3, 2, 4, 3, 5, 3)]    // Rotate - full circle
+        public static void RotateAboutPoint_As_Origin(
+            double x1, double y1, double x2, double y2, double x3, double y3,
+            double rotationDegrees,
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result)
+        {
+            CartesianCoordinate point = new CartesianCoordinate(0, 0);
+
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1, y1),
+                new CartesianCoordinate(x2, y2),
+                new CartesianCoordinate(x3, y3),
+            };
+            PolyLine line = new PolyLine(coordinates);
+
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result) + point,
+                new CartesianCoordinate(x2Result, y2Result) + point,
+                new CartesianCoordinate(x3Result, y3Result) + point,
+            };
+            PolyLine lineResult = new PolyLine(coordinatesResult);
+
+            PolyLine newLine = line.RotateAboutPoint(Angle.CreateFromDegree(rotationDegrees), point);
+
+            Assert.AreEqual(lineResult.Coordinates[0], newLine.Coordinates[0]);
+            Assert.AreEqual(lineResult.Coordinates[1], newLine.Coordinates[1]);
+            Assert.AreEqual(lineResult.Coordinates[2], newLine.Coordinates[2]);
+        }
+
+        [TestCase(3, 2, 4, 3, 5, 3, 90, -2, 3, -3, 4, -3, 5)]    // Rotate + to quadrant II
+        [TestCase(3, 2, 4, 3, 5, 3, 180, -3, -2, -4, -3, -5, -3)]    // Rotate + to quadrant III
+        [TestCase(3, 2, 4, 3, 5, 3, 270, 2, -3, 3, -4, 3, -5)]    // Rotate + to quadrant IV
+        [TestCase(3, 2, 4, 3, 5, 3, 360, 3, 2, 4, 3, 5, 3)]    // Rotate + full circle
+        [TestCase(3, 2, 4, 3, 5, 3, -90, 2, -3, 3, -4, 3, -5)]    // Rotate - to quadrant II
+        [TestCase(3, 2, 4, 3, 5, 3, -180, -3, -2, -4, -3, -5, -3)]    // Rotate - to quadrant III
+        [TestCase(3, 2, 4, 3, 5, 3, -270, -2, 3, -3, 4, -3, 5)]    // Rotate - to quadrant IV
+        [TestCase(3, 2, 4, 3, 5, 3, -360, 3, 2, 4, 3, 5, 3)]    // Rotate - full circle
+        public static void RotateAboutPoint(
+            double x1, double y1, double x2, double y2, double x3, double y3,
+            double rotationDegrees,
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result)
+        {
+            CartesianCoordinate point = new CartesianCoordinate(2, -3);
+
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1, y1) + point,
+                new CartesianCoordinate(x2, y2) + point,
+                new CartesianCoordinate(x3, y3) + point,
+            };
+            PolyLine line = new PolyLine(coordinates);
+
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result) + point,
+                new CartesianCoordinate(x2Result, y2Result) + point,
+                new CartesianCoordinate(x3Result, y3Result) + point,
+            };
+            PolyLine lineResult = new PolyLine(coordinatesResult);
+
+            PolyLine newLine = line.RotateAboutPoint(Angle.CreateFromDegree(rotationDegrees), point);
+
+            Assert.AreEqual(lineResult.Coordinates[0], newLine.Coordinates[0]);
+            Assert.AreEqual(lineResult.Coordinates[1], newLine.Coordinates[1]);
+            Assert.AreEqual(lineResult.Coordinates[2], newLine.Coordinates[2]);
+        }
+
+        // TODO: Implement Skew for this & Segments : https://en.wikipedia.org/wiki/Shear_matrix
+        // TODO: Implement Mirror for this & Segments & Shapes: https://en.wikipedia.org/wiki/Transformation_matrix, https://www.gatevidyalay.com/2d-reflection-in-computer-graphics-definition-examples/
         #endregion
 
         #region Methods: Enumerator

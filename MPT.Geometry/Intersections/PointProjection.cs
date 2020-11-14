@@ -27,102 +27,102 @@ namespace MPT.Geometry.Intersections
     public static class PointProjection
     {
         #region Number of Intersections
-        /// <summary>
-        /// The numbers of shape boundary intersections a horizontal line makes when projecting to the right from the provided point.
-        /// If the point is on a vertex or segment, the function returns either 0 or 1.
-        /// </summary>
-        /// <param name="coordinate">The coordinate.</param>
-        /// <param name="shapeBoundary">The shape boundary composed of n points.</param>
-        /// <param name="includePointOnSegment">if set to <c>true</c> [include point on segment].</param>
-        /// <param name="includePointOnVertex">if set to <c>true</c> [include point on vertex].</param>
-        /// <param name="tolerance">The tolerance.</param>
-        /// <returns>System.Int32.</returns>
-        /// <exception cref="System.ArgumentException">Shape boundary describes a shape. Closure to the shape boundary is needed.</exception>
-        public static int NumberOfIntersectionsOnHorizontalProjection(
-            CartesianCoordinate coordinate, 
-            CartesianCoordinate [] shapeBoundary,
-            bool includePointOnSegment = true,
-            bool includePointOnVertex = true,
-            double tolerance = GeometryLibrary.ZeroTolerance)
-        {
-            if (shapeBoundary[0] != shapeBoundary[shapeBoundary.Length - 1])
-                throw new ArgumentException("Shape boundary describes a shape. Closure to the shape boundary is needed.");
+        ///// <summary>
+        ///// The numbers of shape boundary intersections a horizontal line makes when projecting to the right from the provided point.
+        ///// If the point is on a vertex or segment, the function returns either 0 or 1.
+        ///// </summary>
+        ///// <param name="coordinate">The coordinate.</param>
+        ///// <param name="shapeBoundary">The shape boundary composed of n points.</param>
+        ///// <param name="includePointOnSegment">if set to <c>true</c> [include point on segment].</param>
+        ///// <param name="includePointOnVertex">if set to <c>true</c> [include point on vertex].</param>
+        ///// <param name="tolerance">The tolerance.</param>
+        ///// <returns>System.Int32.</returns>
+        ///// <exception cref="System.ArgumentException">Shape boundary describes a shape. Closure to the shape boundary is needed.</exception>
+        //public static int NumberOfIntersectionsOnHorizontalProjection(
+        //    CartesianCoordinate coordinate, 
+        //    CartesianCoordinate [] shapeBoundary,
+        //    bool includePointOnSegment = true,
+        //    bool includePointOnVertex = true,
+        //    double tolerance = GeometryLibrary.ZeroTolerance)
+        //{
+        //    if (shapeBoundary[0] != shapeBoundary[shapeBoundary.Length - 1])
+        //        throw new ArgumentException("Shape boundary describes a shape. Closure to the shape boundary is needed.");
 
-            // 1. Check horizontal line projection from a pt. n to the right
-            // 2. Count # of intersections of the line with shape edges   
+        //    // 1. Check horizontal line projection from a pt. n to the right
+        //    // 2. Count # of intersections of the line with shape edges   
             
-            // Note shape coordinates from XML already repeat starting node as an ending node.
-            // No need to handle wrap-around below.
+        //    // Note shape coordinates from XML already repeat starting node as an ending node.
+        //    // No need to handle wrap-around below.
 
-            int numberOfIntersections = 0;
-            for (int i = 0; i < shapeBoundary.Length - 1; i++)
-            {
-                CartesianCoordinate vertexI = shapeBoundary[i];
-                if (PointIntersection.IsOnPoint(coordinate, vertexI))
-                {
-                    return 0;
-                }
+        //    int numberOfIntersections = 0;
+        //    for (int i = 0; i < shapeBoundary.Length - 1; i++)
+        //    {
+        //        CartesianCoordinate vertexI = shapeBoundary[i];
+        //        if (PointIntersection.IsOnPoint(coordinate, vertexI))
+        //        {
+        //            return 0;
+        //        }
 
-                CartesianCoordinate vertexJ = shapeBoundary[i + 1];
-                LineSegment segment = new LineSegment(vertexI, vertexJ);
-                LinearCurve segmentCurve = segment.Curve;
-                if (segment.IncludesCoordinate(coordinate))
-                {
-                    return 0;
-                }
-                if (segmentCurve.IsHorizontal())
-                {   // Segment would be parallel or collinear to line projection.
-                    continue;
-                }
+        //        CartesianCoordinate vertexJ = shapeBoundary[i + 1];
+        //        LineSegment segment = new LineSegment(vertexI, vertexJ);
+        //        LinearCurve segmentCurve = segment.Curve;
+        //        if (segment.IncludesCoordinate(coordinate))
+        //        {
+        //            return 0;
+        //        }
+        //        if (segmentCurve.IsHorizontal())
+        //        {   // Segment would be parallel or collinear to line projection.
+        //            continue;
+        //        }
 
 
-                if (!LineToLineIntersection.PointIsLeftOfLineEndExclusive(coordinate.X, vertexI, vertexJ))
-                {   // Pt is to the right of the segment.
-                    continue;
-                }
-                bool pointIsWithinSegmentHeight = LineToLineIntersection.PointIsWithinLineHeightInclusive(
-                                                    coordinate.Y, 
-                                                    vertexI, vertexJ);
-                if (!pointIsWithinSegmentHeight)
-                {   // CartesianCoordinate is out of vertical bounds of the segment extents.
-                    continue;
-                }
-                //bool pointIsWithinSegmentWidth = ProjectionVertical.PointIsWithinSegmentWidth(
-                //                                    coordinate.X, 
-                //                                    vertexI, vertexJ, 
-                //                                    includeEnds: includePointOnSegment);
-                if (segmentCurve.IsVertical())
-                {
-                    //if (pointIsWithinSegmentWidth)
-                    //{ // CartesianCoordinate is on vertical segment
-                    //    return includePointOnSegment ? 1 : 0;
-                    //}
-                    //// CartesianCoordinate hits vertical segment
-                    numberOfIntersections++;
-                    continue;
-                }
-                //if (segment.IsHorizontal())
-                //{   // Segment would be parallel to line projection.
-                //    // CartesianCoordinate is collinear since it is within segment height
-                //    if (pointIsWithinSegmentWidth)
-                //    { // CartesianCoordinate is on horizontal segment
-                //        return includePointOnSegment ? 1 : 0;
-                //    }
-                //    continue;
-                //}
+        //        if (!LineToLineIntersection.PointIsLeftOfLineEndExclusive(coordinate.X, vertexI, vertexJ))
+        //        {   // Pt is to the right of the segment.
+        //            continue;
+        //        }
+        //        bool pointIsWithinSegmentHeight = LineToLineIntersection.PointIsWithinLineHeightInclusive(
+        //                                            coordinate.Y, 
+        //                                            vertexI, vertexJ);
+        //        if (!pointIsWithinSegmentHeight)
+        //        {   // CartesianCoordinate is out of vertical bounds of the segment extents.
+        //            continue;
+        //        }
+        //        //bool pointIsWithinSegmentWidth = ProjectionVertical.PointIsWithinSegmentWidth(
+        //        //                                    coordinate.X, 
+        //        //                                    vertexI, vertexJ, 
+        //        //                                    includeEnds: includePointOnSegment);
+        //        if (segmentCurve.IsVertical())
+        //        {
+        //            //if (pointIsWithinSegmentWidth)
+        //            //{ // CartesianCoordinate is on vertical segment
+        //            //    return includePointOnSegment ? 1 : 0;
+        //            //}
+        //            //// CartesianCoordinate hits vertical segment
+        //            numberOfIntersections++;
+        //            continue;
+        //        }
+        //        //if (segment.IsHorizontal())
+        //        //{   // Segment would be parallel to line projection.
+        //        //    // CartesianCoordinate is collinear since it is within segment height
+        //        //    if (pointIsWithinSegmentWidth)
+        //        //    { // CartesianCoordinate is on horizontal segment
+        //        //        return includePointOnSegment ? 1 : 0;
+        //        //    }
+        //        //    continue;
+        //        //}
 
-                double xIntersection = LineToLineIntersection.IntersectionPointX(coordinate.Y, vertexI, vertexJ);
-                if (LineToLineIntersection.PointIsLeftOfSegmentIntersection(coordinate.X, xIntersection, vertexI, vertexJ))
-                {
-                    numberOfIntersections++;
-                }
-                //else if (coordinate.X.IsEqualTo(xIntersection, tolerance))
-                //{ // CartesianCoordinate is on sloped segment
-                //    return includePointOnSegment ? 1 : 0;
-                //}
-            }
-            return numberOfIntersections;
-        }
+        //        double xIntersection = LineToLineIntersection.IntersectionPointX(coordinate.Y, vertexI, vertexJ);
+        //        if (LineToLineIntersection.PointIsLeftOfSegmentIntersection(coordinate.X, xIntersection, vertexI, vertexJ))
+        //        {
+        //            numberOfIntersections++;
+        //        }
+        //        //else if (coordinate.X.IsEqualTo(xIntersection, tolerance))
+        //        //{ // CartesianCoordinate is on sloped segment
+        //        //    return includePointOnSegment ? 1 : 0;
+        //        //}
+        //    }
+        //    return numberOfIntersections;
+        //}
 
         // TODO: Determine if this sort of function is ever needed: NumberOfIntersectionsOnVerticalProjection
         ///// <summary>

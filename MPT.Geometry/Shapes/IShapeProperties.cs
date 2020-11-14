@@ -6,7 +6,7 @@ namespace MPT.Geometry.Shapes
     /// <summary>
     /// Interface for all paths that create a closed shape.
     /// </summary>
-    public interface IShapeProperties
+    public interface IShapeProperties : ITolerance
     {
         /// <summary>
         /// Length of all sides of the shape.

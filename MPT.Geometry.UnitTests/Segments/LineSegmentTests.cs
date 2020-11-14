@@ -6,6 +6,7 @@ using MPT.Math.Coordinates;
 using MPT.Math.Vectors;
 using Num = MPT.Math.Numbers;
 using System.Collections.Generic;
+using MPT.Math.Curves;
 
 namespace MPT.Geometry.UnitTests.Segments
 {
@@ -28,6 +29,24 @@ namespace MPT.Geometry.UnitTests.Segments
             Assert.AreEqual(4, lineSegment.Curve.ControlPointI.Y);
             Assert.AreEqual(5, lineSegment.Curve.ControlPointJ.X);
             Assert.AreEqual(6, lineSegment.Curve.ControlPointJ.Y);
+        }
+
+        [Test]
+        public static void Changing_Tolerance_Cascades_to_Properties()
+        {
+            double defaultTolerance = 10E-6;
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(3, 4), new CartesianCoordinate(5, 6));
+
+            Assert.AreEqual(defaultTolerance, lineSegment.Tolerance);
+            Assert.AreEqual(defaultTolerance, lineSegment.I.Tolerance);
+            Assert.AreEqual(defaultTolerance, lineSegment.J.Tolerance);
+
+            double newTolerance = 10E-3;
+            lineSegment.Tolerance = newTolerance;
+
+            Assert.AreEqual(newTolerance, lineSegment.Tolerance);
+            Assert.AreEqual(newTolerance, lineSegment.I.Tolerance);
+            Assert.AreEqual(newTolerance, lineSegment.J.Tolerance);
         }
         #endregion
 
@@ -522,27 +541,254 @@ namespace MPT.Geometry.UnitTests.Segments
         }
 
         [Test]
-        public static void ExtendSegmentToPoint()
+        public static void ExtendSegmentToPoint_Point_Not_On_Curve_Throws_Exception()
         {
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(0, 0), new CartesianCoordinate(1, 2));
+            CartesianCoordinate pointExtension = new CartesianCoordinate(-1, -3);
 
+            Assert.Throws<ArgumentOutOfRangeException>(() => lineSegment.ExtendSegmentToPoint(pointExtension));
         }
 
-        [Test]
-        public static void ExtendSegmentToCurve()
+        [TestCase(0, 0, 1, 2, -1, -2)] // + Sloped
+        [TestCase(0, 0, -1, -2, 1, 2)] // - Sloped
+        [TestCase(1, 1, 1, 2, 1, -2)] // Vertical
+        [TestCase(1, 2, 4, 2, -1, 2)] // Horizontal
+        public static void ExtendSegmentToPoint_Before_Point_I(double iX, double iY, double jX, double jY, double x, double y)
         {
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(iX, iY), new CartesianCoordinate(jX, jY));
+            CartesianCoordinate pointExtension = new CartesianCoordinate(x, y);
 
+            LineSegment extendedLineSegment = lineSegment.ExtendSegmentToPoint(pointExtension) as LineSegment;
+
+            Assert.AreEqual(pointExtension, extendedLineSegment.I);
         }
 
-        [Test]
-        public static void CoordinateOfSegmentProjectedToCurve()
+        [TestCase(0, 0, 1, 2, 2, 4)] // + Sloped
+        [TestCase(0, 0, -1, -2, -2, -4)] // - Sloped
+        [TestCase(1, 1, 1, 2, 1, 4)] // Vertical
+        [TestCase(1, 2, 4, 2, 6, 2)] // Horizontal
+        public static void ExtendSegmentToPoint_After_Point_J(double iX, double iY, double jX, double jY, double x, double y)
         {
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(iX, iY), new CartesianCoordinate(jX, jY));
+            CartesianCoordinate pointExtension = new CartesianCoordinate(x, y);
 
+            LineSegment extendedLineSegment = lineSegment.ExtendSegmentToPoint(pointExtension) as LineSegment;
+
+            Assert.AreEqual(pointExtension, extendedLineSegment.J);
         }
 
-        [Test]
-        public static void CoordinateOfPerpendicularProjection()
+        [TestCase(0, 0, 1, 2, 1, 0, 2, 2)] // + Sloped
+        [TestCase(0, 0, -1, -2, -1, 0, -2, -2)] // - Sloped
+        [TestCase(1, 1, 1, 2, 2, 1, 2, 2)] // Vertical
+        [TestCase(1, 2, 4, 2, 1, 3, 4, 3)] // Horizontal
+        public static void CoordinateOfSegmentProjectedToCurve_Point_Not_On_Curve_Throws_Exception(
+            double iX1, double iY1, double jX1, double jY1,
+            double iX2, double iY2, double jX2, double jY2)
         {
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(iX1, iY1), new CartesianCoordinate(jX1, jY1));
+            LinearCurve linearCurve = new LinearCurve(new CartesianCoordinate(iX2, iY2), new CartesianCoordinate(jX2, jY2));
 
+            Assert.Throws<ArgumentOutOfRangeException>(() => lineSegment.CoordinateOfSegmentProjectedToCurve(linearCurve));
+        }
+
+        [TestCase(-7, 3, -11, 2, -5, 2, -4, 3, -3, 4)] // + Sloped - + Sloped
+        [TestCase(-7, 3, -11, 2, -5, 6, -3, -2, -4.41176470588235, 3.64705882352941)] // + Sloped - - Sloped
+        [TestCase(-5, 6, -3, -2, -11, 2, -7, 3, -4.41176470588235, 3.64705882352941)] // - Sloped - + Sloped
+        [TestCase(-5, 6, -3, -2, -2, 8, -8, 11, -6, 10)] // - Sloped - - Sloped
+        [TestCase(-7, 2, -11, 3, -4, 1, 5, 1, -3, 1)] // Vertical - Horizontal
+        [TestCase(-5, 2, -5, -2, -4, 6, 5, 6, -5, 6)] // Vertical - + Sloped
+        [TestCase(-4, 6, 5, 6, -5, -2, -5, 2, -5, 6)] // Horizontal - Vertical
+        [TestCase(-4, 6, 5, 6, -7, -2, -6, 2, -5, 6)] // Horizontal - + Sloped
+        public static void CoordinateOfSegmentProjectedToCurve_Before_Point_I(
+            double iX1, double iY1, double jX1, double jY1,
+            double iX2, double iY2, double jX2, double jY2, 
+            double x, double y)
+        {
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(iX1, iY1), new CartesianCoordinate(jX1, jY1));
+            LinearCurve linearCurve = new LinearCurve(new CartesianCoordinate(iX2, iY2), new CartesianCoordinate(jX2, jY2));
+            
+            CartesianCoordinate pointExtensionExpected = new CartesianCoordinate(x, y);
+            pointExtensionExpected.Tolerance = 0.000001;
+            CartesianCoordinate pointExtension = lineSegment.CoordinateOfSegmentProjectedToCurve(linearCurve);
+            pointExtension.Tolerance = 0.000001;
+
+            Assert.AreEqual(pointExtensionExpected, pointExtension);
+        }
+
+        [TestCase(-11, 2, -7, 3, -5, 2, -4, 3, -3, 4)] // + Sloped - + Sloped
+        [TestCase(-11, 2, -7, 3, -5, 6, -3, -2, -4.41176470588235, 3.64705882352941)] // + Sloped - - Sloped
+        [TestCase(-3, -2, -5, 6, -11, 2, -7, 3, -4.41176470588235, 3.64705882352941)] // - Sloped - + Sloped
+        [TestCase(-3, -2, -5, 6, -2, 8, -8, 11, -6, 10)] // - Sloped - - Sloped
+        [TestCase(-11, 3, -7, 2, -4, 1, 5, 1, -3, 1)] // Vertical - Horizontal
+        [TestCase(-5, -2, -5, 2, -4, 6, 5, 6, -5, 6)] // Vertical - + Sloped
+        [TestCase(5, 6, -4, 6, -5, -2, -5, 2, -5, 6)] // Horizontal - Vertical
+        [TestCase(5, 6, -4, 6, -7, -2, -6, 2, -5, 6)] // Horizontal - + Sloped
+        public static void CoordinateOfSegmentProjectedToCurve_After_Point_J(
+            double iX1, double iY1, double jX1, double jY1,
+            double iX2, double iY2, double jX2, double jY2,
+            double x, double y)
+        {
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(iX1, iY1), new CartesianCoordinate(jX1, jY1));
+            LinearCurve linearCurve = new LinearCurve(new CartesianCoordinate(iX2, iY2), new CartesianCoordinate(jX2, jY2));
+
+            CartesianCoordinate pointExtensionExpected = new CartesianCoordinate(x, y);
+            pointExtensionExpected.Tolerance = 0.000001;
+            CartesianCoordinate pointExtension = lineSegment.CoordinateOfSegmentProjectedToCurve(linearCurve);
+            pointExtension.Tolerance = 0.000001;
+
+            Assert.AreEqual(pointExtensionExpected, pointExtension);
+        }
+
+        [TestCase(0, 0, 1, 2, 1, 0, 2, 2)] // + Sloped
+        [TestCase(0, 0, -1, -2, -1, 0, -2, -2)] // - Sloped
+        [TestCase(1, 1, 1, 2, 2, 1, 2, 2)] // Vertical
+        [TestCase(1, 2, 4, 2, 1, 3, 4, 3)] // Horizontal
+        public static void ExtendSegmentToCurve_Curves_Parallel_Throws_Exception(
+            double iX1, double iY1, double jX1, double jY1,
+            double iX2, double iY2, double jX2, double jY2)
+        {
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(iX1, iY1), new CartesianCoordinate(jX1, jY1));
+            LinearCurve linearCurve = new LinearCurve(new CartesianCoordinate(iX2, iY2), new CartesianCoordinate(jX2, jY2));
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => lineSegment.ExtendSegmentToCurve(linearCurve));
+        }
+
+        [TestCase(-7, 3, -11, 2, -5, 2, -4, 3, -3, 4)] // + Sloped - + Sloped
+        [TestCase(-7, 3, -11, 2, -4, 2, -3, -2, -4.41176470588235, 3.64705882352941)] // + Sloped - - Sloped
+        [TestCase(-4, 2, -3, -2, -11, 2, -7, 3, -4.41176470588235, 3.64705882352941)] // - Sloped - + Sloped 
+        [TestCase(-5, 6, -3, -2, -2, 8, -8, 11, -6, 10)] // - Sloped - - Sloped
+        [TestCase(-7, 2, -11, 3, -4, 1, 5, 1, -3, 1)] // Vertical - Horizontal
+        [TestCase(-5, 2, -5, -2, -4, 6, 5, 6, -5, 6)] // Vertical - + Sloped
+        [TestCase(-4, 6, 5, 6, -5, -2, -5, 2, -5, 6)] // Horizontal - Vertical
+        [TestCase(-4, 6, 5, 6, -7, -2, -6, 2, -5, 6)] // Horizontal - + Sloped
+        public static void ExtendSegmentToCurve_Before_Point_I(
+            double iX1, double iY1, double jX1, double jY1,
+            double iX2, double iY2, double jX2, double jY2,
+            double x, double y)
+        {
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(iX1, iY1), new CartesianCoordinate(jX1, jY1));
+            LinearCurve linearCurve = new LinearCurve(new CartesianCoordinate(iX2, iY2), new CartesianCoordinate(jX2, jY2));
+
+            CartesianCoordinate pointExtensionExpected = new CartesianCoordinate(x, y);
+            pointExtensionExpected.Tolerance = 0.000001;
+            LineSegment lineExtended = lineSegment.ExtendSegmentToCurve(linearCurve) as LineSegment;
+            lineExtended.Tolerance = 0.000001;
+
+            Assert.AreEqual(pointExtensionExpected, lineExtended.I);
+        }
+
+        [TestCase(-11, 2, -7, 3, -5, 2, -4, 3, -3, 4)] // + Sloped - + Sloped
+        [TestCase(-11, 2, -7, 3, -4, 2, -3, -2, -4.41176470588235, 3.64705882352941)] // + Sloped - - Sloped
+        [TestCase(-3, -2, -4, 2, -11, 2, -7, 3, -4.41176470588235, 3.64705882352941)] // - Sloped - + Sloped
+        [TestCase(-3, -2, -5, 6, -2, 8, -8, 11, -6, 10)] // - Sloped - - Sloped
+        [TestCase(-11, 3, -7, 2, -4, 1, 5, 1, -3, 1)] // Vertical - Horizontal
+        [TestCase(-5, -2, -5, 2, -4, 6, 5, 6, -5, 6)] // Vertical - + Sloped
+        [TestCase(5, 6, -4, 6, -5, -2, -5, 2, -5, 6)] // Horizontal - Vertical
+        [TestCase(5, 6, -4, 6, -7, -2, -6, 2, -5, 6)] // Horizontal - + Sloped
+        public static void ExtendSegmentToCurve_After_Point_J(
+            double iX1, double iY1, double jX1, double jY1,
+            double iX2, double iY2, double jX2, double jY2,
+            double x, double y)
+        {
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(iX1, iY1), new CartesianCoordinate(jX1, jY1));
+            LinearCurve linearCurve = new LinearCurve(new CartesianCoordinate(iX2, iY2), new CartesianCoordinate(jX2, jY2));
+
+            CartesianCoordinate pointExtensionExpected = new CartesianCoordinate(x, y);
+            pointExtensionExpected.Tolerance = 0.000001;
+            LineSegment lineExtended = lineSegment.ExtendSegmentToCurve(linearCurve) as LineSegment;
+            lineExtended.Tolerance = 0.000001;
+
+            Assert.AreEqual(pointExtensionExpected, lineExtended.J);
+        }
+
+        [TestCase(-3, -2, -5, 6, -11, 2, -7, 3, -4.41176470588235, 3.64705882352941)] // - Sloped - + Sloped
+        [TestCase(-5, 6, -3, -2, -11, 2, -7, 3, -4.41176470588235, 3.64705882352941)] // - Sloped - + Sloped, flipped i-j segment coordinates
+        public static void ExtendSegmentToCurve_Truncates_J_to_Curve_Intersection(
+            double iX1, double iY1, double jX1, double jY1,
+            double iX2, double iY2, double jX2, double jY2,
+            double x, double y)
+        {
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(iX1, iY1), new CartesianCoordinate(jX1, jY1));
+            LinearCurve linearCurve = new LinearCurve(new CartesianCoordinate(iX2, iY2), new CartesianCoordinate(jX2, jY2));
+
+            CartesianCoordinate pointExtensionExpected = new CartesianCoordinate(x, y);
+            pointExtensionExpected.Tolerance = 0.000001;
+            LineSegment lineExtended = lineSegment.ExtendSegmentToCurve(linearCurve) as LineSegment;
+            lineExtended.Tolerance = 0.000001;
+
+            Assert.AreEqual(pointExtensionExpected, lineExtended.J);
+        }
+
+        [TestCase(-7, 7, -6, 4)]
+        [TestCase(-5, 1, -6, 4)]
+        [TestCase(-4, 8, -3, 5)]
+        [TestCase(-2, 2, -3, 5)]
+        [TestCase(-1, 9, 0, 6)]
+        [TestCase(1, 3, 0, 6)]
+        [TestCase(5, 11, 6, 8)]
+        [TestCase(7, 5, 6, 8)]
+        [TestCase(8, 12, 9, 9)]
+        [TestCase(10, 6, 9, 9)]
+        public static void CoordinateOfPerpendicularProjection_Sloped_Line(double x, double y, double xExpected, double yExpected)
+        {
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(-3, 5), new CartesianCoordinate(6, 8));
+            CartesianCoordinate coordinate = new CartesianCoordinate(x, y);
+            CartesianCoordinate expectedPerpendicularIntersection = new CartesianCoordinate(xExpected, yExpected);
+
+            CartesianCoordinate actualPerpendicularIntersection = lineSegment.CoordinateOfPerpendicularProjection(coordinate);
+
+            expectedPerpendicularIntersection.Tolerance = Tolerance;
+            actualPerpendicularIntersection.Tolerance = Tolerance;
+
+            Assert.AreEqual(expectedPerpendicularIntersection, actualPerpendicularIntersection);
+        }
+
+        [TestCase(2, 10, 5, 10)]
+        [TestCase(8, 10, 5, 10)]
+        [TestCase(2, 8, 5, 8)]
+        [TestCase(8, 8, 5, 8)]
+        [TestCase(2, 6, 5, 6)]
+        [TestCase(8, 6, 5, 6)]
+        [TestCase(2, 4, 5, 4)]
+        [TestCase(8, 4, 5, 4)]
+        [TestCase(2, 2, 5, 2)]
+        [TestCase(8, 2, 5, 2)]
+        public static void CoordinateOfPerpendicularProjection_Vertical_Line(double x, double y, double xExpected, double yExpected)
+        {
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(5, 4), new CartesianCoordinate(5, 8));
+            CartesianCoordinate coordinate = new CartesianCoordinate(x, y);
+            CartesianCoordinate expectedPerpendicularIntersection = new CartesianCoordinate(xExpected, yExpected);
+
+            CartesianCoordinate actualPerpendicularIntersection = lineSegment.CoordinateOfPerpendicularProjection(coordinate);
+
+            expectedPerpendicularIntersection.Tolerance = Tolerance;
+            actualPerpendicularIntersection.Tolerance = Tolerance;
+
+            Assert.AreEqual(expectedPerpendicularIntersection, actualPerpendicularIntersection);
+        }
+
+        [TestCase(3, 2, 3, 4)]
+        [TestCase(3, 6, 3, 4)]
+        [TestCase(6, 2, 6, 4)]
+        [TestCase(6, 6, 6, 4)]
+        [TestCase(9, 2, 9, 4)]
+        [TestCase(9, 6, 9, 4)]
+        [TestCase(12, 2, 12, 4)]
+        [TestCase(12, 6, 12, 4)]
+        [TestCase(15, 2, 15, 4)]
+        [TestCase(15, 6, 15, 4)]
+        public static void CoordinateOfPerpendicularProjection_Horizontal_Line(double x, double y, double xExpected, double yExpected)
+        {
+            LineSegment lineSegment = new LineSegment(new CartesianCoordinate(6, 4), new CartesianCoordinate(12, 4));
+            CartesianCoordinate coordinate = new CartesianCoordinate(x, y);
+            CartesianCoordinate expectedPerpendicularIntersection = new CartesianCoordinate(xExpected, yExpected);
+
+            CartesianCoordinate actualPerpendicularIntersection = lineSegment.CoordinateOfPerpendicularProjection(coordinate);
+
+            expectedPerpendicularIntersection.Tolerance = Tolerance;
+            actualPerpendicularIntersection.Tolerance = Tolerance;
+
+            Assert.AreEqual(expectedPerpendicularIntersection, actualPerpendicularIntersection);
         }
 
         [TestCase(-3, 4, 5, 6, 0, -3, 4)]

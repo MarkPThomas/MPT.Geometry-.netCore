@@ -26,7 +26,7 @@ namespace MPT.Geometry.Shapes
     /// <summary>
     /// Base abstract Shape.
     /// </summary>
-    public abstract class Shape : ITolerance, IShapeProperties, ITransform<Shape>
+    public abstract class Shape : IShapeProperties, ITransform<Shape>
     {
         #region Properties        
         /// <summary>
@@ -43,13 +43,27 @@ namespace MPT.Geometry.Shapes
         /// The rotation of the shape from it's default local orientation.
         /// </summary>
         protected Angle _rotation;
-                
 
+
+        /// <summary>
+        /// The tolerance
+        /// </summary>
+        protected double _tolerance = GeometryLibrary.ZeroTolerance;
         /// <summary>
         /// Tolerance to use in all calculations with double types.
         /// </summary>
-        /// <value>The tolerance.</value>
-        public double Tolerance { get; set; } = GeometryLibrary.ZeroTolerance;
+        public double Tolerance
+        {
+            get { return _tolerance; }
+            set
+            {
+                _tolerance = value;
+                if (_polyline != null)
+                {
+                    _polyline.Tolerance = _tolerance;
+                }
+            }
+        }
 
         /// <summary>
         /// The name of the shape.
@@ -66,7 +80,7 @@ namespace MPT.Geometry.Shapes
         /// The centroid of the shape.
         /// </summary>
         /// <value>The centroid.</value>
-        public virtual CartesianCoordinate Centroid => new CartesianCoordinate(Xo(), Yo());
+        public virtual CartesianCoordinate Centroid => new CartesianCoordinate(Xo(), Yo(), _tolerance);
         #endregion
 
         #region Initialization

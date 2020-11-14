@@ -340,6 +340,7 @@ namespace MPT.Geometry.Segments
 
         /// <summary>
         /// Extends the segment to intersect the provided curve.
+        /// If the curve intersects the segment, the segment is truncated at the curve by shifting the j-coordinate to the intersection.
         /// </summary>
         /// <param name="curve">The curve.</param>
         /// <returns>IPathSegment.</returns>

@@ -18,7 +18,6 @@ namespace MPT.Geometry.UnitTests.Tools
         {
             SegmentsBoundary boundary = new SegmentsBoundary();
 
-            Assert.AreEqual(GeometryLibrary.ZeroTolerance, boundary.Tolerance);
             Assert.AreEqual(0, boundary.Count);
             Assert.IsTrue(boundary.IsReadOnly);
         }
@@ -43,7 +42,6 @@ namespace MPT.Geometry.UnitTests.Tools
 
             SegmentsBoundary boundary = new SegmentsBoundary(segments);
 
-            Assert.AreEqual(GeometryLibrary.ZeroTolerance, boundary.Tolerance);
             Assert.IsTrue(boundary.IsReadOnly);
             Assert.AreEqual(3, boundary.Count);
             Assert.AreEqual(xOld, boundary[index].I.X);
@@ -82,7 +80,6 @@ namespace MPT.Geometry.UnitTests.Tools
 
             SegmentsBoundary boundary = new SegmentsBoundary(segments);
 
-            Assert.AreEqual(GeometryLibrary.ZeroTolerance, boundary.Tolerance);
             Assert.IsTrue(boundary.IsReadOnly);
             Assert.AreEqual(3, boundary.Count);
             Assert.AreEqual(xOld, boundary[index].I.X);
@@ -101,6 +98,37 @@ namespace MPT.Geometry.UnitTests.Tools
             // Add new coordinate to passed in reference to prove immutable
             segments.Add(new LineSegment(new CartesianCoordinate(xNew, yNew), new CartesianCoordinate(xNew + 5, yNew + 1)));
             Assert.AreEqual(3, boundary.Count);
+        }
+
+        [Test]
+        public static void Changing_Tolerance_Cascades_to_Properties()
+        {
+            double defaultTolerance = 10E-6;
+            CartesianCoordinate[] coordinates = new CartesianCoordinate[4];
+            coordinates[0] = new CartesianCoordinate(0, 0);
+            coordinates[1] = new CartesianCoordinate(1, 2);
+            coordinates[2] = new CartesianCoordinate(3, 4);
+            coordinates[3] = new CartesianCoordinate(5, 6);
+
+            LineSegment[] segments = new LineSegment[3];
+            segments[0] = new LineSegment(coordinates[0], coordinates[1]);
+            segments[1] = new LineSegment(coordinates[1], coordinates[2]);
+            segments[2] = new LineSegment(coordinates[2], coordinates[3]);
+
+            SegmentsBoundary boundary = new SegmentsBoundary(segments);
+
+            Assert.AreEqual(defaultTolerance, boundary.Tolerance);
+            Assert.AreEqual(defaultTolerance, boundary[0].Tolerance);
+            Assert.AreEqual(defaultTolerance, boundary[1].Tolerance);
+            Assert.AreEqual(defaultTolerance, boundary[2].Tolerance);
+
+            double newTolerance = 10E-3;
+            boundary.Tolerance = newTolerance;
+
+            Assert.AreEqual(newTolerance, boundary.Tolerance);
+            Assert.AreEqual(newTolerance, boundary[0].Tolerance);
+            Assert.AreEqual(newTolerance, boundary[1].Tolerance);
+            Assert.AreEqual(newTolerance, boundary[2].Tolerance);
         }
         #endregion
 
@@ -385,7 +413,6 @@ namespace MPT.Geometry.UnitTests.Tools
 
             SegmentsBoundary boundary = new SegmentsBoundary(segments);
 
-            Assert.AreEqual(GeometryLibrary.ZeroTolerance, boundary.Tolerance);
             Assert.IsTrue(boundary.IsReadOnly);
             Assert.AreEqual(3, boundary.Count);
 
@@ -414,7 +441,6 @@ namespace MPT.Geometry.UnitTests.Tools
 
             SegmentsBoundary boundary = new SegmentsBoundary(segments);
 
-            Assert.AreEqual(GeometryLibrary.ZeroTolerance, boundary.Tolerance);
             Assert.IsTrue(boundary.IsReadOnly);
             Assert.AreEqual(3, boundary.Count);
 

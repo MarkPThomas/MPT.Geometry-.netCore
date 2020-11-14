@@ -1,5 +1,4 @@
 ﻿using MPT.Geometry.Tools;
-using MPT.Math;
 using MPT.Math.Coordinates;
 using MPT.Math.Curves;
 using MPT.Math.NumberTypeExtensions;
@@ -13,15 +12,26 @@ namespace MPT.Geometry.Segments
     /// </summary>
     public abstract class PathSegment<T> : 
         IPathSegment,
-        IPathSegmentCollision<T>,
-        ITolerance
+        IPathSegmentCollision<T>
         where T : Curve
     {
-        #region Properties
+        #region Properties        
+        /// <summary>
+        /// The tolerance
+        /// </summary>
+        protected double _tolerance = GeometryLibrary.ZeroTolerance;
         /// <summary>
         /// Tolerance to use in all calculations with double types.
         /// </summary>
-        public double Tolerance { get; set; } = 10E-6;
+        public double Tolerance 
+        { 
+            get { return _tolerance; }
+            set 
+            {
+                _tolerance = value;
+                _curve.Tolerance = _tolerance; 
+            } 
+        }
 
         /// <summary>
         /// The curve
@@ -63,6 +73,8 @@ namespace MPT.Geometry.Segments
         /// <param name="j">Second point of the line.</param>
         protected PathSegment(CartesianCoordinate i, CartesianCoordinate j)
         {
+            i.Tolerance = _tolerance;
+            j.Tolerance = _tolerance;
             I = i;
             J = j;
             _extents = new PointExtents(i, j);

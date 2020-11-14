@@ -65,6 +65,7 @@ namespace MPT.Geometry.Shapes
         public Polygon(IEnumerable<CartesianCoordinate> coordinates)
         {
             SetCoordinates(coordinates);
+            Tolerance = _tolerance;
         }
         #endregion
 
