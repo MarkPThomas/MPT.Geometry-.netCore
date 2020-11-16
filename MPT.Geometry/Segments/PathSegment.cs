@@ -189,7 +189,7 @@ namespace MPT.Geometry.Segments
         public abstract Vector TangentVector(double sRelative);
         #endregion
 
-        #region Methods: IPathTransform        
+        #region Methods: IPathTransform    
         /// <summary>
         /// Translates the segment.
         /// </summary>
@@ -200,6 +200,88 @@ namespace MPT.Geometry.Segments
             return new LineSegment(I + translation, J + translation);
         }
 
+        /// <summary>
+        /// Scales the segment from the provided reference point.
+        /// </summary>
+        /// <param name="scale">The amount to scale relative to the reference point.</param>
+        /// <param name="referencePoint">The reference point.</param>
+        /// <returns>IPathSegment.</returns>
+        public virtual IPathSegment ScaleFromPoint(double scale, CartesianCoordinate referencePoint)
+        {
+            CartesianOffset offsetJ = scale * (J.OffsetFrom(referencePoint));
+            CartesianOffset offsetI = scale * (I.OffsetFrom(referencePoint));
+
+            return new LineSegment(
+                referencePoint + offsetI.ToCartesianCoordinate(),
+                referencePoint + offsetJ.ToCartesianCoordinate());
+        }
+
+        /// <summary>
+        /// Rotates the segment about the reference point.
+        /// </summary>
+        /// <param name="rotation">The amount of rotation. [rad]</param>
+        /// <param name="referencePoint">The center of rotation reference point.</param>
+        /// <returns>IPathSegment.</returns>
+        public virtual IPathSegment RotateAboutPoint(Angle rotation, CartesianCoordinate referencePoint)
+        {
+            return new LineSegment(
+                CartesianCoordinate.RotateAboutPoint(I, referencePoint, rotation.Radians),
+                CartesianCoordinate.RotateAboutPoint(J, referencePoint, rotation.Radians));
+        }
+
+        /// <summary>
+        /// Skews the specified segment to the skewing of a containing box.
+        /// </summary>
+        /// <param name="stationaryReferencePoint">The stationary reference point of the skew box.</param>
+        /// <param name="skewingReferencePoint">The skewing reference point of the skew box.</param>
+        /// <param name="magnitude">The magnitude to skew along the x-axis and y-axis.</param>
+        /// <returns>IPathSegment.</returns>
+        public virtual IPathSegment Skew(
+            CartesianCoordinate stationaryReferencePoint,
+            CartesianCoordinate skewingReferencePoint,
+            CartesianOffset magnitude)
+        {
+            return new LineSegment(
+                CartesianCoordinate.SkewWithinBox(I, stationaryReferencePoint, skewingReferencePoint, magnitude),
+                CartesianCoordinate.SkewWithinBox(J, stationaryReferencePoint, skewingReferencePoint, magnitude));
+        }
+
+        /// <summary>
+        /// Mirrors the specified segment about the specified reference line.
+        /// </summary>
+        /// <param name="referenceLine">The reference line.</param>
+        /// <returns>IPathSegment.</returns>
+        public virtual IPathSegment MirrorAboutLine(LinearCurve referenceLine)
+        {
+            return new LineSegment(
+                CartesianCoordinate.MirrorAboutLine(I, referenceLine),
+                CartesianCoordinate.MirrorAboutLine(J, referenceLine));
+        }
+
+        /// <summary>
+        /// Mirrors the specified segment about the x-axis.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        public virtual IPathSegment MirrorAboutAxisX()
+        {
+            return new LineSegment(
+                CartesianCoordinate.MirrorAboutAxisX(I),
+                CartesianCoordinate.MirrorAboutAxisX(J));
+        }
+
+        /// <summary>
+        /// Mirrors the specified segment about the y-axis.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        public virtual IPathSegment MirrorAboutAxisY()
+        {
+            return new LineSegment(
+                CartesianCoordinate.MirrorAboutAxisY(I),
+                CartesianCoordinate.MirrorAboutAxisY(J));
+        }
+        #endregion
+
+        #region Methods: Transform About Ends I, J
         /// <summary>
         /// Scales the segment from point I.
         /// </summary>
@@ -220,21 +302,6 @@ namespace MPT.Geometry.Segments
             return ScaleFromPoint(scaleFromJ, J);
         }
 
-        /// <summary>
-        /// Scales the segment from the provided reference point.
-        /// </summary>
-        /// <param name="scale">The amount to scale relative to the reference point.</param>
-        /// <param name="referencePoint">The reference point.</param>
-        /// <returns>IPathSegment.</returns>
-        public virtual IPathSegment ScaleFromPoint(double scale, CartesianCoordinate referencePoint)
-        {
-            CartesianOffset offsetJ = scale * (J.OffsetFrom(referencePoint));
-            CartesianOffset offsetI = scale * (I.OffsetFrom(referencePoint));
-
-            return new LineSegment(
-                referencePoint + offsetI.ToCartesianCoordinate(),
-                referencePoint + offsetJ.ToCartesianCoordinate());
-        }
 
         /// <summary>
         /// Rotates the segment from point I.
@@ -256,17 +323,81 @@ namespace MPT.Geometry.Segments
             return new LineSegment(CartesianCoordinate.RotateAboutPoint(I, J, rotation.Radians), J);
         }
 
+
         /// <summary>
-        /// Rotates the segment about the reference point.
+        /// Skews the specified segment about point I by shearing point J.
         /// </summary>
-        /// <param name="rotation">The amount of rotation. [rad]</param>
-        /// <param name="referencePoint">The center of rotation reference point.</param>
+        /// <param name="magnitude">The magnitude to skew along the x-axis and y-axis.</param>
         /// <returns>IPathSegment.</returns>
-        public virtual IPathSegment RotateAboutPoint(Angle rotation, CartesianCoordinate referencePoint)
+        public virtual IPathSegment SkewAboutI(CartesianOffset magnitude)
         {
             return new LineSegment(
-                CartesianCoordinate.RotateAboutPoint(I, referencePoint, rotation.Radians),
-                CartesianCoordinate.RotateAboutPoint(J, referencePoint, rotation.Radians));
+                CartesianCoordinate.SkewWithinBox(I, I, J, magnitude),
+                CartesianCoordinate.SkewWithinBox(J, I, J, magnitude));
+        }
+
+        /// <summary>
+        /// Skews the specified segment about point J by shearing point I.
+        /// </summary>
+        /// <param name="magnitude">The magnitude to skew along the x-axis and y-axis.</param>
+        /// <returns>IPathSegment.</returns>
+        public virtual IPathSegment SkewAboutJ(CartesianOffset magnitude)
+        {
+            return new LineSegment(
+                CartesianCoordinate.SkewWithinBox(I, J, I, magnitude),
+                CartesianCoordinate.SkewWithinBox(J, J, I, magnitude));
+        }
+
+
+        /// <summary>
+        /// Mirrors the specified segment about the X-axis through point I.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        public virtual IPathSegment MirrorAboutAxisIX()
+        {
+            LinearCurve referenceLine = new LinearCurve(I, new CartesianCoordinate(I.X + 1, I.Y));
+            return new LineSegment(
+                CartesianCoordinate.MirrorAboutLine(I, referenceLine),
+                CartesianCoordinate.MirrorAboutLine(J, referenceLine));
+        }
+
+
+        /// <summary>
+        /// Mirrors the specified segment about the X-axis through point J.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        public virtual IPathSegment MirrorAboutAxisJX()
+        {
+            LinearCurve referenceLine = new LinearCurve(J, new CartesianCoordinate(J.X + 1, J.Y));
+            return new LineSegment(
+                CartesianCoordinate.MirrorAboutLine(I, referenceLine),
+                CartesianCoordinate.MirrorAboutLine(J, referenceLine));
+        }
+
+
+        /// <summary>
+        /// Mirrors the specified segment about the Y-axis through point I.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        public virtual IPathSegment MirrorAboutAxisIY()
+        {
+            LinearCurve referenceLine = new LinearCurve(I, new CartesianCoordinate(I.X, I.Y + 1));
+            return new LineSegment(
+                CartesianCoordinate.MirrorAboutLine(I, referenceLine),
+                CartesianCoordinate.MirrorAboutLine(J, referenceLine));
+        }
+
+
+        /// <summary>
+        /// Mirrors the specified segment about the Y-axis through point J.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        public virtual IPathSegment MirrorAboutAxisJY()
+        {
+            LinearCurve referenceLine = new LinearCurve(J, new CartesianCoordinate(J.X, J.Y + 1));
+            return new LineSegment(
+                CartesianCoordinate.MirrorAboutLine(I, referenceLine),
+                CartesianCoordinate.MirrorAboutLine(J, referenceLine));
         }
         #endregion
 

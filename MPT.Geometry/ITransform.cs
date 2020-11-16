@@ -1,4 +1,5 @@
 ﻿using MPT.Math.Coordinates;
+using MPT.Math.Curves;
 
 namespace MPT.Geometry
 {
@@ -30,8 +31,35 @@ namespace MPT.Geometry
         /// <returns>IPathSegment.</returns>
         T RotateAboutPoint(Angle rotation, CartesianCoordinate referencePoint);
 
-        // TODO: Mirror about line
+        /// <summary>
+        /// Skews the specified segment to the skewing of a containing box.
+        /// </summary>
+        /// <param name="stationaryReferencePoint">The stationary reference point of the skew box.</param>
+        /// <param name="skewingReferencePoint">The skewing reference point of the skew box.</param>
+        /// <param name="magnitude">The magnitude to skew along the x-axis and y-axis.</param>
+        /// <returns>IPathSegment.</returns>
+        T Skew(
+            CartesianCoordinate stationaryReferencePoint,
+            CartesianCoordinate skewingReferencePoint,
+            CartesianOffset magnitude);
 
-        // TODO: Skew about line
+        /// <summary>
+        /// Mirrors the specified segment about the specified reference line.
+        /// </summary>
+        /// <param name="referenceLine">The reference line.</param>
+        /// <returns>IPathSegment.</returns>
+        T MirrorAboutLine(LinearCurve referenceLine);
+
+        /// <summary>
+        /// Mirrors the specified segment about the x-axis.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        T MirrorAboutAxisX();
+
+        /// <summary>
+        /// Mirrors the specified segment about the y-axis.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        T MirrorAboutAxisY();
     }
 }

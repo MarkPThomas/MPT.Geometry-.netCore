@@ -415,6 +415,117 @@ namespace MPT.Geometry.Shapes
             }
             return new SegmentsBoundary(segments);
         }
+
+
+        /// <summary>
+        /// Skews the specified shape to the skewing of a containing box.
+        /// </summary>
+        /// <param name="stationaryReferencePoint">The stationary reference point of the skew box.</param>
+        /// <param name="skewingReferencePoint">The skewing reference point of the skew box.</param>
+        /// <param name="magnitude">The magnitude to skew along the x-axis and y-axis.</param>
+        /// <returns>IPathSegment.</returns>
+        public Shape Skew(
+            CartesianCoordinate stationaryReferencePoint,
+            CartesianCoordinate skewingReferencePoint,
+            CartesianOffset magnitude)
+        {
+            _polyline = new PolyLine(skew(stationaryReferencePoint, skewingReferencePoint, magnitude));
+            return this;
+        }
+
+        /// <summary>
+        /// Skews the specified shape to the skewing of a containing box.
+        /// </summary>
+        /// <param name="stationaryReferencePoint">The stationary reference point of the skew box.</param>
+        /// <param name="skewingReferencePoint">The skewing reference point of the skew box.</param>
+        /// <param name="magnitude">The magnitude to skew along the x-axis and y-axis.</param>
+        /// <returns>IList&lt;IPathSegment&gt;.</returns>
+        protected SegmentsBoundary skew(
+            CartesianCoordinate stationaryReferencePoint,
+            CartesianCoordinate skewingReferencePoint,
+            CartesianOffset magnitude)
+        {
+            IList<IPathSegment> segments = new List<IPathSegment>();
+            foreach (IPathSegment segment in _polyline)
+            {
+                segments.Add(segment.Skew(stationaryReferencePoint, skewingReferencePoint, magnitude));
+            }
+            return new SegmentsBoundary(segments);
+        }
+
+        /// <summary>
+        /// Mirrors the specified shape about the specified reference line.
+        /// </summary>
+        /// <param name="referenceLine">The reference line.</param>
+        /// <returns>IPathSegment.</returns>
+        public Shape MirrorAboutLine(LinearCurve referenceLine)
+        {
+            _polyline = new PolyLine(mirrorAboutLine(referenceLine));
+            return this;
+        }
+
+        /// <summary>
+        /// Mirrors the specified shape about the specified reference line.
+        /// </summary>
+        /// <param name="referenceLine">The reference line.</param>
+        /// <returns>IList&lt;IPathSegment&gt;.</returns>
+        protected SegmentsBoundary mirrorAboutLine(LinearCurve referenceLine)
+        {
+            IList<IPathSegment> segments = new List<IPathSegment>();
+            foreach (IPathSegment segment in _polyline)
+            {
+                segments.Add(segment.MirrorAboutLine(referenceLine));
+            }
+            return new SegmentsBoundary(segments);
+        }
+
+        /// <summary>
+        /// Mirrors the specified shape about the x-axis.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        public Shape MirrorAboutAxisX()
+        {
+            _polyline = new PolyLine(mirrorAboutAxisX());
+            return this;
+        }
+
+        /// <summary>
+        /// Mirrors the specified shape about the x-axis.
+        /// </summary>
+        /// <returns>IList&lt;IPathSegment&gt;.</returns>
+        protected SegmentsBoundary mirrorAboutAxisX()
+        {
+            IList<IPathSegment> segments = new List<IPathSegment>();
+            foreach (IPathSegment segment in _polyline)
+            {
+                segments.Add(segment.MirrorAboutAxisX());
+            }
+            return new SegmentsBoundary(segments);
+        }
+
+        /// <summary>
+        /// Mirrors the specified shape about the y-axis.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        public Shape MirrorAboutAxisY()
+        {
+            _polyline = new PolyLine(mirrorAboutAxisY());
+            return this;
+        }
+
+        /// <summary>
+        /// Mirrors the specified shape about the y-axis.
+        /// </summary>
+        /// <returns>IList&lt;IPathSegment&gt;.</returns>
+        protected SegmentsBoundary mirrorAboutAxisY()
+        {
+            IList<IPathSegment> segments = new List<IPathSegment>();
+            foreach (IPathSegment segment in _polyline)
+            {
+                segments.Add(segment.MirrorAboutAxisY());
+            }
+            return new SegmentsBoundary(segments);
+        }
         #endregion
     }
 }

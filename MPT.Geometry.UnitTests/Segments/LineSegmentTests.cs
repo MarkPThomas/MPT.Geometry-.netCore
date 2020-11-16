@@ -325,18 +325,22 @@ namespace MPT.Geometry.UnitTests.Segments
         #endregion
 
         #region Methods: IPathTransform
-        [TestCase(0, 0, 1, 1, 4, 4)]
-        [TestCase(1, 2, 2, 3, 5, 6)]
-        [TestCase(1, -1, 2, 0, 5, 3)]
-        [TestCase(-2, 1, -1, 2, 2, 5)]
-        [TestCase(-1, -3, 0, -2, 3, 1)]
-        public static void TranslateSegment(
-            double deltaX, double deltaY, 
-            double expectedI_x, double expectedI_y, 
+        [TestCase(3, 2, 5, 3, 0, 0, 3, 2, 5, 3)]    // 0
+        [TestCase(3, 2, 5, 3, 3, 1, 6, 3, 8, 4)]    // Default - +x, y, Quadrant I
+        [TestCase(3, 2, 5, 3, -3, 1, 0, 3, 2, 4)]    // Negative x
+        [TestCase(3, 2, 5, 3, 3, -1, 6, 1, 8, 2)]    // Negative y
+        [TestCase(-3, 2, -5, 3, 3, 1, 0, 3, -2, 4)]    // Default in Quadrant II
+        [TestCase(-3, -2, -5, -3, 3, 1, 0, -1, -2, -2)]    // Default in Quadrant III
+        [TestCase(3, -2, 5, -3, 3, 1, 6, -1, 8, -2)]    // Default in Quadrant IV
+        public static void Translate(
+            double i_x, double i_y,
+            double j_x, double j_y,
+            double deltaX, double deltaY,
+            double expectedI_x, double expectedI_y,
             double expectedJ_x, double expectedJ_y)
         {
-            CartesianCoordinate pointI = new CartesianCoordinate(1, 1);
-            CartesianCoordinate pointJ = new CartesianCoordinate(4, 4);
+            CartesianCoordinate pointI = new CartesianCoordinate(i_x, i_y);
+            CartesianCoordinate pointJ = new CartesianCoordinate(j_x, j_y);
             LineSegment segment = new LineSegment(pointI, pointJ);
 
             CartesianOffset translation = new CartesianOffset(deltaX, deltaY);
@@ -346,44 +350,6 @@ namespace MPT.Geometry.UnitTests.Segments
             Assert.AreEqual(expectedI_y, translatedSegment.I.Y);
             Assert.AreEqual(expectedJ_x, translatedSegment.J.X);
             Assert.AreEqual(expectedJ_y, translatedSegment.J.Y);
-        }
-
-        [TestCase(0, 1, 1)]
-        [TestCase(0.75, 4, 7)]
-        [TestCase(1, 5, 9)]
-        [TestCase(1.25, 6, 11)]
-        [TestCase(-0.5, -1, -3)]
-        public static void ScaleSegmentFromI(double scaleFromI, double expectedJ_x, double expectedJ_y)
-        {
-            CartesianCoordinate pointI = new CartesianCoordinate(1, 1);
-            CartesianCoordinate pointJ = new CartesianCoordinate(5, 9);
-            LineSegment segment = new LineSegment(pointI, pointJ);
-
-            IPathSegment scaledSegment = segment.ScaleFromI(scaleFromI);
-
-            Assert.AreEqual(pointI.X, scaledSegment.I.X);
-            Assert.AreEqual(pointI.Y, scaledSegment.I.Y);
-            Assert.AreEqual(expectedJ_x, scaledSegment.J.X);
-            Assert.AreEqual(expectedJ_y, scaledSegment.J.Y);
-        }
-
-        [TestCase(0, 5, 9)]
-        [TestCase(0.75, 2, 3)]
-        [TestCase(1, 1, 1)]
-        [TestCase(1.5, -1, -3)]
-        [TestCase(-0.25, 6, 11)]
-        public static void ScaleSegmentFromJ(double scaleFromJ, double expectedI_x, double expectedI_y)
-        {
-            CartesianCoordinate pointI = new CartesianCoordinate(1, 1);
-            CartesianCoordinate pointJ = new CartesianCoordinate(5, 9);
-            LineSegment segment = new LineSegment(pointI, pointJ);
-
-            IPathSegment scaledSegment = segment.ScaleFromJ(scaleFromJ);
-
-            Assert.AreEqual(pointJ.X, scaledSegment.J.X);
-            Assert.AreEqual(pointJ.Y, scaledSegment.J.Y);
-            Assert.AreEqual(expectedI_x, scaledSegment.I.X);
-            Assert.AreEqual(expectedI_y, scaledSegment.I.Y);
         }
 
         [TestCase(0, 4, 2, 4, 2, 4, 2)]
@@ -410,6 +376,235 @@ namespace MPT.Geometry.UnitTests.Segments
             Assert.AreEqual(expectedJ_y, scaledSegment.J.Y);
         }
 
+        [TestCase(3, 2, 5, 3, 0, 0, 0, 0, 0)]    // 0
+        [TestCase(3, 2, 5, 3, 2, 6, 4, 10, 6)]    // Default - larger, Quadrant I
+        [TestCase(3, 2, 5, 3, 0.5, 1.5, 1, 2.5, 1.5)]    // Smaller
+        [TestCase(3, 2, 5, 3, -2, -6, -4, -10, -6)]    // Negative
+        [TestCase(-3, 2, -5, 3, 2, -6, 4, -10, 6)]    // Default in Quadrant II
+        [TestCase(-3, -2, -5, -3, 2, -6, -4, -10, -6)]    // Default in Quadrant III
+        [TestCase(3, -2, 5, -3, 2, 6, -4, 10, -6)]    // Default in Quadrant IV
+        public static void ScaleFromPoint_About_Origin(
+           double i_x, double i_y,
+           double j_x, double j_y, 
+           double scale,
+           double expectedI_x, double expectedI_y,
+           double expectedJ_x, double expectedJ_y)
+        {
+            CartesianCoordinate pointI = new CartesianCoordinate(i_x, i_y);
+            CartesianCoordinate pointJ = new CartesianCoordinate(j_x, j_y);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            CartesianCoordinate referencePoint = new CartesianCoordinate(0, 0);
+            IPathSegment scaledSegment = segment.ScaleFromPoint(scale, referencePoint);
+
+            Assert.AreEqual(expectedI_x, scaledSegment.I.X);
+            Assert.AreEqual(expectedI_y, scaledSegment.I.Y);
+            Assert.AreEqual(expectedJ_x, scaledSegment.J.X);
+            Assert.AreEqual(expectedJ_y, scaledSegment.J.Y);
+        }
+
+        [TestCase(0, 2, 1, 8, 4)]
+        [TestCase(Num.PiOver4, -3.970563, -10.585786, -1.849242, -4.221825)]
+        [TestCase(Num.PiOver2, 0, -23, -3, -17)]
+        [TestCase(3 * Num.PiOver4, 11.585786, -28.970563, 5.221825, -26.849242)]
+        [TestCase(Num.Pi, 24, -25, 18, -28)]
+        [TestCase(5 * Num.PiOver4, 29.970563, -13.414214, 27.849242, -19.778175)]
+        [TestCase(3 * Num.PiOver2, 26, -1, 29, -7)]
+        [TestCase(7 * Num.PiOver4, 14.414214, 4.970563, 20.778175, 2.849242)]
+        [TestCase(-Num.PiOver4, 14.414214, 4.970563, 20.778175, 2.849242)]
+        public static void RotateAboutPoint(
+            double radianRotation,
+            double expectedI_x, double expectedI_y,
+            double expectedJ_x, double expectedJ_y)
+        {
+            CartesianCoordinate pointI = new CartesianCoordinate(2, 1);
+            CartesianCoordinate pointJ = new CartesianCoordinate(8, 4);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            CartesianCoordinate referencePoint = new CartesianCoordinate(13, -12);
+            IPathSegment scaledSegment = segment.RotateAboutPoint(radianRotation, referencePoint);
+
+            Assert.AreEqual(expectedI_x, scaledSegment.I.X, Tolerance);
+            Assert.AreEqual(expectedI_y, scaledSegment.I.Y, Tolerance);
+            Assert.AreEqual(expectedJ_x, scaledSegment.J.X, Tolerance);
+            Assert.AreEqual(expectedJ_y, scaledSegment.J.Y, Tolerance);
+        }
+
+        [TestCase(3, 2, 4, 3, 90, -2, 3, -3, 4)]    // Rotate + to quadrant II
+        [TestCase(3, 2, 4, 3, 180, -3, -2, -4, -3)]    // Rotate + to quadrant III
+        [TestCase(3, 2, 4, 3, 270, 2, -3, 3, -4)]    // Rotate + to quadrant IV
+        [TestCase(3, 2, 4, 3, 360, 3, 2, 4, 3)]    // Rotate + full circle
+        [TestCase(3, 2, 4, 3, -90, 2, -3, 3, -4)]    // Rotate - to quadrant II
+        [TestCase(3, 2, 4, 3, -180, -3, -2, -4, -3)]    // Rotate - to quadrant III
+        [TestCase(3, 2, 4, 3, -270, -2, 3, -3, 4)]    // Rotate - to quadrant IV
+        [TestCase(3, 2, 4, 3, -360, 3, 2, 4, 3)]    // Rotate - full circle
+        public static void RotateAboutPoint_About_Origin(
+            double i_x, double i_y,
+            double j_x, double j_y,
+            double degreeRotation,
+            double expectedI_x, double expectedI_y,
+            double expectedJ_x, double expectedJ_y)
+        {
+            Angle rotation = Angle.CreateFromDegree(degreeRotation);
+            CartesianCoordinate pointI = new CartesianCoordinate(i_x, i_y);
+            CartesianCoordinate pointJ = new CartesianCoordinate(j_x, j_y);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            CartesianCoordinate referencePoint = new CartesianCoordinate(0, 0);
+            IPathSegment scaledSegment = segment.RotateAboutPoint(rotation.Radians, referencePoint);
+
+            Assert.AreEqual(expectedI_x, scaledSegment.I.X, Tolerance);
+            Assert.AreEqual(expectedI_y, scaledSegment.I.Y, Tolerance);
+            Assert.AreEqual(expectedJ_x, scaledSegment.J.X, Tolerance);
+            Assert.AreEqual(expectedJ_y, scaledSegment.J.Y, Tolerance);
+        }
+
+        [TestCase(3, 2, 5, 3, 0, 0, 5, 5, 2, 0, 3.8, 2, 6.2, 3)]    // Shear +x
+        [TestCase(3, 2, 5, 3, 0, 0, 5, 5, -2, 0, 2.2, 2, 3.8, 3)]    // Shear -x
+        [TestCase(3, 2, 5, 3, 0, 0, 5, 5, 0, 2, 3, 3.2, 5, 5)]    // Shear +y
+        [TestCase(3, 2, 5, 3, 0, 0, 5, 5, 0, -2, 3, 0.8, 5, 1)]    // Shear -y
+        [TestCase(3, 2, 5, 3, 0, 0, 5, 5, 2, 3, 3.8, 3.8, 6.2, 6)]    // Shear +x, +y, Quadrant I
+        [TestCase(-3, 2, -5, 3, 0, 0, -5, 5, 2, 3, -2.2, 3.8, -3.8, 6)]    // Shear +x, +y, Quadrant II
+        [TestCase(-3, -2, -5, -3, 0, 0, -5, -5, 2, 3, -2.2, -0.2, -3.8, 0)]    // Shear +x, +y, Quadrant III
+        [TestCase(3, -2, 5, -3, 0, 0, 5, -5, 2, 3, 3.8, -0.2, 6.2, 0)]    // Shear +x, +y, Quadrant IV
+        [TestCase(3, 2, 5, 3, 2, 2, 5, 5, 2, 0, 4.33333333333333, 2, 7, 3)]    // Bounding box as skew box
+        [TestCase(3, 2, 5, 3, 2, 2, 5, 5, 0, 2, 3, 4, 5, 6.33333333333333)]    // Bounding box as skew box
+        public static void Skew(
+            double i_x, double i_y,
+            double j_x, double j_y,
+            double stationaryPointX, double stationaryPointY,
+            double skewingPointX, double skewingPointY,
+            double magnitudeX, double magnitudeY,
+            double expectedI_x, double expectedI_y,
+            double expectedJ_x, double expectedJ_y)
+        {
+            CartesianCoordinate pointI = new CartesianCoordinate(i_x, i_y);
+            CartesianCoordinate pointJ = new CartesianCoordinate(j_x, j_y);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            CartesianCoordinate stationaryReferencePoint = new CartesianCoordinate(stationaryPointX, stationaryPointY);
+            CartesianCoordinate skewingReferencePoint = new CartesianCoordinate(skewingPointX, skewingPointY);
+            CartesianOffset magnitude = new CartesianOffset(magnitudeX, magnitudeY);
+
+            IPathSegment skewedSegment = segment.Skew(stationaryReferencePoint, skewingReferencePoint, magnitude);
+
+            Assert.AreEqual(expectedI_x, skewedSegment.I.X, Tolerance);
+            Assert.AreEqual(expectedI_y, skewedSegment.I.Y, Tolerance);
+            Assert.AreEqual(expectedJ_x, skewedSegment.J.X, Tolerance);
+            Assert.AreEqual(expectedJ_y, skewedSegment.J.Y, Tolerance);
+        }
+
+
+        [TestCase(3, 2, 4, 3, 0, 1, 0, -1, -3, 2, -4, 3)]    // Mirror about y-axis to Quadrant II
+        [TestCase(3, 2, 4, 3, 0, -1, 0, 1, -3, 2, -4, 3)]    // Mirror about y-axis to Quadrant II, reversed line
+        [TestCase(3, 2, 4, 3, 1, 0, -1, 0, 3, -2, 4, -3)]    // Mirror about x-axis to Quadrant IV
+        [TestCase(3, 2, 4, 3, -1, 0, 1, 0, 3, -2, 4, -3)]    // Mirror about x-axis to Quadrant IV, reversed line
+        [TestCase(3, 2, 4, 3, 0, 0, 1, 1, 2, 3, 3, 4)]    // Mirror about 45 deg sloped line about shape center
+        [TestCase(3, 2, 4, 3, 0, 0, -1, -1, 2, 3, 3, 4)]    // Mirror about 45 deg sloped line about shape center, reversed line
+        [TestCase(3, 2, 4, 3, 0, 0, -1, 1, -2, -3, -3, -4)]    // Mirror about 45 deg sloped line to quadrant III
+        [TestCase(3, 2, 4, 3, 0, 0, 1, -1, -2, -3, -3, -4)]    // Mirror about 45 deg sloped line to quadrant III, reversed line
+        public static void MirrorAboutLine(
+            double i_x, double i_y,
+            double j_x, double j_y,
+            double lineX1, double lineY1, double lineX2, double lineY2,
+            double expectedI_x, double expectedI_y,
+            double expectedJ_x, double expectedJ_y)
+        {
+            CartesianCoordinate pointI = new CartesianCoordinate(i_x, i_y);
+            CartesianCoordinate pointJ = new CartesianCoordinate(j_x, j_y);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            LinearCurve referenceLine = new LinearCurve(new CartesianCoordinate(lineX1, lineY1), new CartesianCoordinate(lineX2, lineY2));
+
+            IPathSegment mirroredSegment = segment.MirrorAboutLine(referenceLine);
+
+            Assert.AreEqual(expectedI_x, mirroredSegment.I.X, Tolerance);
+            Assert.AreEqual(expectedI_y, mirroredSegment.I.Y, Tolerance);
+            Assert.AreEqual(expectedJ_x, mirroredSegment.J.X, Tolerance);
+            Assert.AreEqual(expectedJ_y, mirroredSegment.J.Y, Tolerance);
+        }
+
+        [TestCase(3, 2, 4, 3, 3, -2, 4, -3)]    // Mirror about x-axis to Quadrant IV
+        [TestCase(3, 2, 4, 3, 3, -2, 4, -3)]    // Mirror about x-axis to Quadrant IV, reversed line
+        public static void MirrorAboutAxisX(
+            double i_x, double i_y,
+            double j_x, double j_y,
+            double expectedI_x, double expectedI_y,
+            double expectedJ_x, double expectedJ_y)
+        {
+            CartesianCoordinate pointI = new CartesianCoordinate(i_x, i_y);
+            CartesianCoordinate pointJ = new CartesianCoordinate(j_x, j_y);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            IPathSegment mirroredSegment = segment.MirrorAboutAxisX();
+
+            Assert.AreEqual(expectedI_x, mirroredSegment.I.X, Tolerance);
+            Assert.AreEqual(expectedI_y, mirroredSegment.I.Y, Tolerance);
+            Assert.AreEqual(expectedJ_x, mirroredSegment.J.X, Tolerance);
+            Assert.AreEqual(expectedJ_y, mirroredSegment.J.Y, Tolerance);
+        }
+
+        [TestCase(3, 2, 4, 3, -3, 2, -4, 3)]    // Mirror about y-axis to Quadrant II
+        [TestCase(3, 2, 4, 3, -3, 2, -4, 3)]    // Mirror about y-axis to Quadrant II, reversed line
+        public static void MirrorAboutAxisY(
+            double i_x, double i_y,
+            double j_x, double j_y,
+            double expectedI_x, double expectedI_y,
+            double expectedJ_x, double expectedJ_y)
+        {
+            CartesianCoordinate pointI = new CartesianCoordinate(i_x, i_y);
+            CartesianCoordinate pointJ = new CartesianCoordinate(j_x, j_y);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            IPathSegment mirroredSegment = segment.MirrorAboutAxisY();
+
+            Assert.AreEqual(expectedI_x, mirroredSegment.I.X, Tolerance);
+            Assert.AreEqual(expectedI_y, mirroredSegment.I.Y, Tolerance);
+            Assert.AreEqual(expectedJ_x, mirroredSegment.J.X, Tolerance);
+            Assert.AreEqual(expectedJ_y, mirroredSegment.J.Y, Tolerance);
+        }
+        #endregion
+
+        #region Methods: Transform About Ends I, J
+        [TestCase(0, 1, 1)]
+        [TestCase(0.75, 4, 7)]
+        [TestCase(1, 5, 9)]
+        [TestCase(1.25, 6, 11)]
+        [TestCase(-0.5, -1, -3)]
+        public static void ScaleFromI(double scaleFromI, double expectedJ_x, double expectedJ_y)
+        {
+            CartesianCoordinate pointI = new CartesianCoordinate(1, 1);
+            CartesianCoordinate pointJ = new CartesianCoordinate(5, 9);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            IPathSegment scaledSegment = segment.ScaleFromI(scaleFromI);
+
+            Assert.AreEqual(pointI.X, scaledSegment.I.X);
+            Assert.AreEqual(pointI.Y, scaledSegment.I.Y);
+            Assert.AreEqual(expectedJ_x, scaledSegment.J.X);
+            Assert.AreEqual(expectedJ_y, scaledSegment.J.Y);
+        }
+
+        [TestCase(0, 5, 9)]
+        [TestCase(0.75, 2, 3)]
+        [TestCase(1, 1, 1)]
+        [TestCase(1.5, -1, -3)]
+        [TestCase(-0.25, 6, 11)]
+        public static void ScaleFromJ(double scaleFromJ, double expectedI_x, double expectedI_y)
+        {
+            CartesianCoordinate pointI = new CartesianCoordinate(1, 1);
+            CartesianCoordinate pointJ = new CartesianCoordinate(5, 9);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            IPathSegment scaledSegment = segment.ScaleFromJ(scaleFromJ);
+
+            Assert.AreEqual(pointJ.X, scaledSegment.J.X);
+            Assert.AreEqual(pointJ.Y, scaledSegment.J.Y);
+            Assert.AreEqual(expectedI_x, scaledSegment.I.X);
+            Assert.AreEqual(expectedI_y, scaledSegment.I.Y);
+        }
+
+
         [TestCase(0, 8, 4)]
         [TestCase(Num.PiOver4, 4.121320, 7.363961)]
         [TestCase(Num.PiOver2, -1, 7)]
@@ -419,7 +614,7 @@ namespace MPT.Geometry.UnitTests.Segments
         [TestCase(3 * Num.PiOver2, 5, -5)]
         [TestCase(7 * Num.PiOver4, 8.363961, -1.121320)]
         [TestCase(-Num.PiOver4, 8.363961, -1.121320)]
-        public static void RotateSegmentFromI(double radianRotation, double expectedJ_x, double expectedJ_y)
+        public static void RotateAboutI(double radianRotation, double expectedJ_x, double expectedJ_y)
         {
             Angle rotation = new Angle(radianRotation);
             CartesianCoordinate pointI = new CartesianCoordinate(2, 1);
@@ -443,7 +638,7 @@ namespace MPT.Geometry.UnitTests.Segments
         [TestCase(3 * Num.PiOver2, 5, 10)]
         [TestCase(7 * Num.PiOver4, 1.636039, 6.121320)]
         [TestCase(-Num.PiOver4, 1.636039, 6.121320)]
-        public static void RotateSegmentFromJ(double radianRotation, double expectedI_x, double expectedI_y)
+        public static void RotateAboutJ(double radianRotation, double expectedI_x, double expectedI_y)
         {
             Angle rotation = new Angle(radianRotation);
             CartesianCoordinate pointI = new CartesianCoordinate(2, 1);
@@ -458,32 +653,133 @@ namespace MPT.Geometry.UnitTests.Segments
             Assert.AreEqual(expectedI_y, scaledSegment.I.Y, Tolerance);
         }
 
-        [TestCase(0, 2, 1, 8, 4)]
-        [TestCase(Num.PiOver4, -3.970563, -10.585786, -1.849242, -4.221825)]
-        [TestCase(Num.PiOver2, 0, -23, -3, -17)]
-        [TestCase(3 * Num.PiOver4, 11.585786, -28.970563, 5.221825, -26.849242)]
-        [TestCase(Num.Pi, 24, -25, 18, -28)]
-        [TestCase(5 * Num.PiOver4, 29.970563, -13.414214, 27.849242, -19.778175)]
-        [TestCase(3 * Num.PiOver2, 26, -1, 29, -7)]
-        [TestCase(7 * Num.PiOver4, 14.414214, 4.970563, 20.778175, 2.849242)]
-        [TestCase(-Num.PiOver4, 14.414214, 4.970563, 20.778175, 2.849242)]
-        public static void RotateSegmentFromPoint(
-            double radianRotation,
+
+        [TestCase(3, 2, 5, 3, 2, 0, 7, 2, 11, 3)]    // I Shear +x
+        [TestCase(3, 2, 5, 3, -2, 0, -1, 2, -1, 3)]    // I Shear -x
+        [TestCase(3, 2, 5, 3, 0, 2, 3, 5, 5, 8)]    // I Shear +y
+        [TestCase(3, 2, 5, 3, 0, -2, 3, -1, 5, -2)]    // I Shear -y
+        public static void SkewAboutI(
+            double i_x, double i_y,
+            double j_x, double j_y,
+            double magnitudeX, double magnitudeY,
             double expectedI_x, double expectedI_y,
             double expectedJ_x, double expectedJ_y)
         {
-            Angle rotation = new Angle(radianRotation);
-            CartesianCoordinate pointI = new CartesianCoordinate(2, 1);
-            CartesianCoordinate pointJ = new CartesianCoordinate(8, 4);
+            CartesianCoordinate pointI = new CartesianCoordinate(i_x, i_y);
+            CartesianCoordinate pointJ = new CartesianCoordinate(j_x, j_y);
             LineSegment segment = new LineSegment(pointI, pointJ);
 
-            CartesianCoordinate referencePoint = new CartesianCoordinate(13, -12);
-            IPathSegment scaledSegment = segment.RotateAboutPoint(radianRotation, referencePoint);
+            CartesianOffset magnitude = new CartesianOffset(magnitudeX, magnitudeY);
 
-            Assert.AreEqual(expectedI_x, scaledSegment.I.X, Tolerance);
-            Assert.AreEqual(expectedI_y, scaledSegment.I.Y, Tolerance);
-            Assert.AreEqual(expectedJ_x, scaledSegment.J.X, Tolerance);
-            Assert.AreEqual(expectedJ_y, scaledSegment.J.Y, Tolerance);
+            IPathSegment skewedSegment = segment.SkewAboutI(magnitude);
+
+            Assert.AreEqual(expectedI_x, skewedSegment.I.X, Tolerance);
+            Assert.AreEqual(expectedI_y, skewedSegment.I.Y, Tolerance);
+            Assert.AreEqual(expectedJ_x, skewedSegment.J.X, Tolerance);
+            Assert.AreEqual(expectedJ_y, skewedSegment.J.Y, Tolerance);
+        }
+
+        [TestCase(3, 2, 5, 3, 2, 0, -1, 2, -1, 3)]    // I Shear +x
+        [TestCase(3, 2, 5, 3, -2, 0, 7, 2, 11, 3)]    // I Shear -x
+        [TestCase(3, 2, 5, 3, 0, 2, 3, -1, 5, -2)]    // I Shear +y
+        [TestCase(3, 2, 5, 3, 0, -2, 3, 5, 5, 8)]    // I Shear -y
+        public static void SkewAboutJ(
+            double i_x, double i_y,
+            double j_x, double j_y,
+            double magnitudeX, double magnitudeY,
+            double expectedI_x, double expectedI_y,
+            double expectedJ_x, double expectedJ_y)
+        {
+            CartesianCoordinate pointI = new CartesianCoordinate(i_x, i_y);
+            CartesianCoordinate pointJ = new CartesianCoordinate(j_x, j_y);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            CartesianOffset magnitude = new CartesianOffset(magnitudeX, magnitudeY);
+
+            IPathSegment skewedSegment = segment.SkewAboutJ(magnitude);
+
+            Assert.AreEqual(expectedI_x, skewedSegment.I.X, Tolerance);
+            Assert.AreEqual(expectedI_y, skewedSegment.I.Y, Tolerance);
+            Assert.AreEqual(expectedJ_x, skewedSegment.J.X, Tolerance);
+            Assert.AreEqual(expectedJ_y, skewedSegment.J.Y, Tolerance);
+        }
+
+        
+
+        [TestCase(3, 2, 4, 3, 3, 2, 4, 1)]    // I Mirror about x-axis to Quadrant IV
+        public static void MirrorAboutAxisIX(
+            double i_x, double i_y,
+            double j_x, double j_y,
+            double expectedI_x, double expectedI_y,
+            double expectedJ_x, double expectedJ_y)
+        {
+            CartesianCoordinate pointI = new CartesianCoordinate(i_x, i_y);
+            CartesianCoordinate pointJ = new CartesianCoordinate(j_x, j_y);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            IPathSegment mirroredSegment = segment.MirrorAboutAxisIX();
+
+            Assert.AreEqual(expectedI_x, mirroredSegment.I.X, Tolerance);
+            Assert.AreEqual(expectedI_y, mirroredSegment.I.Y, Tolerance);
+            Assert.AreEqual(expectedJ_x, mirroredSegment.J.X, Tolerance);
+            Assert.AreEqual(expectedJ_y, mirroredSegment.J.Y, Tolerance);
+        }
+
+        [TestCase(3, 2, 4, 3, 3, 2, 2, 3)]    // I Mirror about y-axis to Quadrant II
+        public static void MirrorAboutAxisIY(
+            double i_x, double i_y,
+            double j_x, double j_y,
+            double expectedI_x, double expectedI_y,
+            double expectedJ_x, double expectedJ_y)
+        {
+            CartesianCoordinate pointI = new CartesianCoordinate(i_x, i_y);
+            CartesianCoordinate pointJ = new CartesianCoordinate(j_x, j_y);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            IPathSegment mirroredSegment = segment.MirrorAboutAxisIY();
+
+            Assert.AreEqual(expectedI_x, mirroredSegment.I.X, Tolerance);
+            Assert.AreEqual(expectedI_y, mirroredSegment.I.Y, Tolerance);
+            Assert.AreEqual(expectedJ_x, mirroredSegment.J.X, Tolerance);
+            Assert.AreEqual(expectedJ_y, mirroredSegment.J.Y, Tolerance);
+        }
+
+        [TestCase(3, 2, 4, 3, 3, 4, 4, 3)]    // J Mirror about x-axis to Quadrant IV
+        public static void MirrorAboutAxisJX(
+            double i_x, double i_y,
+            double j_x, double j_y,
+            double expectedI_x, double expectedI_y,
+            double expectedJ_x, double expectedJ_y)
+        {
+            CartesianCoordinate pointI = new CartesianCoordinate(i_x, i_y);
+            CartesianCoordinate pointJ = new CartesianCoordinate(j_x, j_y);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            IPathSegment mirroredSegment = segment.MirrorAboutAxisJX();
+
+            Assert.AreEqual(expectedI_x, mirroredSegment.I.X, Tolerance);
+            Assert.AreEqual(expectedI_y, mirroredSegment.I.Y, Tolerance);
+            Assert.AreEqual(expectedJ_x, mirroredSegment.J.X, Tolerance);
+            Assert.AreEqual(expectedJ_y, mirroredSegment.J.Y, Tolerance);
+        }
+
+        [TestCase(3, 2, 4, 3, 5, 2, 4, 3)]    // J Mirror about y-axis to Quadrant II
+        public static void MirrorAboutAxisJY(
+            double i_x, double i_y,
+            double j_x, double j_y,
+            double expectedI_x, double expectedI_y,
+            double expectedJ_x, double expectedJ_y)
+        {
+            CartesianCoordinate pointI = new CartesianCoordinate(i_x, i_y);
+            CartesianCoordinate pointJ = new CartesianCoordinate(j_x, j_y);
+            LineSegment segment = new LineSegment(pointI, pointJ);
+
+            IPathSegment mirroredSegment = segment.MirrorAboutAxisJY();
+
+            Assert.AreEqual(expectedI_x, mirroredSegment.I.X, Tolerance);
+            Assert.AreEqual(expectedI_y, mirroredSegment.I.Y, Tolerance);
+            Assert.AreEqual(expectedJ_x, mirroredSegment.J.X, Tolerance);
+            Assert.AreEqual(expectedJ_y, mirroredSegment.J.Y, Tolerance);
         }
         #endregion
 

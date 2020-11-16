@@ -5,6 +5,7 @@ using MPT.Geometry.Shapes;
 using MPT.Geometry.Tools;
 using MPT.Math;
 using MPT.Math.Coordinates;
+using MPT.Math.Curves;
 using MPT.Math.NumberTypeExtensions;
 using NUnit.Framework;
 
@@ -646,8 +647,159 @@ namespace MPT.Geometry.UnitTests.Shapes
             Assert.AreEqual(shapeResult.PointAt(4), newShape.PointAt(4));
         }
 
-        // TODO: Implement Skew for this & Segments : https://en.wikipedia.org/wiki/Shear_matrix
-        // TODO: Implement Mirror for this & Segments & Shapes: https://en.wikipedia.org/wiki/Transformation_matrix, https://www.gatevidyalay.com/2d-reflection-in-computer-graphics-definition-examples/
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 0, 0, 5, 5, 2, 0, 3.8, 2, 6.2, 3, 5, 5, 3.2, 3)]    // Shear +x
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 0, 0, 5, 5, -2, 0, 2.2, 2, 3.8, 3, 1, 5, 0.8, 3)]    // Shear -x
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 0, 0, 5, 5, 0, 2, 3, 3.2, 5, 5, 3, 6.2, 2, 3.8)]    // Shear +y
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 0, 0, 5, 5, 0, -2, 3, 0.8, 5, 1, 3, 3.8, 2, 2.2)]    // Shear -y
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 0, 0, 5, 5, 2, 3, 3.8, 3.8, 6.2, 6, 5, 6.8, 3.2, 4.2)]    // Shear +x, +y, Quadrant I
+        [TestCase(-3, 2, -5, 3, -3, 5, -2, 3, 0, 0, -5, 5, 2, 3, -2.2, 3.8, -3.8, 6, -1, 6.8, -0.8, 4.2)]    // Shear +x, +y, Quadrant II
+        [TestCase(-3, -2, -5, -3, -3, -5, -2, -3, 0, 0, -5, -5, 2, 3, -2.2, -0.2, -3.8, 0, -1, -3.2, -0.8, -1.8)]    // Shear +x, +y, Quadrant III
+        [TestCase(3, -2, 5, -3, 3, -5, 2, -3, 0, 0, 5, -5, 2, 3, 3.8, -0.2, 6.2, 0, 5, -3.2, 3.2, -1.8)]    // Shear +x, +y, Quadrant IV
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 2, 2, 5, 5, 2, 0, 4.33333333333333, 2, 7, 3, 6.33333333333333, 5, 4, 3)]    // Bounding box as skew box
+        [TestCase(3, 2, 5, 3, 3, 5, 2, 3, 2, 2, 5, 5, 0, 2, 3, 4, 5, 6.33333333333333, 3, 7, 2, 4.33333333333333)]    // Bounding box as skew box
+        public static void Skew(
+            double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4,
+            double stationaryPointX, double stationaryPointY,
+            double skewingPointX, double skewingPointY,
+            double magnitudeX, double magnitudeY,
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result, double x4Result, double y4Result)
+        {
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1, y1),
+                new CartesianCoordinate(x2, y2),
+                new CartesianCoordinate(x3, y3),
+                new CartesianCoordinate(x4, y4),
+            };
+            Polygon shape = new Polygon(coordinates);
+
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result),
+                new CartesianCoordinate(x2Result, y2Result),
+                new CartesianCoordinate(x3Result, y3Result),
+                new CartesianCoordinate(x4Result, y4Result),
+            };
+            Polygon shapeResult = new Polygon(coordinatesResult);
+
+            CartesianCoordinate stationaryReferencePoint = new CartesianCoordinate(stationaryPointX, stationaryPointY);
+            CartesianCoordinate skewingReferencePoint = new CartesianCoordinate(skewingPointX, skewingPointY);
+            CartesianOffset magnitude = new CartesianOffset(magnitudeX, magnitudeY);
+
+            Polygon newShape = shape.Skew(stationaryReferencePoint, skewingReferencePoint, magnitude) as Polygon;
+
+            Assert.AreEqual(shapeResult.PointAt(0), newShape.PointAt(0));
+            Assert.AreEqual(shapeResult.PointAt(1), newShape.PointAt(1));
+            Assert.AreEqual(shapeResult.PointAt(2), newShape.PointAt(2));
+            Assert.AreEqual(shapeResult.PointAt(3), newShape.PointAt(3));
+        }
+
+
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 0, 1, 0, -1, -3, 2, -4, 3, -5, 3, -3, 5, -2, 3)]    // Mirror about y-axis to Quadrant II
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 0, -1, 0, 1, -3, 2, -4, 3, -5, 3, -3, 5, -2, 3)]    // Mirror about y-axis to Quadrant II, reversed line
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 1, 0, -1, 0, 3, -2, 4, -3, 5, -3, 3, -5, 2, -3)]    // Mirror about x-axis to Quadrant IV
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, -1, 0, 1, 0, 3, -2, 4, -3, 5, -3, 3, -5, 2, -3)]    // Mirror about x-axis to Quadrant IV, reversed line
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 0, 0, 1, 1, 2, 3, 3, 4, 3, 5, 5, 3, 3, 2)]    // Mirror about 45 deg sloped line about shape center
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 0, 0, -1, -1, 2, 3, 3, 4, 3, 5, 5, 3, 3, 2)]    // Mirror about 45 deg sloped line about shape center, reversed line
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 0, 0, -1, 1, -2, -3, -3, -4, -3, -5, -5, -3, -3, -2)]    // Mirror about 45 deg sloped line to quadrant III
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 0, 0, 1, -1, -2, -3, -3, -4, -3, -5, -5, -3, -3, -2)]    // Mirror about 45 deg sloped line to quadrant III, reversed line
+        public static void MirrorAboutLine(
+            double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, double x5, double y5,
+            double lineX1, double lineY1, double lineX2, double lineY2,
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result, double x4Result, double y4Result, double x5Result, double y5Result)
+        {
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1, y1),
+                new CartesianCoordinate(x2, y2),
+                new CartesianCoordinate(x3, y3),
+                new CartesianCoordinate(x4, y4),
+                new CartesianCoordinate(x5, y5),
+            };
+            Polygon shape = new Polygon(coordinates);
+
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result),
+                new CartesianCoordinate(x2Result, y2Result),
+                new CartesianCoordinate(x3Result, y3Result),
+                new CartesianCoordinate(x4Result, y4Result),
+                new CartesianCoordinate(x5Result, y5Result),
+            };
+            Polygon shapeResult = new Polygon(coordinatesResult);
+
+            LinearCurve referenceLine = new LinearCurve(new CartesianCoordinate(lineX1, lineY1), new CartesianCoordinate(lineX2, lineY2));
+
+            Polygon newShape = shape.MirrorAboutLine(referenceLine) as Polygon;
+
+            Assert.AreEqual(shapeResult.PointAt(0), newShape.PointAt(0));
+            Assert.AreEqual(shapeResult.PointAt(1), newShape.PointAt(1));
+            Assert.AreEqual(shapeResult.PointAt(2), newShape.PointAt(2));
+            Assert.AreEqual(shapeResult.PointAt(3), newShape.PointAt(3));
+            Assert.AreEqual(shapeResult.PointAt(4), newShape.PointAt(4));
+        }
+
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 3, -2, 4, -3, 5, -3, 3, -5, 2, -3)]    // Mirror about x-axis to Quadrant IV
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, 3, -2, 4, -3, 5, -3, 3, -5, 2, -3)]    // Mirror about x-axis to Quadrant IV, reversed line
+        public static void MirrorAboutAxisX(
+            double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, double x5, double y5,
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result, double x4Result, double y4Result, double x5Result, double y5Result)
+        {
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1, y1),
+                new CartesianCoordinate(x2, y2),
+                new CartesianCoordinate(x3, y3),
+                new CartesianCoordinate(x4, y4),
+                new CartesianCoordinate(x5, y5),
+            };
+            Polygon shape = new Polygon(coordinates);
+
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result),
+                new CartesianCoordinate(x2Result, y2Result),
+                new CartesianCoordinate(x3Result, y3Result),
+                new CartesianCoordinate(x4Result, y4Result),
+                new CartesianCoordinate(x5Result, y5Result),
+            };
+            Polygon shapeResult = new Polygon(coordinatesResult);
+
+            Polygon newShape = shape.MirrorAboutAxisX() as Polygon;
+
+            Assert.AreEqual(shapeResult.PointAt(0), newShape.PointAt(0));
+            Assert.AreEqual(shapeResult.PointAt(1), newShape.PointAt(1));
+            Assert.AreEqual(shapeResult.PointAt(2), newShape.PointAt(2));
+            Assert.AreEqual(shapeResult.PointAt(3), newShape.PointAt(3));
+            Assert.AreEqual(shapeResult.PointAt(4), newShape.PointAt(4));
+        }
+
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, -3, 2, -4, 3, -5, 3, -3, 5, -2, 3)]    // Mirror about y-axis to Quadrant II
+        [TestCase(3, 2, 4, 3, 5, 3, 3, 5, 2, 3, -3, 2, -4, 3, -5, 3, -3, 5, -2, 3)]    // Mirror about y-axis to Quadrant II, reversed line
+        public static void MirrorAboutAxisY(
+            double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4, double x5, double y5,
+            double x1Result, double y1Result, double x2Result, double y2Result, double x3Result, double y3Result, double x4Result, double y4Result, double x5Result, double y5Result)
+        {
+            IEnumerable<CartesianCoordinate> coordinates = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1, y1),
+                new CartesianCoordinate(x2, y2),
+                new CartesianCoordinate(x3, y3),
+                new CartesianCoordinate(x4, y4),
+                new CartesianCoordinate(x5, y5),
+            };
+            Polygon shape = new Polygon(coordinates);
+
+            IEnumerable<CartesianCoordinate> coordinatesResult = new List<CartesianCoordinate>() {
+                new CartesianCoordinate(x1Result, y1Result),
+                new CartesianCoordinate(x2Result, y2Result),
+                new CartesianCoordinate(x3Result, y3Result),
+                new CartesianCoordinate(x4Result, y4Result),
+                new CartesianCoordinate(x5Result, y5Result),
+            };
+            Polygon shapeResult = new Polygon(coordinatesResult);
+
+            Polygon newShape = shape.MirrorAboutAxisY() as Polygon;
+
+            Assert.AreEqual(shapeResult.PointAt(0), newShape.PointAt(0));
+            Assert.AreEqual(shapeResult.PointAt(1), newShape.PointAt(1));
+            Assert.AreEqual(shapeResult.PointAt(2), newShape.PointAt(2));
+            Assert.AreEqual(shapeResult.PointAt(3), newShape.PointAt(3));
+            Assert.AreEqual(shapeResult.PointAt(4), newShape.PointAt(4));
+        }
         #endregion
     }
 }

@@ -14,6 +14,7 @@
 using MPT.Geometry.Tools;
 using MPT.Math;
 using MPT.Math.Coordinates;
+using MPT.Math.Curves;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -457,6 +458,69 @@ namespace MPT.Geometry.Segments
             foreach (IPathSegment segment in _segmentBoundary)
             {
                 segmentBoundary.AddLast(segment.RotateAboutPoint(rotation, referencePoint));
+            }
+            return new PolyLine(segmentBoundary);
+        }
+
+        /// <summary>
+        /// Skews the specified polyline to the skewing of a containing box.
+        /// </summary>
+        /// <param name="stationaryReferencePoint">The stationary reference point of the skew box.</param>
+        /// <param name="skewingReferencePoint">The skewing reference point of the skew box.</param>
+        /// <param name="magnitude">The magnitude to skew along the x-axis and y-axis.</param>
+        /// <returns>IPathSegment.</returns>
+        public PolyLine Skew(
+            CartesianCoordinate stationaryReferencePoint,
+            CartesianCoordinate skewingReferencePoint,
+            CartesianOffset magnitude)
+        {
+            SegmentsBoundary segmentBoundary = new SegmentsBoundary();
+            foreach (IPathSegment segment in _segmentBoundary)
+            {
+                segmentBoundary.AddLast(segment.Skew(stationaryReferencePoint, skewingReferencePoint, magnitude));
+            }
+            return new PolyLine(segmentBoundary);
+        }
+
+        /// <summary>
+        /// Mirrors the specified polyline about the specified reference line.
+        /// </summary>
+        /// <param name="referenceLine">The reference line.</param>
+        /// <returns>IPathSegment.</returns>
+        public PolyLine MirrorAboutLine(LinearCurve referenceLine)
+        {
+            SegmentsBoundary segmentBoundary = new SegmentsBoundary();
+            foreach (IPathSegment segment in _segmentBoundary)
+            {
+                segmentBoundary.AddLast(segment.MirrorAboutLine(referenceLine));
+            }
+            return new PolyLine(segmentBoundary);
+        }
+
+        /// <summary>
+        /// Mirrors the specified polyline about the x-axis.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        public PolyLine MirrorAboutAxisX()
+        {
+            SegmentsBoundary segmentBoundary = new SegmentsBoundary();
+            foreach (IPathSegment segment in _segmentBoundary)
+            {
+                segmentBoundary.AddLast(segment.MirrorAboutAxisX());
+            }
+            return new PolyLine(segmentBoundary);
+        }
+
+        /// <summary>
+        /// Mirrors the specified polyline about the y-axis.
+        /// </summary>
+        /// <returns>IPathSegment.</returns>
+        public PolyLine MirrorAboutAxisY()
+        {
+            SegmentsBoundary segmentBoundary = new SegmentsBoundary();
+            foreach (IPathSegment segment in _segmentBoundary)
+            {
+                segmentBoundary.AddLast(segment.MirrorAboutAxisY());
             }
             return new PolyLine(segmentBoundary);
         }

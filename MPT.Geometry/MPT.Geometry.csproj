@@ -30,6 +30,7 @@
     <Compile Remove="Shapes\Wedge.cs" />
     <Compile Remove="Tools\Extents3D.cs" />
     <Compile Remove="Tools\PointExtents3D.cs" />
+    <Compile Remove="Tools\TransformationMatrices.cs" />
     <Compile Remove="Tools\Vertex.cs" />
   </ItemGroup>
 
