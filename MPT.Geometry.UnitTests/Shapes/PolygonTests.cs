@@ -801,5 +801,9 @@ namespace MPT.Geometry.UnitTests.Shapes
             Assert.AreEqual(shapeResult.PointAt(4), newShape.PointAt(4));
         }
         #endregion
+
+        #region Methods: Chamfers & Fillets
+
+        #endregion
     }
 }

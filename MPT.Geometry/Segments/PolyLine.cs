@@ -526,6 +526,110 @@ namespace MPT.Geometry.Segments
         }
         #endregion
 
+        #region Methods: Chamfers & Fillets        
+        /// <summary>
+        /// Chamfers the segments at the specified point.
+        /// </summary>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="depth">The depth.</param>
+        /// <returns>PolyLine.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public PolyLine ChamferPoint(int pointIndex, double depth)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Chamfers all intermediate points in the polyline.
+        /// </summary>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="depth">The depth.</param>
+        /// <returns>PolyLine.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public PolyLine ChamferAll(int pointIndex, double depth)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Chamfers between polyline and specified segment.
+        /// Returns the new polyline &amp; segment with updated bounding segments and joining chamfer segment.
+        /// </summary>
+        /// <param name="segment">The segment to chamfer to.</param>
+        /// <param name="depth">The depth.</param>
+        /// <returns>PolyLine.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Tuple<PolyLine, LineSegment, IPathSegment> ChamferToSegment(IPathSegment segment, double depth)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Chamfers between two polylines.
+        /// Returns the new polylines with updated bounding segments and joining chamfer segment.
+        /// </summary>
+        /// <param name="polyline">The polyline to chamfer to.</param>
+        /// <param name="depth">The depth.</param>
+        /// <returns>PolyLine.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Tuple<PolyLine, LineSegment, PolyLine> ChamferToPolyline(PolyLine polyline, double depth)
+        {
+            throw new NotImplementedException();
+        }
+
+
+
+        /// <summary>
+        /// Fillets the segments at the specified point.
+        /// </summary>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="radius">The radius.</param>
+        /// <returns>PolyLine.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public PolyLine FilletPoint(int pointIndex, double radius)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Fillets all intermediate points in the polyline.
+        /// </summary>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="radius">The radius.</param>
+        /// <returns>PolyLine.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public PolyLine FilletAll(int pointIndex, double radius)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Fillets between polyline and specified segment.
+        /// Returns the new polyline &amp; segment with updated bounding segments and joining fillet segment.
+        /// </summary>
+        /// <param name="segment">The segment to fillet to.</param>
+        /// <param name="radius">The radius.</param>
+        /// <returns>PolyLine.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Tuple<PolyLine, LineSegment, IPathSegment> FilletToSegment(IPathSegment segment, double radius)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Fillets between two polylines.
+        /// Returns the new polylines with updated bounding segments and joining fillet segment.
+        /// </summary>
+        /// <param name="polyline">The polyline to fillet to.</param>
+        /// <param name="radius">The radius.</param>
+        /// <returns>PolyLine.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Tuple<PolyLine, LineSegment, PolyLine> FilletToPolyline(PolyLine polyline, double radius)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
         #region ICloneable        
         /// <summary>
         /// Clones the line.

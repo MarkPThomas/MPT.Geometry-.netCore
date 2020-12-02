@@ -12,7 +12,6 @@
 // <summary></summary>
 // ***********************************************************************
 using MPT.Geometry.Segments;
-using MPT.Geometry.Tools;
 using MPT.Math;
 using MPT.Math.Coordinates;
 using MPT.Math.NumberTypeExtensions;
@@ -348,6 +347,56 @@ namespace MPT.Geometry.Shapes
             CartesianCoordinate pt1 = segment.I;
             CartesianCoordinate pt2 = segment.J;
             return (pt1.X * pt2.Y - pt2.X * pt1.Y);
+        }
+        #endregion
+
+        #region Methods: Chamfers & Fillets      
+        /// <summary>
+        /// Chamfers the segments at the specified point.
+        /// </summary>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="depth">The depth.</param>
+        /// <returns>PolyLine.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Polygon ChamferPoint(int pointIndex, double depth)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Chamfers all intermediate points in the polygon.
+        /// </summary>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="depth">The depth.</param>
+        /// <returns>PolyLine.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Polygon ChamferAll(int pointIndex, double depth)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Fillets the segments at the specified point.
+        /// </summary>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="radius">The radius.</param>
+        /// <returns>PolyLine.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Polygon FilletPoint(int pointIndex, double radius)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Fillets all intermediate points in the polygon.
+        /// </summary>
+        /// <param name="pointIndex">Index of the point.</param>
+        /// <param name="radius">The radius.</param>
+        /// <returns>PolyLine.</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public Polygon FilletAll(int pointIndex, double radius)
+        {
+            throw new NotImplementedException();
         }
         #endregion
 

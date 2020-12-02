@@ -504,6 +504,45 @@ namespace MPT.Geometry.Segments
         public abstract CartesianCoordinate IntersectionCoordinate(LineSegment otherLine);
         #endregion
 
+        #region Methods: Chamfers & Fillets        
+        /// <summary>
+        /// Chamfers the segments at the specified point.
+        /// Returns the new bounding segments and joining chamfer segment.
+        /// </summary>
+        /// <param name="segment">Segment to chamfer with.</param>
+        /// <param name="depth">The depth.</param>
+        /// <returns>PolyLine.</returns>
+        public Tuple<IPathSegment, LineSegment, IPathSegment> Chamfer(IPathSegment segment, double depth)
+        {
+            throw new NotImplementedException();
+            
+            // 1. Get angle bisector
+            // 2. Create bisector segment from vertex to a 'depth' along this line on the acute side.
+            // 3. Get the midpoint of the chamfer segment from the bisector segment pt J
+            // 4. Project curve out from midpoint of chamfer perpendicular to angle bisector line to intersection with segments on either side.
+            // 5. Trim adjacent segments to these intersections.
+            // 6. Create chamfer segment from the trim points.
+        }
+
+        /// <summary>
+        /// Fillets the segments at the specified point.
+        /// Returns the new bounding segments and joining fillet segment.
+        /// </summary>
+        /// <param name="segment">Segment to fillet with.</param>
+        /// <param name="radius">The radius.</param>
+        /// <returns>PolyLine.</returns>
+        public Tuple<IPathSegment, IPathSegment, IPathSegment> Fillet(IPathSegment segment, double radius)
+        {
+            throw new NotImplementedException();
+            // 1. Offset segment curves to acute side by radius
+            // 2. Get curves intersection as fillet center
+            // 3. From fillet center, get perpendicular projection from point to each segment 
+            // 4. Get intesections on each segment of the perpendicular projection
+            // 5. Trim adjacent segments to these intersections.
+            // 6. Create arc segment with trim points and fillet center
+        }
+        #endregion
+
         #region Methods: IEquatable        
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.

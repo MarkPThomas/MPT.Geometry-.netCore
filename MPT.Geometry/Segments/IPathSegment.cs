@@ -129,5 +129,27 @@ namespace MPT.Geometry.Segments
         /// <param name="sRelative">The relative position along the path.</param>
         /// <returns>Tuple&lt;IPathSegment, IPathSegment&gt;.</returns>
         Tuple<IPathSegment, IPathSegment> SplitBySegmentPosition(double sRelative);
+
+
+        #region Methods: Chamfer & Fillet
+
+        /// <summary>
+        /// Chamfers the segments at the specified point.
+        /// Returns the new bounding segments and joining chamfer segment.
+        /// </summary>
+        /// <param name="segment">Segment to chamfer with.</param>
+        /// <param name="depth">The depth.</param>
+        /// <returns>PolyLine.</returns>
+        Tuple<IPathSegment, LineSegment, IPathSegment> Chamfer(IPathSegment segment, double depth);
+
+        /// <summary>
+        /// Fillets the segments at the specified point.
+        /// Returns the new bounding segments and joining fillet segment.
+        /// </summary>
+        /// <param name="segment">Segment to fillet with.</param>
+        /// <param name="radius">The radius.</param>
+        /// <returns>PolyLine.</returns>
+        Tuple<IPathSegment, IPathSegment, IPathSegment> Fillet(IPathSegment segment, double radius);
+        #endregion
     }
 }

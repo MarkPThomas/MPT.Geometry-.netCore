@@ -1417,6 +1417,10 @@ namespace MPT.Geometry.UnitTests.Segments
         }
         #endregion
 
+        #region Methods: Chamfers & Fillets
+
+        #endregion
+
         #region Methods: Enumerator
         [Test]
         public static void Enumerator_Enumerates_Over_Segment()
